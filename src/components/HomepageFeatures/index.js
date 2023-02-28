@@ -4,42 +4,43 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Ready-to-use elements',
+    image: require('@site/static/img/puzzle.png').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Jellyfish provides frequently needed tools that are packed into plugins and allows you to create a pipeline out of them.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Easy to customize',
+    image: require('@site/static/img/edit.png').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        If you need to do some custom job, you can write your own element. Jellyfish simply defines the rules of creating them.
+
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Powered by Elixir',
+    image: require('@site/static/img/elixir_logo.png').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Jellyfish is built in Elixir. It reaps the benefits of Elixir's scalability and fault tolerance.
       </>
     ),
   },
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({ image, title, description }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        {/* {image} */}
+        {/* <img src={image}/> */}
+        <img src={image} className={styles.featurePng}  />
+        {/* <img src={image} className={styles.featurePng} role="img" /> */}
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
