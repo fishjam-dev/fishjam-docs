@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Jellyfish docs',
   tagline: 'Jellyfish are cool',
-  favicon: 'img/membrane_logo.svg',
+  favicon: 'img/membrane-signet.svg',
 
   // Set the production url of your site here
   url: 'https://jellyfish-docs.com',
@@ -39,10 +39,9 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/jellyfish-dev/jellyfish-docs',
+          routeBasePath: '/',
         },
         blog: false,
         theme: {
@@ -56,21 +55,21 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/membrane_logo.svg',
+      image: 'img/membrane-signet.svg',
       navbar: {
-        title: 'Jellyfish',
+        title: 'Jellyfish docs',
         logo: {
           alt: 'Jellyfish Logo',
-          src: 'img/membrane_logo.svg',
+          src: 'img/membrane-vertical-contour.svg',
         },
         items: [
-          {
-            type: 'doc',
-            docId: 'signaling_architecture',
-            position: 'left',
-            label: 'Docs',
-          },
-          // {to: '/blog', label: 'Blog', position: 'left'},
+          // Hide doc from navbar for now - introduction will be the landing page
+          // {
+          //   type: 'doc',
+          //   docId: 'signaling_architecture',
+          //   position: 'left',
+          //   label: 'Docs',
+          // },
           {
             href: 'https://github.com/jellyfish-dev/jellyfish',
             label: 'GitHub',
@@ -85,8 +84,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/signaling_architecture',
+                label: 'Introduction',
+                to: '/',
               },
             ],
           },
