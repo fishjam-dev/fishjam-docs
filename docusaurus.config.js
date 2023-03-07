@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Jellyfish docs',
   tagline: 'Jellyfish are cool',
-  favicon: 'img/membrane-signet.svg',
+  favicon: 'img/membrane-signet-light.svg',
 
   // Set the production url of your site here
   url: 'https://jellyfish-docs.com',
@@ -55,12 +55,12 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/membrane-signet.svg',
+      image: 'img/membrane-signet-light.svg',
       navbar: {
         title: 'Jellyfish docs',
         logo: {
           alt: 'Jellyfish Logo',
-          src: 'img/membrane-vertical-contour.svg',
+          src: 'img/membrane-signet-light.svg',
         },
         items: [
           // Hide doc from navbar for now - introduction will be the landing page
