@@ -8,8 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Introduction
 
-Jellyfish is a WebRTC Media Server implemented in Elixir.
-It allows for effortless creationg of online meeting rooms.
+TODO
 
 ## Installation
 
