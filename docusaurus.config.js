@@ -11,10 +11,10 @@ const config = {
   favicon: 'img/membrane-signet-light.svg',
 
   // Set the production url of your site here
-  url: 'https://jellyfish-docs.com',
+  url: 'https://jellyfish-dev.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/jellyfish-docs/',
 
   // GitHub pages deployment config.
   organizationName: 'jellyfish-dev', 
