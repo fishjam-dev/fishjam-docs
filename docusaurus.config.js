@@ -11,18 +11,19 @@ const config = {
   favicon: 'img/membrane-signet-light.svg',
 
   // Set the production url of your site here
-  url: 'https://jellyfish-docs.com',
+  url: 'https://jellyfish-dev.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/jellyfish-docs/',
 
   // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'jellyfish-dev', // Usually your GitHub org/user name.
-  projectName: 'jellyfish-docs', // Usually your repo name.
+  organizationName: 'jellyfish-dev', 
+  projectName: 'jellyfish-docs',
+  deploymentBranch: 'gh-pages',
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
