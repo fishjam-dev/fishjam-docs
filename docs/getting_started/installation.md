@@ -1,16 +1,7 @@
----
-id: introduction
-slug: /
----
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Introduction
-
-TODO
-
-## Installation
+# Installation
 
 Make sure to have Elixir installed. If not, you can do it [here](https://elixir-lang.org/install.html).
 
