@@ -3,6 +3,14 @@ import TabItem from '@theme/TabItem';
 
 # Installation
 
+There are two ways of running Jellyfish:
+* building from source (requires Elixir and native dependencies)
+* using Jellyfish Docker images
+
+At the moment, Jellyfish doesn't provide pre-built binaries.
+
+## Building from source
+
 Make sure to have Elixir installed. If not, you can do it [here](https://elixir-lang.org/install.html).
 
 **Clone the Jellyfish repo**
@@ -53,3 +61,16 @@ mix deps.get
 ```
 mix phx.server
 ```
+
+## Running with Docker
+
+
+```console
+docker run -e VIRTUAL_HOST=localhost -e SECRET_KEY_BASE=secret ghcr.io/jellyfish-dev/jellyfish:latest
+```
+
+:::tip
+
+Instead of passing environmental variables manually, you can use `--env-file ./env-file` flag, where `env-file` is a file containing the variables that the image expects, see example file `.env.sample` in Jellyfish repository.
+
+:::
