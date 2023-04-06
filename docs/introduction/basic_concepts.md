@@ -17,7 +17,6 @@ one responsible for receiving stream from a streaming host (e.g. via RTMP) and
 the other one responsible for converting this stream into HLS playlist ready to be
 broadcasted via CDN.
 
-
 ## Component
 
 A component is a server side process that publishes or subscribes to tracks.
