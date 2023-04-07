@@ -33,6 +33,23 @@ const sidebars = {
         'getting_started/architecture',
         'getting_started/authentication',
         'getting_started/sdks',
+        {
+          type: 'category',
+          label: 'Peers',
+          collapsed: true,
+          items: [
+            'getting_started/peers/webrtc'
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Components',
+          collapsed: true,
+          items: [
+            'getting_started/components/hls',
+            'getting_started/components/rtsp'
+          ]
+        }
       ]
     },
     'design_docs',
