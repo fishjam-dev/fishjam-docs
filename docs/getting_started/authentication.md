@@ -18,7 +18,7 @@ Token encodes peer id and room id.
 1. Run Jellyfish
 
 ```bash
-JELLYFISH_SECRET=mySecret mix phx.server
+TOKEN=HTTP_AUTH_TOKEN mix phx.server
 ```
 
 2. Create a room and add one peer
