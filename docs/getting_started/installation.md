@@ -79,7 +79,7 @@ For the full list of Jellyfish Docker images, see [here](https://github.com/jell
 
 :::tip
 
-Instead of passing environmental variables manually, you can use `--env-file ./env-file` flag, where `env-file` is a file containing the variables that the image expects, see example file `.env.sample` in Jellyfish repository.
+Instead of passing environmental variables manually, you can use the `--env-file ./env-file` flag, where the `env-file` is a file containing the variables that the image expects, see example file `.env.sample` in the Jellyfish repository.
 
 :::
 
@@ -92,7 +92,7 @@ set any of them.
 Besides Jellyfish environment variables, each Peer and Component 
 can expose its own environment variables.
 They are always listed in a Peer/Component description.
-See list of [Peers](./peers/webrtc.md) and [Components](./components/hls.md).
+See the list of [Peers](./peers/webrtc.md) and [Components](./components/hls.md).
 
 * `MIX_ENV` - defines compilation mode.
 This variable takes effect only when running from source.

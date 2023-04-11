@@ -19,7 +19,7 @@ In particular, you can:
 
 Support for server-side notifications is also planned for the near future.
 
-Under the hood, they just use [Jellyfish REST API](rest_api_reference.md). 
+Under the hood, Server SDKs just use [Jellyfish REST API](../api_reference.md). 
 
 :::tip
 
@@ -36,7 +36,7 @@ In particular, you can:
 * publish audio and video
 * receive audio and video from other peers and components
 
-At the moment, Jellyfish supports only one type of clients - WebRTC.
+At the moment, Jellyfish supports only one type of client - WebRTC.
 
 ## Diagram
 
@@ -54,8 +54,8 @@ The whole concept is presented in the following diagram.
 <br/>
 <br/>
 
-**Your Backend (BE)** - serves your application frontend, manages database and application
-specific logic.
+**Your Backend (BE)** - serves your application frontend, and manages the database and 
+application-specific logic.
 
 **Jellyfish (JF)** - Jellyfish media server.
 Manages media.
@@ -65,13 +65,13 @@ rooms, add/remove peers, etc.
 
 **User** - someone who connects to Jellyfish to send and receive media.
 
-Everything starts with *Admin* who sends HTTP request to *BE* to create a new room.
+Everything starts with *Admin* who sends an HTTP request to *BE* to create a new room.
 *BE* uses *jellyfish-server-sdk* to communicate with *JF* and create the room.
 Under the hood, *jellyfish-server-sdk* uses REST API exposed by *JF*.
-Then, *Admin* invites some user by sending a new HTTP request to *BE*.
-Again, *BE* uses *jellyfish-server-sdk* to add a new peer to *JF*.
+After the room has been created, the *Admin* invites a user by sending a new HTTP request to *BE*.
+Again, *BE* uses *jellyfish-server-sdk* to add the new peer to *JF*.
 
-On the user side, they send request to *BE* to join some room.
-*BE* replies with *JF* ip address it should connect to.
-Then, *User* uses *jellyfish-client-sdk* to connect to *JF*.
-After the connection has been established, *User* can send and receive media.
+On the user side, they send a request to *BE* to join the room.
+*BE* replies with *JF* IP address it should connect to.
+Then, the *User* uses *jellyfish-client-sdk* to connect to *JF*.
+After the connection has been established, the *User* can send and receive media.

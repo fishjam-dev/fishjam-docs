@@ -1,6 +1,6 @@
 # HLS
 
-Creates HLS playlist, ready to be broadcasted via CDN
+Creates HLS playlist that is ready to be broadcasted via CDN
 
 ## Compatibility
 
