@@ -28,6 +28,7 @@ Explicit port exposure (macOS compatible)
 ```bash
 docker run -p 50000-50050:50000-50050/udp \
            -p 4000:4000/tcp \
+           -e WEBRTC_USED=true \
            -e INTEGRATED_TURN_PORT_RANGE=50000-50050 \
            -e INTEGRATED_TURN_IP=192.168.0.1 \
            -e TOKEN=token \
@@ -47,7 +48,8 @@ Using host network (Linux only)
 
 ```bash
 docker run --network=host \
-           -e INTEGRATED_TURN_IP=192.168.0.1 \ 
+           -e WEBRTC_USED=true \
+           -e INTEGRATED_TURN_IP=192.168.0.1 \
            -e VIRTUAL_HOST=localhost \
            -e SECRET_KEY_BASE=secret \
            ghcr.io/jellyfish-dev/jellyfish:latest
