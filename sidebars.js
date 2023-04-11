@@ -53,7 +53,7 @@ const sidebars = {
       ]
     },
     'design_docs',
-    'rest_api_reference',
+    'api_reference'
   ],
 };
 
