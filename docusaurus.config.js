@@ -128,9 +128,22 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['elixir']
       },
+      zoom: {
+        selector: '.markdown img',
+        background: {
+          light: '#FFFFFF',
+          dark: '#1B1B1D'
+        },
+        config: {
+          // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+        }
+      }
     }),
 
-  plugins: [require.resolve('docusaurus-lunr-search')],
+  plugins: [
+    require.resolve('docusaurus-lunr-search'),
+    require.resolve('docusaurus-plugin-image-zoom')
+  ],
 };
 
 module.exports = config;
