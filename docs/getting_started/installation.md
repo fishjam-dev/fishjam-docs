@@ -75,7 +75,7 @@ docker run -e VIRTUAL_HOST=localhost \
            ghcr.io/jellyfish-dev/jellyfish:latest
 ```
 
-For the full list of Jellyfish Docker images, see [here](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish).
+For the full list of Jellyfish Docker images, [see this page](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish).
 
 :::tip
 
