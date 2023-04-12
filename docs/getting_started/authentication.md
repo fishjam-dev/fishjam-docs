@@ -24,7 +24,7 @@ TOKEN=HTTP_AUTH_TOKEN mix phx.server
 2. Create a room and add one peer
 
 ```elixir title="Business Logic"
-client = Jellyfish.Client.new("http://address-of-your-server.com", "mySecret")
+client = Jellyfish.Client.new("http://address-of-your-server.com", "HTTP_AUTH_TOKEN")
 {:ok, room} = Jellyfish.Room.create(client, max_peers: 10)
 {:ok, peer, token} = Jellyfish.Room.add_peer(client, room.id, "BobId")
 ```
