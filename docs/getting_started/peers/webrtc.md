@@ -31,7 +31,7 @@ docker run -p 50000-50050:50000-50050/udp \
            -e WEBRTC_USED=true \
            -e INTEGRATED_TURN_PORT_RANGE=50000-50050 \
            -e INTEGRATED_TURN_IP=192.168.0.1 \
-           -e TOKEN=token \
+           -e SERVER_API_TOKEN=token \
            -e VIRTUAL_HOST=localhost \
            -e SECRET_KEY_BASE=secret \
            ghcr.io/jellyfish-dev/jellyfish:latest
@@ -50,7 +50,7 @@ Using host network (Linux only)
 docker run --network=host \
            -e WEBRTC_USED=true \
            -e INTEGRATED_TURN_IP=192.168.0.1 \
-           -e TOKEN=token \
+           -e SERVER_API_TOKEN=token \
            -e VIRTUAL_HOST=localhost \
            -e SECRET_KEY_BASE=secret \
            ghcr.io/jellyfish-dev/jellyfish:latest
