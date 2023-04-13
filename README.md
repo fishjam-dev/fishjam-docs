@@ -1,6 +1,6 @@
-[![pages-build-deployment](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/build_pages.yml/badge.svg)](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/pages/pages-build-deployment)
-
 # Jellyfish docs
+
+[![pages-build-deployment](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/build_pages.yml/badge.svg)](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/pages/pages-build-deployment)
 
 The docs for the [Jellyfish](https://github.com/jellyfish-dev/jellyfish).
 You can read the docs here: https://jellyfish-dev.github.io/jellyfish-docs/
