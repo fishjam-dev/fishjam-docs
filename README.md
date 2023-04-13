@@ -1,4 +1,4 @@
-[![pages-build-deployment](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/pages/pages-build-deployment/badge.svg?branch=main)](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/pages/pages-build-deployment)
+[![pages-build-deployment](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/build_pages.yml/badge.svg)](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/pages/pages-build-deployment)
 
 # Jellyfish docs
 
