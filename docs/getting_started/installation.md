@@ -100,7 +100,7 @@ Possible values are:
   (default option when running with `mix phx.server`)
   * `prod` - requires you to provide values for environment variables
   * `test` - used in tests
-* `TOKEN` - token for authorizing HTTP requests. Defaults to `development` for
+* `SERVER_API_TOKEN` - token for authorizing HTTP requests. Defaults to `development` for
 development builds.
 * `AUTH_SALT` - used to sign/encrypt tokens generated for Peers.
 * `SECRET_KEY_BASE` - used to sign/encrypt cookies and other secrets.
