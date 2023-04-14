@@ -11,7 +11,7 @@ WebRTC peer allows you to connect to Jellyfish via WebRTC standard.
 * `WEBRTC_USED` - has to be `true` if WebRTC peers will be used
 * `INTEGRATED_TURN_IP` - the IP address, on which TURN servers will listen. 
 By default set to `127.0.0.1`.
-When running Jellyfish via Docker, this MUST be set to real (non-loopback) address, even for local tests.
+When running Jellyfish via Docker, this MUST be set to a real (non-loopback) address, even for local tests.
 * `INTEGRATED_TURN_PORT_RANGE` - port range, where UDP TURN will try to open ports. By default set to `50000-59999`.
 The bigger the range is, the more users server will be able to handle. 
 Useful when not using the `--network=host` option to limit the UDP ports 
@@ -21,7 +21,7 @@ used only to ones published from a Docker container.
 * `INTEGRATED_TURN_CERT` - SSL certificate for TLS TURN
 * `INTEGRATED_TURN_PKEY` - SSL private key for TLS TURN
 
-## Example docker command
+## Example Docker commands
 
 Explicit port exposure (macOS compatible)
 
@@ -39,8 +39,8 @@ docker run -p 50000-50050:50000-50050/udp \
 
 :::caution
 
-Make sure that the exposed UDP ports match `INTEGRATED_TURN_PORT_RANGE`. Range of the ports shouldn't be too wide as it might
-cause problems with container startup.
+Make sure that the exposed UDP ports match `INTEGRATED_TURN_PORT_RANGE`.
+The range of the ports shouldn't be too wide as it might cause problems with container startup.
 
 :::
 
@@ -50,6 +50,7 @@ Using host network (Linux only)
 docker run --network=host \
            -e WEBRTC_USED=true \
            -e INTEGRATED_TURN_IP=192.168.0.1 \
+           -e TOKEN=token \
            -e VIRTUAL_HOST=localhost \
            -e SECRET_KEY_BASE=secret \
            ghcr.io/jellyfish-dev/jellyfish:latest
