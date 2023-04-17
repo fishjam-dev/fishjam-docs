@@ -52,6 +52,7 @@ const sidebars = {
         }
       ]
     },
+    'examples',
     'design_docs',
     'api_reference'
   ],
