@@ -1,13 +1,13 @@
 # Deploy to Fly.io
 
-Fly.io is the go-to platform for deploying Phoenix apps.
+[Fly.io](fly.io) is the go-to platform for deploying Phoenix apps.
 This guide will help you deploy Jellyfish server on Fly.io.
 
 First, we recommend you read the [Fly.io speedrun](https://fly.io/docs/speedrun/) for deploying an app.
 
 
 Fly.io uses `fly.toml` files for configuring an app.
-You can create a `fly.toml` file for your app by copying the [`fly.toml.sample`](https://github.com/jellyfish-dev/jellyfish/blob/main/fly.toml.sample)
+You can create a `fly.toml` file for your app by copying the [`fly.toml.sample`](https://github.com/jellyfish-dev/jellyfish/blob/main/fly.toml.sample).
 
 ## Creating new app
 
@@ -24,13 +24,13 @@ Make sure to remove the lines appended by flyctl.
 Before deploying your app, make sure it is correctly configured.
 
 ### Dedicated IPv4
-In order to transmit multimedia via UDP, the app has to be publicly availabla with an IPv4 address.
+In order to transmit multimedia via UDP, the app has to be publicly available with an IPv4 address.
 By default Fly.io uses shared IP. To enable dedicated IPv4 address run 
 
 ```
 fly ips allocate-v4
 ```
-You can learn more about dedicated IPv4 address [here](fly ips allocate-v4).
+You can learn more about dedicated IPv4 address [here](https://fly.io/docs/reference/services/#dedicated-ipv4).
 
 ### fly.toml
 

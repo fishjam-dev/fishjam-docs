@@ -49,7 +49,8 @@ const sidebars = {
             'getting_started/components/hls',
             'getting_started/components/rtsp'
           ]
-        }
+        },
+        'getting_started/fly_io'
       ]
     },
     'design_docs',
