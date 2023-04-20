@@ -1,6 +1,6 @@
 # Deploy to Fly.io
 
-[Fly.io](fly.io) is the go-to platform for deploying Phoenix apps.
+[Fly.io](https://fly.io) is the go-to platform for deploying Phoenix apps.
 This guide will help you deploy Jellyfish server on Fly.io.
 
 First, we recommend you read the [Fly.io speedrun](https://fly.io/docs/speedrun/) for deploying an app.
