@@ -54,10 +54,10 @@ The default for Jellyfish is 4000.
 
 To be able to receive and send UDP traffic, Jellyfish has to open its UDP ports on a special `fly-global-services` address, not `0.0.0.0`.
 
-This must be set using the `INTEGRATED_TURN_PROD_ADDR` enviroment variable.
+This must be set using the `INTEGRATED_TURN_LISTEN_IP` enviroment variable.
 You also need to specify the Jellyfish IP address for UDP, it is the IP address which you generated in the previous step.
 ```
-INTEGRATED_TURN_PROD_ADDR = "fly-global-services"
+INTEGRATED_TURN_LISTEN_IP = "fly-global-services"
 INTEGRATED_TURN_IP="<YOUR APP IP ADDRESS>"
 ```
 
