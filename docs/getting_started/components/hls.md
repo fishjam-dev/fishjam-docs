@@ -13,4 +13,8 @@ Currently, there are no environment variables related to this component.
 
 ## Example Docker commands
 
-Your docker commands shouldn't be affected by adding this component.
+The HLS playlist will be created inside the Docker container. To access it from the host,
+you need to create a volume, e.g. by adding the option `-v $(pwd)/output:/app/output`
+to your Docker command.
+
+Other than that, your Docker commands shouldn't be affected by adding this component.
