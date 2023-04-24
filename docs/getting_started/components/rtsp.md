@@ -17,8 +17,6 @@ a remote source and requesting its stream.
 ### Additional
 
 * `rtpPort` (integer 1..65535, default: 20000) - Local port RTP stream will be received at
-* `maxReconnectAttempts` (integer 0.., default: 3) - How many times the component
-  will attempt to reconnect before hibernating
 * `reconnectDelay` (integer 0.., default: 15000) - Delay (in ms) between successive reconnect attempts
 * `keepAliveInterval` (integer 0.., default: 15000) - Interval (in ms) in which keep-alive
   RTSP messages will be sent to the remote stream source
