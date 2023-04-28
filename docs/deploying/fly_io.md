@@ -1,4 +1,11 @@
-# Deploy to Fly.io
+# Fly.io
+
+:::caution
+
+This deployment guide is expermiental and may not reliably work each time or for every user.
+We came across issues when deploying to Fly.io, which may render your application not
+behaving as expected.
+:::
 
 [Fly.io](https://fly.io) is the go-to platform for deploying Phoenix apps.
 This guide will help you deploy Jellyfish server on Fly.io.
@@ -7,7 +14,60 @@ First, we recommend you read the [Fly.io speedrun](https://fly.io/docs/speedrun/
 
 
 Fly.io uses `fly.toml` files for configuring an app.
-You can create a `fly.toml` file for your app by copying the [`fly.toml.sample`](https://github.com/jellyfish-dev/jellyfish/blob/main/fly.toml.sample).
+You can start from our `fly.toml` sample file:
+
+<details>
+  <summary>fly.toml</summary>
+
+  ```
+  kill_signal = "SIGTERM"
+  kill_timeout = 5
+  processes = []
+
+  [env]
+    INTEGRATED_TURN_IP = "<ip obtained with fly ips allocate-v4>"
+    INTEGRATED_TURN_PORT_RANGE = "50000-59999"
+    INTEGRATED_TURN_LISTEN_IP = "fly-global-services"
+    PORT = "4000"
+    WEBRTC_USED = "true"
+
+  [experimental]
+    auto_rollback = true
+
+  [[services]]
+    http_checks = []
+    internal_port = 4000
+    protocol = "tcp"
+    script_checks = []
+    [services.concurrency]
+      hard_limit = 1000
+      soft_limit = 1000
+      type = "connections"
+
+    [[services.ports]]
+      force_https = true
+      handlers = ["http"]
+      port = 80
+
+    [[services.ports]]
+      handlers = ["tls", "http"]
+      port = 443
+
+    [[services.tcp_checks]]
+      grace_period = "1s"
+      interval = "15s"
+      restart_limit = 0
+      timeout = "2s"
+
+  [[services]]
+    internal_port = 50000
+    protocol = "udp"
+
+    [[services.ports]]
+      port = 50000
+  
+  ```
+</details>
 
 ## Creating new app
 
@@ -81,3 +141,8 @@ With everything configured you can deploy the app
 ```
 fly deploy
 ```
+
+Note that it may take a moment for the UDP traffic to be forwarded to the application.
+This means for example, that WebRTC may not be working yet.
+
+This is the tricky part of the deployment, which we weren't able entirely figure out. Sometimes the UDP just works, others it takes ages for it to start flowing.

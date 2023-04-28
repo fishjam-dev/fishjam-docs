@@ -50,7 +50,14 @@ const sidebars = {
             'getting_started/components/rtsp'
           ]
         },
-        'getting_started/fly_io'
+        {
+          type: 'category',
+          label: 'Deploying',
+          collapsed: true,
+          items: [
+            'deploying/fly_io'
+          ]
+        }
       ]
     },
     'design_docs',
