@@ -8,4 +8,5 @@ See [here](./architecture.md) for more information about client and server SDKs.
 
 ## Client SDKs
 
-* [React/TypeScript](https://github.com/jellyfish-dev/jellyfish-react-client)
+* [React](https://github.com/jellyfish-dev/react-client-sdk)
+* [TypeScript](https://github.com/jellyfish-dev/ts-client-sdk)
