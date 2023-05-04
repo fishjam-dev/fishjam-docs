@@ -1,10 +1,11 @@
-# Fly.io
+# Fly.io (experimental)
 
 :::caution
 
 This deployment guide is expermiental and may not reliably work each time or for every user.
 We came across issues when deploying to Fly.io, which may render your application not
 behaving as expected.
+You can learn more about the problems we came accross, [in the deploying section](#deploying)
 :::
 
 [Fly.io](https://fly.io) is the go-to platform for deploying Phoenix apps.
@@ -90,6 +91,9 @@ By default Fly.io uses shared IP. To enable dedicated IPv4 address run
 ```
 fly ips allocate-v4
 ```
+
+Note, that dedicated IP address is a paid feature on Fly.io.
+
 You can learn more about dedicated IPv4 address [here](https://fly.io/docs/reference/services/#dedicated-ipv4).
 
 ### fly.toml
@@ -146,3 +150,9 @@ Note that it may take a moment for the UDP traffic to be forwarded to the applic
 This means for example, that WebRTC may not be working yet.
 
 This is the tricky part of the deployment, which we weren't able entirely figure out. Sometimes the UDP just works, others it takes ages for it to start flowing.
+[This topic](https://community.fly.io/t/udp-transport-not-working/12203) describes the exact issue we had with Fly.io.
+
+In general, it is unclear when the UDP traffic starts to be forwarded, sometimes it happens relatively quickly after deployment, sometimes you need to wait for some time.
+
+Also, the Fly.io documentation isn't clear in regard to opening UDP sockets.
+Some information was gathered experimentally, or based on Fly.io community questions, such as [this one](https://community.fly.io/t/define-port-range-for-service/1938).

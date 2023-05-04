@@ -49,15 +49,15 @@ const sidebars = {
             'getting_started/components/hls',
             'getting_started/components/rtsp'
           ]
-        },
-        {
-          type: 'category',
-          label: 'Deploying',
-          collapsed: true,
-          items: [
-            'deploying/fly_io'
-          ]
         }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Deploying',
+      collapsed: true,
+      items: [
+        'deploying/fly_io'
       ]
     },
     'design_docs',
