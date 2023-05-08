@@ -106,3 +106,5 @@ development builds.
 * `SECRET_KEY_BASE` - used to sign/encrypt cookies and other secrets.
 * `VIRTUAL_HOST` - host passed to the endpoint config. Defaults to `example.com` for production builds.
 * `PORT` - port to run the HTTP server. Defaults to `4000` both for development and production builds.
+* `OUTPUT_BASE_PATH` - a base path where Jellyfish will save its artifacts. 
+When running via docker, it's set to `jellyfish_output` can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_output`.
