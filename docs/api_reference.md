@@ -39,4 +39,4 @@ If you want to create your own Jellyfish SDK, the easiest way to reference to de
 ```bash
 git submodule add https://github.com/jellyfish-dev/protos
 ```
-Also you could think about creating script that will pull newest changes from git submodule and also compile proto files to your chosen programming language, [example script used in our elixir sdk](https://github.com/jellyfish-dev/elixir_server_sdk/blob/RTC-231-move-server-notifications-to-protobuffs/compile_proto.sh). 
+You could also consider creating a script that will pull newest changes from the git submodule and compile proto files to your chosen programming language. For reference, see [the script used in our Elixir SDK](https://github.com/jellyfish-dev/elixir_server_sdk/blob/RTC-231-move-server-notifications-to-protobuffs/compile_proto.sh).
