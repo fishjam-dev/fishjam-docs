@@ -34,8 +34,8 @@ ws.send(authRequest)
 
 
 The communication between peer WS and server is done with use of Protobuf format.
-All supported messages are listed in [jellyfish protos repo](https://github.com/jellyfish-dev/protos).
-If you want to create your own jellyfish SDK the easiest way to reference to defined protobuf messages will be by adding to your git repository protos as git submodule. You can do this with this command:
+All supported messages are listed in [the Jellyfish protos repo](https://github.com/jellyfish-dev/protos).
+If you want to create your own Jellyfish SDK, the easiest way to reference to defined protobuf messages will be by adding protos to your git repository as a git submodule. You can do it with this command:
 ```bash
 git submodule add https://github.com/jellyfish-dev/protos
 ```
