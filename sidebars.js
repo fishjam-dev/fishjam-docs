@@ -52,6 +52,14 @@ const sidebars = {
         }
       ]
     },
+    {
+      type: 'category',
+      label: 'Deploying',
+      collapsed: true,
+      items: [
+        'deploying/fly_io'
+      ]
+    },
     'design_docs',
     'api_reference'
   ],
