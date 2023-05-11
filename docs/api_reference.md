@@ -16,6 +16,7 @@ authorization request.
 
 
 The communication from server to peer WS is done with use of Protobuf format.
+The very first message that has to be sent on server WS is `AuthRequest`.
 All supported messages are listed in [the Jellyfish protos repo](https://github.com/jellyfish-dev/protos).
 If you want to create your own Jellyfish SDK, the easiest way to reference to defined protobuf messages will be by adding protos to your git repository as a git submodule. You can do it with this command:
 
