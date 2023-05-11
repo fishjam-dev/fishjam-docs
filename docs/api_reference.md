@@ -18,7 +18,9 @@ authorization request.
 The communication from server to peer WS is done with use of Protobuf format.
 All supported messages are listed in [the Jellyfish protos repo](https://github.com/jellyfish-dev/protos).
 If you want to create your own Jellyfish SDK, the easiest way to reference to defined protobuf messages will be by adding protos to your git repository as a git submodule. You can do it with this command:
+
 ```bash
 git submodule add https://github.com/jellyfish-dev/protos
 ```
+
 You could also consider creating a script that will pull newest changes from the git submodule and compile proto files to your chosen programming language. For reference, see [the script used in our Elixir SDK](https://github.com/jellyfish-dev/elixir_server_sdk/blob/RTC-231-move-server-notifications-to-protobuffs/compile_proto.sh).
