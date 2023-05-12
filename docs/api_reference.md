@@ -8,25 +8,20 @@ Jellyfish API is composed of three layers
 You can find them here:
 * [OpenAPI REST description](https://github.com/jellyfish-dev/jellyfish/blob/main/openapi.yaml)
 * [AsyncAPI client WS description](https://github.com/jellyfish-dev/jellyfish/blob/main/docs/jellyfish-ws.yaml)
-* AsyncAPI server WS description - TODO
+* [Protobufs used by server WS](https://github.com/jellyfish-dev/protos/blob/master/jellyfish/server_notifications.proto)
 
-The very first message that has to be sent both on peer and server WS is
+The communication between peer WS and server is done with use of JSON format.
+The very first message that has to be sent on peer WS is
 authorization request.
 
-For example
 
-```js
-authRequest = JSON.stringify({
-    type: "controlMessage",
-    data: {
-        type: "authRequest",
-        token: "development"
-    }
-})
+The communication from server to peer WS is done with use of Protobuf format.
+The very first message that has to be sent on server WS is `AuthRequest`.
+All supported messages are listed in [the Jellyfish protos repo](https://github.com/jellyfish-dev/protos).
+If you want to create your own Jellyfish SDK, the easiest way to reference to defined protobuf messages will be by adding protos to your git repository as a git submodule. You can do it with this command:
 
-ws = new WebSocket("ws://localhost:4000/socket/server/websocket")
-ws.addEventListener("message", (event) => {
-    console.log("Message from server ", event.data);
-});
-ws.send(authRequest)
+```bash
+git submodule add https://github.com/jellyfish-dev/protos
 ```
+
+You could also consider creating a script that will pull newest changes from the git submodule and compile proto files to your chosen programming language. For reference, see [the script used in our Elixir SDK](https://github.com/jellyfish-dev/elixir_server_sdk/blob/master/compile_proto.sh).
