@@ -12,7 +12,7 @@ You can find them here:
 
 The communication via WebSockets is done with use of [Protobuf](https://protobuf.dev) format.
 The very first message that has to be sent on either of WebSocket connections (**peer** to **Jellyfish** or 
-**you_backend_server** to **Jellyfish**) is `AuthRequest`.
+**your_backend_server** to **Jellyfish**) is `AuthRequest`.
 All supported messages are listed in [the Jellyfish protos repo](https://github.com/jellyfish-dev/protos).
 
 If you want to create your own Jellyfish SDK, the easiest way to reference to defined protobuf messages 
