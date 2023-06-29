@@ -68,7 +68,7 @@ Docker images are built for production which means that you always
 need to set a couple of environment variables.
 
 Environment variables are split into two groups:
-* general ones - see [General env variables](#env-variables) below
+* general ones - see [General env variables](#general-env-variables) below
 * peer/component-specific - each Peer and Component can expose its own environment variables.
 They are always listed in a Peer/Component description.
 See the list of [Peers](./peers/webrtc.md) and [Components](./components/hls.md).
