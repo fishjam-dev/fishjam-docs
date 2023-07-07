@@ -50,6 +50,24 @@ const config = {
         },
       }),
     ],
+    [
+      'redocusaurus',
+      {
+        // Plugin Options for loading OpenAPI files
+        specs: [
+          {
+            id: 'jellyfish-rest-api',
+            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/main/openapi.yaml',
+            route: '/examples/using-single-yaml/',
+          },
+        ],
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          primaryColor: '#3F57A6',
+        },
+      },
+    ],
   ],
 
   themeConfig:

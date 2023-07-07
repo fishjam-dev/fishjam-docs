@@ -62,7 +62,17 @@ const sidebars = {
     },
     'examples',
     'design_docs',
-    'api_reference'
+    {
+      type: 'category',
+      label: 'API Reference',
+      link: {
+        type: 'doc',
+        id: 'api_reference',
+      },
+      items: [
+        'api_reference/rest_api'
+      ]
+    }
   ],
 };
 
