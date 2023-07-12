@@ -6,7 +6,7 @@ Jellyfish API is composed of three layers
 * a WS connection for server notifications (socket path `/socket/server`)
 
 You can find them here:
-* [OpenAPI REST description](https://github.com/jellyfish-dev/jellyfish/blob/main/openapi.yaml)
+* [OpenAPI REST description](api_reference/rest_api.md)
 * [Protobufs used by peer WS](https://github.com/jellyfish-dev/protos/blob/master/jellyfish/peer_notifications.proto)
 * [Protobufs used by server WS](https://github.com/jellyfish-dev/protos/blob/master/jellyfish/server_notifications.proto)
 
