@@ -74,7 +74,7 @@ They are always listed in a Peer/Component description.
 See the list of [Peers](./peers/webrtc.md) and [Components](./components/hls.md).
 
 As docker commands depend on peers/components you are going to use, we don't present
-them here but rather in each peer/component's documentation.
+them here but rather in each peer/component's documentation, e.g. [WebRTC Peer](./peers/webrtc#example-docker-commands)
 
 For the full list of Jellyfish Docker images, [see this page](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish).
 
@@ -92,19 +92,23 @@ Below there are general, Jellyfish environment variables.
 If you are running Jellyfish in development, you don't need to 
 set any of them.
 
-* `MIX_ENV` - defines compilation mode.
+#### Required in production:
+
+* `SERVER_API_TOKEN` - token for authorizing HTTP requests. Defaults to `development` for
+development builds. 
+* `SECRET_KEY_BASE` - used to sign/encrypt tokens generated for Peers.
+* `VIRTUAL_HOST` - host passed to the endpoint config. Defaults to `example.com` for production builds.
+
+#### Optional:
+
+* `PORT` - port to run the HTTP server. Defaults to `4000` both for development and production builds.
+* `OUTPUT_BASE_PATH` - a base path where Jellyfish will save its artifacts. 
+When running via docker, it's set to `jellyfish_output` can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_output`.
+* `MIX_ENV` - defines compilation environment.
 This variable takes effect only when running from the source.
-Docker images are built with `MIX_ENV=prod`.
+Docker images are always built with `MIX_ENV=prod`.
 Possible values are:
   * `dev` - uses default values for environment variables 
   (default option when running with `mix phx.server`)
   * `prod` - requires you to provide values for environment variables
   * `test` - used in tests
-* `SERVER_API_TOKEN` - token for authorizing HTTP requests. Defaults to `development` for
-development builds.
-* `AUTH_SALT` - used to sign/encrypt tokens generated for Peers.
-* `SECRET_KEY_BASE` - used to sign/encrypt cookies and other secrets.
-* `VIRTUAL_HOST` - host passed to the endpoint config. Defaults to `example.com` for production builds.
-* `PORT` - port to run the HTTP server. Defaults to `4000` both for development and production builds.
-* `OUTPUT_BASE_PATH` - a base path where Jellyfish will save its artifacts. 
-When running via docker, it's set to `jellyfish_output` can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_output`.
