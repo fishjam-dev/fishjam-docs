@@ -7,6 +7,9 @@ Creates HLS playlist that is ready to be broadcasted via CDN
 * [WebRTC](../peers/webrtc.md)
 * [RTSP](../components/rtsp.md)
 
+## Requirements
+* [Room](../../introduction/basic_concepts\#room) with video codec set to H264. See [API](../../api_reference/rest_api#tag/room/operation/JellyfishWeb.RoomController.create) for more information.
+
 ## Env variables
 
 Currently, there are no environment variables related to this component.
