@@ -6,6 +6,12 @@ WebRTC peer allows you to connect to Jellyfish via WebRTC standard.
 
 * [HLS](../components/hls.md)
 
+## Configuration options
+
+### Optional
+
+* `enableSimulcast` (boolean, default: true) - Enables the peer to use simulcast
+
 ## Env variables:
 
 * `WEBRTC_USED` - has to be `true` if WebRTC peers will be used
