@@ -102,6 +102,7 @@ development builds.
 #### Optional:
 
 * `PORT` - port to run the HTTP server. Defaults to `4000` both for development and production builds.
+* `CHECK_ORIGIN` - defines if jellyfish will check origin of incoming requests and socket connection.
 * `OUTPUT_BASE_PATH` - a base path where Jellyfish will save its artifacts. 
 When running via docker, it's set to `jellyfish_output` can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_output`.
 * `MIX_ENV` - defines compilation environment.
