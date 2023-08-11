@@ -14,7 +14,7 @@ a remote source and requesting its stream.
 
 * `sourceUri` (string) - URI of RTSP source stream, e.g. `"rtsp://mysite.net:554/stream"`
 
-### Additional
+### Optional
 
 * `rtpPort` (integer 1..65535, default: 20000) - Local port RTP stream will be received at
 * `reconnectDelay` (integer 0.., default: 15000) - Delay (in ms) between successive reconnect attempts
