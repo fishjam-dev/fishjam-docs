@@ -4,11 +4,21 @@ Consumes a remote RTSP stream (e.g. from an IP camera).
 The RTSP component initializes communication by connecting to
 a remote source and requesting its stream.
 
+Supports H264 streams only.
+
 ## Compatibility
 
+* [WebRTC](../peers/webrtc.md)
 * [HLS](./hls.md)
 
+## Requirements
+* If the [Room](../../introduction/basic_concepts\#room) in which the RTSP component is created enforces a video codec,
+  it must be set to H264.
+  See [API](../../api_reference/rest_api#tag/room/operation/JellyfishWeb.RoomController.create) for more information.
+
 ## Configuration options
+
+See [API](../../api_reference/rest_api#tag/component/operation/JellyfishWeb.ComponentController.create) for more information.
 
 ### Required
 
