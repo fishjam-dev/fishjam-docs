@@ -60,6 +60,7 @@ const sidebars = {
         'deploying/fly_io'
       ]
     },
+    'metrics',
     'examples',
     'design_docs',
     {
