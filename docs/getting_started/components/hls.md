@@ -1,6 +1,6 @@
 # HLS
 
-Creates HLS playlist that is ready to be broadcasted via CDN
+Creates HLS playlist that is ready to be broadcasted via CDN.
 
 ## Compatibility
 
@@ -8,7 +8,14 @@ Creates HLS playlist that is ready to be broadcasted via CDN
 * [RTSP](../components/rtsp.md)
 
 ## Requirements
-* The [Room](../../introduction/basic_concepts\#room) in which the HLS component is created must have the video codec set to H264. See [API](../../api_reference/rest_api#tag/room/operation/JellyfishWeb.RoomController.create) for more information.
+
+* The [Room](../../introduction/basic_concepts\#room) in which the HLS component is created must have the video codec set to H264.
+  See [API](../../api_reference/rest_api#tag/room/operation/JellyfishWeb.RoomController.create) for more information.
+* Max 1 HLS component allowed per room.
+
+## Configuration options
+
+Currently, there are no configuration options related to this component.
 
 ## Env variables
 

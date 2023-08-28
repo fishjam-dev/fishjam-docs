@@ -5,8 +5,11 @@ WebRTC peer allows you to connect to Jellyfish via WebRTC standard.
 ## Compatibility
 
 * [HLS](../components/hls.md)
+* [RTSP](../components/rtsp.md)
 
 ## Configuration options
+
+See [API](../../api_reference/rest_api#tag/peer/operation/JellyfishWeb.PeerController.create) for more information.
 
 ### Optional
 
