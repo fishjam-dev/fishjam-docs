@@ -1,0 +1,632 @@
+---
+title: iOS
+---
+
+import JellyfishArchitecture from "./_jellyfish-architecture.mdx";
+import StartingJellyfishBackend from "./_starting-jellyfish-backend.mdx";
+import StartingJellyfishDashboard from "./_starting-dashboard.mdx";
+
+# iOS Minimal Working Example
+
+## What you'll learn
+
+This tutorial will guide you through creating your first iOS project which
+uses Jellyfish client. By the end of the tutorial, you'll have a working
+application that connects to the front-end dashboard using WebRTC technology and
+streams and receives camera tracks.
+
+![Finished app](./img/ios_full_app.gif)
+
+You can check out the finished project [here](https://github.com/jellyfish-dev/jellyfish-clients-tutorials/tree/main/JellyfishDashboardiOS).
+
+## What do you need
+
+- a little bit of experience in creating iOS apps in Swift and SwiftUI
+- Xcode IDE, iOS device for testing
+
+## Jellyfish architecture
+
+<JellyfishArchitecture />
+
+## Setup
+
+### Add dependencies
+
+Jellyfish Client for iOS is a Swift package, so you can add it simply in Xcode.
+Go to `File` -> `Add packages` and enter the package Github repo URL
+(`https://github.com/jellyfish-dev/ios-client-sdk`):
+
+![File -> Add packages](./img/add_package_ios_1.png)
+
+![Enter package URL](./img/add_package_ios_2.png)
+
+### Start the Jellyfish backend
+
+<StartingJellyfishBackend />
+
+### Start the dashboard web front-end
+
+<StartingJellyfishDashboard />
+
+### App permissions
+
+In the `Info.plist` file you have to set `NSCameraUsageDescription`. You can edit
+this file in Xcode. This value is a description that is shown when iOS asks the user
+for camera permission.
+
+We also suggest setting the background mode to `audio` so that the app doesn't
+disconnect when it's in the background:
+
+```xml title=Info.plist
+<key>UIBackgroundModes</key>
+<array>
+  <string>audio</string>
+</array>
+```
+
+## Connecting to the server and joining the room
+
+Our app will consist of two screens. The first one allows the user to type,
+paste or scan the peer token and connect to the room. The second screen shows
+room participants with their video tracks.
+
+### App structure
+
+To write the app we'll use SwiftUI. Firstly, create a new iOS application
+project. You'll see a `ContentView.swift` file created for you. In this file,
+we're going to put UI-related code. On the other hand, the code responsible for
+the business logic of the app (storing data, managing the state of the app,
+connecting to the server) will be put in `ContentViewController.swift`.
+
+We'll have also a small file for things related to styling. Feel free to skip this step and style
+your components however you want, we just put them there for completeness.
+
+```swift title=Theme.swift
+import SwiftUI
+
+let seaBlue40 = Color(red:0.749, green:0.906, blue:0.973)
+let seaBlue20 = Color(red:0.945, green:0.98, blue:0.996)
+let darkBlue100 = Color(red:0, green:0.102, blue:0.447)
+let darkText = Color(red:0, green:0.102, blue:0.447)
+
+struct ButtonStyle: ViewModifier {
+  func body(content: Content) -> some View {
+    content.padding()
+      .frame(maxWidth: .infinity)
+      .background(darkBlue100)
+      .foregroundColor(.white)
+      .cornerRadius(100)
+  }
+}
+
+struct TextFieldStyle: ViewModifier {
+  func body(content: Content) -> some View {
+    content.padding()
+      .foregroundColor(.black)
+      .background(.white)
+      .cornerRadius(100)
+      .overlay(
+        RoundedRectangle(cornerRadius: 100)
+          .stroke(darkBlue100, lineWidth: 2)
+      )
+  }
+}
+```
+
+Of course, your app might be a lot more complicated and use a different
+structure. The two screens should be probably separated into different files, we
+should use some kind of navigation, etc. For this tutorial though, this simple
+structure should be enough.
+
+### Connect screen
+
+The UI of the Connect screen consists of a simple text input and a few buttons.
+The flow for this screen is simple: the user either copies the peer token from
+the dashboard or scans it with a QR code scanner and presses Connect button. The
+QR code scanner is completely optional, but we'll show how to add it for
+convenience.
+
+The code for the connect screen UI is straightforward:
+
+```swift title=ContentView.swift
+struct ConnectScreen: View {
+  @State private var peerToken = ""
+
+  var body: some View {
+    VStack {
+      TextField("Enter peer token...", text: $peerToken)
+        .modifier(TextFieldStyle())
+
+      Button(action: {
+        // added later
+      }) {
+        Text("Connect").modifier(ButtonStyle())
+      }
+      Button(action: {
+        // added later
+      }) {
+        Text("Scan QR code").modifier(ButtonStyle())
+      }
+    }
+    .padding(10)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(seaBlue40)
+  }
+}
+```
+
+### QR Code scanning
+
+We know that copy-paste from desktop to mobile device is annoying. That's why to
+copy the peer token from the dashboard we'll use QR code scanning. We'll use a
+standard iOS library (AVFoundation) for this.
+
+Create a new file `QRScanner.swift` with the following contents:
+
+```swift title=QRScanner.swift
+import SwiftUI
+import AVFoundation
+
+class QRScannerController: UIViewController {
+  var captureSession = AVCaptureSession()
+  var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+  var qrCodeFrameView: UIView?
+
+  var delegate: AVCaptureMetadataOutputObjectsDelegate?
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
+      print("Failed to get the camera device")
+      return
+    }
+
+    let videoInput: AVCaptureDeviceInput
+
+    do {
+      videoInput = try AVCaptureDeviceInput(device: captureDevice)
+
+    } catch {
+      print(error)
+      return
+    }
+
+    captureSession.addInput(videoInput)
+
+    let captureMetadataOutput = AVCaptureMetadataOutput()
+    captureSession.addOutput(captureMetadataOutput)
+
+    captureMetadataOutput.setMetadataObjectsDelegate(delegate, queue: DispatchQueue.main)
+    captureMetadataOutput.metadataObjectTypes = [ .qr ]
+
+    videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+    videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+    videoPreviewLayer?.frame = view.layer.bounds
+    view.layer.addSublayer(videoPreviewLayer!)
+
+    DispatchQueue.global(qos: .background).async {
+      self.captureSession.startRunning()
+    }
+
+  }
+}
+
+struct QRScanner: UIViewControllerRepresentable {
+  var onQRCodeScanned: (_ code: String) -> Void
+
+  init(_ onQRCodeScanned: @escaping (_ code: String) -> Void) {
+    self.onQRCodeScanned = onQRCodeScanned
+  }
+
+  func updateUIViewController(_ uiViewController: QRScannerController, context: Context) {
+  }
+
+  func makeCoordinator() -> Coordinator {
+    Coordinator(onQRCodeScanned)
+  }
+
+  func makeUIViewController(context: Context) -> QRScannerController {
+    let controller = QRScannerController()
+    controller.delegate = context.coordinator
+
+    return controller
+  }
+}
+
+class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+  var onQRCodeScanned: ((_ code: String) -> Void)?
+
+  init(_ onQRCodeScanned: @escaping (_ code: String) -> Void) {
+    self.onQRCodeScanned = onQRCodeScanned
+  }
+
+  func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+    if metadataObjects.count == 0 {
+      return
+    }
+
+    let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+
+    if metadataObj.type == AVMetadataObject.ObjectType.qr,
+       let result = metadataObj.stringValue {
+      if let onQRCodeScanned = onQRCodeScanned {
+        onQRCodeScanned(result)
+      }
+      onQRCodeScanned = nil
+    }
+  }
+}
+```
+
+We won't go into details as it's not the main topic of this tutorial. The most
+important class here is `QRScanner`. We can use it in our UI, just like any
+SwiftUI component. As an argument, it takes a callback that is called when the
+code is scanned. We'll put this component in a modal, which is shown after
+clicking the `Scan QR code` button:
+
+```swift title=ContentView.swift
+struct ConnectScreen: View {
+  // ...
+
+  var body: some View {
+    VStack {
+      // ...
+      Button(action: {
+        // highlight-next-line
+        showingSheet.toggle()
+      }) {
+        Text("Scan QR code").modifier(ButtonStyle())
+      }
+      // highlight-start
+      .sheet(isPresented: $showingSheet) {
+        VStack {
+          QRScanner() { code in
+            peerToken = code
+            showingSheet.toggle()
+          }
+        }
+      }
+      // highlight-end
+    }
+    // ...
+  }
+}
+```
+
+Now if you scan the code, the peer token should appear in the text field.
+
+![Scanning qr code](./img/scan_qr_ios.gif)
+
+### Connecting to the backend
+
+Time to write code to connect to the backend. It will be the responsibility of
+the `ContentViewController`. Let's create the controller:
+
+```swift title=ContentViewController.swift
+class ContentViewController: ObservableObject {
+    @Published var isConnected: Bool = false
+}
+```
+
+And connect it with the `ContentView`. Depending on whether we're connected or
+not, we display the appropriate screen:
+
+```swift title=ContentView.swift
+// highlight-start
+struct ContentView: View {
+  @ObservedObject var contentViewController: ContentViewController
+
+  init() {
+    self.contentViewController = ContentViewController()
+  }
+
+  var body: some View {
+    if !contentViewController.isConnected {
+      ConnectScreen(contentViewController: contentViewController)
+    } else {
+      RoomScreen(contentViewController: contentViewController)
+    }
+  }
+}
+// highlight-end
+
+struct ConnectScreen: View {
+  // highlight-next-line
+  let contentViewController: ContentViewController
+  // ...
+}
+```
+
+Now to connect to the backend, create a `JellyfishClient` instance and call the `connect()` function:
+
+```swift title=ContentViewController.swift
+class ContentViewController: ObservableObject {
+  private var jellyfishClient: JellyfishClientSdk?
+
+  public init() {
+    self.jellyfishClient = JellyfishClientSdk(listener: self)
+  }
+
+  public func connect(peerToken: String) {
+    let conf = Config(
+      websocketUrl: "ws://192.168.0.31:4000/socket/peer/websocket",
+      token: peerToken
+    )
+    jellyfishClient?.connect(config: conf)
+  }
+}
+```
+
+the `websocketUrl` is the URL of the Jellyfish backend, be sure to change it to your
+local backend. Also, we strongly recommend storing it for example as an
+environment variable.
+
+The `token` is the peer token provided by the user. It's used to determine the
+user and the room to be connected to.
+
+Now we have to get the answer from the backend that we're connected
+successfully. To do this we need to implement the `JellyfishClientListener`
+protocol.
+
+Firstly we'll implement `onAuthSuccess()` and `onAuthError()` callbacks.
+
+`onAuthSuccess()` is called when the user is authenticated successfully and can
+set up tracks to stream and join the room. So we'll do so:
+
+```swift title=ContentViewController.swift
+class ContentViewController: ObservableObject, JellyfishClientListener {
+    // ...
+
+// highlight-next-line
+  var localVideoTrack: LocalVideoTrack?
+
+// highlight-start
+  func setupTracks() {
+    self.localVideoTrack = jellyfishClient?.createVideoTrack(videoParameters: VideoParameters.presetHD169, metadata: .init())
+  }
+
+
+  func onAuthSuccess() {
+    setupTracks()
+    jellyfishClient?.join(peerMetadata: .init())
+  }
+
+  func onAuthError() {}
+  // highlight-end
+}
+```
+
+In the `setupTracks()` function we set up a local video track to stream. We use
+a preset with reasonable defaults, but there are many settings you can customize
+(resolution, bandwidth, simulcast, etc.). The local video track streams the
+local device camera. You can also set up an audio track, but for this tutorial
+we omitted it.
+
+Then in the `onAuthSuccess()` after setting up tracks we join the room. When the
+user joins the room, the user can receive tracks from other peers and
+vice-versa.
+
+Don't forget to implement also the `onAuthError()` function - it's called when the
+authentication failed and you should handle it by for example informing the user
+that something went wrong.
+
+The backend informs us that the user successfully joined the room in the
+`onJoined` callback. In the `onJoined` callback, we also receive information
+about other peers in the room and local user id. We're going to store
+information about peers in `MainViewModel`:
+
+```swift title=ContentViewController.swift
+// highlight-start
+class Participant: Identifiable {
+  let id: String
+  var videoTrackContext: TrackContext? = nil
+
+  init(id: String) {
+    self.id = id
+  }
+}
+// highlight-start
+
+class ContentViewController: ObservableObject, JellyfishClientListener {
+  // ...
+  // highlight-start
+  private var mutableParticipants:[String:Participant] = [:]
+  @Published var participants: [Participant] = []
+  // highlight-end
+
+  // ...
+
+ // highlight-start
+  func onJoined(peerID: String, peersInRoom: [Peer]) {
+    peersInRoom.forEach { peer in mutableParticipants[peer.id] = Participant(id: peer.id)}
+    DispatchQueue.main.async {
+      self.isConnected = true
+    }
+    emitParticipants()
+  }
+
+  func onJoinError(metadata _: Any) {
+  }
+  // highlight-end
+}
+```
+
+`Participant` is a simple class for storing data about participants - in this
+example, it's just their id and track context.
+
+`participants` and `isConnected` are state variables that are exposed to the UI
+(`ContentView`). `participants` stores current peers and updates when peers are
+added or removed.
+
+In the `onJoined` callback, we add participants that are currently in the room and
+update the UI accordingly.
+
+Remember to also implement the `onJoinError` callback, just like `onAuthError`.
+
+With this, you should be able to connect to the server now. Scan the QR code and
+connect, and in the dashboard, you should be able to see video from the camera
+on your mobile device.
+
+## Room Screen
+
+Now we need a UI to display other participants. Jellyfish Client provides a
+component for that: `SwiftUIVideoView`. We'll put it in a grid.
+
+:::info
+
+`SwiftUIVideoView` is a wrapper around Jellyfish Client's `VideoView`. So if
+you're not using Swift UI you can use `VideoView`.
+
+:::
+
+```swift title=ContentView.swift
+struct RoomScreen: View {
+  @ObservedObject var contentViewController: ContentViewController
+
+  var body: some View {
+     VStack {
+      ForEach(Array(stride(from: 0, to: contentViewController.participants.count, by: 2)), id: \.self) { index in
+        HStack {
+          SwiftUIVideoView((contentViewController.participants[index].videoTrackContext?.track as? VideoTrack)!)
+            .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
+            .cornerRadius(20)
+          if index + 1 < contentViewController.participants.count {
+            SwiftUIVideoView((contentViewController.participants[index+1].videoTrackContext?.track as? VideoTrack)!)
+              .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
+              .cornerRadius(20)
+          }
+        }
+      }
+      Spacer()
+      Button(action: {
+        contentViewController.disconnect()
+      }) {
+        Text("Disconnect").modifier(ButtonStyle())
+      }
+    }
+    .padding(10)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(seaBlue20)
+  }
+}
+```
+
+To test it you can add another participant and their new track (displaying for
+example rotating frog) in the dashboard like this (do it before joining the room):
+
+![Adding new participant](./img/adding_new_track.gif)
+
+### Adding/removing peers and tracks
+
+If you run the app, you'll see that nothing happens if a new participant joins
+the room while we're joined. We have to handle this by implementing some more
+methods from the `JellyfishClientListener` protocol:
+
+```swift title=ContentViewController.swift
+class ContentViewController: ObservableObject, JellyfishClientListener {
+  // ...
+
+  func onPeerJoined(peer: Peer) {
+    mutableParticipants[peer.id] = Participant(id: peer.id)
+    emitParticipants()
+  }
+
+  func onPeerLeft(peer: Peer) {
+    mutableParticipants.removeValue(forKey: peer.id)
+    emitParticipants()
+  }
+
+  func onTrackReady(ctx: TrackContext) {
+    guard let participant = mutableParticipants[ctx.peer.id] else {
+      return
+    }
+
+    participant.videoTrackContext = ctx
+
+    mutableParticipants[ctx.peer.id] = participant
+
+    emitParticipants()
+  }
+
+  func onTrackRemoved(ctx: TrackContext) {
+    guard let participant = mutableParticipants[ctx.peer.id],
+          let _ = participant.videoTrackContext?.trackId else {
+      return
+    }
+
+    participant.videoTrackContext = nil
+
+    mutableParticipants[ctx.peer.id] = participant
+    emitParticipants()
+  }
+}
+```
+
+Those methods are rather self-explanatory: `onPeerJoined()` is called when
+someone joins the room, and `onPeerLeft()` is called when someone leaves the room.
+Similarly, `onTrackReady()` is called when a track is ready to display and
+`onTrackRemoved()` is called when a track is no longer streamed.
+
+### Gracefully leaving the room
+
+To leave a room we'll add a button for the user. When the user clicks it, we
+gracefully leave the room, close the server connection, and go back to the
+Connect screen.
+
+```swift title=ContentView.swift
+struct RoomScreen: View {
+  // ...
+
+  var body: some View {
+    VStack {
+      // ...
+      // highlight-start
+      Spacer()
+      Button(action: {
+        contentViewController.disconnect()
+      }) {
+        Text("Disconnect").modifier(ButtonStyle())
+      }
+      // highlight-end
+    }
+    // ...
+  }
+}
+```
+
+And in `ContentViewController` we'll add the`disconnect()` function:
+
+```swift title=ContentViewController.swift
+class ContentViewController: ObservableObject, JellyfishClientListener {
+  // ...
+  // highlight-start
+  public func disconnect() {
+    jellyfishClient?.cleanUp()
+    DispatchQueue.main.async {
+      self.isConnected = false
+    }
+  }
+  // highlight-end
+}
+```
+
+## Summary
+
+Congrats on finishing your first Jellyfish mobile application! In this tutorial,
+you've learned how to make a basic Jellyfish client application that streams and
+receives video tracks with WebRTC technology.
+
+But this was just the beginning. Jellyfish Client supports much more than just
+streaming camera: it can also stream audio, screencast your device's screen,
+configure your camera and audio devices, detect voice activity, control
+simulcast, bandwidth and encoding settings, show camera preview, display WebRTC
+stats and more to come. Check out our other tutorials to learn about those
+features.
+
+You can also take a look at our fully featured [Videoroom Demo
+example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
+
+![Videoroom Demo](./img/videoroom.gif)
+
+It's written in React Native, but React Native SDK uses iOS SDK under the hood!

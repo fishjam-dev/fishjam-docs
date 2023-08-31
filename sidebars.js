@@ -62,6 +62,26 @@ const sidebars = {
     },
     'metrics',
     'examples',
+    {
+      type: 'category',
+      label: 'Tutorials',
+      collapsible: true,
+      collapsed: false,
+        items: [
+          {
+            type: 'category',
+            label: 'Minimal Working Examples',
+            collapsible: false,
+            collapsed: false,
+            items: [
+              'tutorials/minimal-working-example-react',
+              'tutorials/minimal-working-example-react-native',
+              'tutorials/minimal-working-example-android',
+              'tutorials/minimal-working-example-ios',
+            ]
+          }
+        ]
+    },
     'design_docs',
     {
       type: 'category',
