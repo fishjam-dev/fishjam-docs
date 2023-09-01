@@ -2,6 +2,7 @@
 title: Android
 ---
 
+import { ImageWrapper } from "./ImageWrapper";
 import JellyfishArchitecture from "./_jellyfish-architecture.mdx";
 import StartingJellyfishBackend from "./_starting-jellyfish-backend.mdx";
 import StartingJellyfishDashboard from "./_starting-dashboard.mdx";
@@ -15,7 +16,7 @@ uses Jellyfish client. By the end of the tutorial, you'll have a working
 application that connects to the front-end dashboard using WebRTC technology and
 streams and receives camera tracks.
 
-![Finished app](./img/android_full_app.gif)
+<ImageWrapper url={'/img/tutorials/android_full_app.gif'} height={500} alt="Finished app" />
 
 You can check out the finished project [here](https://github.com/jellyfish-dev/jellyfish-clients-tutorials/tree/main/JellyfishDashboardAndroid).
 
@@ -750,6 +751,6 @@ features.
 You can also take a look at our fully featured [Videoroom Demo
 example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
 
-![Videoroom Demo](./img/videoroom.gif)
+<ImageWrapper url={'/img/tutorials/videoroom.gif'} height={700} alt="Videoroom Demo" />
 
 It's written in React Native, but React Native SDK uses Android SDK under the hood!

@@ -2,6 +2,7 @@
 title: React Native / Expo
 ---
 
+import { ImageWrapper } from "./ImageWrapper";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import JellyfishArchitecture from "./_jellyfish-architecture.mdx";
@@ -17,7 +18,7 @@ project which uses Jellyfish client. By the end of the tutorial, you'll have a
 working application that connects to the front-end dashboard using WebRTC
 technology and streams and receives camera tracks.
 
-![Finished app](./img/rn_full_app.gif)
+<ImageWrapper url={'/img/tutorials/rn_full_app.gif'} height={500} alt="Finished app" />
 
 You can check out the finished project [here](https://github.com/jellyfish-dev/jellyfish-clients-tutorials/tree/main/JellyfishDashboardRN).
 
@@ -572,7 +573,7 @@ this:
 
 It should show up in the Room screen automatically:
 
-![Room screen](./img/room_screen.png)
+<ImageWrapper url="/img/tutorials/room_screen.png" height={500} alt="Room screen"/>
 
 For your convenience in our components library we provided a component to layout
 videos in a nice grid:
@@ -663,4 +664,4 @@ features.
 You can also take a look at our fully featured [Videoroom Demo
 example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
 
-![Videoroom Demo](./img/videoroom.gif)
+<ImageWrapper url={'/img/tutorials/videoroom.gif'} height={700} alt="Videoroom Demo" />
