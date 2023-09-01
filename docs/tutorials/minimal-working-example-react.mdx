@@ -177,15 +177,6 @@ export const App = () => {
 ```tsx title="App.tsx"
 import { SignalingUrl } from "@jellyfish-dev/react-client-sdk/.";
 //...
-// This is the address of the Jellyfish backend. Adjust it to your server. We
-// strongly recommend setting this as an environment variable, we hardcoded it here
-// for simplicity.
-const JELLYFISH_URL = {
-  protocol: "ws",
-  host: "localhost:4002",
-  path: "/socket/peer/websocket",
-} as SignalingUrl;
-
 export const {
   // highlight-start
   useStatus, // Hook to check the status of the connection
@@ -218,7 +209,6 @@ export const App = () => {
             connect({
               peerMetadata: { name: "John Doe" }, // example metadata
               token: token,
-              signaling: JELLYFISH_URL,
             });
             // highlight-end
           }}
@@ -401,4 +391,4 @@ features.
 You can also take a look at our fully featured [Videoroom Demo
 example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
 
-<ImageWrapper url={'/img/tutorials/videoroom.gif'} height={700} alt="Videoroom Demo" />
+<ImageWrapper url={'/img/tutorials/videoroom.gif'} alt="Videoroom Demo" />

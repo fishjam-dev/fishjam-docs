@@ -8,14 +8,15 @@ import ThemedImage from '@theme/ThemedImage';
 
 type Props = {
     url: string,
-    height: number
+    height?: number
+    alt: string,
 }
 
-export const ImageWrapper = ({ url, height }: Props) => {
+export const ImageWrapper = ({ url, height, alt }: Props) => {
     return <p style={{ display: "flex", justifyContent: "center" }}>
         <ThemedImage
             height={height}
-            alt="Real-time video conferencing system architecture"
+            alt={alt}
             sources={{
                 light: useBaseUrl(url),
                 dark: useBaseUrl(url),
