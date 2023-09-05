@@ -108,7 +108,7 @@ development builds.
 
 * `CHECK_ORIGIN` - defines if jellyfish will check origin of incoming requests and socket connection.
   Defaults to `"true"`, set to anything else to disable.
-* `JELLYFISH_ADDRESS` - defines what address is returned when creating a room. Default to `VIRTUAL_HOST:PORT`.
+* `JELLYFISH_ADDRESS` - defines what address is returned when creating a room. Defaults to `VIRTUAL_HOST:PORT`.
 * `OUTPUT_BASE_PATH` - a base path where Jellyfish will save its artifacts. Defaults to `./jellyfish_output/`.
   When running via docker, the directory can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_output`.
 * `MIX_ENV` - defines compilation environment.
