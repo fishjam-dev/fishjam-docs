@@ -11,7 +11,9 @@ At the moment, Jellyfish doesn't provide pre-built binaries.
 
 ## Building from source
 
-Make sure to have Elixir installed. If not, you can do it [here](https://elixir-lang.org/install.html).
+Make sure to have both Elixir and Rust installed. Check the links below for instructions:
+* [Elixir](https://elixir-lang.org/install.html)
+* [Rust](https://rustup.rs)
 
 **Clone the Jellyfish repo**
 ```
@@ -22,6 +24,7 @@ git clone https://github.com/jellyfish-dev/jellyfish.git
 
 <Tabs>
   <TabItem value="mac-intel" label="macOS Intel" default>
+  These instructions assume you have Homebrew installed. You can get it <a href="https://brew.sh">here</a>.
 
   ```
   brew install srtp libnice clang-format ffmpeg opus pkg-config
@@ -33,6 +36,7 @@ git clone https://github.com/jellyfish-dev/jellyfish.git
 
   </TabItem>
   <TabItem value="mac-m1" label="macOS Apple Silicon" default>
+  These instructions assume you have Homebrew installed. You can get it <a href="https://brew.sh">here</a>.
 
   ```
   brew install srtp libnice clang-format ffmpeg opus
@@ -45,7 +49,7 @@ git clone https://github.com/jellyfish-dev/jellyfish.git
   <TabItem value="ubuntu" label="Ubuntu" default>
 
   ```
-  sudo apt-get install libsrtp2-dev libnice-dev libavcodec-dev libavformat-dev libavutil-dev libopus-dev
+  sudo apt install pkg-config libsrtp2-dev libnice-dev libavcodec-dev libavformat-dev libavutil-dev libopus-dev libfdk-aac-dev
   ```
 
   </TabItem>
@@ -80,8 +84,8 @@ For the full list of Jellyfish Docker images, [see this page](https://github.com
 
 :::tip
 
-Instead of passing environmental variables manually, you can use the `--env-file ./env-file` flag, 
-where the `env-file` is a file containing the variables that the image expects, 
+Instead of passing environmental variables manually, you can use the `--env-file ./env-file` flag,
+where the `env-file` is a file containing the variables that the image expects,
 see example file `.env.sample` in the Jellyfish repository.
 
 :::
@@ -89,28 +93,29 @@ see example file `.env.sample` in the Jellyfish repository.
 ## General env variables
 
 Below there are general, Jellyfish environment variables.
-If you are running Jellyfish in development, you don't need to 
+If you are running Jellyfish in development, you don't need to
 set any of them.
 
 #### Required in production:
 
 * `SERVER_API_TOKEN` - token for authorizing HTTP requests. Defaults to `development` for
-development builds. 
+development builds.
 * `SECRET_KEY_BASE` - used to sign/encrypt tokens generated for Peers.
-* `VIRTUAL_HOST` - host passed to the endpoint config. Defaults to `example.com` for production builds.
+* `VIRTUAL_HOST` - host passed to the endpoint config. Defaults to `localhost` for development builds.
+* `PORT` - port to run the HTTP server on. Defaults to `5002` for development builds.
 
 #### Optional:
 
-* `PORT` - port to run the HTTP server. Defaults to `4000` both for development and production builds.
 * `CHECK_ORIGIN` - defines if jellyfish will check origin of incoming requests and socket connection.
-* `JELLYFISH_ADDRESS` - defines what address is returned during creating a room. If not provided `VIRTUAL_HOST:PORT` is returned.
-* `OUTPUT_BASE_PATH` - a base path where Jellyfish will save its artifacts. 
-When running via docker, it's set to `jellyfish_output` can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_output`.
+  Defaults to `"true"`, set to anything else to disable.
+* `JELLYFISH_ADDRESS` - defines what address is returned when creating a room. Defaults to `VIRTUAL_HOST:PORT`.
+* `OUTPUT_BASE_PATH` - a base path where Jellyfish will save its artifacts. Defaults to `./jellyfish_output/`.
+  When running via docker, the directory can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_output`.
 * `MIX_ENV` - defines compilation environment.
 This variable takes effect only when running from the source.
 Docker images are always built with `MIX_ENV=prod`.
 Possible values are:
-  * `dev` - uses default values for environment variables 
+  * `dev` - uses default values for environment variables
   (default option when running with `mix phx.server`)
-  * `prod` - requires you to provide values for environment variables
+  * `prod` - requires that you provide values for environment variables
   * `test` - used in tests
