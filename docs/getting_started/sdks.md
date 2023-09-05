@@ -8,8 +8,10 @@ See [here](./architecture.md) for more information about client and server SDKs.
 
 ## Client SDKs
 
-* [React](https://github.com/jellyfish-dev/react-client-sdk)
-* [TypeScript](https://github.com/jellyfish-dev/ts-client-sdk)
-* [IOS](https://github.com/jellyfish-dev/ios-client-sdk)
-* [Android](https://github.com/jellyfish-dev/android-client-sdk)
-* [React Native](https://github.com/jellyfish-dev/react-native-client-sdk)
+| SDK                                                                      | Resources                                                                                                                                                                                                                                                              |
+|--------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [React](https://github.com/jellyfish-dev/react-client-sdk)               | [React Minimal Working Example Guide](/docs/tutorials/minimal-working-example-react.mdx) <br/> [Jellyfish Videoroom](https://github.com/jellyfish-dev/jellyfish_videoroom) <br/> [Code examples](https://github.com/jellyfish-dev/react-client-sdk/tree/main/examples) |
+| [TypeScript](https://github.com/jellyfish-dev/ts-client-sdk)             | [Code examples](https://github.com/jellyfish-dev/ts-client-sdk/tree/main/examples)                                                                                                                                                                                     |
+| [IOS](https://github.com/jellyfish-dev/ios-client-sdk)                   | [Code example](https://github.com/jellyfish-dev/ios-client-sdk/tree/main/JellyfishClientDemo)                                                                                                                                                                          |
+| [Android](https://github.com/jellyfish-dev/android-client-sdk)           | [Code example](https://github.com/jellyfish-dev/android-client-sdk/tree/main/app)                                                                                                                                                                                      |
+| [React Native](https://github.com/jellyfish-dev/react-native-client-sdk) | [Code example](https://github.com/jellyfish-dev/react-native-client-sdk/tree/main/example)                                                                                                                                                                             |
