@@ -10,7 +10,7 @@ docker run -p 50000-50050:50000-50050/udp \
            -e SERVER_API_TOKEN=development \
            -e VIRTUAL_HOST=192.168.0.1 \
            -e SECRET_KEY_BASE=secret \
-           ghcr.io/jellyfish-dev/jellyfish:edge
+           ghcr.io/jellyfish-dev/jellyfish:0.1.0-5e95d59
 ```
 
 Make sure to set `INTEGRATED_TURN_IP` and `VIRTUAL_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the backend.
