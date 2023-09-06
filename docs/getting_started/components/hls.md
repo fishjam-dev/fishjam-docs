@@ -17,6 +17,9 @@ Creates HLS playlist that is ready to be broadcasted via CDN.
 
 Currently, there are no configuration options related to this component.
 
+## Output
+After adding a peer or an rtsp component, the hls stream will be available under `http://<jellyfish-address>/hls/<room_id>/index.m3u8`.
+
 ## Env variables
 
 Currently, there are no environment variables related to this component.
