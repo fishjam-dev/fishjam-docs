@@ -1,0 +1,27 @@
+For testing, we'll run the backend locally using Docker image:
+
+```bash
+docker run -p 50000-50050:50000-50050/udp \
+           -p 4000:4000/tcp \
+           -e WEBRTC_USED=true \
+           -e INTEGRATED_TURN_PORT_RANGE=50000-50050 \
+           -e INTEGRATED_TURN_IP=<your ip address> \
+           -e INTEGRATED_TURN_LISTEN_IP=0.0.0.0 \
+           -e SERVER_API_TOKEN=development \
+           -e VIRTUAL_HOST=<your ip address> \
+           -e SECRET_KEY_BASE=secret \
+           -e PORT="4000" \
+           ghcr.io/jellyfish-dev/jellyfish:0.1.0-5e95d59
+```
+
+Make sure to set `INTEGRATED_TURN_IP` and `VIRTUAL_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the backend.
+
+:::tip
+
+To check your local IP you can use this handy command (Linux/macOS):
+
+```bash
+ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'
+```
+
+:::
