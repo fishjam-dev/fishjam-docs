@@ -1,0 +1,147 @@
+---
+title: Jellyfish Dashboard
+---
+
+import { ImageWrapper } from "./ImageWrapper";
+import StartingJellyfishBackend from "./common/_starting-jellyfish-backend.mdx";
+import StartingJellyfishDashboard from "./common/_starting-dashboard.mdx";
+
+# The Whats and Hows of Jellyfish Dashboard
+
+## What is Jellyfish Dashboard?
+
+Jellyfish Dashboard is a web application that allows you to manage your
+Jellyfish backend. It is a React application that uses the Jellyfish React Client API
+to communicate with the backend.
+
+It was created to help Jellyfish developers in testing but was later extended and
+adapted to as a tool for tutorials and demos. Here we present a short introduction to
+the dashboard and its features.
+
+## How to start Jellyfish Dashboard?
+
+<StartingJellyfishDashboard/>
+
+## How to start Jellyfish Backend?
+
+<StartingJellyfishBackend/>
+
+## How to use Jellyfish Dashboard?
+
+Since we have Dashboard and Jellyfish backend up and running, we can dive into
+the features.
+
+### Connecting to the server
+
+We started the dashboard and the backend separately, so we need to connect them.
+
+1. Open the dashboard in your browser. Open the side menu and fill in the parameters:
+![Dashboard server connection](/img/tutorials/dashboard/dashboard_server.png)
+
+- **Server token** - a token necessary to authenticate the dashboard with the backend. For now, it's simply `development`, but
+it is meant to authenticate the dashboard to the backend, so the good practice is to use a token that is hard to guess.
+- **WS/WSS** - whether to use a secure or insecure connection. , it's `ws`, but if the backend uses secure WebSocket, use `wss`.
+- **HTTP/HTTPS** - whether to use a secure or insecure connection. By default, it's `http`, but if the backend uses secure HTTP, use `https`.
+- **Server URL** - URL of the backend server. Here, `localhost:5002` would be a local build, but it can be any URL that points to the backend.
+- **Socket Path** - path to the WebSocket endpoint. The default value is `/socket/peer/websocket`.
+
+2. Click **Connect to server**. If everything is correct, a server will appear in the list of connected servers:
+![Connected dashboard](/img/tutorials/dashboard/dashboard_connected.png)
+
+### Creating a room
+
+There are plenty of settings that You can adjust in a room:
+![Adding Room](/img/tutorials/dashboard/dashboard_add_room.png)
+
+- **h264 or vp8** - video codec used in the room. If you want to use `HLS` streaming, you need to use `h264`.
+- **Max Peers** - maximum number of peers that can join to the room.
+
+When you select the settings, click the **Add room** button. If everything is correct, a room will appear in the list of rooms:
+![Room added](/img/tutorials/dashboard/dashboard_room_added.png)
+
+### Adding and connecting peers to the room
+
+Using the **Create peer** button, you can create a peer that will be ready to connect to the room.
+![Peer created](/img/tutorials/dashboard/dashboard_peer_created.png)
+
+The peer has its `ID` and `Token`. The `ID` is used to identify the peer in the backend, and the `Token` is used to authenticate the peer with the backend.
+
+Dashboard has an option to copy both of those values to the clipboard. You can also create a QR code with the peer's `Token` to make connecting to Jellyfish with a mobile device easier.
+![Peer copied](/img/tutorials/dashboard/dashboard_peer_copied.png)
+
+To connect the peer to the room, you can either press the **Connect** button in the peer's row, or scan the QR code with your mobile app, and connect there.
+
+### Sending tracks
+
+When the peer connects to the room, you will see the track menu. It allows you to send tracks to the room.
+![Track menu](/img/tutorials/dashboard/dashboard_track_menu.png)
+
+You can select the _audio or video tracks_ You want to send to the room. Apart from your camera/microphone,
+there is an option to pick one from a list of _mock tracks_ that we prepared.
+
+You can also select the _resolution_ of the video track
+or if you want, send the video as a _simulcast_ stream.
+
+There is also an option to add custom _metadata_ (in JSON format) to the track. The peer will send metadata with the track to the room. Each recipient will be able to see it.
+
+When you select the track, click the **Add track** button. If everything is correct, client will send the track to the room and other peers
+will be able to see and hear you.
+
+### Receiving tracks
+
+When the peer connects to the room, it will automatically receive tracks from other peers.
+
+#### Congrats! The basic utils of the dashboard are now covered. Next, we will dive into useful features that will help you with testing.
+
+## A ton of information that the dashboard provides
+
+### Server logs in console
+
+On the side menu, you can set up the dashboard to show the server logs in the console.
+Logs are great for debugging purposes and present the variety of communication that takes place between the dashboard and the backend.
+You can also register your callbacks in your Jellyfish projects.
+
+
+<ImageWrapper
+    url={"/img/tutorials/dashboard/dashboard_server_logs.png"}
+    height={500}
+    alt="Server logs"
+/>
+
+
+### Server/Room/Client state
+
+Each server, room, and client has its state. You can see the state of each of them in the dashboard by clicking appropriate buttons.
+![Server state](/img/tutorials/dashboard/dashboard_states.png)
+
+### Server events
+
+Apart from the state, you can also see the events that occur on the server.
+You can see them after clicking the **Show Server Events** button.
+
+![Server events](/img/tutorials/dashboard/dashboard_server_events.png)
+
+## HLS and RTSP streaming
+
+The dashboard allows adding HLS and RTSP streams in the room. You can set up the streams and see them in the room. It will look like this:
+![HLS and RTSP](/img/tutorials/dashboard/dashboard_hls_rtsp.png)
+
+## Loadbalancing in Dashboard
+
+Jellyfish Server supports load balancing.This means you can run multiple instances of the server and use them simultaneously to minimize the load on each of them.
+The dashboard reflects this feature. If you run multiple Jellyfish instances (Docker compose does that by default), connect one server to the dashboard.
+When a server opens a room on a different instance, the dashboard will automatically connect to it and display the room.
+
+## Summary
+
+Congrats on finishing the tutorial! You should now be able to use the dashboard to its full potential.
+
+But this was just the beginning. Jellyfish Client API is a powerful tool that allows you to create your own web or mobile multimedia application.
+Check out the other tutorials to learn more about the Jellyfish Client API and how to use it in your projects.
+
+You can also take a look at our fully featured [Videoroom Demo
+example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
+
+<ImageWrapper url={"/img/tutorials/videoroom.gif"} alt="Videoroom Demo" />
+
+It's written in React Native, but it uses the same Jellyfish Client API as the dashboard, so you can learn a lot from it.

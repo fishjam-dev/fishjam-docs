@@ -59,6 +59,7 @@ const sidebars = {
       collapsible: true,
       collapsed: false,
       items: [
+          "tutorials/dashboard",
         {
           type: 'category',
           label: 'Minimal Working Examples',
