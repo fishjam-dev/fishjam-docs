@@ -66,6 +66,7 @@ const sidebars = {
           collapsed: false,
           items: [
             'tutorials/minimal-working-example-react',
+            'tutorials/react-native'
           ]
         }
       ]
