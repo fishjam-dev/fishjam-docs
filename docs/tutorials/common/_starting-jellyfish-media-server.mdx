@@ -1,4 +1,4 @@
-For testing, we'll run the backend locally using Docker image:
+For testing, we'll run the Jellyfish Media Server locally using Docker image:
 
 ```bash
 docker run -p 50000-50050:50000-50050/udp \
@@ -14,7 +14,7 @@ docker run -p 50000-50050:50000-50050/udp \
            ghcr.io/jellyfish-dev/jellyfish:0.1.0-5e95d59
 ```
 
-Make sure to set `INTEGRATED_TURN_IP` and `VIRTUAL_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the backend.
+Make sure to set `INTEGRATED_TURN_IP` and `VIRTUAL_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the Jellyfish.
 
 :::tip
 
