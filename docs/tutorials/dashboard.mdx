@@ -3,14 +3,14 @@ title: Jellyfish Dashboard
 ---
 
 import { ImageWrapper } from "./ImageWrapper";
-import StartingJellyfishBackend from "./common/_starting-jellyfish-backend.mdx";
+import StartingJellyfishMediaServer from "./common/_starting-jellyfish-media-server.mdx";
 import StartingJellyfishDashboard from "./common/_starting-dashboard.mdx";
 
 # The Whats and Hows of Jellyfish Dashboard
 
 ## What is Jellyfish Dashboard?
 
-Jellyfish Dashboard is a web application that allows you to manage your Jellyfish backend.
+Jellyfish Dashboard is a web application that allows you to manage your Jellyfish Media Server instance.
 It is a React application that uses the [Jellyfish React Client API](https://github.com/jellyfish-dev/react-client-sdk)
 for adding and receiving tracks and [Jellyfish Server API](https://github.com/jellyfish-dev/jellyfish/blob/main/openapi.yaml)
 for adding peers, creating rooms etc.
@@ -22,28 +22,28 @@ Here, we present a short introduction to the dashboard and its features.
 
 <StartingJellyfishDashboard/>
 
-## How to start Jellyfish Backend?
+## How to start Jellyfish Media Server?
 
-<StartingJellyfishBackend/>
+<StartingJellyfishMediaServer/>
 
 ## How to use Jellyfish Dashboard?
 
-Since we have Dashboard and Jellyfish backend up and running, we can dive into
+Since we have Dashboard and Jellyfish Media Server up and running, we can dive into
 the features.
 
 ### Connecting to the server
 
-We started the dashboard and the backend separately, so we need to connect them.
+We started the dashboard and the Jellyfish Media Server separately, so we need to connect them.
 
 1. Open the dashboard in your browser. Open the side menu and fill in the parameters:
 
 ![Dashboard server connection](/img/tutorials/dashboard/dashboard_server.png)
 
-- **Server token** - a token necessary to authenticate the dashboard with the backend. For now, it's simply `development`,
-but it is meant to authenticate the dashboard to the backend, so the good practice is to use a token that is hard to guess.
-- **WS/WSS** - whether to use a secure or insecure connection. , it's `ws`, but if the backend uses secure WebSocket, use `wss`.
-- **HTTP/HTTPS** - whether to use a secure or insecure connection. By default, it's `http`, but if the backend uses secure HTTP, use `https`.
-- **Server URL** - URL of the backend server. Here, `localhost:5002` would be a local build, but it can be any URL that points to the backend.
+- **Server token** - a token necessary to authenticate the dashboard with the Jellyfish. For now, it's simply `development`,
+but it is meant to authenticate the dashboard to the Jellyfish, so the good practice is to use a token that is hard to guess.
+- **WS/WSS** - whether to use a secure or insecure connection. , it's `ws`, but if the Jellyfish uses secure WebSocket, use `wss`.
+- **HTTP/HTTPS** - whether to use a secure or insecure connection. By default, it's `http`, but if the Jellyfish uses secure HTTP, use `https`.
+- **Server URL** - URL of the Jellyfish server. Here, `localhost:5002` would be a local build, but it can be any URL that points to the Jellyfish.
 - **Socket Path** - path to the WebSocket endpoint. The default value is `/socket/peer/websocket`.
 
 2. Click **Connect to server**. If everything is correct, a server will appear in the list of connected servers:
@@ -109,7 +109,7 @@ When the peer connects to the room, it will automatically receive tracks from ot
 
 
 On the side menu, you can set up the dashboard to display React Client logs in the console.
-Logs are great for debugging purposes and provide insight into the various communications that occur between the dashboard and the backend.
+Logs are great for debugging purposes and provide insight into the various communications that occur between the dashboard and the Jellyfish Server.
 You can also register your event handlers in your Jellyfish-based projects, both in the
 [React Client SDK](https://github.com/jellyfish-dev/react-client-sdk) and the[TS Client SDK](https://github.com/jellyfish-dev/ts-client-sdk).
 These logs can show you when particular events occur and provide data that you can use in your own handlers
