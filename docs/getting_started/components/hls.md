@@ -15,14 +15,20 @@ Creates HLS playlist that is ready to be broadcasted via CDN.
 
 ## Configuration options
 
-Currently, there are no configuration options related to this component.
+See [API](../../api_reference/rest_api#tag/component/operation/JellyfishWeb.ComponentController.create) for more information.
 
-## Output
-After adding a peer or an rtsp component, the hls stream will be available under `http://<jellyfish-address>/hls/<room_id>/index.m3u8`.
+### Optional
+
+* `lowLatency` (boolean, default: false) - Whether the component should use LL-HLS
 
 ## Env variables
 
 Currently, there are no environment variables related to this component.
+
+## Output
+
+After adding a peer (and at least one track) or an RTSP component, the HLS stream will be available
+under `http://<jellyfish-address>/hls/<room_id>/index.m3u8` (or `https://`, if using TLS).
 
 ## Example Docker commands
 
