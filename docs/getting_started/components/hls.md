@@ -10,12 +10,12 @@ Creates HLS playlist that is ready to be broadcasted via CDN.
 ## Requirements
 
 * The [Room](../../introduction/basic_concepts\#room) in which the HLS component is created must have the video codec set to H264.
-  See [API](../../api_reference/rest_api#tag/room/operation/JellyfishWeb.RoomController.create) for more information.
+  See [API](../../api_reference/rest_api#tag/room/operation/create_room) for more information.
 * Max 1 HLS component allowed per room.
 
 ## Configuration options
 
-See [API](../../api_reference/rest_api#tag/component/operation/JellyfishWeb.ComponentController.create) for more information.
+See [API](../../api_reference/rest_api#tag/room/operation/add_component) for more information.
 
 ### Optional
 

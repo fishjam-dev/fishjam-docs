@@ -14,11 +14,11 @@ Supports H264 streams only.
 ## Requirements
 * If the [Room](../../introduction/basic_concepts\#room) in which the RTSP component is created enforces a video codec,
   it must be set to H264.
-  See [API](../../api_reference/rest_api#tag/room/operation/JellyfishWeb.RoomController.create) for more information.
+  See [API](../../api_reference/rest_api#tag/room/operation/create_room) for more information.
 
 ## Configuration options
 
-See [API](../../api_reference/rest_api#tag/component/operation/JellyfishWeb.ComponentController.create) for more information.
+See [API](../../api_reference/rest_api#tag/room/operation/add_component) for more information.
 
 ### Required
 
