@@ -33,6 +33,14 @@ You can check out the finished project [here](https://github.com/jellyfish-dev/j
 
 <JellyfishArchitecture />
 
+### Start the Jellyfish backend
+
+<StartingJellyfishBackend />
+
+### Start the dashboard web front-end
+
+<StartingJellyfishDashboard />
+
 ## Setup
 
 ### Create React Native / Expo project
@@ -57,6 +65,8 @@ npx react-native init jellyfish-dashboard --template react-native-template-types
 </Tabs>
 
 ### Add dependencies
+
+Please make sure to install or update `expo` to version `^49.0.0` 
 
 <Tabs>
   <TabItem value="react-native" label="React Native">
@@ -155,14 +165,6 @@ plugin. Just add it to `app.json`:
 </TabItem>
 </Tabs>
 
-### Start the Jellyfish backend
-
-<StartingJellyfishBackend />
-
-### Start the dashboard web front-end
-
-<StartingJellyfishDashboard />
-
 ## Add components library
 
 For your convenience, we've prepared a library with nice-looking components
@@ -172,7 +174,7 @@ useful for following this tutorial. Feel free to use standard React Native compo
 npx expo install @expo/vector-icons expo-barcode-scanner expo-font @expo-google-fonts/noto-sans @jellyfish-dev/react-native-jellyfish-components @react-navigation/native-stack
 ```
 
-**_You'll also need to install [Reanimated library (3.3.0)](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started) and [React Navigation](https://reactnavigation.org/)_**
+**_You'll also need to install [Reanimated library (3.3.0)](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started) and [React Navigation (6.1.7)](https://reactnavigation.org/)_**
 
 :::tip
 Run `pod install` in the /ios directory to install the new pods
@@ -365,7 +367,13 @@ To start the camera we need to ask the user for permission first. We'll use a
 standard React Native module for this:
 
 ```tsx title="/screens/Connect.tsx"
-import { View, StyleSheet, Permission, PermissionsAndroid } from "react-native";
+import { 
+  View,
+  StyleSheet,
+  type Permission,
+  PermissionsAndroid,
+  Platform, 
+ } from "react-native";
 
 // ...
 
@@ -374,6 +382,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 
   // highlight-start
   const grantedCameraPermissions = async () => {
+    if (Platform.OS === 'ios') return true;
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.CAMERA as Permission
     );
