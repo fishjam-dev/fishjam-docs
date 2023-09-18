@@ -9,13 +9,13 @@ WebRTC peer allows you to connect to Jellyfish via WebRTC standard.
 
 ## Configuration options
 
-See [API](../../api_reference/rest_api#tag/peer/operation/JellyfishWeb.PeerController.create) for more information.
+See [API](../../api_reference/rest_api#tag/room/operation/add_peer) for more information.
 
 ### Optional
 
 * `enableSimulcast` (boolean, default: true) - Enables the peer to use simulcast
 
-## Env variables:
+## Env variables
 
 * `WEBRTC_USED` - has to be `true` if WebRTC peers will be used
 * `INTEGRATED_TURN_LISTEN_IP` - the IP address on which TURN servers will listen. 
