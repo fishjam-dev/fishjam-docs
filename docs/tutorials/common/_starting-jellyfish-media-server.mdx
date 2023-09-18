@@ -11,7 +11,7 @@ docker run -p 50000-50050:50000-50050/udp \
            -e VIRTUAL_HOST=<your ip address> \
            -e SECRET_KEY_BASE=secret \
            -e PORT="4000" \
-           ghcr.io/jellyfish-dev/jellyfish:0.1.0-5e95d59
+           ghcr.io/jellyfish-dev/jellyfish:0.1.0-2b0f5f1
 ```
 
 Make sure to set `INTEGRATED_TURN_IP` and `VIRTUAL_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the Jellyfish.
