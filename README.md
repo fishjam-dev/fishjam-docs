@@ -5,13 +5,13 @@
 The docs for the [Jellyfish](https://github.com/jellyfish-dev/jellyfish).
 You can read the docs here: https://jellyfish-dev.github.io/jellyfish-docs/
 
-### Installation
+## Installation
 
 ```
 npm install
 ```
 
-### Local Development
+## Local Development
 
 ```
 npm start
@@ -19,13 +19,22 @@ npm start
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-### Build
+## Build
 
 ```
 npm run build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+## Versioning
+
+We follow the versioning system provided by docusaurus: [click](https://docusaurus.io/docs/versioning).
+
+To create a new docs version:
+* make sure the current docs version inside `/docs` directory and `sidebars.js` are ready to be frozen
+* create a new directory `versioned_docs/version-1.0.0`
+* run `npm run docusaurus docs:version 1.0.0`
 
 ## Copyright and License
 
