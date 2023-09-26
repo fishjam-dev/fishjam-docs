@@ -29,10 +29,10 @@ This command generates static content into the `build` directory and can be serv
 
 ## Versioning
 
-We follow the versioning system provided by docusaurus: [click](https://docusaurus.io/docs/versioning)
+We follow [the versioning system provided by docusaurus](https://docusaurus.io/docs/versioning)
 
 To create a new docs version:
-* make sure the current docs version inside `/docs` directory and `sidebars.js` are ready to be frozen
+* make sure that `sidebars.js` and files inside `docs/` directory are up-to-date and ready to be frozen
 * create a new directory `versioned_docs/version-1.0.0`
 * run `npm run docusaurus docs:version 1.0.0`
 
