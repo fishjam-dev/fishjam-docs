@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Jellyfish docs',
+  title: 'Jellyfish',
   tagline: 'Jellyfish are cool',
   favicon: 'img/membrane-signet-light.svg',
 
@@ -43,6 +43,13 @@ const config = {
           editUrl:
             'https://github.com/jellyfish-dev/jellyfish-docs',
           routeBasePath: '/',
+          lastVersion: 'current',
+          versions: {
+            current: {
+              label: '0.2.0-dev',
+              path: '/',
+            },
+          },
         },
         blog: false,
         theme: {
@@ -82,13 +89,11 @@ const config = {
           src: 'img/membrane-signet-light.svg',
         },
         items: [
-          // Hide doc from navbar for now - introduction will be the landing page
-          // {
-          //   type: 'doc',
-          //   docId: 'signaling_architecture',
-          //   position: 'left',
-          //   label: 'Docs',
-          // },
+            {
+            type: 'docsVersionDropdown',
+            position: 'right',
+            dropdownActiveClassDisabled: true,
+          },
           {
             href: 'https://github.com/jellyfish-dev/jellyfish',
             label: 'GitHub',
