@@ -27,7 +27,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Getting Started',
-      collapsed: false,
+      collapsed: true,
       items: [
         'getting_started/installation',
         'getting_started/architecture',
@@ -52,12 +52,12 @@ const sidebars = {
         }
       ]
     },
+    'cluster',
     'examples',
     {
       type: 'category',
       label: 'Tutorials',
-      collapsible: true,
-      collapsed: false,
+      collapsed: true,
       items: [
           "tutorials/dashboard",
         {

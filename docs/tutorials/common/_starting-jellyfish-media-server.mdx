@@ -3,18 +3,17 @@ For testing, we'll run the Jellyfish Media Server locally using Docker image:
 ```bash
 docker run -p 50000-50050:50000-50050/udp \
            -p 4000:4000/tcp \
-           -e WEBRTC_USED=true \
-           -e INTEGRATED_TURN_PORT_RANGE=50000-50050 \
-           -e INTEGRATED_TURN_IP=<your ip address> \
-           -e INTEGRATED_TURN_LISTEN_IP=0.0.0.0 \
-           -e SERVER_API_TOKEN=development \
-           -e VIRTUAL_HOST=<your ip address> \
-           -e SECRET_KEY_BASE=secret \
-           -e PORT="4000" \
-           ghcr.io/jellyfish-dev/jellyfish:0.1.0-2b0f5f1
+           -e JF_HOST=<your ip address>:4000 \
+           -e JF_PORT="4000" \
+           -e JF_WEBRTC_USED=true \
+           -e JF_WEBRTC_TURN_PORT_RANGE=50000-50050 \
+           -e JF_WEBRTC_TURN_IP=<your ip address> \
+           -e JF_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
+           -e JF_SERVER_API_TOKEN=development \
+           ghcr.io/jellyfish-dev/jellyfish:0.2.0
 ```
 
-Make sure to set `INTEGRATED_TURN_IP` and `VIRTUAL_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the Jellyfish.
+Make sure to set `JF_WEBRTC_TURN_IP` and `JF_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the Jellyfish.
 
 :::tip
 

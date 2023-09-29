@@ -57,11 +57,10 @@ Explicit port exposure (macOS compatible)
 
 ```bash
 docker run -p 20000:20000/udp \
-           -p 4000:4000/tcp \
-           -e SERVER_API_TOKEN=token \
-           -e VIRTUAL_HOST=localhost \
-           -e SECRET_KEY_BASE=secret \
-           ghcr.io/jellyfish-dev/jellyfish:latest
+           -p 8080:8080/tcp \
+           -e JF_SERVER_API_TOKEN=token \
+           -e JF_HOST=localhost:8080 \
+           ghcr.io/jellyfish-dev/jellyfish:0.2.0
 ```
 
 :::caution
@@ -77,8 +76,7 @@ Using host network (Linux only)
 
 ```bash
 docker run --network=host \
-           -e SERVER_API_TOKEN=token \
-           -e VIRTUAL_HOST=localhost \
-           -e SECRET_KEY_BASE=secret \
-           ghcr.io/jellyfish-dev/jellyfish:latest
+           -e JF_SERVER_API_TOKEN=token \
+           -e JF_HOST=localhost:8080 \
+           ghcr.io/jellyfish-dev/jellyfish:0.2.0
 ```
