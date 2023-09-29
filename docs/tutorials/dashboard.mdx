@@ -20,11 +20,11 @@ Here, we present a short introduction to the dashboard and its features.
 
 ## How to start Jellyfish Dashboard?
 
-<StartingJellyfishDashboard/>
+<StartingJellyfishDashboard />
 
 ## How to start Jellyfish Media Server?
 
-<StartingJellyfishMediaServer/>
+<StartingJellyfishMediaServer />
 
 ## How to use Jellyfish Dashboard?
 
@@ -40,7 +40,7 @@ We started the dashboard and the Jellyfish Media Server separately, so we need t
 ![Dashboard server connection](/img/tutorials/dashboard/dashboard_server.png)
 
 - **Server token** - a token necessary to authenticate the dashboard with the Jellyfish. For now, it's simply `development`,
-but it is meant to authenticate the dashboard to the Jellyfish, so the good practice is to use a token that is hard to guess.
+  but it is meant to authenticate the dashboard to the Jellyfish, so the good practice is to use a token that is hard to guess.
 - **WS/WSS** - whether to use a secure or insecure connection. , it's `ws`, but if the Jellyfish uses secure WebSocket, use `wss`.
 - **HTTP/HTTPS** - whether to use a secure or insecure connection. By default, it's `http`, but if the Jellyfish uses secure HTTP, use `https`.
 - **Server URL** - URL of the Jellyfish server. Here, `localhost:5002` would be a local build, but it can be any URL that points to the Jellyfish.
@@ -86,8 +86,10 @@ It allows you to send tracks to the room.
 
 ![Track menu](/img/tutorials/dashboard/dashboard_track_menu.png)
 
-You can select the _audio or video tracks_ you want to send to the room.
-Apart from your camera/microphone, there is an option to pick one from a list of _mock tracks_ that we prepared.
+You can select the _audio or video track_ you want to create.
+Created tracks will be visible in the list below.
+You can select any track from the list and send it to the room.
+Apart from your camera/microphone, you can easily share your screen with its audio or pick one from a list of _mock tracks_ that we prepared.
 
 You can also select the _resolution_ of the video track or if you want, send the video as a _simulcast_ stream.
 
@@ -107,20 +109,17 @@ When the peer connects to the room, it will automatically receive tracks from ot
 
 ### Server logs in console
 
-
 On the side menu, you can set up the dashboard to display React Client logs in the console.
 Logs are great for debugging purposes and provide insight into the various communications that occur between the dashboard and the Jellyfish Server.
 You can also register your event handlers in your Jellyfish-based projects, both in the
 [React Client SDK](https://github.com/jellyfish-dev/react-client-sdk) and the[TS Client SDK](https://github.com/jellyfish-dev/ts-client-sdk).
 These logs can show you when particular events occur and provide data that you can use in your own handlers
 
-
 <ImageWrapper
-    url={"/img/tutorials/dashboard/dashboard_server_logs.png"}
-    height={500}
-    alt="Server logs"
+  url={"/img/tutorials/dashboard/dashboard_server_logs.png"}
+  height={500}
+  alt="Server logs"
 />
-
 
 ### Server/Room/Client state
 
@@ -154,6 +153,17 @@ When a server opens a room on a different instance, the Dashboard will automatic
 When Jellyfish runs in a cluster, and the Dashboard requests a new room, it's created on the Jellyfish instance with the lowest load.
 Information about the specific Jellyfish instance that hosts the newly created room is returned in the HTTP response body.
 
+## Data collected by Jellyfish
+
+For each server, Jellyfish collects WebRTC statistics about the rooms, clients and streamed tracks. You can see them in the dashboard using the **Internals** button.
+
+![Internals button](/img/tutorials/dashboard/dashboard_internals_button.png)
+
+The button opens a new tab with the panel to connect to the WebSocket of the Jellyfish of choice.
+You can observe the data with the dynamically generated charts showing what flows through the Jellyfish.
+
+![Internals](/img/tutorials/dashboard/dashboard_internals.png)
+
 ## Summary
 
 Congrats on finishing the tutorial! You should now be able to use the dashboard to its full potential.
@@ -164,6 +174,6 @@ Check out the other tutorials to learn more about the Jellyfish Client API and h
 
 You can also take a look at our fully featured [Videoroom Demo example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
 
-<ImageWrapper url={"/img/tutorials/videoroom.gif"} alt="Videoroom Demo"/>
+<ImageWrapper url={"/img/tutorials/videoroom.gif"} alt="Videoroom Demo" />
 
 It's written in React Native, but it uses the same Jellyfish Client API as the dashboard, so you can learn a lot from it.
