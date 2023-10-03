@@ -25,7 +25,7 @@ You can do this with `JF_PORT` and `JF_METRICS_PORT` environment variables.
 
 :::tip Distribution Environment Variables
 
-List of all cluster-related environment variables is available [here](./getting_started/installation#general-env-variables).
+List of all cluster-related environment variables is available [here](./getting_started/installation#distribution).
 
 :::
 
@@ -73,13 +73,13 @@ See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution
 Run the first Jellyfish:
 
 ```sh
-JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j1@127.0.0.1 JF_DIST_COOKIE=jellyfish_cookie mix phx.server
+JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j1@127.0.0.1 mix phx.server
 ```
 
 Run the second Jellyfish
 
 ```sh
-JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j2@127.0.0.1 JF_DIST_COOKIE=jellyfish_cookie JF_DIST_NODES="j1@127.0.0.1" JF_PORT=4002 JF_METRICS_PORT=9468 mix phx.server
+JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j2@127.0.0.1 JF_DIST_NODES="j1@127.0.0.1" JF_PORT=4002 JF_METRICS_PORT=9468 mix phx.server
 ```
 
 :::info
@@ -101,7 +101,6 @@ x-jellyfish-template: &jellyfish-template
   environment: &jellyfish-environment
     JF_SERVER_API_TOKEN: "development"
     JF_DIST_ENABLED: "true"
-    JF_DIST_COOKIE: "jellyfish_cookie"
     JF_DIST_MODE: "sname"
     JF_DIST_NODES: "j1@jellyfish1 j2@jellyfish2"
   networks:
