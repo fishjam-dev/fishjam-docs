@@ -1,6 +1,7 @@
 # HLS
 
 Creates HLS playlist that is ready to be broadcasted via CDN.
+Read more about HLS [here](https://developer.apple.com/streaming/).
 
 ## Compatibility
 
@@ -10,16 +11,14 @@ Creates HLS playlist that is ready to be broadcasted via CDN.
 ## Requirements
 
 * The [Room](../../introduction/basic_concepts\#room) in which the HLS component is created must have the video codec set to H264.
-  See [API](../../api_reference/rest_api#tag/room/operation/create_room) for more information.
+See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_room) for more information.
 * Max 1 HLS component allowed per room.
 
 ## Configuration options
 
-See [API](../../api_reference/rest_api#tag/room/operation/add_component) for more information.
+**Optional**
 
-### Optional
-
-* `lowLatency` (boolean, default: false) - Whether the component should use LL-HLS
+* `lowLatency` (boolean, default: false) - whether the component should use LL-HLS
 
 ## Env variables
 
@@ -27,7 +26,7 @@ Currently, there are no environment variables related to this component.
 
 ## Output
 
-After adding a peer (and at least one track) or an RTSP component, the HLS stream will be available
+After adding an WebRTC peer (and at least one track) or an RTSP component, the HLS stream will be available
 under `http://<jellyfish-address>/hls/<room_id>/index.m3u8` (or `https://`, if using TLS).
 
 ## Example Docker commands

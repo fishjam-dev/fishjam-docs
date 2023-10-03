@@ -83,7 +83,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/membrane-signet-light.svg',
       navbar: {
-        title: 'Jellyfish docs',
+        title: 'Jellydocs',
         logo: {
           alt: 'Jellyfish Logo',
           src: 'img/membrane-signet-light.svg',
@@ -99,6 +99,16 @@ const config = {
             label: 'GitHub',
             position: 'right',
           },
+          {
+            href: 'https://jellyfish-dev.github.io/jellyfish-dashboard/',
+            label: 'Jellydashboard',
+            position: 'left',
+          },
+          {
+            href: 'https://jellyroom.membrane.stream/',
+            label: 'Jellyroom',
+            position: 'left',
+          }
         ],
       },
       footer: {

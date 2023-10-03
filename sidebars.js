@@ -32,6 +32,8 @@ const sidebars = {
         'getting_started/installation',
         'getting_started/architecture',
         'getting_started/authentication',
+        'getting_started/notifications',
+        'getting_started/metrics',
         'getting_started/sdks',
         {
           type: 'category',
@@ -52,25 +54,16 @@ const sidebars = {
         }
       ]
     },
-    'cluster',
-    'examples',
     {
       type: 'category',
       label: 'Tutorials',
       collapsed: true,
       items: [
-          "tutorials/dashboard",
-        {
-          type: 'category',
-          label: 'Minimal Working Examples',
-          collapsible: false,
-          collapsed: false,
-          items: [
-            'tutorials/minimal-working-example-react',
-          ]
-        }
+        "tutorials/dashboard",
+        'tutorials/simple-react-app'
       ]
     },
+    'cluster',
     {
       type: 'category',
       label: 'Deploying',
@@ -80,17 +73,23 @@ const sidebars = {
         'deploying/fly_io'
       ]
     },
-    'metrics',
-    'design_docs',
     {
       type: 'category',
-      label: 'API Reference',
-      link: {
-        type: 'doc',
-        id: 'api_reference',
-      },
+      label: 'For Developers',
       items: [
-        'api_reference/rest_api'
+        'for_developers/design_docs',
+        {
+          type: 'category',
+          label: 'API Reference',
+          collapsed: true,
+          link: {
+            type: 'doc',
+            id: 'for_developers/api_reference',
+          },
+          items: [
+            'for_developers/api_reference/rest_api'
+          ]
+        }
       ]
     }
   ],

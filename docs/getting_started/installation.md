@@ -62,23 +62,44 @@ mix deps.get
 ```
 
 **Run the server in development**
+
 ```
 mix phx.server
 ```
 
+**Create a binary**
+
+You can also create Jellyfish binary with:
+
+```
+MIX_ENV=prod mix release
+```
+
+Then follow instructions printed in your terminal.
+
+:::info
+
+The difference between running with `mix phx.server` and generating target
+binary is that the latter is prepared for running in production so e.g.
+it includes some Erlang Virtual Machine tweaks.
+Jellyfish Dockerfile always uses `mix release` under the hood.
+
+:::
+
 ## Running with Docker
 
 Docker images are built for production which means that you always
-need to set a couple of environment variables.
+need to set a couple of [environment variables](#environment-variables).
 
-Environment variables are split into two groups:
-* general ones - see [General env variables](#general-env-variables) below
-* peer/component-specific - each Peer and Component can expose its own environment variables.
-They are always listed in a Peer/Component description.
-See the list of [Peers](./peers/webrtc.md) and [Components](./components/hls.md).
+An example docker command running bare Jellyfish HTTP service locally:
 
-As docker commands depend on peers/components you are going to use, we don't present
-them here but rather in each peer/component's documentation, e.g. [WebRTC Peer](./peers/webrtc#example-docker-commands)
+```bash
+docker run -p 8080:8080/tcp -e JF_HOST=localhost:8080 JF_SERVER_API_TOKEN=token ghcr.io/jellyfish-dev/jellyfish:0.2.0
+```
+
+Note that in real case scenarios, docker commands depend on peers/components you are going to use.
+Therefore, we don't present them here but rather in each peer/component's documentation.
+As an example see [WebRTC Peer](./peers/webrtc#example-docker-commands).
 
 For the full list of Jellyfish Docker images, [see this page](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish).
 
@@ -90,7 +111,13 @@ see example file `.env.sample` in the Jellyfish repository.
 
 :::
 
-## General env variables
+## Environment variables
+
+Environment variables are split into two groups:
+* general ones - presented below
+* peer/component-specific - each Peer and Component can expose its own environment variables.
+They are always listed in a Peer/Component description.
+See the list of [Peers](./peers/webrtc.md) and [Components](./components/hls.md).
 
 Below there are general, Jellyfish environment variables.
 If you are running Jellyfish in development, you don't need to
@@ -178,7 +205,7 @@ Only available when running with Docker or `mix release`.
 Defaults to `9000` when running with Docker.<br/>
 Only available when running with Docker or `mix release`.
 
-:::caution
+:::tip
 
 You can use a single port to form a cluster, even if a cluster consists of
 more than two Jellyfishes. 
