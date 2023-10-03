@@ -1,7 +1,7 @@
 # Cluster
 
 Jellyfish comes with a built-in clustering mechanism.
-By a cluster, we mean a set of connected Jellyfishes.
+By a cluster, we mean a set of connected Jellyfish instances.
 Whenever a new request for creating a room is sent to one of Jellyfishes in a cluster, this Jellyfish
 communicates with all other nodes and creates a room on the node with the lowest load.
 In response, a Jellyfish address (specified with `JF_HOST` environment variable) where the room was created is returned.
@@ -26,6 +26,15 @@ You can do this with `JF_PORT` and `JF_METRICS_PORT` environment variables.
 :::tip Distribution Environment Variables
 
 List of all cluster-related environment variables is available [here](./getting_started/installation#general-env-variables).
+
+:::
+
+:::warning Security
+
+Currently, Jellyfish distribution is not encrypted meaning that data between
+Jellyfishes is sent as plain text.
+Cookie does not provide any cryptographic security.
+Do run a cluster only across machines in the same network!
 
 :::
 
@@ -64,13 +73,13 @@ See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution
 Run the first Jellyfish:
 
 ```sh
-JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j1@127.0.0.1 mix phx.server
+JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j1@127.0.0.1 JF_DIST_COOKIE=jellyfish_cookie mix phx.server
 ```
 
 Run the second Jellyfish
 
 ```sh
-JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j2@127.0.0.1 JF_DIST_NODES="j1@127.0.0.1" JF_PORT=4002 JF_METRICS_PORT=9468 mix phx.server
+JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j2@127.0.0.1 JF_DIST_COOKIE=jellyfish_cookie JF_DIST_NODES="j1@127.0.0.1" JF_PORT=4002 JF_METRICS_PORT=9468 mix phx.server
 ```
 
 :::info
@@ -92,6 +101,7 @@ x-jellyfish-template: &jellyfish-template
   environment: &jellyfish-environment
     JF_SERVER_API_TOKEN: "development"
     JF_DIST_ENABLED: "true"
+    JF_DIST_COOKIE: "jellyfish_cookie"
     JF_DIST_MODE: "sname"
     JF_DIST_NODES: "j1@jellyfish1 j2@jellyfish2"
   networks:

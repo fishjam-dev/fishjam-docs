@@ -147,6 +147,9 @@ See our [docker-compose.yaml](https://github.com/jellyfish-dev/jellyfish/blob/ma
 * `JF_DIST_COOKIE` - used to group Jellyfishes in a cluster.<br/>
 Defaults to `jellyfish_cookie`.<br/>
 Use different cookies to create multiple clusters on the same machine.
+**Important**: cookie does not provide any cryptographic security.
+Its only purpose is to prevent a node from connecting to a cluster with which 
+it is not intended to communicate.
 * `JF_DIST_NODES` - space-separated list of other Jellyfishes to connect to.<br/>
 Defaults to `""`.<br/>
 Example: `JF_DIST_NODES="jellyfish1@127.0.0.1 jellyfish2@127.0.0.1"`.<br/>
