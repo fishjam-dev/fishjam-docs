@@ -88,7 +88,7 @@ We prepared a template *cloud-config* that will configure your server and start 
 
   runcmd:
     - export JELLYFISH_VERSION=0.1.0-5ef4452
-    - export JELLYFISH_DOMAIN=$(ip route get 1.0.0.0 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')
+    - export JELLYFISH_DOMAIN=mydomain.example.com
     - export LETSENCRYPT_EMAIL=my@email.com
     - export SERVER_API_TOKEN=test_token
     - systemctl enable fail2ban
