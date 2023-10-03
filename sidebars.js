@@ -76,6 +76,7 @@ const sidebars = {
       label: 'Deploying',
       collapsed: true,
       items: [
+        'deploying/vps',
         'deploying/fly_io'
       ]
     },
