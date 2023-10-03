@@ -128,6 +128,17 @@ When running via docker, the directory can be mounted as `-v $(pwd)/host_directo
 Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0.0.0` for Docker.
 * `JF_METRICS_PORT` - a port to run metrics endpoint on.<br/>
 Defaults to `9568`.
+* `MIX_ENV` - defines compilation environment.
+This variable takes effect only when running from the source.
+Docker images are always built with `MIX_ENV=prod`.
+Possible values are:
+  * `dev` - uses default values for environment variables
+  (default option when running with `mix phx.server`)
+  * `prod` - requires that you provide values for environment variables
+  * `test` - used in tests
+
+#### Distribution:
+
 * `JF_DIST_ENABLED` - whether to run Jellyfish in a cluster.<br/>
 Defaults to `false`.
 * `JF_DIST_NODE_NAME` - Node name used in a cluster.
@@ -146,7 +157,7 @@ When using `sname`, your hostname can be any string.
 See our [docker-compose.yaml](https://github.com/jellyfish-dev/jellyfish/blob/main/docker-compose.yaml), which we use in our integration tests for an example.
 * `JF_DIST_COOKIE` - used to group Jellyfishes in a cluster.<br/>
 Defaults to `jellyfish_cookie`.<br/>
-Use different cookies to create multiple clusters on the same machine.
+Use different cookies to create multiple clusters on the same machine.<br/>
 **Important**: cookie does not provide any cryptographic security.
 Its only purpose is to prevent a node from connecting to a cluster with which 
 it is not intended to communicate.
@@ -183,11 +194,4 @@ Read more in the [Cluster](../cluster.md) section.
 
 :::
 
-* `MIX_ENV` - defines compilation environment.
-This variable takes effect only when running from the source.
-Docker images are always built with `MIX_ENV=prod`.
-Possible values are:
-  * `dev` - uses default values for environment variables
-  (default option when running with `mix phx.server`)
-  * `prod` - requires that you provide values for environment variables
-  * `test` - used in tests
+
