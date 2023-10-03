@@ -103,8 +103,6 @@ x-jellyfish-template: &jellyfish-template
     JF_DIST_ENABLED: "true"
     JF_DIST_MODE: "sname"
     JF_DIST_NODES: "j1@jellyfish1 j2@jellyfish2"
-  networks:
-    - net1
   restart: on-failure
 
 services:
@@ -131,10 +129,6 @@ services:
     ports:
       - 5002:5002
       - 6002:6002
-
-networks:
-  net1:
-    driver: bridge
 ```
 
 Because we run Jellyfishes in the same Docker network:
