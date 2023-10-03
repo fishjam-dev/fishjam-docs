@@ -1,40 +1,53 @@
 # Cloud VPS with cloud-init
 
-We're encouraging you to use VPS as the most customizable option. In this example, we will show you how to set up a Jellyfish media server on [Hetzner Cloud](https://www.hetzner.com/cloud) but you can use these instructions to run Jellyfish on VPS from any provider that supports [cloud-init](https://cloud-init.io/) setup.
+We're encouraging you to use VPS as the most customizable option.
+In this example, we will show you how to set up a Jellyfish media server on [Hetzner Cloud](https://www.hetzner.com/cloud), but you can use these instructions to run Jellyfish on VPS from any provider that supports [cloud-init](https://cloud-init.io/) setup.
 
-We're presenting a configuration which uses SSL protocol, as we are aware of the consequences of using unencrypted connections. That means you're going to need a registered domain but getting one is not a big deal nowadays.
+We're presenting a configuration which uses SSL protocol, as we are aware of the consequences of using unencrypted connections.
+That means you're going to need a registered domain but getting one is not a big deal nowadays.
 
 ## 1. Creating primary IP
 
-We divided the process of creating VPS into two parts (creating IP and configuring server) because before configuring your server with _cloud-init_ using our script, you should have registered your domain to point at the particular IP address.
+Because configuring a server with _cloud-init_ using our script requires you to have a registered domain pointing at a particular IP address, we divided the process of creating VPS into two parts:
+* obtaining dedicated IP address
+* configuring the server using _cloud-init_
 
-Let's start with it. In Hetzner's project site go to the section ___Primary IPs___ then click ___Create Primary IP___ button. Choose a data center location for your server and select __IPv4__ protocol. You can also name that IP if you'd like.
+Let's start with the first one.
+In Hetzner's project site go to the section ___Primary IPs___ then click ___Create Primary IP___ button.
+Choose a data center location for your server and select __IPv4__ protocol.
+You can also name that IP if you'd like.
 
 ## 2. Registering Domain
 
-We'll not suggest you use a specific domain provider, maybe you've got one chosen so we'll describe this step without details that may be different among providers. If you'd like, [you can use Hetzner as well to register a domain](https://www.hetzner.com/domainregistration).
+We'll not suggest you to use a specific domain provider, maybe you've got one chosen so we'll describe this step without details that may be different among providers.
+If you'd like, [you can use Hetzner as well to register a domain](https://www.hetzner.com/domainregistration).
 
 After registering your domain go to the DNS Records Table of your provider and create an __A__ record pointing to the __IP__ you've created in the previous step.
 ## 3. Choosing the right VPS
 
-Now let's go back to the Hetzner project site. It's time to choose and configure a server for Jellyfish.
+Now let's go back to the Hetzner project site.
+It's time to choose and configure a server for Jellyfish.
 
-Although Jellyfish doesn't have minimum requirements to work, we encourage you to choose a middle-sized VPS as media processing is consuming quite a lot of CPU. Remember to choose a server located in the data center where you've created an IP address in the first step.
+Although Jellyfish doesn't have minimum requirements to work, we encourage you to choose a middle-sized VPS (at least 8 cores) as media processing is consuming quite a lot of CPU.
+Remember to choose a server located in the data center where you've created an IP address in the first step.
 
 For this tutorial, we decided on CPX21 from Hetzner Cloud running Ubuntu 22:
 
 ![Hetzner Cloud - choosing VPS](/img/vps-1.png)
 
 ## 4. Assigning Primary IP
-Below the list of the VPS types you chose from there is a ___Networking___ section where your Primary IP from Step 1 is waiting to be used. Select it.
+Below the list of the VPS types there is a ___Networking___ section where your Primary IP from Step 1 is waiting to be used.
+Select it.
 
 ![Hetzner Cloud - choosing VPS](/img/vps-3.png)
 
 ## 5. Adding a *cloud-init* configuration
 
-To configure a server and install Jellyfish on it we're going to use *cloud-init*. It's a preinstalled tool that lets you set up a newly created server with a YAML config file. In the configuration you can create a user, choose packages to be installed, configure them, write or modify files and in our case finally run a docker container.
+To configure a server and install Jellyfish on it we're going to use *cloud-init*.
+It's a preinstalled tool that lets you set up a newly created server with a YAML config file.
+In the configuration you can create a user, choose packages to be installed, configure them, write or modify files and in our case finally run a docker container.
 
-Full documentation about keys you can use to write a _cloud-config_ file can be found in [the official *cloud-init* documentation](https://cloudinit.readthedocs.io/en/latest/reference/modules.html).
+Full documentation about keys you can use in a _cloud-config_ file can be found in [the official *cloud-init* documentation](https://cloudinit.readthedocs.io/en/latest/reference/modules.html).
 
 
 ### A ___cloud-config___ tempalte
@@ -74,7 +87,7 @@ We prepared a template *cloud-config* that will configure your server and start 
       owner: jellyfish:jellyfish
 
   runcmd:
-    - export JELLYFISH_VERSION=0.1.0-4a3173b
+    - export JELLYFISH_VERSION=0.1.0-5ef4452
     - export JELLYFISH_DOMAIN=$(ip route get 1.0.0.0 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')
     - export LETSENCRYPT_EMAIL=my@email.com
     - export SERVER_API_TOKEN=test_token
@@ -139,15 +152,14 @@ We prepared a template *cloud-config* that will configure your server and start 
     - service nginx start
     - |
       cat << EOF > /opt/jellyfish/env-file
-      JF_SECRET_KEY_BASE=$(openssl rand -base64 32)
-      JF_SERVER_API_TOKEN=$SERVER_API_TOKEN
-      JF_INTEGRATED_TURN_IP=$(ip route get 1.0.0.0 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')
-      JF_INTEGRATED_TURN_TCP_PORT=49999
-      JF_INTEGRATED_TURN_PORT_RANGE=50000-50100
       JF_HOST=$JELLYFISH_DOMAIN
-      JF_CHECK_ORIGIN=false
       JF_PORT=5002
-      JF_INTEGRATED_TURN_LISTEN_IP=0.0.0.0
+      JF_SERVER_API_TOKEN=$SERVER_API_TOKEN
+      JF_CHECK_ORIGIN=false
+      JF_WEBRTC_TURN_IP=$(ip route get 1.0.0.0 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')
+      JF_WEBRTC_TURN_TCP_PORT=49999
+      JF_WEBRTC_TURN_PORT_RANGE=50000-50100
+      JF_WEBRTC_TURN_LISTEN_IP=0.0.0.0
       EOF
     - [
         su,
@@ -167,25 +179,38 @@ We prepared a template *cloud-config* that will configure your server and start 
 </details>
 You'll need to manually take care of four lines in that template:
 
-- `- export JELLYFISH_VERSION=0.1.0-ed317b`. Change the value if you want to deploy a different version of Jellyfish. You can find the list of available versions in [our package repository](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish)
-- `- export JELLYFISH_DOMAIN=mydomain.example.com`. Enter here a domain you've configured with **A** record in step 2.
-- `- export LETSENCRYPT_EMAIL=my@email.com`. Enter your email address to be notified when the SSL certificate will be about to expire.
-- `export SERVER_API_TOKEN=test_token` Server API token is a token you'll need to connect to Jellyfish via API or SDK. Write here a chosen secret value you're going to remember later.
+- `- export JELLYFISH_VERSION=0.1.0-ed317b`
+  Change the value if you want to deploy a different version of Jellyfish.
+  You can find the list of available versions in [our package repository](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish)
+- `- export JELLYFISH_DOMAIN=mydomain.example.com`
+  Enter here a domain you've configured with **A** record in step 2.
+- `- export LETSENCRYPT_EMAIL=my@email.com`
+  Enter your email address to be notified when the SSL certificate will be about to expire.
+- `export SERVER_API_TOKEN=test_token`
+  Server API token is a token you'll need to connect to Jellyfish via API or SDK.
+  Write here a chosen secret value you're going to remember later.
 
-Copy the file and change up those two variables. You're going to need the content of the file in the next section.
+Copy the file and change up those two variables.
+You're going to need the content of the file in the next section.
 
 ### Other tools we'll install with _cloud-init_
 
 As you might noticed we've chosen some packages to be installed:
 
-- `ufw` - Uncomplicated Firewall. We'll need it to allow or block traffic on specific ports [https://help.ubuntu.com/community/UFW](https://help.ubuntu.com/community/UFW).
-- `fail2ban` - Tool to block traffic recognized as unauthorized [https://www.fail2ban.org/wiki/index.php/Main_Page](https://www.fail2ban.org/wiki/index.php/Main_Page)
-- `gzip` - Compression Utility [https://www.gzip.org/](https://www.gzip.org/)
-- `containerd.io`, `docker-ce`, `docker-ce-cli` - Docker and Docker-related libraries.
+- `ufw` -
+  Uncomplicated Firewall.
+  We'll need it to allow or block traffic on specific ports [https://help.ubuntu.com/community/UFW](https://help.ubuntu.com/community/UFW).
+- `fail2ban` -
+  Tool to block traffic recognized as unauthorized [https://www.fail2ban.org/wiki/index.php/Main_Page](https://www.fail2ban.org/wiki/index.php/Main_Page)
+- `gzip` -
+  Compression Utility [https://www.gzip.org/](https://www.gzip.org/)
+- `containerd.io`, `docker-ce`, `docker-ce-cli` -
+  Docker and Docker-related libraries.
 
 ### Setting up Hetzner cloud VPS with _cloud-config_
 
-Now, we're going to use the content of the file you prepared in the Hetzner cloud VPS creating form. To do it scroll to the _Cloud config_ section of the form and paste the content of your _cloud-config.yaml_ file.
+Now, we're going to use the content of the file you prepared in the Hetzner cloud VPS creating form.
+To do it scroll to the _Cloud config_ section of the form and paste the content of your _cloud-config.yaml_ file.
 
 ![Hetzner Cloud - placing cloud-config](/img/vps-2.png)
 
@@ -198,15 +223,19 @@ _cloud-init_ will recognize the file as a configuration only if the file starts 
 So be careful while copying.
 :::
 
-That's it. You can click 'Create & Buy' and the server will start to configure.
+That's it.
+You can click 'Create & Buy' and the server will start to configure.
 
 :::tip
-Think about adding your public SSH key while creating a VPS instance. It will ease up connecting to VPS later. If you don't add any key you're going to need a root password (you'll receive it in an email after creating VPS)
+Think about adding your public SSH key while creating a VPS instance.
+It will ease up connecting to VPS later.
+If you don't add any key you're going to need a root password (you'll receive it in an email after creating VPS)
 :::
 
 ## 6. Checking _cloud-init_ status
 
-Configuring your server will take some time, but it's available for you almost immediately after creation. You can log into the server using _ssh_:
+Configuring your server will take some time, but it's created almost immediately after creation.
+You can log into the server using _ssh_:
 ```
 ssh root@<VPS_IP>
 ```
@@ -216,7 +245,11 @@ then, in the server's terminal you can check the current status of _cloud-init_:
 cloud-init status
 ```
 
-Possible responses are `running`, `error` and `done`. The first one informs you that _cloud-init_ is still configuring your server. The second one means that something went wrong. You can find logs from the _cloud-init_ run in `/var/log/cloud-init-output.log` file. `done` means that your jellyfish server is ready to be used.
+Possible responses are `running`, `error` and `done`.
+The first one informs you that _cloud-init_ is still configuring your server.
+The second one means that something went wrong.
+You can find logs from the _cloud-init_ run in `/var/log/cloud-init-output.log` file.
+`done` means that your jellyfish server is ready to be used.
 
 If you'd like to keep an eye on the _cloud-init_ process you can use:
 
@@ -227,4 +260,5 @@ To see the output when the process is finished (successfully or not).
 
 ## Testing your instance with the Jellyfish dashboard
 
-To see how (or if) your Jellyfish server is working you can test it by connecting our [Jellyfish Dashboard](https://jellyfish-dev.github.io/jellyfish-dashboard/) with your server. Detailed instructions on how to use Jellyfish Dashboard can be found [here](../tutorials/dashboard.mdx).
+To see how (or if) your Jellyfish server is working you can test it by connecting our [Jellyfish Dashboard](https://jellyfish-dev.github.io/jellyfish-dashboard/) with your server.
+Detailed instructions on how to use Jellyfish Dashboard can be found [here](../tutorials/dashboard.mdx).
