@@ -2,9 +2,9 @@ For testing, we'll run the Jellyfish Media Server locally using Docker image:
 
 ```bash
 docker run -p 50000-50050:50000-50050/udp \
-           -p 4000:4000/tcp \
-           -e JF_HOST=<your ip address>:4000 \
-           -e JF_PORT="4000" \
+           -p 5002:5002/tcp \
+           -e JF_HOST=<your ip address>:5002 \
+           -e JF_PORT="5002" \
            -e JF_WEBRTC_USED=true \
            -e JF_WEBRTC_TURN_PORT_RANGE=50000-50050 \
            -e JF_WEBRTC_TURN_IP=<your ip address> \
