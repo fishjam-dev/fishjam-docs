@@ -16,11 +16,11 @@ See [Example Scenarios](example_scenarios.md) for more information.
 Jellyfish comes with:
 * [built-in authentication](../getting_started/authentication.md)
 * [client and server SDKs](../getting_started/sdks.md)
-* [server side notifications](../getting_started/notifications.md)
+* [server-side notifications](../getting_started/notifications.md)
 * [support for multiple media protocols](#supported-protocols)
 * [built-in clustering](../cluster.md)
 * [tutorials](../tutorials/dashboard.mdx)
-* [docker images for multiple architectures](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish)
+* [Docker images for multiple architectures](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish)
 * [deployment instructions](../deploying/vps.md)
 
 ## Supported protocols

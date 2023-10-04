@@ -26,7 +26,7 @@ Currently, there are no environment variables related to this component.
 
 ## Output
 
-After adding an WebRTC peer (and at least one track) or an RTSP component, the HLS stream will be available
+After adding a WebRTC peer (and at least one track) or an RTSP component, the HLS stream will be available
 under `http://<jellyfish-address>/hls/<room_id>/index.m3u8` (or `https://`, if using TLS).
 
 ## Example Docker commands
