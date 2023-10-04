@@ -39,10 +39,9 @@ to your Docker command.
 Other than that, your Docker commands shouldn't be affected by adding this component.
 
 ```bash
-docker run -p 4000:4000/tcp \
-           -e SERVER_API_TOKEN=token \
-           -e VIRTUAL_HOST=localhost \
-           -e SECRET_KEY_BASE=secret \
-           -v $(pwd)/jellyfish_output:/app/jellyfish_output
-           ghcr.io/jellyfish-dev/jellyfish:latest
+docker run -p 8080:8080/tcp \
+           -e JF_SERVER_API_TOKEN=token \
+           -e JF_HOST=localhost:8080 \
+           -v $(pwd)/jellyfish_output:/app/jellyfish_output \
+           ghcr.io/jellyfish-dev/jellyfish:0.2.0
 ```

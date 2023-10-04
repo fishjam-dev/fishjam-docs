@@ -2,10 +2,10 @@
 
 :::caution
 
-This deployment guide is expermiental and may not reliably work each time or for every user.
+This deployment guide is experimental and may not reliably work each time or for every user.
 We came across issues when deploying to Fly.io, which may render your application not
 behaving as expected.
-You can learn more about the problems we came accross [in the deploying section](#deploying)
+You can learn more about the problems we came across [in the deploying section](#deploying)
 :::
 
 [Fly.io](https://fly.io) is the go-to platform for deploying Phoenix apps.
@@ -26,11 +26,11 @@ You can start from our `fly.toml` sample file:
   processes = []
 
   [env]
-    INTEGRATED_TURN_IP = "<ip obtained with fly ips allocate-v4>"
-    INTEGRATED_TURN_PORT_RANGE = "50000-59999"
-    INTEGRATED_TURN_LISTEN_IP = "fly-global-services"
-    PORT = "4000"
-    WEBRTC_USED = "true"
+    JF_PORT = "4000"
+    JF_WEBRTC_USED = "true"
+    JF_WEBRTC_TURN_IP = "<ip obtained with fly ips allocate-v4>"
+    JF_WEBRTC_TURN_PORT_RANGE = "50000-59999"
+    JF_WEBRTC_TURN_LISTEN_IP = "fly-global-services"
 
   [experimental]
     auto_rollback = true
@@ -106,23 +106,23 @@ You don't need to run migrations, since you don't have a database.
   release_command = "/app/bin/migrate"
 ```
 
-Jellyfish uses `VIRTUAL_HOST` variable instead of the default `PHX_HOST`.
+Jellyfish uses `JF_HOST` variable instead of the default `PHX_HOST`.
 ```
-VIRTUAL_HOST = "<YOUR APP HOSTNAME>"
+JF_HOST = "<YOUR APP HOSTNAME>"
 ```  
 
 Also, make sure you have set the correct port.
-The enviroment variable `PORT` has to match the tcp `internal_port` defined under `services` section.
-The default for Jellyfish is 4000.
+The environment variable `JF_PORT` has to match the TCP `internal_port` defined under `services` section.
+The default for Jellyfish is 5002 in development and 8080 in production (when using Docker or `mix release`).
 
 
 To be able to receive and send UDP traffic, Jellyfish has to open its UDP ports on a special `fly-global-services` address, not `0.0.0.0`.
 
-This must be set using the `INTEGRATED_TURN_LISTEN_IP` enviroment variable.
+This must be set using the `JF_WEBRTC_TURN_LISTEN_IP` enviroment variable.
 You also need to specify the Jellyfish IP address for UDP, it is the IP address which you generated in the previous step.
 ```
-INTEGRATED_TURN_LISTEN_IP = "fly-global-services"
-INTEGRATED_TURN_IP="<YOUR APP IP ADDRESS>"
+JF_WEBRTC_TURN_LISTEN_IP = "fly-global-services"
+JF_WEBRTC_TURN_IP="<YOUR APP IP ADDRESS>"
 ```
 
 You can also read [tutorial for running Fly.io apps which use UDP](https://fly.io/docs/app-guides/udp-and-tcp/).
@@ -130,13 +130,12 @@ You can also read [tutorial for running Fly.io apps which use UDP](https://fly.i
 
 ### Fly.io secrets
 
-There are enviroment variables, which you may not want to keep in the `fly.toml` config.
+There are environment variables, which you may not want to keep in the `fly.toml` config.
 Fly.io provides a way to store such values securely.
 
-For Jellyfish you need to configure `SECRET_KEY_BASE` and `TOKEN` secrets.
+For Jellyfish you need to configure just one secret - `JF_SERVER_API_TOKEN`.
 ```
-flyctl secrets set SECRET_KEY_BASE=super-secret-key
-flyctl secrets set TOKEN=development
+flyctl secrets set JF_SERVER_API_TOKEN=development
 ```
 
 ## Deploying
