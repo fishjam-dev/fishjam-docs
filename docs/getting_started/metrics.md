@@ -13,7 +13,7 @@ See `JF_METRICS_IP` and `JF_METRICS_PORT` for configuration options.
 | `jellyfish_rooms`                                       |           | Amount of rooms currently present in Jellyfish    |
 | `jellyfish_room_peers`                                  | `room_id` | Amount of peers currently present in a given room |
 | `jellyfish_room_peer_time_total_seconds`                | `room_id` | Total peer time accumulated for a given room      |
-
-The default metrics from Phoenix and Erlang VM are exported as well.
-For description of these metrics, refer [here (Phoenix)](https://hexdocs.pm/phoenix/Phoenix.Logger.html)
-and [here (VM)](https://hexdocs.pm/telemetry_metrics/Telemetry.Metrics.html#module-vm-metrics).
+| `vm_memory_total_bytes`                                 |           | Total memory used by Erlang Virtual Machine       |
+| `vm_total_run_queue_lengths_total`                      |           | Number of Erlang processes waiting to be executed |
+| `vm_total_run_queue_lengths_cpu`                        |           | Number of Erlang processes waiting to be executed on CPU schedulers      |
+| `vm_total_run_queue_lengths_io`                         |           | Number of Erlang processes waiting to be executed on IO schedulers       |
