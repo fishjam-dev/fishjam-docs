@@ -24,16 +24,13 @@ newer Jellyfish until they are upgraded as well.
 ## Testing
 
 In order to assure quality, all the versions declared compatible
-will be tested against each other.
+should be tested for compatibility, i.e. if a given test suite
+passes for a given release, it should also pass for the following
+compatible releases.
 
 At minimum, we should check that there are no breaking changes
 between API versions, or that the breaking changes are only
 related to resources previously marked deprecated.
-
-Tool such as [oasdiff](https://github.com/Tufin/oasdiff)
-will be of great help here.
-[Here](https://github.com/Tufin/oasdiff/blob/main/API-DEPRECATION.md)
-the oasdiff describes removal of deprecated resources.
 
 Simmilar tools are available for protobuf.
 
