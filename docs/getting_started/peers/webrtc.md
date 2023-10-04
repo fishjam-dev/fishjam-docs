@@ -2,6 +2,8 @@
 
 WebRTC peer allows you to connect to Jellyfish via WebRTC standard.
 
+Read more about WebRTC [here](https://webrtc.org/).
+
 ## Compatibility
 
 * [HLS](../components/hls.md)
@@ -9,9 +11,7 @@ WebRTC peer allows you to connect to Jellyfish via WebRTC standard.
 
 ## Configuration options
 
-See [API](../../api_reference/rest_api#tag/room/operation/add_peer) for more information.
-
-### Optional
+**Optional**
 
 * `enableSimulcast` (boolean, default: true) - Enables the peer to use simulcast
 

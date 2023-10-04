@@ -6,25 +6,25 @@ a remote source and requesting its stream.
 
 Supports H264 streams only.
 
+Read more about RTSP [here](https://www.rfc-editor.org/rfc/rfc2326.html).
+
 ## Compatibility
 
 * [WebRTC](../peers/webrtc.md)
 * [HLS](./hls.md)
 
 ## Requirements
-* If the [Room](../../introduction/basic_concepts\#room) in which the RTSP component is created enforces a video codec,
+* RTSP component always outputs H264 stream so if the [Room](../../introduction/basic_concepts\#room) in which the RTSP component is created enforces a video codec,
   it must be set to H264.
-  See [API](../../api_reference/rest_api#tag/room/operation/create_room) for more information.
+  See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_room) for more information.
 
 ## Configuration options
 
-See [API](../../api_reference/rest_api#tag/room/operation/add_component) for more information.
-
-### Required
+**Required**
 
 * `sourceUri` (string) - URI of RTSP source stream, e.g. `"rtsp://mysite.net:554/stream"`
 
-### Optional
+**Optional**
 
 * `rtpPort` (integer 1..65535, default: 20000) - Local port RTP stream will be received at
 * `reconnectDelay` (integer 0.., default: 15000) - Delay (in ms) between successive reconnect attempts

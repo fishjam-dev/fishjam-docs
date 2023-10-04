@@ -16,10 +16,9 @@ In particular, you can:
 * create/delete rooms
 * add/remove peers
 * add/remove components
+* subscribe for notifications
 
-Support for server-side notifications is also planned for the near future.
-
-Under the hood, Server SDKs just use [Jellyfish REST API](../api_reference.md). 
+Under the hood, Server SDKs just use Jellyfish REST and WS API, see [Jellyfish API](../for_developers/api_reference.md).
 
 :::tip
 

@@ -14,14 +14,18 @@ In general, there are no limitations.
 See [Example Scenarios](example_scenarios.md) for more information.
 
 Jellyfish comes with:
-* built-in authentication
-* client and server SDKs
-* support for multiple media protocols
-* docker images for multiple architectures
+* [built-in authentication](../getting_started/authentication.md)
+* [client and server SDKs](../getting_started/sdks.md)
+* [server-side notifications](../getting_started/notifications.md)
+* [support for multiple media protocols](#supported-protocols)
+* [built-in clustering](../cluster.md)
+* [tutorials](../tutorials/dashboard.mdx)
+* [Docker images for multiple architectures](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish)
+* [deployment instructions](../deploying/vps.md)
 
 ## Supported protocols
 
 Jellyfish supports following protocols:
-* [WebRTC](https://webrtc.org/) - used for creating real-time video conferencing systems
-* [HLS](https://developer.apple.com/streaming/) - allows for implementing broadcasting solutions
-* [RTSP](https://www.rfc-editor.org/rfc/rfc2326.html) - very often used for consuming streams from IP cameras
+* [WebRTC](../getting_started/peers/webrtc.md) - used for creating real-time video conferencing systems
+* [HLS](../getting_started/components/hls.md) - allows for implementing broadcasting solutions
+* [RTSP](../getting_started/components/rtsp.md) - very often used for consuming streams from IP cameras
