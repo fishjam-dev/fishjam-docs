@@ -10,13 +10,18 @@ import StartingJellyfishBackend from "./common/_starting-jellyfish-backend.mdx";
 import StartingJellyfishDashboard from "./common/_starting-dashboard.mdx";
 
 # React Native Minimal Working Example
+:::note
+
+This guide expects that you have read [`Basic Concepts`](docs/introduction/basic_concepts.md) and [`Example Scenarios`](docs/introduction/example_scenarios.md)
+
+:::
 
 ## What you'll learn
 
 This tutorial will guide you through creating your first React Native / Expo
 project which uses Jellyfish client. By the end of the tutorial, you'll have a
-working application that connects to the front-end dashboard using WebRTC
-technology and streams and receives camera tracks.
+working application that connects to an instance of [Jellyfish Server](https://github.com/jellyfish-dev/jellyfish) using WebRTC
+and streams and receives camera tracks.
 
 <ImageWrapper url={'/img/tutorials/rn_full_app.gif'}/>
 
@@ -33,7 +38,7 @@ You can check out the finished project [here](https://github.com/jellyfish-dev/j
 
 <JellyfishArchitecture />
 
-### Start the Jellyfish backend
+### Start the Jellyfish Dashboard 
 
 <StartingJellyfishBackend />
 
@@ -65,8 +70,28 @@ npx react-native init jellyfish-dashboard --template react-native-template-types
 </Tabs>
 
 ### Add dependencies
+:::note
 
 Please make sure to install or update `expo` to version `^49.0.0` 
+
+:::
+
+You have two options here. You can follow configuration instructions for
+React Native (Expo Bare workflow is a React Native project after all) or if
+you're using `expo prebuild` command to set up native code you can add our Expo
+plugin. 
+
+Just add it to `app.json`:
+
+```json title:app.json
+{
+  "expo": {
+    "name": "example",
+    //...
+    "plugins": ["@jellyfish-dev/react-native-membrane-webrtc"]
+  }
+}
+```
 
 <Tabs>
   <TabItem value="react-native" label="React Native">
@@ -95,12 +120,9 @@ npx expo install @jellyfish-dev/react-native-client-sdk
 Run `pod install` in the /ios directory to install the new pods
 :::
 
-### Native configuration
+### Native permissions configuration
 
 In order for camera and audio to work you'll need to add some native configuration:
-
-<Tabs>
-  <TabItem value="react-native" label="React Native">
 
 You need to at least set up camera permissions.
 
@@ -144,27 +166,6 @@ disconnect when it's in the background:
 </array>
 ```
 
-  </TabItem>
-   <TabItem value="expo-bare" label="Expo Bare workflow"> 
-   
-   You have two options here. You can follow configuration instructions for
-React Native (Expo Bare workflow is a React Native project after all) or if
-you're using `expo prebuild` command to set up native code you can add our Expo
-plugin. Just add it to `app.json`:
-
-```json title:app.json
-{
-  "expo": {
-    "name": "example",
-    //...
-    "plugins": ["@jellyfish-dev/react-native-membrane-webrtc"]
-  }
-}
-```
-
-</TabItem>
-</Tabs>
-
 ## Add components library
 
 For your convenience, we've prepared a library with nice-looking components
@@ -182,17 +183,15 @@ Run `pod install` in the /ios directory to install the new pods
 
 ## Connecting to the server and joining the room
 
-Our app will consist of two screens. The first one allows the user to type, paste or
-scan the peer token and connect to the room. The second screen shows room
-participants with their video tracks.
 
 ### Screens
 
-For managing screens I've used React Navigation library, you're free though to
-use another one. Our app will contain two screens: Connect screen and Room
-screen:
+For managing screens we will use React Navigation library, but feel free to pick whatever suits you.  
+Our app will consist of two screens.   
+The first one `ConnectScreen` will allow a user to type, paste or scan a peer token and connect to the room.   
+The second one `RoomScreen` will show room participants with their video tracks.
 
-```tsx title="/App.tsx"
+```tsx title="/App.tsx"  
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -217,11 +216,12 @@ export default App;
 
 ### Connect screen
 
-The UI of the Connect screen consists of a simple text input and a few buttons.
-The flow for this screen is simple: the user either copies the peer token from the
-dashboard or scans it with a QR code scanner and presses Connect button. The QR
-code scanner is provided by our components library and it's completely optional,
-just for convenience.
+The UI of the `ConnectScreen` consists of a simple text input and a few buttons.   
+The flow for this screen is simple:   
+the user either copies the peer token from the
+dashboard or scans it with a QR code scanner and presses Connect button.   
+The QR code scanner is provided by our components library and it's completely optional,
+just for convenience.   
 
 The code for the UI looks like this:
 
@@ -276,11 +276,11 @@ export default ConnectScreen;
 
 ### Connecting to the server
 
-Once the UI is ready, let's implement connecting to the server.
+Once the UI is ready, let's implement the logic responsible for connecting to the server.
 
 Firstly wrap your app with `JelyfishContextProvider`:
 
-```tsx "/App.tsx"
+```tsx title="/App.tsx"  
 import React from "react";
 // highlight-next-line
 import { JellyfishContextProvider } from "@jellyfish-dev/react-native-client-sdk";
@@ -416,12 +416,12 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 
 ### Starting the camera
 
-Jellyfish Client provides a handy hook for managing the camera: `useCamera`. It
-can not only start a camera but also toggle, switch between multiple cameras,
-manage camera state and camera track simulcast settings and bandwidth. Also when
-starting the camera you can provide multiple different settings such as
-resolution, quality, and metadata. In this example though we'll simply turn it
-on to stream the camera to the dashboard with default settings:
+Jellyfish Client provides a handy hook for managing the camera: `useCamera`.  
+Not only it can start a camera but also toggle it, manage its state, simulcast and bandwidth settings, and switch between multiple sources.
+Also when starting the camera you can provide multiple different settings such as
+resolution, quality, and metadata.  
+In this example though we'll simply turn it
+on to stream the camera to the dashboard with default settings
 
 ```tsx title="/screens/Connect.tsx"
 import {
@@ -461,12 +461,14 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 
 ### Joining the room
 
-The last step of connecting to the room would be actually joining the room - so
-that your camera track is visible to other users. To do this simply use the `join` function
+The last step of connecting to the room would be actually joining it so
+that your camera track is visible to the other users.  
+To do this simply use the `join` function
 from the `useJellyfishClient` hook.
 
-You can also provide some user metadata when joining. You can put there whatever
-you want, it depends on your business logic. In our example, we provide a user name.
+You can also provide some user metadata when joining.  
+Metadata can be anything and is forwarded to the other participants as is.  
+In our case, we pass a username.  
 
 After joining the room we navigate to the next screen: Room screen.
 
@@ -510,8 +512,12 @@ displaying the streams from other participants.
 
 ### Displaying video tracks
 
-The Room screen displays the video from the camera on your device and also
-videos from other participants as well. It also allows the user to exit the call.
+The `Room` screen has a couple of responsibilities:
+
+- it displays your own video.  
+  Note that it's taken directly from your camera i.e. we don't send it to the JF and get it back so other participants might see you a little bit differently
+- it presents current room state so participants list, their video tiles, etc.
+- it allows you to leave a meeting
 
 To get information about all participants (also the local one) in the room use
 `usePeers()` hook from Jellyfish Client. The hook returns all the participants
@@ -519,10 +525,10 @@ with their ids, tracks and metadata. When a new participant joins or any
 participant leaves or anything else changes, the hook updates with the new
 information.
 
-To display video tracks Jellyfish Client has a dedicated component for
+To display video tracks Jellyfish Client comes with a dedicated component for 
 displaying a video track: `<VideoRenderer>`. It takes a track id as a prop (it
-may be a local or remote track) and you can style it just like an ordinary
-`<View>`. You can even animate it!
+may be a local or remote track) and, as any other `<View>` in react, a style.  
+style property gives a lot of possibilities ... You can even animate your track!
 
 So, let's display all the participants in the simplest way possible:
 
@@ -582,8 +588,8 @@ const styles = StyleSheet.create({
 export default RoomScreen;
 ```
 
-You should now see your own camera on your mobile device. You can add another
-participant and their new track (displaying for example rotating frog) in the dashboard like
+You should now see your own camera on your mobile device.  
+You can add another participant and their new track (displaying for example rotating frog) in the dashboard like
 this:
 
 <ImageWrapper url={'/img/tutorials/adding_new_track.gif'}/>
@@ -620,11 +626,9 @@ function RoomScreen({ navigation }: RoomScreenProps): JSX.Element {
 
 To leave a room we'll add a button for the user. When the user clicks it, we
 gracefully leave the room, close the server connection and go back to the
-Connect screen.
+`Connectscreen`.
 
 For leaving the room and closing the server connection you can use the `cleanUp` method from the `useJellyfishClient()` hook.
-
-After leaving the room we go back to the Connect screen.
 
 ```tsx title="/screens/Room.tsx"
 // ...
