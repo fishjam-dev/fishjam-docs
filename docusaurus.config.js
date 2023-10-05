@@ -17,7 +17,7 @@ const config = {
   baseUrl: '/jellyfish-docs/',
 
   // GitHub pages deployment config.
-  organizationName: 'jellyfish-dev', 
+  organizationName: 'jellyfish-dev',
   projectName: 'jellyfish-docs',
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
@@ -43,13 +43,6 @@ const config = {
           editUrl:
             'https://github.com/jellyfish-dev/jellyfish-docs',
           routeBasePath: '/',
-          lastVersion: 'current',
-          versions: {
-            current: {
-              label: '0.2.0-dev',
-              path: '/',
-            },
-          },
         },
         blog: false,
         theme: {
@@ -89,7 +82,7 @@ const config = {
           src: 'img/membrane-signet-light.svg',
         },
         items: [
-            {
+          {
             type: 'docsVersionDropdown',
             position: 'right',
             dropdownActiveClassDisabled: true,
