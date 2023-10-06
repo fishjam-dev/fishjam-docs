@@ -43,6 +43,11 @@ const config = {
           editUrl:
             'https://github.com/jellyfish-dev/jellyfish-docs',
           routeBasePath: '/',
+          versions: {
+            current: {
+              label: '0.3.0-dev'
+            },
+          },
         },
         blog: false,
         theme: {
