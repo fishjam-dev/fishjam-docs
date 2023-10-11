@@ -145,9 +145,10 @@ Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0
 Defaults to `5002` for development builds and `8080` for production builds (`mix release` or Docker).
 * `JF_SECRET_KEY_BASE` - used to sign/encrypt tokens generated for Peers.
 Generated if not provided.
-* `JF_CHECK_ORIGIN` - defines if Jellyfish will check the origin of incoming requests and socket connection. It is possible to specify the origins of requests that will be accepted by Jellyfish.<br/>
+* `JF_CHECK_ORIGIN` - defines if Jellyfish will check the origin of incoming requests and socket connection. <br/>
 Defaults to `true`.<br/>
-Possible values are `true`, `false` or list of allowed origins space seperated (wildcards are allowed) e.g: `https://example.com //another.com:888 //*.other.com`. 
+Possible values are `true`, `false` or a space-separated list of allowed origins (wildcards are allowed). <br/>
+Example: `JF_CHECK_ORIGIN="https://example.com //another.com:888 //*.other.com"`
 * `JF_OUTPUT_BASE_PATH` - a base path where Jellyfish will save its artifacts.<br/>
 Defaults to `./jellyfish_output/`.<br/>
 When running via docker, the directory can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_output`.
