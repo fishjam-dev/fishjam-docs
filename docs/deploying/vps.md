@@ -50,7 +50,7 @@ In the configuration you can create a user, choose packages to be installed, con
 Full documentation about keys you can use in a _cloud-config_ file can be found in [the official *cloud-init* documentation](https://cloudinit.readthedocs.io/en/latest/reference/modules.html).
 
 
-### A ___cloud-config___ tempalte
+### A ___cloud-config___ template
 
 We prepared a template *cloud-config* that will configure your server and start a chosen version of Jellyfish:
 
