@@ -3,6 +3,7 @@ For testing, we'll run the Jellyfish Media Server locally using Docker image:
 ```bash
 docker run -p 50000-50050:50000-50050/udp \
            -p 5002:5002/tcp \
+           -e JF_CHECK_ORIGIN=false \
            -e JF_HOST=<your ip address>:5002 \
            -e JF_PORT="5002" \
            -e JF_WEBRTC_USED=true \
