@@ -1,0 +1,393 @@
+import { ImageWrapper } from "./ImageWrapper";
+import JellyfishArchitecture from "./common/_jellyfish-architecture.mdx";
+import StartingJellyfishBackend from "./common/_starting-jellyfish-media-server.mdx";
+import StartingJellyfishDashboard from "./common/_starting-dashboard.mdx";
+
+# Simple React App
+
+## What you'll learn
+
+This tutorial will guide you through creating your first React project that uses the Jellyfish Client.
+By the end of the tutorial, you'll have a working web application that connects to
+[Jellyfish Media Server](https://github.com/jellyfish-dev/jellyfish) using WebRTC technology.
+
+<ImageWrapper
+  url={"/img/tutorials/react-finished.gif"}
+  height={500}
+  alt="Finished app"
+/>
+
+You can check out the finished project [here](https://github.com/jellyfish-dev/jellyfish-clients-tutorials/tree/main/JellyfishDashboardReact/JellyfishDashboard)
+
+## What do you need
+
+- a little bit of experience in creating React apps
+- IDE of your choice (for example [Visual Studio Code](https://code.visualstudio.com/))
+- [Node.js](https://nodejs.org/en/) installed on your machine
+
+## Jellyfish architecture
+
+<JellyfishArchitecture />
+
+## Setup
+
+### Create React + Vite project
+
+Firstly create a brand new project.
+
+<Tabs>
+  <TabItem value="vite" label="Vite">
+
+```bash
+npm create vite@latest my-react-app -- --template react-ts
+```
+
+  </TabItem>
+</Tabs>
+
+### Add dependencies
+
+<Tabs>
+
+  <TabItem value="react" label="React">
+    For this module to work you'll need to add our `react-client-sdk` package. This
+    is necessary to create and connect Jellyfish Client.
+
+```bash npm2yarn
+npm install https://github.com/jellyfish-dev/react-client-sdk#0.1.2
+```
+
+  </TabItem>
+</Tabs>
+
+### Start the Jellyfish backend
+
+<StartingJellyfishBackend />
+
+### Start the dashboard web front-end
+
+<StartingJellyfishDashboard />
+
+## (Optional) Add a bit of CSS styling
+
+For this project, we prepared simple [CSS classes](https://github.com/Crackhoff/jellyfish-clients-tutorials/blob/main/JellyfishDashboardReact/JellyfishDashboard/src/styles.css),
+You are free to use it or create your own.
+
+## General project structure
+
+Our app will consist of two parts:
+
+- a component that will connect to the server and join the room
+
+- a component that will display the video tracks from other participants
+
+## First step - prepare all the hooks and the context
+
+To connect to the Jellyfish backend, we need to create a Membrane Client
+instance. We can do it by using the `create` function from the
+`@jellyfish-dev/react-client-sdk` package. It needs two generic parameters:
+
+- `PeerMetadata` - the type of metadata that will be sent to the server when
+  connecting to the room (for example, user name) it has to be serializable
+
+- `TrackMetadata` - the type of the metadata that will be sent to the server when
+  sending a track (for example, track name) it has to be serializable as well
+
+```tsx title="App.tsx"
+import React from "react";
+import { create } from "@jellyfish-dev/react-client-sdk";
+
+// Example metadata types for peer and track
+// You can define your metadata types just make sure they are serializable
+type PeerMetadata = {
+  name: string;
+};
+
+type TrackMetadata = {
+  type: "camera" | "screen";
+};
+
+// Create a Jellyfish client instance
+// Since we will use this context outside of the component we need to export it
+export const {
+  JellyfishContextProvider, // Context provider
+} = create<PeerMetadata, TrackMetadata>();
+
+export const App = () => {};
+```
+
+### Now we need to wrap our app with the context provider
+
+That's all we will need to do in this file. Simply import the `JellyfishContextProvider` along with the `App`
+component and wrap the `App` component with the `JellyfishContextProvider`:
+
+```tsx title="main.tsx"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { App, JellyfishContextProvider } from "./components/App";
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <React.StrictMode>
+    <JellyfishContextProvider>
+      <App />
+    </JellyfishContextProvider>
+  </React.StrictMode>
+);
+```
+
+## UI component that will connect to the server and join the room
+
+The UI of the component will be quite simple. It will consist of a simple text input field
+that will allow us to enter the peer token and a button that
+will connect to the server and join the room. We can also display the status of the connection.
+
+```tsx title="App.tsx"
+import React, { useState } from "react";
+//...
+export const App = () => {
+  // Create a state to store the peer token
+  const [token, setToken] = useState("");
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+    <input value={token} onChange={(e) => setToken(() => e?.target?.value)} placeholder="token" />
+    <div style={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+
+       <button
+          disabled={}
+          onClick={() => {}};
+        >
+          Connect
+        </button>
+        <button
+          disabled={}
+          onClick={() => {}};
+        >
+          Disconnect
+        </button>
+        <span>Status: {}</span>
+    </div>
+    </div>
+  );
+};
+```
+
+### Once the UI is ready, we need to implement the logic
+
+```tsx title="App.tsx"
+import { SignalingUrl } from "@jellyfish-dev/react-client-sdk/.";
+//...
+export const {
+  // highlight-start
+  useStatus, // Hook to check the status of the connection
+  useConnect, // Hook to connect to the server
+  useDisconnect, // Hook to disconnect from the server
+  // highlight-end
+  JellyfishContextProvider, // Context provider
+};
+export const App = () => {
+  // Create a state to store the peer token
+  const [token, setToken] = useState("");
+  // Use the built-in hook to check the status of the connection
+  const status = useStatus();
+  const connect = useConnect();
+  const disconnect = useDisconnect();
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <input
+        className="input-field"
+        value={token}
+        onChange={(e) => setToken(() => e?.target?.value)}
+        placeholder="token"
+      />
+      <div style={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+        <button
+          className="button"
+          disabled={token === "" || status === "joined"} // simple check to avoid errors
+          onClick={() => {
+            // highlight-start
+            connect({
+              peerMetadata: { name: "John Doe" }, // example metadata
+              token: token,
+            });
+            // highlight-end
+          }}
+        >
+          Connect
+        </button>
+        <button
+          className="button"
+          disabled={status !== "joined"}
+          onClick={() => {
+            // highlight-next-line
+            disconnect();
+          }}
+        >
+          Disconnect
+        </button>
+        // highlight-next-line
+        <span className="span-status">Status: {status}</span>
+      </div>
+    </div>
+  );
+};
+```
+
+Great! Now we can connect to the server and join the room. But we still need to
+add some logic to send our tracks to the server and receive tracks from others.
+
+### Let's send our screen to the server
+
+This hook uses [Navigator.mediaDevices](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaDevices) take a look how it works
+
+```tsx title="App.tsx"
+import React, { useEffect, useState } from "react";
+import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@jellyfish-dev/react-client-sdk";
+import { SignalingUrl, Peer } from "@jellyfish-dev/react-client-sdk/.";
+//...
+export const {
+  useStatus, // Hook to check the status of the connection
+  // highlight-next-line
+  useApi, // Hook to get the webrtcApi reference
+  useConnect, // Hook to connect to the server
+  useDisconnect, // Hook to disconnect from the server
+  JellyfishContextProvider, // Context provider
+} = create<PeerMetadata, TrackMetadata>();
+
+export const App = () => {
+  //...
+  // Get the webrtcApi reference
+  const webrtcApi = useApi();
+
+   function startScreenSharing() {
+      // Get screen sharing MediaStream
+            navigator.mediaDevices.getDisplayMedia(SCREEN_SHARING_MEDIA_CONSTRAINTS).then((screenStream) => {
+              // Add local MediaStream to webrtc
+              screenStream.getTracks().forEach((track) => webrtcApi.addTrack(track, screenStream, { type: "screen" }));
+    };
+   };
+   return (
+  //...
+  <button
+  className="button"
+    disabled={status !== "joined"}
+    onClick={() => {
+      startScreenSharing();
+    }}
+  >
+    Start screen share
+  </button>
+  <span>Status: {status}</span>
+  //...
+  )
+};
+```
+
+You should now see your screen received for each connected client on the dashboard. You can add another participant to check this out!
+
+The streaming part of the app is ready!
+
+## What about the receiving part?
+
+### This is where the second component comes in handy
+
+For each track received, we will create a new video element and display it on the screen. For clarity, we will separate this component into another file:
+
+Create in your directory file `VideoPlayer.tsx`
+
+```tsx title="VideoPlayer.tsx"
+type Props = {
+  stream: MediaStream | null | undefined;
+};
+
+const VideoPlayer = ({ stream }: Props) => {
+  return (
+    <div className="video-container">
+      <video autoPlay playsInline muted ref={/* place for track ref*/} />
+    </div>
+  );
+};
+
+export default VideoPlayer;
+```
+
+### Now the logic for the component
+
+```tsx title="VideoPlayer.tsx"
+type Props = {
+  stream: MediaStream | null | undefined;
+};
+
+const VideoPlayer = ({ stream }: Props) => {
+  const videoRef: RefObject<HTMLVideoElement> = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    videoRef.current.srcObject = stream || null;
+  }, [stream]);
+
+  return (
+    <div>
+      <video autoPlay playsInline muted ref={videoRef} />
+    </div>
+  );
+};
+
+export default VideoPlayer;
+```
+
+### Now we can use it in our main component
+
+```tsx title="App.tsx"
+import React, { useEffect, useState } from "react";
+import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@jellyfish-dev/react-client-sdk";
+import { SignalingUrl, Peer } from "@jellyfish-dev/react-client-sdk/.";
+import VideoPlayer from "./VideoPlayer";
+//...
+
+export const {
+ useStatus, // Hook to check the status of the connection
+  // highlight-next-line
+  useTracks, // Hook to get the tracks from the server
+  useApi, // Hook to get the webrtcApi reference
+  useConnect, // Hook to connect to the server
+  useDisconnect, // Hook to disconnect from the server
+  JellyfishContextProvider, // Context provider
+} = create<PeerMetadata, TrackMetadata>();
+export const App = () => {
+  const tracks = useTracks();
+  //...
+  <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center", // To align items in the center
+          gap: "20px",
+        }}
+      >
+  {Object.values(tracks).map(({ stream, trackId }) => (
+        <VideoPlayer key={trackId} stream={stream} /> // pass the stream to the component
+      ))}
+  </div>
+  //...
+  )
+```
+
+You should see all the tracks sent from the dashboard directly on your page, to test them, add a new client, and add a track (for example a rotating frog). It will show up in your app automatically:
+
+## Summary
+
+Congrats on finishing your first Jellyfish web application! In this tutorial,
+You've learned how to make a basic Jellyfish client application that streams your screen and
+receives video tracks with WebRTC technology.
+
+But this was just the beginning. Jellyfish Client supports much more than just
+streaming camera: It can also stream audio or your device's camera,
+configure your camera and audio devices, detect voice activity, control
+simulcast, bandwidth and encoding settings, show camera preview, display WebRTC
+stats and more to come. Check out our other tutorials to learn about those
+features.
+
+You can also take a look at our fully featured [Videoroom Demo
+example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
+
+<ImageWrapper url={"/img/tutorials/videoroom.gif"} alt="Videoroom Demo" />
