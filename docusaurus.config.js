@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Jellyfish docs',
+  title: 'Jellyfish',
   tagline: 'Jellyfish are cool',
   favicon: 'img/membrane-signet-light.svg',
 
@@ -17,7 +17,7 @@ const config = {
   baseUrl: '/jellyfish-docs/',
 
   // GitHub pages deployment config.
-  organizationName: 'jellyfish-dev', 
+  organizationName: 'jellyfish-dev',
   projectName: 'jellyfish-docs',
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
@@ -76,24 +76,32 @@ const config = {
       // Replace with your project's social card
       image: 'img/membrane-signet-light.svg',
       navbar: {
-        title: 'Jellyfish docs',
+        title: 'Jellydocs',
         logo: {
           alt: 'Jellyfish Logo',
           src: 'img/membrane-signet-light.svg',
         },
         items: [
-          // Hide doc from navbar for now - introduction will be the landing page
-          // {
-          //   type: 'doc',
-          //   docId: 'signaling_architecture',
-          //   position: 'left',
-          //   label: 'Docs',
-          // },
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+            dropdownActiveClassDisabled: true,
+          },
           {
             href: 'https://github.com/jellyfish-dev/jellyfish',
             label: 'GitHub',
             position: 'right',
           },
+          {
+            href: 'https://jellyfish-dev.github.io/jellyfish-dashboard/',
+            label: 'Jellydashboard',
+            position: 'left',
+          },
+          {
+            href: 'https://jellyroom.membrane.stream/',
+            label: 'Jellyroom',
+            position: 'left',
+          }
         ],
       },
       footer: {

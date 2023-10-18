@@ -15,83 +15,85 @@
 const sidebars = {
   mainSidebar: [
     {
-      type: 'category',
-      label: 'Introduction',
+      type: "category",
+      label: "Introduction",
       collapsed: false,
       items: [
-        'introduction/what_is_jellyfish',
-        'introduction/basic_concepts',
-        'introduction/example_scenarios',
-      ]
+        "introduction/what_is_jellyfish",
+        "introduction/basic_concepts",
+        "introduction/example_scenarios",
+      ],
     },
     {
-      type: 'category',
-      label: 'Getting Started',
-      collapsed: false,
+      type: "category",
+      label: "Getting Started",
+      collapsed: true,
       items: [
-        'getting_started/installation',
-        'getting_started/architecture',
-        'getting_started/authentication',
-        'getting_started/sdks',
+        "getting_started/installation",
+        "getting_started/architecture",
+        "getting_started/authentication",
+        "getting_started/notifications",
+        "getting_started/metrics",
+        "getting_started/sdks",
         {
-          type: 'category',
-          label: 'Peers',
+          type: "category",
+          label: "Peers",
           collapsed: true,
-          items: [
-            'getting_started/peers/webrtc'
-          ]
+          items: ["getting_started/peers/webrtc"],
         },
         {
-          type: 'category',
-          label: 'Components',
+          type: "category",
+          label: "Components",
           collapsed: true,
           items: [
-            'getting_started/components/hls',
-            'getting_started/components/rtsp'
-          ]
-        }
-      ]
+            "getting_started/components/hls",
+            "getting_started/components/rtsp",
+          ],
+        },
+      ],
     },
-    'examples',
     {
-      type: 'category',
-      label: 'Tutorials',
-      collapsible: true,
-      collapsed: false,
+      type: "category",
+      label: "Tutorials",
+      collapsed: true,
       items: [
         {
-          type: 'category',
-          label: 'Minimal Working Examples',
+          type: "category",
+          label: "Minimal Working Examples",
           collapsible: false,
           collapsed: false,
           items: [
-            'tutorials/minimal-working-example-react',
-            'tutorials/react-native'
-          ]
-        }
-      ]
+            "tutorials/dashboard",
+            "tutorials/simple-react-app",
+            "tutorials/react-native",
+          ],
+        },
+      ],
     },
+    "cluster",
     {
-      type: 'category',
-      label: 'Deploying',
+      type: "category",
+      label: "Deploying",
       collapsed: true,
-      items: [
-        'deploying/fly_io'
-      ]
+      items: ["deploying/vps", "deploying/fly_io"],
     },
-    'metrics',
-    'design_docs',
     {
-      type: 'category',
-      label: 'API Reference',
-      link: {
-        type: 'doc',
-        id: 'api_reference',
-      },
+      type: "category",
+      label: "For Developers",
       items: [
-        'api_reference/rest_api'
-      ]
-    }
+        "for_developers/design_docs",
+        {
+          type: "category",
+          label: "API Reference",
+          collapsed: true,
+          link: {
+            type: "doc",
+            id: "for_developers/api_reference",
+          },
+          items: ["for_developers/api_reference/rest_api"],
+        },
+      ],
+    },
   ],
 };
 
