@@ -46,7 +46,8 @@
       "collapsed": true,
       "items": [
         "tutorials/dashboard",
-        "tutorials/simple-react-app"
+        "tutorials/simple-react-app",
+        "tutorials/react-native"
       ]
     },
     "cluster",
