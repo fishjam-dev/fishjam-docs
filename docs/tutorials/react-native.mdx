@@ -10,6 +10,7 @@ import StartingJellyfishBackend from "./common/_starting-jellyfish-backend.mdx";
 import StartingJellyfishDashboard from "./common/_starting-dashboard.mdx";
 
 # React Native Minimal Working Example
+
 :::note
 
 This guide expects that you have read [`Basic Concepts`](docs/introduction/basic_concepts.md) and [`Example Scenarios`](docs/introduction/example_scenarios.md)
@@ -23,7 +24,7 @@ project which uses Jellyfish client. By the end of the tutorial, you'll have a
 working application that connects to an instance of [Jellyfish Server](https://github.com/jellyfish-dev/jellyfish) using WebRTC
 and streams and receives camera tracks.
 
-<ImageWrapper url={'/img/tutorials/rn_full_app.gif'}/>
+<ImageWrapper url={"/img/tutorials/rn_full_app.gif"} />
 
 You can check out the finished project [here](https://github.com/jellyfish-dev/jellyfish-clients-tutorials/tree/main/JellyfishDashboardRN).
 
@@ -38,15 +39,15 @@ You can check out the finished project [here](https://github.com/jellyfish-dev/j
 
 <JellyfishArchitecture />
 
-### Start the Jellyfish Dashboard 
+## Setup
+
+### Start the Jellyfish Dashboard
 
 <StartingJellyfishBackend />
 
 ### Start the dashboard web front-end
 
 <StartingJellyfishDashboard />
-
-## Setup
 
 ### Create React Native / Expo project
 
@@ -70,16 +71,17 @@ npx react-native init jellyfish-dashboard --template react-native-template-types
 </Tabs>
 
 ### Add dependencies
+
 :::note
 
-Please make sure to install or update `expo` to version `^49.0.0` 
+Please make sure to install or update `expo` to version `^49.0.0`
 
 :::
 
 You have two options here. You can follow configuration instructions for
 React Native (Expo Bare workflow is a React Native project after all) or if
 you're using `expo prebuild` command to set up native code you can add our Expo
-plugin. 
+plugin.
 
 Just add it to `app.json`:
 
@@ -166,7 +168,7 @@ disconnect when it's in the background:
 </array>
 ```
 
-## Add components library
+### Add components library
 
 For your convenience, we've prepared a library with nice-looking components
 useful for following this tutorial. Feel free to use standard React Native components or your own components though!
@@ -181,17 +183,14 @@ npx expo install @expo/vector-icons expo-barcode-scanner expo-font @expo-google-
 Run `pod install` in the /ios directory to install the new pods
 :::
 
-## Connecting to the server and joining the room
-
-
-### Screens
+## Screens
 
 For managing screens we will use React Navigation library, but feel free to pick whatever suits you.  
-Our app will consist of two screens.   
-The first one `ConnectScreen` will allow a user to type, paste or scan a peer token and connect to the room.   
+Our app will consist of two screens.  
+The first one `ConnectScreen` will allow a user to type, paste or scan a peer token and connect to the room.  
 The second one `RoomScreen` will show room participants with their video tracks.
 
-```tsx title="/App.tsx"  
+```tsx title="/App.tsx"
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -214,14 +213,14 @@ function App(): JSX.Element {
 export default App;
 ```
 
-### Connect screen
+### ConnectScreen
 
-The UI of the `ConnectScreen` consists of a simple text input and a few buttons.   
-The flow for this screen is simple:   
+The UI of the `ConnectScreen` consists of a simple text input and a few buttons.  
+The flow for this screen is simple:  
 the user either copies the peer token from the
-dashboard or scans it with a QR code scanner and presses Connect button.   
+dashboard or scans it with a QR code scanner and presses Connect button.  
 The QR code scanner is provided by our components library and it's completely optional,
-just for convenience.   
+just for convenience.
 
 The code for the UI looks like this:
 
@@ -274,13 +273,13 @@ const styles = StyleSheet.create({
 export default ConnectScreen;
 ```
 
-### Connecting to the server
+#### Connecting to the server
 
 Once the UI is ready, let's implement the logic responsible for connecting to the server.
 
 Firstly wrap your app with `JelyfishContextProvider`:
 
-```tsx title="/App.tsx"  
+```tsx title="/App.tsx"
 import React from "react";
 // highlight-next-line
 import { JellyfishContextProvider } from "@jellyfish-dev/react-native-client-sdk";
@@ -361,19 +360,19 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 // ...
 ```
 
-### Camera permissions (Android only)
+#### Camera permissions (Android only)
 
 To start the camera we need to ask the user for permission first. We'll use a
 standard React Native module for this:
 
 ```tsx title="/screens/Connect.tsx"
-import { 
+import {
   View,
   StyleSheet,
   type Permission,
   PermissionsAndroid,
-  Platform, 
- } from "react-native";
+  Platform,
+} from "react-native";
 
 // ...
 
@@ -382,7 +381,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 
   // highlight-start
   const grantedCameraPermissions = async () => {
-    if (Platform.OS === 'ios') return true;
+    if (Platform.OS === "ios") return true;
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.CAMERA as Permission
     );
@@ -414,7 +413,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 // ...
 ```
 
-### Starting the camera
+#### Starting the camera
 
 Jellyfish Client provides a handy hook for managing the camera: `useCamera`.  
 Not only it can start a camera but also toggle it, manage its state, simulcast and bandwidth settings, and switch between multiple sources.
@@ -459,7 +458,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 // ...
 ```
 
-### Joining the room
+#### Joining the room
 
 The last step of connecting to the room would be actually joining it so
 that your camera track is visible to the other users.  
@@ -468,7 +467,7 @@ from the `useJellyfishClient` hook.
 
 You can also provide some user metadata when joining.  
 Metadata can be anything and is forwarded to the other participants as is.  
-In our case, we pass a username.  
+In our case, we pass a username.
 
 After joining the room we navigate to the next screen: Room screen.
 
@@ -508,9 +507,9 @@ Now the app is ready for the first test. If everything went well you should see
 a video from your camera in the front-end dashboard. Now onto the second part:
 displaying the streams from other participants.
 
-## Displaying streams from other participants
+### RoomScreen
 
-### Displaying video tracks
+#### Displaying video tracks
 
 The `Room` screen has a couple of responsibilities:
 
@@ -525,10 +524,10 @@ with their ids, tracks and metadata. When a new participant joins or any
 participant leaves or anything else changes, the hook updates with the new
 information.
 
-To display video tracks Jellyfish Client comes with a dedicated component for 
+To display video tracks Jellyfish Client comes with a dedicated component for
 displaying a video track: `<VideoRenderer>`. It takes a track id as a prop (it
 may be a local or remote track) and, as any other `<View>` in react, a style.  
-style property gives a lot of possibilities ... You can even animate your track!
+style property gives a [lot of possibilities](https://reactnative.dev/docs/stylesheet). You can even animate your track!
 
 So, let's display all the participants in the simplest way possible:
 
@@ -592,11 +591,11 @@ You should now see your own camera on your mobile device.
 You can add another participant and their new track (displaying for example rotating frog) in the dashboard like
 this:
 
-<ImageWrapper url={'/img/tutorials/adding_new_track.gif'}/>
+<ImageWrapper url={"/img/tutorials/adding_new_track.gif"} />
 
 It should show up in the Room screen automatically:
 
-<ImageWrapper url={'/img/tutorials/room_screen.png'}/>
+<ImageWrapper url={"/img/tutorials/room_screen.png"} />
 
 For your convenience in our components library we provided a component to layout
 videos in a nice grid:
@@ -622,7 +621,7 @@ function RoomScreen({ navigation }: RoomScreenProps): JSX.Element {
 }
 ```
 
-### Gracefully leaving the room
+#### Gracefully leaving the room
 
 To leave a room we'll add a button for the user. When the user clicks it, we
 gracefully leave the room, close the server connection and go back to the
