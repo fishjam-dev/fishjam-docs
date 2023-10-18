@@ -213,7 +213,7 @@ function App(): JSX.Element {
 export default App;
 ```
 
-### ConnectScreen
+## ConnectScreen
 
 The UI of the `ConnectScreen` consists of a simple text input and a few buttons.  
 The flow for this screen is simple:  
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
 export default ConnectScreen;
 ```
 
-#### Connecting to the server
+### Connecting to the server
 
 Once the UI is ready, let's implement the logic responsible for connecting to the server.
 
@@ -360,7 +360,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 // ...
 ```
 
-#### Camera permissions (Android only)
+### Camera permissions (Android only)
 
 To start the camera we need to ask the user for permission first. We'll use a
 standard React Native module for this:
@@ -413,7 +413,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 // ...
 ```
 
-#### Starting the camera
+### Starting the camera
 
 Jellyfish Client provides a handy hook for managing the camera: `useCamera`.  
 Not only it can start a camera but also toggle it, manage its state, simulcast and bandwidth settings, and switch between multiple sources.
@@ -458,7 +458,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 // ...
 ```
 
-#### Joining the room
+### Joining the room
 
 The last step of connecting to the room would be actually joining it so
 that your camera track is visible to the other users.  
@@ -507,9 +507,9 @@ Now the app is ready for the first test. If everything went well you should see
 a video from your camera in the front-end dashboard. Now onto the second part:
 displaying the streams from other participants.
 
-### RoomScreen
+## RoomScreen
 
-#### Displaying video tracks
+### Displaying video tracks
 
 The `Room` screen has a couple of responsibilities:
 
@@ -621,7 +621,7 @@ function RoomScreen({ navigation }: RoomScreenProps): JSX.Element {
 }
 ```
 
-#### Gracefully leaving the room
+### Gracefully leaving the room
 
 To leave a room we'll add a button for the user. When the user clicks it, we
 gracefully leave the room, close the server connection and go back to the
