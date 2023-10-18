@@ -19,7 +19,9 @@ See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_
 **Optional**
 
 * `lowLatency` (boolean, default: false) - whether the component should use LL-HLS
-
+* `persistent` (boolean, default: false) - whether the stream should be saved or not
+* `targetWindowDuration` (positive integer, default: nil) - represents the duration, in seconds, of the live streaming content to be
+    maintained in a rolling window
 ## Env variables
 
 Currently, there are no environment variables related to this component.
