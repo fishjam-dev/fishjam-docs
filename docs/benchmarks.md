@@ -1,4 +1,4 @@
-# Performance
+# Benchmarks
 
 Performance tests for our Jellyfish media server were carried out with particular emphasis
 on quantifying its real-world capabilities, even under intense workloads.
@@ -67,7 +67,7 @@ innate processing capabilities.
 | 1000    | 12 Mbps  | 1.9 Gbps        | 2.6 Gbps         | 1.9 GB   | 19%   | 3 ms   | 65 ms  |
 | 2000    | 24 Mbps  | 3.6 Gbps        | 5.2 Gbps         | 2.8 GB   | 23%   | 3 ms   | 66 ms  |
 | 3000    | 36 Mbps  | 5.1 Gbps        | 6.5 Gbps         | 4.5 GB   | 30%   | 4 ms   | 67 ms  |
-| 4000    | 48 Mbps  | 7.0 Gbps        | 9.2 Gbps *(limit)* | 9.2 GB   | 34%   | *17 ms*  | *243 ms* |
+| 4000    | 48 Mbps  | 7.0 Gbps        | 9.2 Gbps *(limit)* | 9.2 GB   | 34%   | <i>17 ms*</i>  | <i>243 ms*</i> |
 
 #### Low-Latency HLS
 
@@ -79,7 +79,7 @@ This makes the "Playlist request latency (mean)" metric meaningless, and it is t
 | ------- | -------- | --------------- | ---------------- | -------- | ----- | ------ |
 | 500     | 25 Mbps  | 1.1 Gbps        | 4.7 Gbps         | 210 MB   | 25%   | 98 ms  |
 | 1000    | 50 Mbps  | 2.3 Gbps        | 9.0 Gbps         | 290 MB   | 34%   | 138 ms |
-| 1500    | 75 Mbps  | 3.3 Gbps        | 9.2 Gbps *(limit)* | 340 MB   | 43%   | *244 ms* |
-| 2000    | 100 Mbps | 4.5 Gbps        | 9.2 Gbps *(limit)* | 410 MB   | 47%   | *341 ms* |
-| 2500    | 125 Mbps | 5.7 Gbps        | 9.2 Gbps *(limit)* | 480 MB   | 48%   | *402 ms* |
-| 3000    | 150 Mbps | 6.6 Gbps        | 9.2 Gbps *(limit)* | 560 MB   | 50%   | *514 ms* |
+| 1500    | 75 Mbps  | 3.3 Gbps        | 9.2 Gbps *(limit)* | 340 MB   | 43%   | <i>244 ms*</i> |
+| 2000    | 100 Mbps | 4.5 Gbps        | 9.2 Gbps *(limit)* | 410 MB   | 47%   | <i>341 ms*</i> |
+| 2500    | 125 Mbps | 5.7 Gbps        | 9.2 Gbps *(limit)* | 480 MB   | 48%   | <i>402 ms*</i> |
+| 3000    | 150 Mbps | 6.6 Gbps        | 9.2 Gbps *(limit)* | 560 MB   | 50%   | <i>514 ms*</i> |
