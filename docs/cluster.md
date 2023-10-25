@@ -15,17 +15,21 @@ Currently, Jellyfish doesn't offer an option to split a room across multiple mac
 
 ## Configuring a Cluster
 
-Jellyfish cluster can be created in 4 simple steps:
-
+Currently Jellyfish supports two clustering strategy `DNS` and `EPMD`.
+Configuration for each strategy is described below.
+But before that you need to set two flags:
 1. Enable distribution mode with `JF_DIST_ENABLED=true`
-1. Give your node a name with `JF_DIST_NODE_NAME`
-1. Specify a list of nodes to connect to with `JF_DIST_NODES`
-1. Configure HTTP and metrics ports so they don't overlap with other nodes.
-You can do this with `JF_PORT` and `JF_METRICS_PORT` environment variables.
+2. Define which distribution strategy will be used with `JF_DIST_STRATEGY_NAME`
 
 :::tip Distribution Environment Variables
 
 List of all cluster-related environment variables is available [here](./getting_started/installation#distribution).
+
+:::
+
+:::tip Configure HTTP and metrics ports so they don't overlap with other nodes.
+
+You can do this with `JF_PORT` and `JF_METRICS_PORT` environment variables.
 
 :::
 
@@ -45,6 +49,13 @@ This means that we don't need to use any database where we would store
 information about network topology.
 Instead, some extra network configuration might be needed.
 
+#### EPMD strategy
+
+When using EPMD to finish distribution configuration you need to set additional two flags:
+1. Give your node a name with `JF_DIST_NODE_NAME`
+2. Specify a list of nodes to connect to with `JF_DIST_NODES`
+
+
 * Jellyfish uses a service called EPMD (Erlang Port Mapper Deamon)
 that runs on port `4369` (TCP).
 If you run Jellyfish using Docker, you have to explicitly export this port.
@@ -63,9 +74,14 @@ As in the case of EPMD, in production deployment, you have to modify your firewa
 See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution) for more information.
 :::
 
+#### DNS strategy
+When using DNS to finish distribution configuration you need to set additional flags:
+1. Give your node a name with `JF_DIST_NODE_NAME`. It should be in format `<NODE_BASENAME>@<ip_address>`.
+2. Specify a basename of other Jellyfishes in cluster with `JF_DIST_NODE_BASENAME`.
+3. Specify a query under which jellyfishes should be register in DNS with `JF_DIST_QUERY`
 
 
-## Examples
+## EPMD Examples 
 
 
 ### Running from source
@@ -196,3 +212,79 @@ A couple of notes about EPMD:
 that's why we can't simulate Global Docker setup locally
 
 You can read more about Erlang Distribution [here](https://www.erlang.org/doc/reference_manual/distributed.html).
+
+## DNS Example
+
+This simple docker compose file sets a cluster of two Jellyfishes and starts a DNS with use of dnsmasq.
+
+```yml
+version: "3"
+
+x-jellyfish-template: &jellyfish-template
+  build: .
+  environment: &jellyfish-environment
+    JF_SERVER_API_TOKEN: "development"
+    JF_DIST_ENABLED: "true"
+    JF_DIST_STRATEGY_NAME: "DNS"
+  restart: on-failure
+
+services:
+  app1:
+    <<: *jellyfish-template
+    environment:
+      <<: *jellyfish-environment
+      JF_HOST: "localhost:4001"
+      JF_PORT: 4001
+      JF_DIST_NODE_NAME: app@172.28.1.2
+      JF_DIST_NODE_BASENAME: app
+      JF_DIST_QUERY: app.dns-network
+    ports:
+      - 4001:4001
+    networks:
+      dns-network:
+        ipv4_address: 172.28.1.2
+        aliases:
+          - app.dns-network
+    dns:
+      - 172.28.1.4:5353
+
+  app2:
+    container_name: name
+    <<: *jellyfish-template
+    environment:
+      <<: *jellyfish-environment
+      JF_HOST: "localhost:4002"
+      JF_PORT: 4002
+      JF_DIST_NODE_NAME: app@172.28.1.3
+      JF_DIST_NODE_BASENAME: app
+      JF_DIST_QUERY: app.dns-network
+    ports:
+      - 4002:4002
+    networks:
+      dns-network:
+        ipv4_address: 172.28.1.3
+        aliases:
+          - app.dns-network
+    dns:
+      - 172.28.1.4:5353
+
+  dnsmasq:
+    image: andyshinn/dnsmasq:2.78
+    volumes:
+      - /etc/resolv.conf:/etc/resolv.dnsmasq.conf
+    command: -d -q --no-hosts --no-resolv --no-poll --server 127.0.0.11 --listen-address 0.0.0.0 --port 5353 --log-queries --log-facility=- --address=/./127.0.0.11
+    networks:
+      dns-network:
+        ipv4_address: 172.28.1.4
+        aliases:
+          - dnsmasq
+
+networks:
+  dns-network:
+    ipam:
+      config:
+        - subnet: 172.28.1.0/24
+```
+
+Because we run Jellyfishes in the same Docker network we don't need to export EPMD (`4369`) or distribution (`9000`)
+ports.
