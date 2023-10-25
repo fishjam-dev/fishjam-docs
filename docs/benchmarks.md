@@ -71,7 +71,8 @@ innate processing capabilities.
 
 #### Low-Latency HLS
 
-In Low-Latency HLS, the server intentionally delays the response until the specifically requested partial segment becomes available.
+In Low-Latency HLS, the server intentionally delays the response to playlist requests
+until the specifically requested partial segment becomes available.
 This makes the "Playlist request latency (mean)" metric meaningless, and it is thus omitted from the following table.
 
 | Client connections | Incoming throughput (mean) | Outgoing throughput (mean) | Outgoing throughput (peak) | Memory used (peak) | CPU utilisation (peak) | Partial segment request latency (mean) |
