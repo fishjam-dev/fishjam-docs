@@ -77,6 +77,7 @@ const sidebars = {
       collapsed: true,
       items: ["deploying/vps", "deploying/fly_io"],
     },
+    "benchmarks",
     {
       type: "category",
       label: "For Developers",
