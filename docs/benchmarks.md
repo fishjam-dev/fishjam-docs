@@ -17,7 +17,7 @@ scenario, where any client can request any segment at any given time.
 
 - Machine `A`, running Jellyfish with one room
   - One WebRTC peer in the room (WebRTC video stream with **constant bitrate of 1.8 Mbps**)
-  - One HLS component in the room
+  - One HLS component in the room (segment length: 6 s, partial segment length: 1 s)
 
 - Machine `B`, running a stress test utility
   - The utility steadily increases the number of simulated clients over the course of the test, up to a given amount
