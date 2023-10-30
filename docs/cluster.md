@@ -13,9 +13,15 @@ Currently, Jellyfish doesn't offer an option to split a room across multiple mac
 
 :::
 
-## Configuring a Cluster
+## Strategies
 
-Currently Jellyfish supports two clustering strategy `DNS` and `NODES_LIST`.
+Currently Jellyfish supports two clustering strategy `DNS` and `NODES_LIST`. <br/>
+In `NODES_LIST` strategy jellyfish try to connect with
+jellyfish instances that were passed in configuration. 
+This doesn't mean that these instances will be only connected with this jellyfish, because connecting in 
+Erlang Distribution is transitive. <br/>
+In `DNS` strategy jellyfish regularly sends a query to DNS and tries to connect to jellyfish instances based on the information returned from DNS.
+
 Configuration for each strategy is described below.
 But before that you need to set two flags:
 1. Enable distribution mode with `JF_DIST_ENABLED=true`
@@ -25,12 +31,6 @@ By default it is setup to `NODES_LIST`.
 :::tip Distribution Environment Variables
 
 List of all cluster-related environment variables is available [here](./getting_started/installation#distribution).
-
-:::
-
-:::tip Configure HTTP and metrics ports so they don't overlap with other nodes.
-
-You can do this with `JF_PORT` and `JF_METRICS_PORT` environment variables.
 
 :::
 
@@ -76,15 +76,17 @@ When using `NODES_LIST` to finish distribution configuration you need to set add
 
 #### DNS strategy
 When using DNS to finish distribution configuration you need to set additional flags:
-1. Give your node a name with `JF_DIST_NODE_NAME`. It should be in format `<NODE_BASENAME>@<ip_address>`. <br/>
-All jellyfishes must have the same `NODE_BASENAME`.
-2. Specify a query under which jellyfishes should be register in DNS with `JF_DIST_QUERY`
+1. Give your node a name with `JF_DIST_NODE_NAME`. It should be in format `<nodename>@<ip_address>`. <br/>
+All jellyfishes must have the same `nodename`.
+1. Specify a query under which jellyfishes should be register in DNS with `JF_DIST_QUERY`
 
 
-## NODES_LIST Examples 
+## EXAMPLES
+
+### NODES_LIST 
 
 
-### Running from source
+#### Running from source
 
 Run the first Jellyfish:
 
@@ -105,7 +107,7 @@ Note that when running the second Jellyfish, we had to change its HTTP and metri
 :::
 
 
-### Running with Docker (locally)
+#### Running with Docker (locally)
 
 This simple docker compose file sets a cluster of two Jellyfishes.
 
@@ -155,7 +157,7 @@ us to reference Jellyfishes using their service names so
 ports
 
 
-### Running with Docker (globally)
+#### Running with Docker (globally)
 
 When forming a cluster across multiple machines:
 * you have to take care of [Extra Network Configuration](#configuring-a-cluster)
@@ -166,54 +168,8 @@ See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution
 
 See our [Jellyfish Videoroom deployment configuration](https://github.com/jellyfish-dev/jellyfish_videoroom/blob/main/docker-compose-deploy.yaml) for an example.
 
-## Verifying that a cluster has been created
 
-When a cluster is created correctly you will see a log indicating that one of your Jellyfishes connected to the other one, e.g.:
-
-```
-[info] [libcluster:epmd_cluster] connected to :"j1@127.0.0.1"
-```
-
-To see clustering in action, create two rooms using the same Jellyfish address and observe how they are load balanced:
-
-```bash
-curl -X POST -H "authorization: Bearer development" http://localhost:4002/room
-# {"data":{"jellyfish_address":"localhost:4001"}}
-```
-
-```bash
-curl -X POST -H "authorization: Bearer development" http://localhost:4002/room
-# {"data":{"jellyfish_address":"localhost:4002"}}
-```
-
-Load balancing can also be tested using [Jellyfish Dashboard](https://github.com/jellyfish-dev/jellyfish-dashboard).
-See [here](./tutorials/dashboard#loadbalancing-in-dashboard) for more information.
-
-## Deeper dive into Erlang Distribution
-
-The most tricky thing when running Jellyfish in a cluster is to understand the role of EPMD.
-EPMD is responsible for mapping node names to ports they use.
-Node names consist of two parts `nodename@hostname`.
-`hostname` identifies a host machine, and `nodename` identifies a node on this machine.
-When node A wants to connect to node B, it uses node's B name to ask EPMD (running on node B) 
-for the actual port node B is accessible on.
-
-**Example**
-
-1. Let's assume that node's B name is `nodeb@192.168.1.2`.
-1. Node A will contact EPMD using `192.168.1.2` IP address and port `4369`, and ask for the
-port number used by a node with the name `nodeb`.
-1. After that, node A can contact node B using `192.168.1.2` IP address and port returned by EPMD.
-
-A couple of notes about EPMD:
-* it always uses port `4369` (TCP)
-* it is started automatically when running Jellyfish
-* there is one EPMD per machine or one EPMD per docker container - 
-that's why we can't simulate Global Docker setup locally
-
-You can read more about Erlang Distribution [here](https://www.erlang.org/doc/reference_manual/distributed.html).
-
-## DNS Example
+### DNS
 
 This simple docker compose file sets a cluster of two Jellyfishes and starts a DNS with use of dnsmasq.
 
@@ -288,3 +244,50 @@ networks:
 
 Because we run Jellyfishes in the same Docker network we don't need to export EPMD (`4369`) or distribution (`9000`)
 ports.
+
+## Verifying that a cluster has been created
+
+When a cluster is created correctly you will see a log indicating that one of your Jellyfishes connected to the other one, e.g.:
+
+```
+[info] [libcluster:epmd_cluster] connected to :"j1@127.0.0.1"
+```
+
+To see clustering in action, create two rooms using the same Jellyfish address and observe how they are load balanced:
+
+```bash
+curl -X POST -H "authorization: Bearer development" http://localhost:4002/room
+# {"data":{"jellyfish_address":"localhost:4001"}}
+```
+
+```bash
+curl -X POST -H "authorization: Bearer development" http://localhost:4002/room
+# {"data":{"jellyfish_address":"localhost:4002"}}
+```
+
+Load balancing can also be tested using [Jellyfish Dashboard](https://github.com/jellyfish-dev/jellyfish-dashboard).
+See [here](./tutorials/dashboard#loadbalancing-in-dashboard) for more information.
+
+## Deeper dive into Erlang Distribution
+
+The most tricky thing when running Jellyfish in a cluster is to understand the role of EPMD.
+EPMD is responsible for mapping node names to ports they use.
+Node names consist of two parts `nodename@hostname`.
+`hostname` identifies a host machine, and `nodename` identifies a node on this machine.
+When node A wants to connect to node B, it uses node's B name to ask EPMD (running on node B) 
+for the actual port node B is accessible on.
+
+**Example**
+
+1. Let's assume that node's B name is `nodeb@192.168.1.2`.
+1. Node A will contact EPMD using `192.168.1.2` IP address and port `4369`, and ask for the
+port number used by a node with the name `nodeb`.
+1. After that, node A can contact node B using `192.168.1.2` IP address and port returned by EPMD.
+
+A couple of notes about EPMD:
+* it always uses port `4369` (TCP)
+* it is started automatically when running Jellyfish
+* there is one EPMD per machine or one EPMD per docker container - 
+that's why we can't simulate Global Docker setup locally
+
+You can read more about Erlang Distribution [here](https://www.erlang.org/doc/reference_manual/distributed.html).

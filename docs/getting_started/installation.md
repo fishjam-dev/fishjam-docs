@@ -213,7 +213,7 @@ this one was connected to.
 
 ###### Distribution DNS specific:
 * `JF_DIST_QUERY` - query sent to DNS to discover other Jellyfishes. <br/>
-Returned list of IPs from DNS is used for creating distribution node name in the format `<NODE_BASENAME>@<IP_ADDRESS>`.  
+Returned list of IPs from DNS is used for creating distribution node name in the format `<nodename>@<IP_ADDRESS>`.  
 * `JF_DIST_POLLING_INTERVAL` - DNS polling interval in ms. <br/> 
 Default value is 5000.
 
