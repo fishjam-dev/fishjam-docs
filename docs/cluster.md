@@ -31,8 +31,7 @@ List of all cluster-related environment variables is available [here](./getting_
 
 :::warning Security
 
-Currently, Jellyfish distribution is not encrypted meaning that data between
-Jellyfishes is sent as plain text.
+Jellyfish distribution is not encrypted meaning that data between Jellyfishes is sent as plain text.
 Cookie does not provide any cryptographic security.
 Do run a cluster only across machines in the same network!
 
