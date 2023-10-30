@@ -181,6 +181,7 @@ ip address or FQDN of a machine Jellyfish runs on.
 If you run a cluster on a single machine or in the same docker network
 and you don't want to use IP addresses or FQDN as hostnames, 
 you can use short names (see `JF_DIST_MODE`).
+When running jellyfish in distributed mode with `DNS` strategy each jellyfish instance in a cluster must have the same `nodename` in `JF_DIST_NODE_NAME`.
 * `JF_DIST_MODE` - distribution mode - can be `name` or `sname`.<br/>
 Defaults to `name`.<br/>
 When using `name`, your hostname has to be an IP address or FQDN of a machine Jellyfish runs on.

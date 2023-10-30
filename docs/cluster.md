@@ -15,12 +15,11 @@ Currently, Jellyfish doesn't offer an option to split a room across multiple mac
 
 ## Strategies
 
-Currently Jellyfish supports two clustering strategy `DNS` and `NODES_LIST`. <br/>
-In `NODES_LIST` strategy jellyfish try to connect with
-jellyfish instances that were passed in configuration. 
-This doesn't mean that these instances will be only connected with this jellyfish, because connecting in 
+Currently, Jellyfish supports two clustering strategies `DNS` and `NODES_LIST`. <br/>
+In `NODES_LIST` strategy, jellyfish tries to connect with jellyfish instances that were passed in configuration. 
+This doesn't mean that these instances will be only connected with this jellyfish because connecting in 
 Erlang Distribution is transitive. <br/>
-In `DNS` strategy jellyfish regularly sends a query to DNS and tries to connect to jellyfish instances based on the information returned from DNS.
+In `DNS` strategy, jellyfish regularly sends a query to DNS and tries to connect to jellyfish instances based on the information returned from DNS.
 
 Configuration for each strategy is described below.
 But before that you need to set two flags:
