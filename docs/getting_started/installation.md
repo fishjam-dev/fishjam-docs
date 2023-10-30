@@ -170,7 +170,8 @@ Possible values are:
 * `JF_DIST_ENABLED` - whether to run Jellyfish in a cluster.<br/>
 Defaults to `false`.
 * `JF_DIST_STRATEGY_NAME` - specify which clustering strategy to use.<br/>
-Possible values are `DNS` or `EPMD`.
+Possible values are `DNS` or `NODES_LIST`. 
+Defaults to `NODES_LIST`.
 * `JF_DIST_NODE_NAME` - Node name used in a cluster.
 It consists of two parts - nodename@hostname.
 The first part identifies a node on a single machine and can
@@ -200,7 +201,7 @@ Only available when running with Docker or `mix release`.
 Defaults to `9000` when running with Docker.<br/>
 Only available when running with Docker or `mix release`.
 
-###### Distribution EPMD specific:
+###### Distribution NODES_LIST specific:
 * `JF_DIST_NODES` - space-separated list of other Jellyfishes to connect to.<br/>
 Defaults to `""`.<br/>
 Example: `JF_DIST_NODES="jellyfish1@127.0.0.1 jellyfish2@127.0.0.1"`.<br/>
@@ -211,7 +212,6 @@ when you connect to one Jellyfish you also connect to all other Jellyfishes
 this one was connected to.
 
 ###### Distribution DNS specific:
-* `JF_DIST_NODE_BASENAME` - string used as prefix in distibution node name.
 * `JF_DIST_QUERY` - query which is sent do DNS. <br/>
 Returned list of IPs from DNS is used for creating distribution node name in the format `<NODE_BASENAME>@<IP_ADDRESS>`.  
 * `JF_DIST_POLLING_INTERVAL` - DNS polling interval in ms. <br/> 

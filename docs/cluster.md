@@ -15,11 +15,12 @@ Currently, Jellyfish doesn't offer an option to split a room across multiple mac
 
 ## Configuring a Cluster
 
-Currently Jellyfish supports two clustering strategy `DNS` and `EPMD`.
+Currently Jellyfish supports two clustering strategy `DNS` and `NODES_LIST`.
 Configuration for each strategy is described below.
 But before that you need to set two flags:
 1. Enable distribution mode with `JF_DIST_ENABLED=true`
-2. Define which distribution strategy will be used with `JF_DIST_STRATEGY_NAME`
+2. (Optionally) Define which distribution strategy will be used with `JF_DIST_STRATEGY_NAME`. <br/>
+By default it is setup to `NODES_LIST`.
 
 :::tip Distribution Environment Variables
 
@@ -49,14 +50,7 @@ This means that we don't need to use any database where we would store
 information about network topology.
 Instead, some extra network configuration might be needed.
 
-#### EPMD strategy
-
-When using EPMD to finish distribution configuration you need to set additional two flags:
-1. Give your node a name with `JF_DIST_NODE_NAME`
-2. Specify a list of nodes to connect to with `JF_DIST_NODES`
-
-
-* Jellyfish uses a service called EPMD (Erlang Port Mapper Deamon)
+* Jellyfish in distributed mode uses a service called EPMD (Erlang Port Mapper Deamon)
 that runs on port `4369` (TCP).
 If you run Jellyfish using Docker, you have to explicitly export this port.
 In production deployment, you also have to allow for traffic on this port in your firewall.
@@ -74,14 +68,20 @@ As in the case of EPMD, in production deployment, you have to modify your firewa
 See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution) for more information.
 :::
 
+#### NODES_LIST strategy
+
+When using `NODES_LIST` to finish distribution configuration you need to set additional two flags:
+1. Give your node a name with `JF_DIST_NODE_NAME`
+2. Specify a list of nodes to connect to with `JF_DIST_NODES`
+
 #### DNS strategy
 When using DNS to finish distribution configuration you need to set additional flags:
-1. Give your node a name with `JF_DIST_NODE_NAME`. It should be in format `<NODE_BASENAME>@<ip_address>`.
-2. Specify a basename of other Jellyfishes in cluster with `JF_DIST_NODE_BASENAME`.
-3. Specify a query under which jellyfishes should be register in DNS with `JF_DIST_QUERY`
+1. Give your node a name with `JF_DIST_NODE_NAME`. It should be in format `<NODE_BASENAME>@<ip_address>`. <br/>
+All jellyfishes must have the same `NODE_BASENAME`.
+2. Specify a query under which jellyfishes should be register in DNS with `JF_DIST_QUERY`
 
 
-## EPMD Examples 
+## NODES_LIST Examples 
 
 
 ### Running from source
