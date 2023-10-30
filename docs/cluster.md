@@ -6,30 +6,10 @@ Whenever a new request for creating a room is sent to one of Jellyfishes in a cl
 communicates with all other nodes and creates a room on the node with the lowest load.
 In response, a Jellyfish address (specified with `JF_HOST` environment variable) where the room was created is returned.
 
-:::caution
+:::info
 
 Even when running a cluster of Jellyfishes, a room still has to fit into one Jellyfish.
 Currently, Jellyfish doesn't offer an option to split a room across multiple machines.
-
-:::
-
-## Strategies
-
-Currently, Jellyfish supports two clustering strategies `DNS` and `NODES_LIST`. <br/>
-In `NODES_LIST` strategy, jellyfish tries to connect with jellyfish instances that were passed in configuration. 
-This doesn't mean that these instances will be only connected with this jellyfish because connecting in 
-Erlang Distribution is transitive. <br/>
-In `DNS` strategy, jellyfish regularly sends a query to DNS and tries to connect to jellyfish instances based on the information returned from DNS.
-
-Configuration for each strategy is described below.
-But before that you need to set two flags:
-1. Enable distribution mode with `JF_DIST_ENABLED=true`
-2. (Optionally) Define which distribution strategy will be used with `JF_DIST_STRATEGY_NAME`. <br/>
-By default it is setup to `NODES_LIST`.
-
-:::tip Distribution Environment Variables
-
-List of all cluster-related environment variables is available [here](./getting_started/installation#distribution).
 
 :::
 
@@ -39,6 +19,12 @@ Currently, Jellyfish distribution is not encrypted meaning that data between
 Jellyfishes is sent as plain text.
 Cookie does not provide any cryptographic security.
 Do run a cluster only across machines in the same network!
+
+:::
+
+:::tip Distribution Environment Variables
+
+List of all cluster-related environment variables is available [here](./getting_started/installation#distribution).
 
 :::
 
@@ -65,27 +51,32 @@ forming a cluster.
 As in the case of EPMD, in production deployment, you have to modify your firewall rules appropriately.
 
 See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution) for more information.
+
 :::
 
-#### NODES_LIST strategy
 
-When using `NODES_LIST` to finish distribution configuration you need to set additional two flags:
+## Strategies
+
+Currently, Jellyfish supports two clustering strategies: `NODES_LIST` and `DNS`, but other strategies
+might be added in the future.
+
+* `NODES_LIST` - form a cluster basing on a list of Jellyfish addresses
+* `DNS` - regularly query DNS to discover other Jellyfishes
+ 
+Regardless of the strategy, Erlang Distribution is transitive.
+When node A connects to node B, it also connects to all other nodes that node B is connected to.
+
+
+## NODES_LIST 
+
+To form a cluster using `NODES_LIST` strategy:
+
+1. Enable distribution mode with `JF_DIST_ENABLED=true`
 1. Give your node a name with `JF_DIST_NODE_NAME`
-2. Specify a list of nodes to connect to with `JF_DIST_NODES`
-
-#### DNS strategy
-When using DNS to finish distribution configuration you need to set additional flags:
-1. Give your node a name with `JF_DIST_NODE_NAME`. It should be in format `<nodename>@<ip_address>`. <br/>
-All jellyfishes must have the same `nodename`.
-1. Specify a query under which jellyfishes should be register in DNS with `JF_DIST_QUERY`
+1. Specify a list of nodes to connect to with `JF_DIST_NODES`
 
 
-## EXAMPLES
-
-### NODES_LIST 
-
-
-#### Running from source
+### Running from source
 
 Run the first Jellyfish:
 
@@ -106,7 +97,7 @@ Note that when running the second Jellyfish, we had to change its HTTP and metri
 :::
 
 
-#### Running with Docker (locally)
+### Running with Docker (locally)
 
 This simple docker compose file sets a cluster of two Jellyfishes.
 
@@ -156,7 +147,7 @@ us to reference Jellyfishes using their service names so
 ports
 
 
-#### Running with Docker (globally)
+### Running with Docker (globally)
 
 When forming a cluster across multiple machines:
 * you have to take care of [Extra Network Configuration](#configuring-a-cluster)
@@ -168,7 +159,20 @@ See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution
 See our [Jellyfish Videoroom deployment configuration](https://github.com/jellyfish-dev/jellyfish_videoroom/blob/main/docker-compose-deploy.yaml) for an example.
 
 
-### DNS
+## DNS
+
+To form a cluster using `DNS` strategy:
+
+1. Enable distribution mode with `JF_DIST_ENABLED=true`
+1. Chose `DNS` strategy with `JF_DIST_STRATEGY_NAME`.
+1. Give your node a name with `JF_DIST_NODE_NAME`.<br /> 
+**Important** It has to be in the form of `<nodename>@<ip_address>`
+where all Jellyfishes MUST have the same `<nodename>`.
+1. Specify a query under which Jellyfishes are register in DNS with `JF_DIST_QUERY`. <br />
+**Important** Jellyfish does not register itself in DNS.
+It is user responsibility to enusre that your Jellyfish is registered in DNS under `JF_DIST_QUERY`.
+
+### Running with Docker
 
 This simple docker compose file sets a cluster of two Jellyfishes and starts a DNS with use of dnsmasq.
 
@@ -191,7 +195,6 @@ services:
       JF_HOST: "localhost:4001"
       JF_PORT: 4001
       JF_DIST_NODE_NAME: app@172.28.1.2
-      JF_DIST_NODE_BASENAME: app
       JF_DIST_QUERY: app.dns-network
     ports:
       - 4001:4001
@@ -211,7 +214,6 @@ services:
       JF_HOST: "localhost:4002"
       JF_PORT: 4002
       JF_DIST_NODE_NAME: app@172.28.1.3
-      JF_DIST_NODE_BASENAME: app
       JF_DIST_QUERY: app.dns-network
     ports:
       - 4002:4002
