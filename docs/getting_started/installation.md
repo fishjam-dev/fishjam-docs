@@ -169,15 +169,19 @@ Possible values are:
 
 * `JF_DIST_ENABLED` - whether to run Jellyfish in a cluster.<br/>
 Defaults to `false`.
+* `JF_DIST_STRATEGY_NAME` - specify which clustering strategy to use.<br/>
+Possible values are `DNS` or `NODES_LIST`. 
+Defaults to `NODES_LIST`.
 * `JF_DIST_NODE_NAME` - Node name used in a cluster.
 It consists of two parts - nodename@hostname.
 The first part identifies a node on a single machine and can
 be any string.
 The second part identifies the host machine and has to be an 
 ip address or FQDN of a machine Jellyfish runs on.
-If you run a cluster on a single machine or in the same docker network
-and you don't want to use IP addresses or FQDN as hostnames, 
+If you run a cluster using `NODES_LIST` strategy on a single machine 
+or in the same docker network and you don't want to use IP addresses or FQDN as hostnames, 
 you can use short names (see `JF_DIST_MODE`).
+If you run a cluster using `DNS` strategy, every Jellyfish instance must have `nodename` set to the same value.
 * `JF_DIST_MODE` - distribution mode - can be `name` or `sname`.<br/>
 Defaults to `name`.<br/>
 When using `name`, your hostname has to be an IP address or FQDN of a machine Jellyfish runs on.
@@ -189,14 +193,6 @@ Use different cookies to create multiple clusters on the same machine.<br/>
 **Important**: cookie does not provide any cryptographic security.
 Its only purpose is to prevent a node from connecting to a cluster with which 
 it is not intended to communicate.
-* `JF_DIST_NODES` - space-separated list of other Jellyfishes to connect to.<br/>
-Defaults to `""`.<br/>
-Example: `JF_DIST_NODES="jellyfish1@127.0.0.1 jellyfish2@127.0.0.1"`.<br/>
-This list can also include ourselves so that you can pass the same value
-to every Jellyfish.
-Note: Jellyfish connection to other Jellyfish is transitive meaning that
-when you connect to one Jellyfish you also connect to all other Jellyfishes
-this one was connected to.
 * `JF_DIST_MIN_PORT`- minimal port used by Jellyfish when forming a cluster
 (connecting to other Jellyfishes).<br/>
 Defaults to `9000` when running with Docker.<br/>
@@ -205,6 +201,22 @@ Only available when running with Docker or `mix release`.
 (connecting to other Jellyfishes).<br/>
 Defaults to `9000` when running with Docker.<br/>
 Only available when running with Docker or `mix release`.
+
+###### Distribution NODES_LIST specific:
+* `JF_DIST_NODES` - space-separated list of other Jellyfishes to connect to.<br/>
+Defaults to `""`.<br/>
+Example: `JF_DIST_NODES="jellyfish1@127.0.0.1 jellyfish2@127.0.0.1"`.<br/>
+This list can also include ourselves so that you can pass the same value
+to every Jellyfish.
+Note: Jellyfish connection to other Jellyfish is transitive meaning that
+when you connect to one Jellyfish you also connect to all other Jellyfishes
+this one was connected to.
+
+###### Distribution DNS specific:
+* `JF_DIST_QUERY` - query sent to DNS to discover other Jellyfishes. <br/>
+Returned list of IPs from DNS is used for creating distribution node name in the format `<nodename>@<IP_ADDRESS>`.  
+* `JF_DIST_POLLING_INTERVAL` - DNS polling interval in ms. <br/> 
+Default value is 5000.
 
 :::tip
 
