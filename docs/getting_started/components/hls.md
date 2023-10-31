@@ -32,7 +32,10 @@ After adding a WebRTC peer (and at least one track) or an RTSP component, the HL
 under `http://<jellyfish-address>/hls/<room_id>/index.m3u8` (or `https://`, if using TLS).
 
 ## Recordings
-After a meeting that integrates an HLS component (with the persistent option set to true) ends, the meeting is preserved as a recording. To manage this recording, use the [Recording API](../../for_developers/api_reference/rest_api#tag/recording). The recording is also available as HLS Video On Demand (VOD) [API](../../for_developers/api_reference/rest_api#tag/recording/operation/send_file).
+
+After a meeting that integrates an HLS component (with the persistent option set to true) ends, the meeting is preserved as a recording. 
+To manage this recording, use the [Recording API](../../for_developers/api_reference/rest_api#tag/recording).
+The recording is also available as HLS Video On Demand (VOD) [API](../../for_developers/api_reference/rest_api#tag/recording/operation/send_file).
 
 ## Example Docker commands
 
