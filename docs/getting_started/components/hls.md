@@ -35,7 +35,7 @@ under `http://<jellyfish-address>/hls/<room_id>/index.m3u8` (or `https://`, if u
 
 After a meeting that integrates an HLS component (with the persistent option set to true) ends, the meeting is preserved as a recording. 
 To manage this recording, use the [Recording API](../../for_developers/api_reference/rest_api#tag/recording).
-The recording is also available as HLS Video On Demand (VOD) [API](../../for_developers/api_reference/rest_api#tag/recording/operation/send_file).
+The recording is also available as HLS Video On Demand (VOD) [API](../../for_developers/api_reference/rest_api#tag/recording/operation/getRecordingContent).
 
 ## Example Docker commands
 
