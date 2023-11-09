@@ -69,7 +69,7 @@ client = Jellyfish.Client.new(server_address: server_address, server_api_token: 
 {:ok, %Jellyfish.Room{id: room_id}, jellyfish_address} = Jellyfish.Room.create(client, max_peers: 10, webhook_url: webhook_url)
 ```
 
-To decode received notification through webhook, you can use a function from SDK.
+Users have to receive post requests on its own. They can decode received notificaton by passing request body to proper SDK function.
 Example using Elixir Server SDK:
 ```elixir
   def call(conn, _opts) do
@@ -84,7 +84,7 @@ Example using Elixir Server SDK:
   end
 ```
 
-As a result, this will be value in notification variable:
+As a result, this is an example value that could be in notification variable:
 ```
 %Jellyfish.Notification.PeerConnected{
   room_id: "fbf4190c-5c76-415c-8939-52c6ed20868b",
@@ -105,7 +105,7 @@ room_api = RoomApi(server_address = server_address, server_api_token = server_ap
 _, room = room_api.create_room(webhook_url=webhook_url)
 ```
 
-To decode received notification through webhook, you can use a function from SDK.
+Users have to receive post requests on its own. They can decode received notificaton by passing request body to proper SDK function.
 Example using Elixir Server SDK:
 ```python
   from jellyfish import recevie_json
