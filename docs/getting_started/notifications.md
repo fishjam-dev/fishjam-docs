@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Notifications
 
 Jellyfish sends server side notifications whenever some important event occurs, e.g.:
@@ -7,121 +10,132 @@ Jellyfish sends server side notifications whenever some important event occurs, 
 * etc.
 
 A full list of available notifications is always present in specific server SDK documentation.
-Notifications can be received through websockets or webhooks.
+Notifications can be received through [WebSockets](#websockets) or [Webhooks](#webhooks).
 
+## WebSockets
 
-## Websockets
-WebSocket is a communication protocol that provides full-duplex communication between a client and a server over a persistent connection.
+WebSocket (WS) is a communication protocol that provides full-duplex communication between a client and a server over a persistent connection.
+When you create a notifier, it will open WS connection, receive notifications,
+decode and return them to you via callbacks or messages.
+In other words, you don't have to do anything on your own.
 
-#### Elixir example
-Here, we present how you can subscribe for server side websocket notifications using Elixir Server SDK:
+<Tabs>
+  <TabItem value="python" label="Python">
+
+```python
+from jellyfish import Notifier
+
+server_address = "localhost:5002"
+server_api_token = "development"
+
+notifier = Notifier(server_address = server_address, server_api_token = server_api_token)
+
+@notifier.on_server_notification
+def handle_notification(server_notification):
+    print(f'Received a notification: {server_notification}')
+
+@notifier.on_metrics
+def handle_metrics(metrics_report):
+    print(f'Received WebRTC metrics: {metrics_report}')
+
+notifier.connect()
+await notifier.wait_ready()
+```
+
+  </TabItem>
+
+  <TabItem value="elixir" label="Elixir">
 
 ```elixir
 server_address = "localhost:5002"
 server_api_token = "development"
 
 {:ok, notifier} =
-  Jellyfish.Notifier.start(server_address: server_address, server_api_token: server_api_token)
+  Jellyfish.WSNotifier.start(server_address: server_address, server_api_token: server_api_token)
 
-:ok = Jellyfish.Notifier.subscribe_server_notifications(notifier)
-:ok = Jellyfish.Notifier.subscribe_metrics(notifier)
+:ok = Jellyfish.WSNotifier.subscribe_server_notifications(notifier)
+:ok = Jellyfish.WSNotifier.subscribe_metrics(notifier)
+
+receive do
+  {:jellyfish, %Jellyfish.Notification.PeerConnected{} = notification} ->
+    IO.inspect(notification)
+  # other notificaitons ...
+end
 ```
+
+  </TabItem>
+</Tabs>
 
 As a result, you should see the following logs on the server side
 
-```
-07:45:02.684 [info] New incoming server WebSocket connection, accepting
-07:45:02.688 [info] Server WS authenticated.
-```
-
-#### Python example
-Here, we present how you can subscribe for server side websocket notifications using Python Server SDK:
-
-```python
-from jellyfish import Notifier
-server_address = "localhost:5002"
-server_api_token = "development"
-room_api = Notifier(server_address = server_address, server_api_token = server_api_token)
-notifier.connect()
-await notifier.wait_ready()
-```
-
-As a result, you should see the following logs on the server side
 ```
 07:45:02.684 [info] New incoming server WebSocket connection, accepting
 07:45:02.688 [info] Server WS authenticated.
 ```
 
 ## Webhooks
-Webhook is a method of augmenting or altering the behaviour of a web page, application, or web API by allowing it to send real-time data to a specified URL when a certain event occurs.
+
+Webhooks are simply HTTP POST requests sent to a specified URL.
+They are a common choice in serverless architectures where a WebSocket connection cannot be established.
+
+The most important difference between Webhook and WebSocket notifications is that you have to receive those
+POST requests on your own and then use SDK's decode functions to get the actual notification.
 
 To receive server notifications through webhooks you have to pass `webhook_url` during room creation.
 
-#### Elixir example
+<Tabs>
+  <TabItem value="python" label="Python">
 
-Example using Elixir Server SDK:
-```elixir
-server_address = "localhost:5002"
-server_api_token = "development"
-webhook_url = "http://localhost:5003/"
-
-client = Jellyfish.Client.new(server_address: server_address, server_api_token: server_api_token)
-{:ok, %Jellyfish.Room{id: room_id}, jellyfish_address} = Jellyfish.Room.create(client, max_peers: 10, webhook_url: webhook_url)
-```
-
-Users have to receive post requests on its own. They can decode received notificaton by passing request body to proper SDK function.
-Example using Elixir Server SDK:
-```elixir
-  def call(conn, _opts) do
-    {:ok, body, conn} = Plug.Conn.read_body(conn, [])
-    json_body = Jason.decode!(body)
-
-    notification = WebhookNotifier.receive(json_body)
-
-    conn
-    |> put_resp_content_type("text/plain")
-    |> send_resp(200, "OK")
-  end
-```
-
-As a result, this is an example value that could be in notification variable:
-```
-%Jellyfish.Notification.PeerConnected{
-  room_id: "fbf4190c-5c76-415c-8939-52c6ed20868b",
-  peer_id: "c7236587-5df8-4b41-b6e4-268e71133ee2"
-  }
-```
-
-
-#### Python example
-Example using Python Server SDK:
 ```python
 from jellyfish import Notifier, RoomApi
+from jellyfish import recevie_json
+
 server_address = "localhost:5002"
 server_api_token = "development"
 webhook_url = "http://localhost:5003/webhook"
 
 room_api = RoomApi(server_address = server_address, server_api_token = server_api_token)
 _, room = room_api.create_room(webhook_url=webhook_url)
+
+@app.route("/webhook", methods=["POST"])
+def respond_root():
+    json = request.get_json()
+    notification = receive_json(json)
+
+    return Response(status=200)
 ```
 
-Users have to receive post requests on its own. They can decode received notificaton by passing request body to proper SDK function.
-Example using Elixir Server SDK:
-```python
-  from jellyfish import recevie_json
+  </TabItem>
 
-  @app.route("/webhook", methods=["POST"])
-  def respond_root():
-      json = request.get_json()
-      notification = receive_json(json)
+  <TabItem value="elixir" label="Elixir">
 
-      return Response(status=200)
+```elixir
+server_address = "localhost:5002"
+server_api_token = "development"
+webhook_url = "http://localhost:5003/webhook"
+
+client = Jellyfish.Client.new(server_address: server_address, server_api_token: server_api_token)
+{:ok, %Jellyfish.Room{id: room_id}, jellyfish_address} = Jellyfish.Room.create(client, max_peers: 10, webhook_url: webhook_url)
+
+# assuming you are using Phoenix
+# router.ex
+scope "/", MyAppWeb do
+  post "/webhook", WebhookController, :receive_webhook_notification
+end
+
+# webhook_controller.ex
+def receive_webhook_notification(conn, _params) do
+  {:ok, body, conn} = Plug.Conn.read_body(conn, [])
+  json_body = Jason.decode!(body)
+
+  notification = Jellyfish.WebhookNotifier.receive(json_body)
+
+  conn
+  |> put_resp_content_type("text/plain")
+  |> send_resp(200, "OK")
+end
+
 ```
 
-Example value in notification variable:
-```
-ServerMessageRoomCreated(room_id='7ed98fd9-a5ca-4223-9c3a-111067c8b7f6')
-```
-
-
-
+  </TabItem>
+</Tabs>
