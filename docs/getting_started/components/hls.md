@@ -37,6 +37,10 @@ After a meeting that integrates an HLS component (with the persistent option set
 To manage this recording, use the [Recording API](../../for_developers/api_reference/rest_api#tag/recording).
 The recording is also available as HLS Video On Demand (VOD) [API](../../for_developers/api_reference/rest_api#tag/recording/operation/getRecordingContent).
 
+## Store HLS stream on S3
+You can directly store your HLS streams on S3. This solution will automatically send your streams to an AWS bucket right after the end of your meetings.
+When initializing your stream, simply include your S3 credentials as part of the configuration [API](http://localhost:3000/jellyfish-docs/next/for_developers/api_reference/rest_api#tag/room/operation/add_component).
+
 ## Example Docker commands
 
 The HLS playlist will be created inside the Docker container. To access it from the host,
