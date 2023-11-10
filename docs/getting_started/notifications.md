@@ -38,8 +38,11 @@ def handle_notification(server_notification):
 def handle_metrics(metrics_report):
     print(f'Received WebRTC metrics: {metrics_report}')
 
-notifier.connect()
-await notifier.wait_ready()
+async def run():
+    await notifier.connect()
+    await notifier.wait_ready()
+
+asyncio.run(run())
 ```
 
   </TabItem>
@@ -97,6 +100,7 @@ webhook_url = "http://localhost:5003/webhook"
 room_api = RoomApi(server_address = server_address, server_api_token = server_api_token)
 _, room = room_api.create_room(webhook_url=webhook_url)
 
+# assuming you are using Flask
 @app.route("/webhook", methods=["POST"])
 def respond_root():
     json = request.get_json()
