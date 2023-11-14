@@ -22,7 +22,7 @@ See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_
 * `persistent` (boolean, default: false) - whether the stream should be saved or not
 * `targetWindowDuration` (positive integer, default: null) - represents the duration, in seconds, of the live streaming content to be
     maintained in a rolling window. If set to null (default), the entire stream will be available.
-* `s3`` (object, default: nil) - AWS S3 credentials. If credentials are set, the stream will be saved to the specified bucket.
+* `s3` (object, default: nil) - AWS S3 credentials. If credentials are set, the stream will be saved to the specified bucket.
 
 ## Env variables
 
