@@ -22,6 +22,8 @@ See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_
 * `persistent` (boolean, default: false) - whether the stream should be saved or not
 * `targetWindowDuration` (positive integer, default: null) - represents the duration, in seconds, of the live streaming content to be
     maintained in a rolling window. If set to null (default), the entire stream will be available.
+* `s3` (object, default: nil) - AWS S3 credentials. If credentials are set, the stream will be saved to the specified bucket.
+
 ## Env variables
 
 Currently, there are no environment variables related to this component.
@@ -36,6 +38,11 @@ under `http://<jellyfish-address>/hls/<room_id>/index.m3u8` (or `https://`, if u
 After a meeting that integrates an HLS component (with the persistent option set to true) ends, the meeting is preserved as a recording. 
 To manage this recording, use the [Recording API](../../for_developers/api_reference/rest_api#tag/recording).
 The recording is also available as HLS Video On Demand (VOD) [API](../../for_developers/api_reference/rest_api#tag/recording/operation/getRecordingContent).
+
+## Store HLS stream on S3
+You can directly store your HLS streams on S3. 
+This solution will automatically send your streams to an AWS bucket right after the end of your meetings.
+When initializing your stream, simply include your S3 credentials as part of the configuration [API](http://localhost:3000/jellyfish-docs/next/for_developers/api_reference/rest_api#tag/room/operation/add_component).
 
 ## Example Docker commands
 
