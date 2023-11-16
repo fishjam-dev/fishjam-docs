@@ -83,6 +83,7 @@ const sidebars = {
       label: "For Developers",
       items: [
         "for_developers/design_docs",
+        "for_developers/metrics_design",
         {
           type: "category",
           label: "API Reference",
