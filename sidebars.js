@@ -80,6 +80,7 @@ const sidebars = {
     {
       type: "category",
       label: "Benchmarks",
+      collapsed: true,
       link: {
         type: "doc",
         id: "benchmarks",
