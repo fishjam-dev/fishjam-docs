@@ -77,7 +77,19 @@ const sidebars = {
       collapsed: true,
       items: ["deploying/vps", "deploying/fly_io"],
     },
-    "benchmarks",
+    {
+      type: "category",
+      label: "Benchmarks",
+      collapsed: true,
+      link: {
+        type: "doc",
+        id: "benchmarks",
+      },
+      items: [
+        "benchmarks/hls",
+        "benchmarks/webrtc"
+      ]
+    },
     {
       type: "category",
       label: "For Developers",
