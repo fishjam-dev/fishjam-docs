@@ -42,8 +42,7 @@ The recording is also available as HLS Video On Demand (VOD) [API](../../for_dev
 ## Manual subscription
 
 If you do not want the HLS component to automatically subscribe to all available tracks, you can set the `subscribeMode` option to `manual`.
-In this mode, the HLS component will not automatically subscribe to any tracks. 
-It will only subscribe to tracks that you explicitly instruct it to subscribe to using the subscription [API](http://localhost:3000/jellyfish-docs/next/for_developers/api_reference/rest_api#tag/hls/operation/subscribe_tracks).
+In this mode, the HLS component will only subscribe to tracks that you explicitly instruct it to subscribe to using the subscription [API](http://localhost:3000/jellyfish-docs/next/for_developers/api_reference/rest_api#tag/hls/operation/subscribe_tracks).
 
 ## Store HLS stream on S3
 
