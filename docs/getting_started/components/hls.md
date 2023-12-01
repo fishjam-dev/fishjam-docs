@@ -6,7 +6,8 @@ Read more about HLS [here](https://developer.apple.com/streaming/).
 ## Compatibility
 
 * [WebRTC](../peers/webrtc.md)
-* [RTSP](../components/rtsp.md)
+* [RTSP](./rtsp.md)
+* [File](./file.md)
 
 ## Requirements
 
