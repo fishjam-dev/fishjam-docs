@@ -17,14 +17,22 @@ Supports H264 for video and OPUS for audio files.
   it must be set to H264.
   See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_room)
   for more information.
-* The input file must be either raw H264 video or OPUS audio encapsulated in an Ogg container.
-  You can use the following ffmpeg commands to convert the media: `ffmpeg -i input_audio -acodec libopus output.opus` or `ffmpeg -i input_video -vcodec libx264 output.h264`
+* The input file can be either audio or video
+* The video must be encoded in raw H264 at 30 frames per second.
+  You can convert the video using the following ffmpeg command: 
+  `ffmpeg -i input_video -filter:v fps=30 -vcodec libx264 output.h264`
+* The audio must be monophonic, encoded in OPUS and encapsulated in Ogg container.
+  You can convert the audio using the following ffmpeg command:
+  `ffmpeg -i input_audio -ac 1 -acodec libopus output.ogg`
+* The input files must be located inside `$JF_RESOURCES_BASE_PATH/file_component_sources` path.
+  Take a look at `JF_RESOURCES_BASE_PATH` environment variable in the
+  [installation guide](../installation.md#environment-variables) for more info
 
 ## Configuration options
 
 **Required**
 
-* `filePath` (string) - path for media file, with either `.opus` or `.h264` extension
+* `filePath` (string) - path for media file, relative to the `$JF_RESOURCES_BASE_PATH/file_component_sources` directory, with either `.ogg` or `.h264` extension
 
 ## Env variables
 
