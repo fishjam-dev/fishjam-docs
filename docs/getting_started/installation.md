@@ -149,9 +149,9 @@ Generated if not provided.
 Defaults to `true`.<br/>
 Possible values are `true`, `false` or a space-separated list of allowed origins (wildcards are allowed). <br/>
 Example: `JF_CHECK_ORIGIN="https://example.com //another.com:888 //*.other.com"`
-* `JF_OUTPUT_BASE_PATH` - a base path where Jellyfish will save its artifacts.<br/>
-Defaults to `./jellyfish_output/`.<br/>
-When running via docker, the directory can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_output`.
+* `JF_RESOURCES_BASE_PATH` - a base path where Jellyfish multimedia files are stored<br/>
+Defaults to `./jellyfish_resources/`.<br/>
+When running via docker, the directory can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_resources`.
 * `JF_METRICS_IP` - an IP address to run metrics endpoint on.<br/>
 Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0.0.0` for Docker.
 * `JF_METRICS_PORT` - a port to run metrics endpoint on.<br/>
