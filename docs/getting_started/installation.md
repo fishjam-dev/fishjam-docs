@@ -143,6 +143,14 @@ For running Docker locally, it can simply be `localhost:8080`.
 Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0.0.0` for Docker.
 * `JF_PORT` - port to run the HTTP server on.<br/>
 Defaults to `5002` for development builds and `8080` for production builds (`mix release` or Docker).
+* `JF_SSL_KEY_PATH` - an absolute path to the SSL key.
+When both `JF_SSL_KEY_PATH` and `JF_SSL_CERT_PATH` are set, Jellyfish will
+run HTTPS server instead of HTTP one.
+An address where this server listens to is still configured via `JF_IP` and `JF_PORT`.
+* `JF_SSL_CERT_PATH` - an absolute path the the SSL certificate.
+When both `JF_SSL_KEY_PATH` and `JF_SSL_CERT_PATH` are set, Jellyfish will
+run HTTPS server instead of HTTP one.
+An address where this server listens to is still configured via `JF_IP` and `JF_PORT`.
 * `JF_SECRET_KEY_BASE` - used to sign/encrypt tokens generated for Peers.
 Generated if not provided.
 * `JF_CHECK_ORIGIN` - defines if Jellyfish will check the origin of incoming requests and socket connection. <br/>
