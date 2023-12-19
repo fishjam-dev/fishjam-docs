@@ -60,7 +60,7 @@ hls_options = %Jellyfish.Component.HLS{subscribe_mode: :manual}
   <TabItem value="python" label="Python">
 
 ```python
-SOON
+TODO
 ```
 
   </TabItem>
