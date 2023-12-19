@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # HLS
 
 Creates HLS playlist that is ready to be broadcasted via CDN.
@@ -26,12 +29,42 @@ To manage this recording, use the [Recording API](../../for_developers/api_refer
 The recording is also available as [HLS Video On Demand (VOD) API](../../for_developers/api_reference/rest_api#tag/recording/operation/getRecordingContent).
 * `targetWindowDuration` (positive integer, default: null) - represents the duration, in seconds, of the live streaming content to be
     maintained in a rolling window. If set to null (default), the entire stream will be available.
-* `subscribeMode` (string "manual" or "auto", default: "auto") - whether HLS component should automatically start consuming available tracks.
-When set to `manual`, HLS component has to be explicitly told to subscribe for a specific peer/component tracks using 
-the [Subscription API](../../for_developers/api_reference/rest_api#tag/hls/operation/subscribe_tracks).
 * `s3` (object, default: null) - AWS S3 credentials. If credentials are set, the stream will be saved to the specified bucket.
 This solution will automatically send your streams to an AWS bucket right after the end of your meeting.
+The uploaded stream will be accessible in the `/<room-id>` folder within the S3 bucket.
 For the exact credential structure see [Configuration API](../../for_developers/api_reference/rest_api#tag/room/operation/add_component).
+* `subscribeMode` (string "manual" or "auto", default: "auto") - whether HLS component should automatically start consuming available tracks.
+When set to `manual`, HLS component has to be explicitly told to subscribe to a specific peer/component tracks using 
+the [Subscription API](../../for_developers/api_reference/rest_api#tag/hls/operation/subscribe_hls_to).
+
+<Tabs>
+  <TabItem value="elixir" label="Elixir">
+
+```elixir
+server_address = "localhost:5002"
+server_api_token = "development"
+
+client = Jellyfish.Client.new(server_address: server_address, server_api_token: server_api_token)
+
+{:ok, room, _jellyfish_address} = Jellyfish.Room.create(client, video_codec: :h264)
+{:ok, peer, _peer_token} = Jellyfish.Room.add_peer(client, room.id, Jellyfish.Peer.WebRTC)
+
+hls_options = %Jellyfish.Component.HLS{subscribe_mode: :manual}
+{:ok, _component} = Jellyfish.Room.add_component(client, room.id, hls_options)
+
+:ok = Jellyfish.Room.hls_subscribe(client, room.id, [peer.id])
+```
+
+  </TabItem>
+
+  <TabItem value="python" label="Python">
+
+```python
+TODO
+```
+
+  </TabItem>
+</Tabs>
 
 ## Env variables
 
