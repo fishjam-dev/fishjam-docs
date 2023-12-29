@@ -82,13 +82,13 @@ To form a cluster using `NODES_LIST` strategy:
 Run the first Jellyfish:
 
 ```sh
-JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j1@127.0.0.1 mix phx.server
+JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j1@localhost mix phx.server
 ```
 
 Run the second Jellyfish
 
 ```sh
-JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j2@127.0.0.1 JF_DIST_NODES="j1@127.0.0.1" JF_PORT=4002 JF_METRICS_PORT=9468 mix phx.server
+JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j2@localhost JF_DIST_NODES="j1@localhost" JF_PORT=4002 JF_METRICS_PORT=9468 mix phx.server
 ```
 
 :::info
@@ -110,7 +110,6 @@ x-jellyfish-template: &jellyfish-template
   environment: &jellyfish-environment
     JF_SERVER_API_TOKEN: "development"
     JF_DIST_ENABLED: "true"
-    JF_DIST_MODE: "sname"
     JF_DIST_NODES: "j1@jellyfish1 j2@jellyfish2"
   restart: on-failure
 
@@ -152,8 +151,6 @@ ports
 
 When forming a cluster across multiple machines:
 * you have to take care of [Extra Network Configuration](#extra-network-configuration)
-* you also can't use `JF_DIST_MODE="sname"` as you have to name Jellyfish nodes using their publicly available IP address
-or domain names (see `JF_DIST_NODE_NAME` and `JF_DIST_MODE`)
 * you can't simulate this setup locally as you won't be able to expose two EMPD ports on the same machine.
 See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution) for more information.
 
@@ -166,8 +163,9 @@ To form a cluster using `DNS` strategy:
 
 1. Enable distribution mode with `JF_DIST_ENABLED=true`
 1. Chose `DNS` strategy with `JF_DIST_STRATEGY_NAME`.
+1. Set `JF_DIST_MODE` to `name`.
 1. Give your node a name with `JF_DIST_NODE_NAME`.<br /> 
-**Important** It has to be in the form of `<nodename>@<ip_address>`
+**Important** It has to be in the form of `<nodename>@<hostname>`
 where all Jellyfishes MUST have the same `<nodename>`.
 1. Specify a query under which Jellyfishes are register in DNS with `JF_DIST_QUERY`. <br />
 **Important** Jellyfish does not register itself in DNS.
@@ -175,19 +173,18 @@ It is user responsibility to enusre that your Jellyfish is registered in DNS und
 
 ### Running with Docker
 
-This simple docker compose file sets a cluster of two Jellyfishes and starts a DNS with use of dnsmasq.
+This simple docker compose file sets a cluster of two Jellyfishes using internal Docker DNS.
 
 ```yml
 version: "3"
-
 x-jellyfish-template: &jellyfish-template
   build: .
   environment: &jellyfish-environment
     JF_SERVER_API_TOKEN: "development"
     JF_DIST_ENABLED: "true"
     JF_DIST_STRATEGY_NAME: "DNS"
+    JF_DIST_MODE: "name"
   restart: on-failure
-
 services:
   app1:
     <<: *jellyfish-template
@@ -195,57 +192,34 @@ services:
       <<: *jellyfish-environment
       JF_HOST: "localhost:4001"
       JF_PORT: 4001
-      JF_DIST_NODE_NAME: app@172.28.1.2
       JF_DIST_QUERY: app.dns-network
     ports:
       - 4001:4001
     networks:
-      dns-network:
-        ipv4_address: 172.28.1.2
+      default:
         aliases:
           - app.dns-network
-    dns:
-      - 172.28.1.4:5353
 
   app2:
-    container_name: name
     <<: *jellyfish-template
     environment:
       <<: *jellyfish-environment
       JF_HOST: "localhost:4002"
       JF_PORT: 4002
-      JF_DIST_NODE_NAME: app@172.28.1.3
       JF_DIST_QUERY: app.dns-network
     ports:
       - 4002:4002
     networks:
-      dns-network:
-        ipv4_address: 172.28.1.3
+      default:
         aliases:
           - app.dns-network
-    dns:
-      - 172.28.1.4:5353
-
-  dnsmasq:
-    image: andyshinn/dnsmasq:2.78
-    volumes:
-      - /etc/resolv.conf:/etc/resolv.dnsmasq.conf
-    command: -d -q --no-hosts --no-resolv --no-poll --server 127.0.0.11 --listen-address 0.0.0.0 --port 5353 --log-queries --log-facility=- --address=/./127.0.0.11
-    networks:
-      dns-network:
-        ipv4_address: 172.28.1.4
-        aliases:
-          - dnsmasq
-
-networks:
-  dns-network:
-    ipam:
-      config:
-        - subnet: 172.28.1.0/24
 ```
 
 Because we run Jellyfishes in the same Docker network we don't need to export EPMD (`4369`) or distribution (`9000`)
 ports.
+We also didn't have to explicitly set `JF_DIST_NODE_NAME`.
+The default value (`jellyfish@(hostname)`) is automatically resolved to `jellyfish@<ip_address>`
+and is routable from other nodes in the docker network.
 
 ## Verifying that a cluster has been created
 

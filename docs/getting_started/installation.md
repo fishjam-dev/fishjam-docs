@@ -181,20 +181,24 @@ Defaults to `false`.
 Possible values are `DNS` or `NODES_LIST`. 
 Defaults to `NODES_LIST`.
 * `JF_DIST_NODE_NAME` - Node name used in a cluster.
+Defaults to `jellyfish@(hostname)`. <br/>
 It consists of two parts - nodename@hostname.
 The first part identifies a node on a single machine and can
 be any string.
-The second part identifies the host machine and has to be an 
-ip address or FQDN of a machine Jellyfish runs on.
-If you run a cluster using `NODES_LIST` strategy on a single machine 
-or in the same docker network and you don't want to use IP addresses or FQDN as hostnames, 
-you can use short names (see `JF_DIST_MODE`).
+The second part identifies the host machine jellyfish runs on and has to be resolvable.
+Its format depends on `JF_DIST_MODE`.
+If `JF_DIST_MODE` is set to `name`, the `hostname` has to be an IP address or FQDN.
+If `JF_DIST_MODE` is set to `sname`, the `hostname` can be any string.
 If you run a cluster using `DNS` strategy, every Jellyfish instance must have `nodename` set to the same value.
+If `hostname` is not an IP address, it will be automatically resolved as DNS strategy requires
+node names to use IP addresses.
+This also means that `DNS` strategy has to be run with `JF_DIST_MODE` set to `name`.
+See our [docker-compose-epmd.yaml](https://github.com/jellyfish-dev/jellyfish/blob/main/docker-compose-epmd.yaml) or [docker-compose-dns.yaml](https://github.com/jellyfish-dev/jellyfish/blob/main/docker-compose-dns.yaml), which we use in our integration tests or refer to [Cluster](../cluster.md) section for examples.
 * `JF_DIST_MODE` - distribution mode - can be `name` or `sname`.<br/>
-Defaults to `name`.<br/>
+Defaults to `sname`.<br/>
 When using `name`, your hostname has to be an IP address or FQDN of a machine Jellyfish runs on.
 When using `sname`, your hostname can be any string.
-See our [docker-compose.yaml](https://github.com/jellyfish-dev/jellyfish/blob/main/docker-compose.yaml), which we use in our integration tests for an example.
+See `JF_DIST_NODE_NAME` for more information.
 * `JF_DIST_COOKIE` - used to group Jellyfishes in a cluster.<br/>
 Defaults to `jellyfish_cookie`.<br/>
 Use different cookies to create multiple clusters on the same machine.<br/>
