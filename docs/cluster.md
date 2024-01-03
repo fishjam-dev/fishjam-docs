@@ -151,6 +151,8 @@ ports
 
 When forming a cluster across multiple machines:
 * you have to take care of [Extra Network Configuration](#extra-network-configuration)
+* you also can't use `JF_DIST_MODE="sname"` as you have to name Jellyfish nodes using their publicly available IP address
+or domain names (see `JF_DIST_NODE_NAME` and `JF_DIST_MODE`)
 * you can't simulate this setup locally as you won't be able to expose two EMPD ports on the same machine.
 See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution) for more information.
 
