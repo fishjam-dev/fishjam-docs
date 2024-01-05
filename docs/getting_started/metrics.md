@@ -10,8 +10,6 @@ See `JF_METRICS_IP` and `JF_METRICS_PORT` for configuration options.
 | `jellyfish_traffic_egress_webrtc_total_bytes`  |           | Total WebRTC traffic sent                                           |
 | `jellyfish_traffic_ingress_http_total_bytes`   |           | Total HTTP traffic received                                         |
 | `jellyfish_traffic_egress_http_total_bytes`    |           | Total HTTP traffic sent                                             |
-| `jellyfish_traffic_ingress_total_bytes`        |           | Total traffic received                                              |
-| `jellyfish_traffic_egress_total_bytes`         |           | Total traffic sent                                                  |
 | `jellyfish_rooms`                              |           | Amount of rooms currently present in Jellyfish                      |
 | `jellyfish_room_peers`                         | `room_id` | Amount of peers currently present in a given room                   |
 | `jellyfish_room_peer_time_total_seconds`       | `room_id` | Total peer time accumulated for a given room                        |
