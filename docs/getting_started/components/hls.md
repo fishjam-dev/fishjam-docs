@@ -60,7 +60,20 @@ hls_options = %Jellyfish.Component.HLS{subscribe_mode: :manual}
   <TabItem value="python" label="Python">
 
 ```python
-TODO
+from jellyfish import RoomApi, ComponentOptionsHLS, PeerOptionsWebRTC
+
+server_address = "localhost:5002"
+server_api_token = "development"
+
+room_api = RoomApi(server_address='localhost:5002', server_api_token='development')
+
+jellyfish_address, room = room_api.create_room(video_codec='h264')
+peer_token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+
+hls_options = ComponentOptionsHLS(subscribe_mode="manual")
+component_hls = room_api.add_component(room.id, options=hls_options)
+
+room_api.hls_subscribe(room.id, [peer.id])
 ```
 
   </TabItem>
