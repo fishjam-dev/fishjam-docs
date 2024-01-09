@@ -8,6 +8,7 @@ Read more about WebRTC [here](https://webrtc.org/).
 
 * [HLS](../components/hls.md)
 * [RTSP](../components/rtsp.md)
+* [File](../components/file.md)
 
 ## Configuration options
 

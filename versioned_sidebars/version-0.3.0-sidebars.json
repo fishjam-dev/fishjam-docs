@@ -35,7 +35,8 @@
           "collapsed": true,
           "items": [
             "getting_started/components/hls",
-            "getting_started/components/rtsp"
+            "getting_started/components/rtsp",
+            "getting_started/components/file"
           ]
         }
       ]
@@ -45,9 +46,17 @@
       "label": "Tutorials",
       "collapsed": true,
       "items": [
-        "tutorials/dashboard",
-        "tutorials/simple-react-app",
-        "tutorials/react-native"
+        {
+          "type": "category",
+          "label": "Minimal Working Examples",
+          "collapsible": false,
+          "collapsed": false,
+          "items": [
+            "tutorials/dashboard",
+            "tutorials/simple-react-app",
+            "tutorials/react-native"
+          ]
+        }
       ]
     },
     "cluster",
@@ -62,9 +71,23 @@
     },
     {
       "type": "category",
+      "label": "Benchmarks",
+      "collapsed": true,
+      "link": {
+        "type": "doc",
+        "id": "benchmarks"
+      },
+      "items": [
+        "benchmarks/hls",
+        "benchmarks/webrtc"
+      ]
+    },
+    {
+      "type": "category",
       "label": "For Developers",
       "items": [
         "for_developers/design_docs",
+        "for_developers/metrics_design",
         {
           "type": "category",
           "label": "API Reference",
@@ -78,6 +101,7 @@
           ]
         }
       ]
-    }
+    },
+    "release_notes"
   ]
 }

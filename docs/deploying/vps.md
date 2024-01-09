@@ -172,7 +172,7 @@ We prepared a template *cloud-config* that will configure your server and start 
         -p 50000-50100:50000-50100/udp \
         -p 5002:5002 \
         --env-file /opt/jellyfish/env-file \
-        -v /opt/jellyfish/jellyfish_output:/app/jellyfish_output \
+        -v /opt/jellyfish/jellyfish_resources:/app/jellyfish_resources \
         ghcr.io/jellyfish-dev/jellyfish:$JELLYFISH_VERSION",
       ]
   ```
