@@ -87,7 +87,7 @@ We prepared a template *cloud-config* that will configure your server and start 
       owner: jellyfish:jellyfish
 
   runcmd:
-    - export JELLYFISH_VERSION=0.2.0
+    - export JELLYFISH_VERSION=0.2.1
     - export JELLYFISH_DOMAIN=mydomain.example.com
     - export LETSENCRYPT_EMAIL=my@email.com
     - export SERVER_API_TOKEN=test_token
