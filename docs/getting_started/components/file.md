@@ -18,7 +18,8 @@ Supports H264 for video and OPUS for audio files.
   See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_room)
   for more information.
 * The input file can be either audio or video
-* The video must be encoded in raw H264 at 30 frames per second.
+* The video must be encoded in raw H264. The framerate can be specified through `framerate` option. 
+  If not specified 30 is set as a default.
   You can convert the video using the following ffmpeg command: 
   `ffmpeg -i input_video -filter:v fps=30 -vcodec libx264 output.h264`
 * The audio must be monophonic, encoded in OPUS and encapsulated in Ogg container.
