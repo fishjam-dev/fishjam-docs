@@ -130,6 +130,7 @@ Defaults to `development` for development builds.
 * `JF_HOST` - defines how Jellyfish should be seen from the outside.<br/>
 Defaults to `JF_IP:JF_PORT`.<br/>
 It can be in the form of `ip:port`, `domain:port` or simply `domain`.
+Additionally, you can specify a path (e.g. `ip:port/path`, `domain:port/path`, `domain/path`).
 Useful when hosting Jellyfish behind proxy.
 It is returned e.g. when creating a new room.
 When running with Docker, `JF_IP` is set to `0.0.0.0`
