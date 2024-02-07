@@ -262,3 +262,7 @@ To see the output when the process is finished (successfully or not).
 
 To see how (or if) your Jellyfish server is working you can test it by connecting our [Jellyfish Dashboard](https://jellyfish-dev.github.io/jellyfish-dashboard/) with your server.
 Detailed instructions on how to use Jellyfish Dashboard can be found [here](../tutorials/dashboard.mdx).
+
+:::tip
+You can use the `/health` endpoint of Jellyfish to see the status of its services. Read more [here](../for_developers/api_reference/rest_api.md)
+:::
