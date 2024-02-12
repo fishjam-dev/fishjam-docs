@@ -19,15 +19,19 @@ Read more about WebRTC [here](https://webrtc.org/).
 ## Env variables
 
 * `JF_WEBRTC_USED` - has to be `true` if WebRTC peers will be used
+
 * `JF_WEBRTC_TURN_LISTEN_IP` - the IP address on which TURN servers will listen. 
 By default set to `127.0.0.1`.
 When running Jellyfish via Docker, this MUST be set to `0.0.0.0`, even for local tests.
+
 * `JF_WEBRTC_TURN_IP` - the IP address, under which TURN will present itself to the clients. By default set to `127.0.0.1`.
 When running Jellyfish via Docker, this MUST be set to real (non-loopback) address, even for local tests.
+
 * `JF_WEBRTC_TURN_PORT_RANGE` - port range, where UDP TURN will try to open ports. By default set to `50000-59999`.
 The bigger the range is, the more users server will be able to handle. 
 Useful when not using the `--network=host` option to limit the UDP ports 
 used only to ones published from a Docker container.
+
 * `JF_WEBRTC_TURN_TCP_PORT` - port number of TCP TURN
 
 ## Example Docker commands

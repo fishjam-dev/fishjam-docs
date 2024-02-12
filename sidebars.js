@@ -35,12 +35,7 @@ const sidebars = {
         "getting_started/notifications",
         "getting_started/metrics",
         "getting_started/sdks",
-        {
-          type: "category",
-          label: "Peers",
-          collapsed: true,
-          items: ["getting_started/peers/webrtc"],
-        },
+        "getting_started/room",
         {
           type: "category",
           label: "Components",
@@ -50,6 +45,12 @@ const sidebars = {
             "getting_started/components/rtsp",
             "getting_started/components/file"
           ],
+        },
+        {
+          type: "category",
+          label: "Peers",
+          collapsed: true,
+          items: ["getting_started/peers/webrtc"],
         },
       ],
     },

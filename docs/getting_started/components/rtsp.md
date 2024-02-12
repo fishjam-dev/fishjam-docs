@@ -28,9 +28,12 @@ Read more about RTSP [here](https://www.rfc-editor.org/rfc/rfc2326.html).
 **Optional**
 
 * `rtpPort` (integer 1..65535, default: 20000) - Local port RTP stream will be received at
+
 * `reconnectDelay` (integer 0.., default: 15000) - Delay (in ms) between successive reconnect attempts
+
 * `keepAliveInterval` (integer 0.., default: 15000) - Interval (in ms) in which keep-alive
   RTSP messages will be sent to the remote stream source
+
 * `pierceNat` (boolean, default: true) - Whether to attempt to create client-side NAT binding
   by sending an empty datagram from client to source, after the completion of RTSP setup
 
