@@ -154,9 +154,27 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['elixir']
       },
-    }),
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'MKQW7UWJGK',
 
-  plugins: [require.resolve('docusaurus-lunr-search')],
+        // Public API key: it is safe to commit it
+        apiKey: '4b226ecf0912d4f136ebb9ac4f01b4d5',
+
+        indexName: 'DEFAULT_INDEX',
+
+        // Optional: see doc section below
+        contextualSearch: true,
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+
+        //... other Algolia params
+      },
+    }),
 };
 
 module.exports = config;
