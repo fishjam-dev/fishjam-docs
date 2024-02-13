@@ -161,7 +161,7 @@ const config = {
         // Public API key: it is safe to commit it
         apiKey: '4b226ecf0912d4f136ebb9ac4f01b4d5',
 
-        indexName: 'DEFAULT_INDEX',
+        indexName: 'jellyfish',
 
         // Optional: see doc section below
         contextualSearch: true,
@@ -171,8 +171,6 @@ const config = {
 
         // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: 'search',
-
-        //... other Algolia params
       },
     }),
 };
