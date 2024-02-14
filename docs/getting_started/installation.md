@@ -127,6 +127,7 @@ set any of them.
 
 * `JF_SERVER_API_TOKEN` - token for authorizing HTTP requests.<br/>
 Defaults to `development` for development builds.
+
 * `JF_HOST` - defines how Jellyfish should be seen from the outside.<br/>
 Defaults to `JF_IP:JF_PORT`.<br/>
 It can be in the form of `ip:port`, `domain:port` or simply `domain`.
@@ -142,29 +143,38 @@ For running Docker locally, it can simply be `localhost:8080`.
 
 * `JF_IP` - an ip address to run the HTTP server on.<br/>
 Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0.0.0` for Docker.
+
 * `JF_PORT` - port to run the HTTP server on.<br/>
 Defaults to `5002` for development builds and `8080` for production builds (`mix release` or Docker).
+
 * `JF_SSL_KEY_PATH` - an absolute path to the SSL key.
 When both `JF_SSL_KEY_PATH` and `JF_SSL_CERT_PATH` are set, Jellyfish will
 run HTTPS server instead of HTTP one.
 An address where this server listens to is still configured via `JF_IP` and `JF_PORT`.
+
 * `JF_SSL_CERT_PATH` - an absolute path the the SSL certificate.
 When both `JF_SSL_KEY_PATH` and `JF_SSL_CERT_PATH` are set, Jellyfish will
 run HTTPS server instead of HTTP one.
 An address where this server listens to is still configured via `JF_IP` and `JF_PORT`.
+
 * `JF_SECRET_KEY_BASE` - used to sign/encrypt tokens generated for Peers.
 Generated if not provided.
+
 * `JF_CHECK_ORIGIN` - defines if Jellyfish will check the origin of incoming requests and socket connection. <br/>
 Defaults to `true`.<br/>
 Possible values are `true`, `false` or a space-separated list of allowed origins (wildcards are allowed). <br/>
 Example: `JF_CHECK_ORIGIN="https://example.com //another.com:888 //*.other.com"`
+
 * `JF_RESOURCES_BASE_PATH` - a base path where Jellyfish multimedia files are stored<br/>
 Defaults to `./jellyfish_resources/`.<br/>
 When running via docker, the directory can be mounted as `-v $(pwd)/host_directory:/app/jellyfish_resources`.
+
 * `JF_METRICS_IP` - an IP address to run metrics endpoint on.<br/>
 Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0.0.0` for Docker.
+
 * `JF_METRICS_PORT` - a port to run metrics endpoint on.<br/>
 Defaults to `9568`.
+
 * `MIX_ENV` - defines compilation environment.
 This variable takes effect only when running from the source.
 Docker images are always built with `MIX_ENV=prod`.
@@ -178,9 +188,11 @@ Possible values are:
 
 * `JF_DIST_ENABLED` - whether to run Jellyfish in a cluster.<br/>
 Defaults to `false`.
+
 * `JF_DIST_STRATEGY_NAME` - specify which clustering strategy to use.<br/>
 Possible values are `DNS` or `NODES_LIST`. 
 Defaults to `NODES_LIST`.
+
 * `JF_DIST_NODE_NAME` - Node name used in a cluster.
 Defaults to `jellyfish@(hostname)`. <br/>
 It consists of two parts - nodename@hostname.
@@ -195,21 +207,25 @@ If `hostname` is not an IP address, it will be automatically resolved as DNS str
 node names to use IP addresses.
 This also means that `DNS` strategy has to be run with `JF_DIST_MODE` set to `name`.
 See our [docker-compose-epmd.yaml](https://github.com/jellyfish-dev/jellyfish/blob/main/docker-compose-epmd.yaml) or [docker-compose-dns.yaml](https://github.com/jellyfish-dev/jellyfish/blob/main/docker-compose-dns.yaml), which we use in our integration tests or refer to [Cluster](../cluster.md) section for examples.
+
 * `JF_DIST_MODE` - distribution mode - can be `name` or `sname`.<br/>
 Defaults to `sname`.<br/>
 When using `name`, your hostname has to be an IP address or FQDN of a machine Jellyfish runs on.
 When using `sname`, your hostname can be any string.
 See `JF_DIST_NODE_NAME` for more information.
+
 * `JF_DIST_COOKIE` - used to group Jellyfishes in a cluster.<br/>
 Defaults to `jellyfish_cookie`.<br/>
 Use different cookies to create multiple clusters on the same machine.<br/>
 **Important**: cookie does not provide any cryptographic security.
 Its only purpose is to prevent a node from connecting to a cluster with which 
 it is not intended to communicate.
+
 * `JF_DIST_MIN_PORT`- minimal port used by Jellyfish when forming a cluster
 (connecting to other Jellyfishes).<br/>
 Defaults to `9000` when running with Docker.<br/>
 Only available when running with Docker or `mix release`.
+
 * `JF_DIST_MAX_PORT`- maximal port used by Jellyfish when forming a cluster
 (connecting to other Jellyfishes).<br/>
 Defaults to `9000` when running with Docker.<br/>
@@ -228,6 +244,7 @@ this one was connected to.
 ###### Distribution DNS specific:
 * `JF_DIST_QUERY` - query sent to DNS to discover other Jellyfishes. <br/>
 Returned list of IPs from DNS is used for creating distribution node name in the format `<nodename>@<IP_ADDRESS>`.  
+
 * `JF_DIST_POLLING_INTERVAL` - DNS polling interval in ms. <br/> 
 Default value is 5000.
 
