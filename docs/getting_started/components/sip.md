@@ -2,9 +2,7 @@
 
 Makes a SIP connection with the specified provider.
 From this connection it consumes a remote RTP stream with G711 A-law audio
-and publishes through this connection all audio tracks from the [Room](REFLINK_TO_ROOM).
-
-Supports OPUS streams only.
+and publishes through this connection all audio tracks from the [Room](../room.md).
 
 Read more about SIP [here](https://www.rfc-editor.org/rfc/rfc3261.html).
 
@@ -25,6 +23,7 @@ SIP Endpoint will be published.
 **Required**
 
 * `registrarCredentials` (object) - registrar credentials which allows to make a connection with a SIP provider.
+  For the exact credential structure see [Configuration API](../../for_developers/api_reference/rest_api#tag/room/operation/add_component).
 
 ## Env variables
 

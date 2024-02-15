@@ -43,7 +43,8 @@ const sidebars = {
           items: [
             "getting_started/components/hls",
             "getting_started/components/rtsp",
-            "getting_started/components/file"
+            "getting_started/components/file",
+            "getting_started/components/sip"
           ],
         },
         {

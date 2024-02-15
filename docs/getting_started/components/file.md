@@ -9,7 +9,7 @@ Supports H264 for video and OPUS for audio files.
 * [WebRTC](../peers/webrtc.md)
 * [HLS](./hls.md)
 * [RTSP](./rtsp.md)
-* [SIP](../components/sip.md)
+* [SIP](./sip.md)
 
 ## Requirements
 * If the File component publishes a video, it does so in the H264 standard.
