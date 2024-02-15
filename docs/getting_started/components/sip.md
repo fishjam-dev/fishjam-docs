@@ -1,6 +1,6 @@
 # SIP
 
-Makes a SIP connection with specified provider.
+Makes a SIP connection with the specified provider.
 From this connection it consumes a remote RTP stream with G711 A-law audio
 and publishes through this connection all audio tracks from the [Room](REFLINK_TO_ROOM).
 
