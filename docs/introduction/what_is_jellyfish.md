@@ -29,4 +29,4 @@ Jellyfish supports following protocols:
 * [WebRTC](../getting_started/peers/webrtc.md) - used for creating real-time video conferencing systems
 * [HLS](../getting_started/components/hls.md) - allows for implementing broadcasting solutions
 * [RTSP](../getting_started/components/rtsp.md) - very often used for consuming streams from IP cameras
-* [SIP](../getting_started/components/sip.md) - used for making VoIP call
+* [SIP](../getting_started/components/sip.md) - used for making VoIP calls
