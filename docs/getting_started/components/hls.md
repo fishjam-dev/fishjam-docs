@@ -11,6 +11,7 @@ Read more about HLS [here](https://developer.apple.com/streaming/).
 * [WebRTC](../peers/webrtc.md)
 * [RTSP](./rtsp.md)
 * [File](./file.md)
+* [SIP](./sip.md)
 
 ## Requirements
 

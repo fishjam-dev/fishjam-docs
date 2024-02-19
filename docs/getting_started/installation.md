@@ -117,7 +117,7 @@ Environment variables are split into two groups:
 * general ones - presented below
 * peer/component-specific - each Peer and Component can expose its own environment variables.
 They are always listed in a Peer/Component description.
-See the list of [Peers](./peers/webrtc.md) and [Components](./components/hls.md).
+See for example the list of [Peers](./peers/webrtc.md) and [SIP Component](./components/sip.md).
 
 Below there are general, Jellyfish environment variables.
 If you are running Jellyfish in development, you don't need to
