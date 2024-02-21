@@ -175,6 +175,26 @@ Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0
 * `JF_METRICS_PORT` - a port to run metrics endpoint on.<br/>
 Defaults to `9568`.
 
+* `JF_STRUCTURED_LOGGING` - whether to enable JSON-structured logging to stdout.<br/>
+Defaults to `false`.<br/>
+Example log with and without this option:
+<Tabs>
+  <TabItem value="json-log-on" label="true" default>
+
+  ```json
+  {"time":"2024-02-20T17:32:32.448Z","severity":"info","message":"Initialize room","metadata":{"room_id":"40"}}
+  ```
+
+  </TabItem>
+  <TabItem value="json-log-off" label="false" default>
+
+  ```
+  17:32:32.448 room_id=40 [info] Initialize room
+  ```
+
+  </TabItem>
+</Tabs>
+
 * `MIX_ENV` - defines compilation environment.
 This variable takes effect only when running from the source.
 Docker images are always built with `MIX_ENV=prod`.
