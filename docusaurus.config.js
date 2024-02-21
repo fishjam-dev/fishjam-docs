@@ -70,6 +70,9 @@ const config = {
     ],
   ],
 
+  themes: [
+    'docusaurus-theme-github-codeblock'
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -172,6 +175,12 @@ const config = {
         // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: 'search',
       },
+      // Github codeblock theme configuration
+      codeblock: {
+        showGithubLink: true,
+        githubLinkLabel: 'View on GitHub',
+        showRunmeLink: false
+      }
     }),
 };
 

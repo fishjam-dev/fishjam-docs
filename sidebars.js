@@ -71,6 +71,7 @@ const sidebars = {
             "tutorials/react-native",
           ],
         },
+        "tutorials/server_sdk_examples"
       ],
     },
     "cluster",
