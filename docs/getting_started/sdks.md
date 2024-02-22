@@ -6,8 +6,10 @@ See [here](./architecture.md) for more information about client and server SDKs.
 
 | SDK | Resources |
 | --- | --------- |
-| [Elixir](https://github.com/jellyfish-dev/elixir_server_sdk) | [Code examples](https://github.com/jellyfish-dev/elixir_server_sdk/tree/master/examples) <br/> [RTSP to HLS conversion](https://github.com/jellyfish-dev/jellyfish/tree/ad1cfb6eebc5b0d7bdda153dcba6d333904f9d69/examples) |
-| [Python](https://github.com/jellyfish-dev/python-server-sdk) | |
+| [Elixir](https://github.com/jellyfish-dev/elixir_server_sdk) | [Code examples](https://github.com/jellyfish-dev/elixir_server_sdk/tree/master/examples) |
+| [Python](https://github.com/jellyfish-dev/python-server-sdk) | [Code examples](https://github.com/jellyfish-dev/python-server-sdk/tree/main/examples) |
+
+For more examples, see [Server SDK Examples](../tutorials/server_sdk_examples.md).
 
 ## Client SDKs
 
