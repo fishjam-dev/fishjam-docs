@@ -5,4 +5,4 @@ hide_table_of_contents: true
 
 import ApiDocMdx from '@theme/ApiDocMdx';
 
-<ApiDocMdx id="jellyfish-rest-api" />
+<ApiDocMdx id="jellyfish-rest-apix-0_2_1" />

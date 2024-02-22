@@ -60,6 +60,16 @@ const config = {
             spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/main/openapi.yaml',
             route: '/examples/using-single-yaml/',
           },
+          {
+            id: 'jellyfish-rest-apix-0_2_1',
+            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/v0.2.1/openapi.yaml',
+            route: '/examples/using-single-yaml-0_2_1/',
+          },
+          {
+            id: 'jellyfish-rest-apix-0_3_0',
+            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/v0.3.0/openapi.yaml',
+            route: '/examples/using-single-yaml-0_3_0/',
+          }
         ],
         // Theme Options for modifying how redoc renders them
         theme: {
