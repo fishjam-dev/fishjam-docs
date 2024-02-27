@@ -33,7 +33,6 @@ We follow [the versioning system provided by docusaurus](https://docusaurus.io/d
 
 To create a new docs version:
 * make sure that `sidebars.js` and files inside `docs/` directory are up-to-date and ready to be frozen
-* create a new directory `versioned_docs/version-1.0.0`
 * run `npm run docusaurus docs:version 1.0.0`
 
 ## Copyright and License
