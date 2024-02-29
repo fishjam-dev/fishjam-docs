@@ -11,7 +11,7 @@ docker run -p 50000-50050:50000-50050/udp \
            -e JF_WEBRTC_TURN_IP=<your ip address> \
            -e JF_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
            -e JF_SERVER_API_TOKEN=development \
-           ghcr.io/jellyfish-dev/jellyfish:0.3.0
+           ghcr.io/jellyfish-dev/jellyfish:0.4.0
 ```
 
 Make sure to set `JF_WEBRTC_TURN_IP` and `JF_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the Jellyfish.
