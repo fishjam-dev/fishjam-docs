@@ -16,10 +16,10 @@
 
 ### Bugfixes:
 * fixed duplicated `peer_disconnected` notification
-* fixed prometheus metrics not being reset - now, after room is removed, its metrics are set to 0 - dopytać o interwał
+* fixed prometheus metrics not being reset - now, after room is removed, its metrics are set to 0
 * fixed starting logs not being displayed when JF couldn't run in a distributed mode - now, even if JF crashes because of distribution-related problems, config logs will be displayed (i.e. JF version, WebRTC config, distribution config)
 * fixed removing component, which crashed from JF state (thanks to @gfodor) 
-* fixed removing component, which finisehd its work from JF state
+* fixed removing component, which finished its work from JF state
 * fixed authorization not required for /hls and /recording endpoints **[BREAKING]**
 * fixed authorization information in OpenAPI spec - previously, all endpoints were marked as requiring authorization, even if they didn't actually need it
 
@@ -28,7 +28,7 @@
 
 ### Features:
 * added `persistent` and `targetWindowDuration` options for HLS component
-* added VOD HLS (a.k.a HLS recordings) - allows to play out HLS stream recorded with `persistent` set to `true`
+* added VOD HLS (aka HLS recordings) - allows to play out HLS stream recorded with `persistent` set to `true`
 * added support for uploading HLS recordings to S3
 * added manual subscription mode for HLS - from now, you can manually instruct HLS component when it should start recording tracks from a given peer or component
 * added File component, which allows for publishing tracks from a file
