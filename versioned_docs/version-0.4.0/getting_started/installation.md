@@ -23,26 +23,15 @@ git clone https://github.com/jellyfish-dev/jellyfish.git
 **Install native dependencies**
 
 <Tabs>
-  <TabItem value="mac-intel" label="macOS Intel" default>
+  <TabItem value="mac-m1" label="macOS Intel/Apple Silicon" default>
   These instructions assume you have Homebrew installed. You can get it <a href="https://brew.sh">here</a>.
 
   ```
   brew install srtp libnice clang-format ffmpeg opus pkg-config
-  export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
-  export CFLAGS="-I/usr/local/opt/openssl@1.1/include/"
-  export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include/"
-  export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
-  ```
-
-  </TabItem>
-  <TabItem value="mac-m1" label="macOS Apple Silicon" default>
-  These instructions assume you have Homebrew installed. You can get it <a href="https://brew.sh">here</a>.
-
-  ```
-  brew install srtp libnice clang-format ffmpeg opus
-  export C_INCLUDE_PATH=/opt/homebrew/Cellar/libnice/0.1.18/include:/opt/homebrew/Cellar/opus/1.3.1/include:/opt/homebrew/Cellar/openssl@1.1/1.1.1l_1/include
-  export LIBRARY_PATH=/opt/homebrew/Cellar/opus/1.3.1/lib
-  export PKG_CONFIG_PATH=/opt/homebrew/Cellar/openssl@1.1/1.1.1l_1/lib/pkgconfig/
+  export C_INCLUDE_PATH=$(brew --prefix libnice)/include:$(brew --prefix opus)/include:$(brew --prefix openssl)/include
+  export LIBRARY_PATH=$(brew --prefix opus)/lib:$(brew --prefix openssl)/lib
+  export LD_LIBRARY_PATH=$(brew --prefix opus)/lib:$(brew --prefix openssl)/lib
+  export PKG_CONFIG_PATH=$(brew --prefix openssl)/lib/pkgconfig
   ```
 
   </TabItem>
