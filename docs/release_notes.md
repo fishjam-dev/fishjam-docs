@@ -2,7 +2,7 @@
 
 ## 0.4.0 - 27.02.2024
 
-**IMPORTANT** This version might require updating env vars when running from source on macOS.
+**IMPORTANT** This version might require clearing or updating env vars when running from source on macOS.
 See [here](./getting_started/installation.md#building-from-source).
 
 ### Features:
@@ -14,7 +14,7 @@ See [here](./getting_started/installation.md#building-from-source).
 * added new server notifications: `PeerMetadataUpdated`, `TrackAdded`, `TrackRemoved`, `TrackMetadataUpdated`
 * added peerless room purge option - after predefined amount of time, if a room is empty, it will be automatically closed. This behaviour is disabled by default. See [here](./getting_started/room#configuration-options).
 * added [SIP component](./getting_started/components/sip). This might require 
-updating env vars when running from source on macOS. See [here](./getting_started/installation.md#building-from-source). **[BREAKING]**
+clearing or updating env vars when running from source on macOS. See [here](./getting_started/installation.md#building-from-source). **[BREAKING]**
 * added basic structured logging that can be enabled with [`JF_STRUCTURED_LOGGING`](./getting_started/installation#optional)
 * added python RTSP -> HLS example
 

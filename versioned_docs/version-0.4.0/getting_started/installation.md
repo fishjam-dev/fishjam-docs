@@ -28,6 +28,7 @@ git clone https://github.com/jellyfish-dev/jellyfish.git
 
   ```
   brew install srtp clang-format ffmpeg opus pkg-config
+  # additionally, you might need to export these env vars
   export C_INCLUDE_PATH=$(brew --prefix opus)/include:$(brew --prefix openssl)/include
   export LIBRARY_PATH=$(brew --prefix opus)/lib:$(brew --prefix openssl)/lib
   export PKG_CONFIG_PATH=$(brew --prefix openssl)/lib/pkgconfig
