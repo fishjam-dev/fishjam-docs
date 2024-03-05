@@ -23,14 +23,13 @@ git clone https://github.com/jellyfish-dev/jellyfish.git
 **Install native dependencies**
 
 <Tabs>
-  <TabItem value="mac-m1" label="macOS Intel/Apple Silicon" default>
+  <TabItem value="mac-os" label="macOS Intel/Apple Silicon" default>
   These instructions assume you have Homebrew installed. You can get it <a href="https://brew.sh">here</a>.
 
   ```
-  brew install srtp libnice clang-format ffmpeg opus pkg-config
-  export C_INCLUDE_PATH=$(brew --prefix libnice)/include:$(brew --prefix opus)/include:$(brew --prefix openssl)/include
+  brew install srtp clang-format ffmpeg opus pkg-config
+  export C_INCLUDE_PATH=$(brew --prefix opus)/include:$(brew --prefix openssl)/include
   export LIBRARY_PATH=$(brew --prefix opus)/lib:$(brew --prefix openssl)/lib
-  export LD_LIBRARY_PATH=$(brew --prefix opus)/lib:$(brew --prefix openssl)/lib
   export PKG_CONFIG_PATH=$(brew --prefix openssl)/lib/pkgconfig
   ```
 
@@ -38,7 +37,7 @@ git clone https://github.com/jellyfish-dev/jellyfish.git
   <TabItem value="ubuntu" label="Ubuntu" default>
 
   ```
-  sudo apt install pkg-config libsrtp2-dev libnice-dev libavcodec-dev libavformat-dev libavutil-dev libopus-dev libfdk-aac-dev
+  sudo apt install pkg-config libsrtp2-dev libavcodec-dev libavformat-dev libavutil-dev libopus-dev libfdk-aac-dev
   ```
 
   </TabItem>
