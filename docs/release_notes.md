@@ -2,6 +2,9 @@
 
 ## 0.4.0 - 27.02.2024
 
+**IMPORTANT** This version might require updating env vars when running from source on macOS.
+See [here](./getting_started/installation.md#building-from-source).
+
 ### Features:
 * added peer websocket close reason - now, server closes peer websocket with a reason e.g. "Internal server error", "Peer removed" or "Room stopped"
 * added support for path in [JF_HOST](./getting_started/installation#required-in-production) env var
@@ -10,7 +13,8 @@
 * added published tracks and their metadata to the REST API e.g. [GET /room](./for_developers/api_reference/rest_api#tag/room) will return a list of rooms with their components and peers, where each component and each peer will also list all of its published tracks
 * added new server notifications: `PeerMetadataUpdated`, `TrackAdded`, `TrackRemoved`, `TrackMetadataUpdated`
 * added peerless room purge option - after predefined amount of time, if a room is empty, it will be automatically closed. This behaviour is disabled by default. See [here](./getting_started/room#configuration-options).
-* added [SIP component](./getting_started/components/sip)
+* added [SIP component](./getting_started/components/sip). This might require 
+updating env vars when running from source on macOS. See [here](./getting_started/installation.md#building-from-source). **[BREAKING]**
 * added basic structured logging that can be enabled with [`JF_STRUCTURED_LOGGING`](./getting_started/installation#optional)
 * added python RTSP -> HLS example
 
