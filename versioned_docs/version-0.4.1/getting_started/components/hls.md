@@ -106,5 +106,5 @@ docker run -p 8080:8080/tcp \
            -e JF_SERVER_API_TOKEN=token \
            -e JF_HOST=localhost:8080 \
            -v $(pwd)/jellyfish_resources:/app/jellyfish_resources \
-           ghcr.io/jellyfish-dev/jellyfish:0.4.0
+           ghcr.io/jellyfish-dev/jellyfish:0.3.0
 ```
