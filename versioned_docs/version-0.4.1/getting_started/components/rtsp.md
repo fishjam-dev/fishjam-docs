@@ -65,7 +65,7 @@ docker run -p 20000:20000/udp \
            -p 8080:8080/tcp \
            -e JF_SERVER_API_TOKEN=token \
            -e JF_HOST=localhost:8080 \
-           ghcr.io/jellyfish-dev/jellyfish:0.4.0
+           ghcr.io/jellyfish-dev/jellyfish:0.4.1
 ```
 
 :::caution
@@ -83,5 +83,5 @@ Using host network (Linux only)
 docker run --network=host \
            -e JF_SERVER_API_TOKEN=token \
            -e JF_HOST=localhost:8080 \
-           ghcr.io/jellyfish-dev/jellyfish:0.4.0
+           ghcr.io/jellyfish-dev/jellyfish:0.4.1
 ```

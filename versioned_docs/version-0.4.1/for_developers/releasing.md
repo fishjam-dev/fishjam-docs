@@ -8,5 +8,5 @@ To release Jellyfish Media Server perform the following steps:
 1. Create a new release on GitHub with previously prepared release notes. Don't use auto-generated release notes.
 1. Release new versions of server SDKs.
 1. Optionally, release new versions of client SDKs.
-1. Release new version of documentation. Include new release notes and bump docker image version in examples.
+1. Release new version of documentation. Include new release notes, bump docker image version in examples and add new OpenApi specification document
 1. Announce release (Elixir Forum, Discord, Twitter, etc.).
