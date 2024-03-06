@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.4.1 - 06.03.2024
+
+### Bugfixes:
+* API spec fixes - now correct version of OpenAPI is shown in docs
+* Fixed peer being removed once it disconnects from Jellyfish
+
 ## 0.4.0 - 27.02.2024
 
 **IMPORTANT** This version might require clearing or updating env vars when running from source on macOS.
