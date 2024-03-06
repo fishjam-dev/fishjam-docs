@@ -110,6 +110,7 @@ const sidebars = {
           },
           items: ["for_developers/api_reference/rest_api"],
         },
+        "for_developers/releasing"
       ],
     },
     "release_notes"
