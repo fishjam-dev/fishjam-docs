@@ -48,7 +48,7 @@ docker run -p 50000-50050:50000-50050/udp \
            -e JF_WEBRTC_TURN_PORT_RANGE=50000-50050 \
            -e JF_WEBRTC_TURN_IP=192.168.0.1 \
            -e JF_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
-           ghcr.io/jellyfish-dev/jellyfish:0.4.1
+           ghcr.io/jellyfish-dev/jellyfish:0.4.2
 ```
 
 :::caution
@@ -67,5 +67,5 @@ docker run --network=host \
            -e JF_WEBRTC_USED=true \
            -e JF_WEBRTC_TURN_IP=192.168.0.1 \
            -e JF_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
-           ghcr.io/jellyfish-dev/jellyfish:0.4.1
+           ghcr.io/jellyfish-dev/jellyfish:0.4.2
 ```
