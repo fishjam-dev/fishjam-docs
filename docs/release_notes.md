@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.4.2 - 08.03.2024
+
+### Bugfixes:
+* Fixed tracks not being removed after WebRTC peer disconnects
+
 ## 0.4.1 - 06.03.2024
 
 ### Bugfixes:
