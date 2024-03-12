@@ -14,6 +14,8 @@ Read more about RTSP [here](https://www.rfc-editor.org/rfc/rfc2326.html).
 * [HLS](./hls.md)
 * [File](./file.md)
 * [SIP](./sip.md)
+* [Recording](./recording.md)
+
 
 ## Requirements
 * RTSP component always outputs H264 stream so if the [Room](../../introduction/basic_concepts\#room) in which the RTSP component is created enforces a video codec,
