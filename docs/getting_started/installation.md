@@ -166,6 +166,13 @@ Defaults to `9568`.
 
 * `JF_STRUCTURED_LOGGING` - whether to enable JSON-structured logging to stdout.<br/>
 Defaults to `false`.<br/>
+Possible values of the `severity` field (ordered by importance) are:
+  * `error`
+  * `warning`
+  * `info`
+  * `debug` (disabled by default)
+
+For more information about these log levels, refer [here](https://hexdocs.pm/logger/1.15/Logger.html#module-levels).<br/>
 Example log with and without this option:
 <Tabs>
   <TabItem value="json-log-on" label="true" default>
