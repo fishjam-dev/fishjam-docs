@@ -10,6 +10,7 @@ Supports H264 for video and OPUS for audio files.
 * [HLS](./hls.md)
 * [RTSP](./rtsp.md)
 * [SIP](./sip.md)
+* [Recording](./recording.md)
 
 ## Requirements
 * If the File component publishes a video, it does so in the H264 standard.

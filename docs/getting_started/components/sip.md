@@ -12,6 +12,8 @@ Read more about SIP [here](https://www.rfc-editor.org/rfc/rfc3261.html).
 * [HLS](./hls.md)
 * [RTSP](./rtsp.md)
 * [File](./file.md)
+* [Recording](./recording.md)
+
 
 ## Requirements
 * The specified SIP provider needs to support G711 A-law as it will be a format in which audio from
