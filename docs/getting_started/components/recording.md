@@ -14,6 +14,12 @@ For an example pipeline, please refer to the [Recording Converter](https://githu
 * [SIP](./sip.md)
 * [File](./file.md)
 
+## Requirements
+
+* The [Room](../../introduction/basic_concepts\#room) in which the Recording component is created must have the video codec set to H264.
+See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_room) for more information.
+* Max 1 Recording component allowed per room.
+
 ## Configuration options
 
 **Optional**:
