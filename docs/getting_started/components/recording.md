@@ -14,6 +14,13 @@ For an example pipeline, please refer to the [Recording Converter](https://githu
 * [SIP](./sip.md)
 * [File](./file.md)
 
+## Requirements
+
+* The [Room](../../introduction/basic_concepts\#room) in which the Recording component is created must have the video codec set to H264.
+See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_room) for more information.
+* Max 1 Recording component allowed per room.
+* Remember to provide credentials and path prefix through only one method. Otherwise recording compontent won't create.
+
 ## Configuration options
 
 **Optional**:
@@ -26,9 +33,12 @@ Please refer to the [Configuration API](../../for_developers/api_reference/rest_
 
 ## Environment variables
 
-If you prefer not to pass these through the REST API, you should declare the following environment variables for the S3 bucket:
+If you prefer not to pass these parameters through the REST API, you should declare the following environment variables for the S3 bucket:
 
+Credentials:
 * `JF_S3_BUCKET` - The name of the S3 bucket where the RTP streams will be stored.
 * `JF_S3_REGION` - The AWS region where your S3 bucket is located.
 * `JF_S3_ACCESS_KEY_ID` - Your AWS access key ID.
 * `JF_S3_SECRET_ACCESS_KEY` - Your secret access key for AWS. 
+Path prefix:
+* `JF_S3_PATH_PREFIX` - path prefix under which all streams will be stored.
