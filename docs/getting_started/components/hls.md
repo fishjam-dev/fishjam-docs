@@ -40,7 +40,7 @@ For the exact credential structure see [Configuration API](../../for_developers/
 
 * `subscribeMode` (string "manual" or "auto", default: "auto") - whether HLS component should automatically start consuming available tracks.
 When set to `manual`, HLS component has to be explicitly told to subscribe to a specific peer/component tracks using 
-the [Subscription API](../../for_developers/api_reference/rest_api#tag/hls/operation/subscribe_hls_to).
+the [Subscription API](../../for_developers/api_reference/rest_api#tag/room/operation/subscribe_to).
 
 <Tabs>
   <TabItem value="elixir" label="Elixir">
