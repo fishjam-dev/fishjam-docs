@@ -30,6 +30,9 @@ See [API](../../for_developers/api_reference/rest_api#tag/room/operation/create_
 If this is set to null, you will need to provide these credentials via environment variables.
 Once uploaded, the stream will be accessible in the `<path-prefix>/<room-id>` directory in the S3 bucket.
 Please refer to the [Configuration API](../../for_developers/api_reference/rest_api#tag/room/operation/add_component) for exact structure of the AWS S3 credentials.
+* `subscribeMode` (string "manual" or "auto", default: "auto") - whether Recording component should automatically start consuming available tracks.
+When set to `manual`, Recording component has to be explicitly told to subscribe to a specific peer/component tracks using 
+the [Subscription API](../../for_developers/api_reference/rest_api#tag/room/operation/subscribe_to).
 
 ## Environment variables
 
