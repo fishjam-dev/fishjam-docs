@@ -185,9 +185,9 @@ Run `pod install` in the /ios directory to install the new pods
 
 ## Screens
 
-For managing screens we will use React Navigation library, but feel free to pick whatever suits you.  
-Our app will consist of two screens.  
-The first one `ConnectScreen` will allow a user to type, paste or scan a peer token and connect to the room.  
+For managing screens we will use React Navigation library, but feel free to pick whatever suits you.
+Our app will consist of two screens.
+The first one `ConnectScreen` will allow a user to type, paste or scan a peer token and connect to the room.
 The second one `RoomScreen` will show room participants with their video tracks.
 
 ```tsx title="/App.tsx"
@@ -215,10 +215,10 @@ export default App;
 
 ## ConnectScreen
 
-The UI of the `ConnectScreen` consists of a simple text input and a few buttons.  
-The flow for this screen is simple:  
+The UI of the `ConnectScreen` consists of a simple text input and a few buttons.
+The flow for this screen is simple:
 the user either copies the peer token from the
-dashboard or scans it with a QR code scanner and presses Connect button.  
+dashboard or scans it with a QR code scanner and presses Connect button.
 The QR code scanner is provided by our components library and it's completely optional,
 just for convenience.
 
@@ -415,10 +415,10 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 
 ### Starting the camera
 
-Jellyfish Client provides a handy hook for managing the camera: `useCamera`.  
+Jellyfish Client provides a handy hook for managing the camera: `useCamera`.
 Not only it can start a camera but also toggle it, manage its state, simulcast and bandwidth settings, and switch between multiple sources.
 Also when starting the camera you can provide multiple different settings such as
-resolution, quality, and metadata.  
+resolution, quality, and metadata.
 In this example though we'll simply turn it
 on to stream the camera to the dashboard with default settings
 
@@ -461,12 +461,12 @@ function ConnectScreen({ navigation }: ConnectScreenProps): JSX.Element {
 ### Joining the room
 
 The last step of connecting to the room would be actually joining it so
-that your camera track is visible to the other users.  
+that your camera track is visible to the other users.
 To do this simply use the `join` function
 from the `useJellyfishClient` hook.
 
-You can also provide some user metadata when joining.  
-Metadata can be anything and is forwarded to the other participants as is.  
+You can also provide some user metadata when joining.
+Metadata can be anything and is forwarded to the other participants as is.
 In our case, we pass a username.
 
 After joining the room we navigate to the next screen: Room screen.
@@ -513,7 +513,7 @@ displaying the streams from other participants.
 
 The `Room` screen has a couple of responsibilities:
 
-- it displays your own video.  
+- it displays your own video.
   Note that it's taken directly from your camera i.e. we don't send it to the JF and get it back so other participants might see you a little bit differently
 - it presents current room state so participants list, their video tiles, etc.
 - it allows you to leave a meeting
@@ -526,7 +526,7 @@ information.
 
 To display video tracks Jellyfish Client comes with a dedicated component for
 displaying a video track: `<VideoRenderer>`. It takes a track id as a prop (it
-may be a local or remote track) and, as any other `<View>` in react, a style.  
+may be a local or remote track) and, as any other `<View>` in react, a style.
 style property gives a [lot of possibilities](https://reactnative.dev/docs/stylesheet). You can even animate your track!
 
 So, let's display all the participants in the simplest way possible:
@@ -587,7 +587,7 @@ const styles = StyleSheet.create({
 export default RoomScreen;
 ```
 
-You should now see your own camera on your mobile device.  
+You should now see your own camera on your mobile device.
 You can add another participant and their new track (displaying for example rotating frog) in the dashboard like
 this:
 
