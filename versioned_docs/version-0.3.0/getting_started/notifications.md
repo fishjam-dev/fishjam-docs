@@ -91,7 +91,7 @@ To receive server notifications through webhooks you have to pass `webhook_url` 
 
 ```python
 from jellyfish import Notifier, RoomApi
-from jellyfish import recevie_json
+from jellyfish import recevie_binary
 
 server_address = "localhost:5002"
 server_api_token = "development"
