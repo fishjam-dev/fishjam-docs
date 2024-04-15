@@ -91,7 +91,7 @@ To receive server notifications through webhooks you have to pass `webhook_url` 
 
 ```python
 from jellyfish import Notifier, RoomApi
-from jellyfish import recevie_json
+from jellyfish import recevie_binary
 
 server_address = "localhost:5002"
 server_api_token = "development"
@@ -103,8 +103,8 @@ _, room = room_api.create_room(webhook_url=webhook_url)
 # assuming you are using Flask
 @app.route("/webhook", methods=["POST"])
 def respond_root():
-    json = request.get_json()
-    notification = receive_json(json)
+    data = request.get_data()
+    notification = receive_binary(data)
 
     return Response(status=200)
 ```
