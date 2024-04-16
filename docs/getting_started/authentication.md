@@ -26,7 +26,7 @@ JF_SERVER_API_TOKEN=JF_SERVER_API_TOKEN mix phx.server
 ```elixir title="Business Logic"
 client = Jellyfish.Client.new("http://address-of-your-server.com", "JF_SERVER_API_TOKEN")
 {:ok, room, _jellyfish_address} = Jellyfish.Room.create(client, max_peers: 10)
-{:ok, peer, peer_token} = Jellyfish.Room.add_peer(client, room.id, "BobId")
+{:ok, peer, peer_token, websocket_url} = Jellyfish.Room.add_peer(client, room.id, "BobId")
 ```
 
 3. Connect as a peer to Jellyfish
