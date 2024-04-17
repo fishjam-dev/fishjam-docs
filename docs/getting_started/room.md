@@ -20,3 +20,6 @@ The holder for peers and components.
 
 * `peerlessPurgeTimeout` (integer 1.., default: null) - Duration (in seconds) after which the room
   will be removed if no peers are connected. If set to null (default), this feature is disabled.
+
+* `peerDisconnectedTimeout` (integer 1.., default: null) - Duration (in seconds) after which the peer
+  will be removed if it is disconnected. If set to null (default), this feature is disabled.
