@@ -52,7 +52,7 @@ server_api_token = "development"
 client = Jellyfish.Client.new(server_address: server_address, server_api_token: server_api_token)
 
 {:ok, room, _jellyfish_address} = Jellyfish.Room.create(client, video_codec: :h264)
-{:ok, peer, _peer_token} = Jellyfish.Room.add_peer(client, room.id, Jellyfish.Peer.WebRTC)
+{:ok, %{peer: peer}} = Jellyfish.Room.add_peer(client, room.id, Jellyfish.Peer.WebRTC)
 
 hls_options = %Jellyfish.Component.HLS{subscribe_mode: :manual}
 {:ok, _component} = Jellyfish.Room.add_component(client, room.id, hls_options)
@@ -73,12 +73,12 @@ server_api_token = "development"
 room_api = RoomApi(server_address='localhost:5002', server_api_token='development')
 
 jellyfish_address, room = room_api.create_room(video_codec='h264')
-peer_token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 
 hls_options = ComponentOptionsHLS(subscribe_mode="manual")
 component_hls = room_api.add_component(room.id, options=hls_options)
 
-room_api.hls_subscribe(room.id, [peer.id])
+room_api.hls_subscribe(room.id, [result.peer.id])
 ```
 
   </TabItem>
