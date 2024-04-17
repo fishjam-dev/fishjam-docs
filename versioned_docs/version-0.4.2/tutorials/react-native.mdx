@@ -28,8 +28,6 @@ streaming and receiving multimedia.
 
 <ImageWrapper url={"/img/tutorials/rn_full_app.gif"} />
 
-You can check out the finished project [here](https://github.com/jellyfish-dev/jellyfish-clients-tutorials/tree/main/JellyfishDashboardRN).
-
 ## What do you need
 
 - a little bit of experience in creating apps with React Native and/or Expo -
@@ -53,20 +51,27 @@ You can check out the finished project [here](https://github.com/jellyfish-dev/j
 
 ### Create React Native / Expo project
 
+:::info
+
+If you want to skip initialization of app clone this [repo](https://github.com/karkakol/react-native-jellyfish-example-begin-0.1.6).
+
+If you want ready app clone and run this [repo](https://github.com/karkakol/react-native-jellyfish-example-end-0.1.6).
+:::
+
 Firstly create a brand new project and change directory.
 
 <Tabs>
   <TabItem value="react-native" label="React Native">
 
 ```bash
-npx react-native@latest init JellyfishMobileExample && cd JellyfishMobileExample
+npx react-native@latest init ReactNativeJellyfishExample && cd ReactNativeJellyfishExample
 ```
 
   </TabItem>
   <TabItem value="expo-bare" label="Expo Bare workflow">
 
 ```bash
-npx react-native init JellyfishMobileExample --template react-native-template-typescript && cd JellyfishMobileExample
+npx react-native init ReactNativeJellyfishExample --template react-native-template-typescript && cd ReactNativeJellyfishExample
 ```
 
   </TabItem>
@@ -525,32 +530,6 @@ function ConnectScreen({ navigation }: ConnectScreenProps): React.JSX.Element {
 // ...
 ```
 
-Now the app is ready for the first test.
-
-This video shows how to connect to Jellyfish dashboard, create room and peers.
-
-<ImageWrapper url={"/react_native/dashboard_connect_to_media_server.gif"} />
-
-This image shows how you can obtain peer token.
-
-<ImageWrapper url={"/react_native/dashboard_peer_token.png"} />
-
-For physical devices, it would be easier to scan a QR code to place the peer token in the app. For a simulator/emulator, it is more convenient to copy the token to the clipboard and paste it in the simulator/emulator.
-:::note
-
-Don't connect with the same peer simultaneously from dashboard and mobile app.
-
-:::
-
-:::note
-
-Ios simulator does not support camera, but it will display remote tracks. It is strongly recommended to use physical device or android emulator where you can see your camera preview.
-
-:::
-
-If everything went well you should see
-a video from your camera in the front-end dashboard. Now onto the second part:
-displaying the streams from other participants.
 
 ## RoomScreen
 
@@ -632,17 +611,124 @@ const styles = StyleSheet.create({
 export default RoomScreen;
 ```
 
-You should now see your own camera on your mobile device.
-You can also add a fake peer that shares a video track in the dashboard (remember to check the `Attach metadata` checkbox):
+### First test
+
+
+Now the app is ready for the first test.
+
+This video shows how to connect to Jellyfish dashboard, create room and peers.
+
+<ImageWrapper url={"/react_native/dashboard_connect_to_media_server.gif"} />
+
+This image shows how you can obtain peer token.
+
+<ImageWrapper url={"/react_native/dashboard_peer_token.png"} />
+
+For physical devices, it would be easier to scan a QR code to input the peer token into the app. For virtual devices, it is more convenient to copy the token to the clipboard and then paste it.
+
+:::note
+
+Don't connect with the same peer simultaneously from dashboard and mobile app.
+
+:::
+
+:::note
+
+Ios simulator does not support camera, but it will display remote tracks. It is strongly recommended to use physical device or android emulator where you can see your camera preview.
+
+:::
+
+:::note
+Due to react-native hot-reload feature sometimes following error may occur in console logs:
+
+`Error while connecting [Error: WebSocket was closed: 1000 peer already connected]`.
+
+To fix it just kill your app and run it again. Later we will add disconnect button and it will solve this issue.
+:::
+
+Before launching your app, start Metro:
+
+<Tabs>
+    <TabItem value="npm" label="npm">
+
+        ```bash
+        npm start
+        ```
+
+    </TabItem>
+    <TabItem value="Yarn" label="Yarn">
+
+        ```bash
+        yarn start
+        ```
+
+    </TabItem>
+</Tabs>
+
+To launch your app, you can use the following command:
+
+
+
+<Tabs>
+    <TabItem value="npm" label="npm">
+
+        <Tabs>
+            <TabItem value="ios" label="ios">
+
+                ```bash
+                cd ios && pod install && cd .. && npm run ios
+                ```
+
+            </TabItem>
+            <TabItem value="android" label="android">
+
+                ```bash
+                npm run android
+                ```
+
+            </TabItem>
+        </Tabs>
+
+    </TabItem>
+    <TabItem value="Yarn" label="Yarn">
+
+        <Tabs>
+            <TabItem value="ios" label="ios">
+
+                ```bash
+                cd ios && pod install && cd .. && yarn ios
+                ```
+
+            </TabItem>
+            <TabItem value="android" label="android">
+
+                ```bash
+                yarn android
+                ```
+
+            </TabItem>
+        </Tabs>
+
+    </TabItem>
+</Tabs>
+
+If everything went well you should see
+a video from your camera in the front-end dashboard.
+
+<ImageWrapper url={"/react_native/room_screen_with_camera_only.gif"} height={720}/>
+
+Now onto the second part:
+displaying the streams from other participants.
+
+This gif shows how to add a fake peer that shares a video track in the dashboard (remember to check the `Attach metadata` checkbox):
 
 <ImageWrapper url={"/react_native/add_track_in_jellyfish.gif"} />
 
 It should show up in the Room screen automatically:
 
-<ImageWrapper url={"/img/tutorials/room_screen.png"} />
+<ImageWrapper url={"/react_native/unstyled_track_joining_from_dashboard.gif"} height={720} />
 
-For your convenience in our components library we provided a component to layout
-videos in a nice grid:
+Let's utilize the provided components to implement basic styling and layout for organizing video tracks in a visually appealing grid.
 
 ```tsx title="/screens/Room.tsx"
 // highlight-start
@@ -674,10 +760,6 @@ function RoomScreen({ navigation }: RoomScreenProps): React.JSX.Element {
   );
 }
 ```
-
-Now your app should look like this:
-
-<ImageWrapper url={"/react_native/track_joining_from_dashboard.gif"} height={720}/>
 
 ### Gracefully leaving the room
 
@@ -731,71 +813,9 @@ function RoomScreen({ navigation }: RoomScreenProps): React.JSX.Element {
 // ...
 ```
 
-Before launching your app, start Metro:
+Now your app should look like this:
 
-<Tabs>
-    <TabItem value="npm" label="npm">
-
-        ```bash
-        npm start
-        ```
-
-    </TabItem>
-    <TabItem value="Yarn" label="Yarn">
-
-        ```bash
-        yarn start
-        ```
-
-    </TabItem>
-</Tabs>
-
-To launch your app, you can use the following command:
-
-
-
-<Tabs>
-    <TabItem value="npm" label="npm">
-
-        <Tabs>
-            <TabItem value="ios" label="ios">
-
-                ```bash
-                npm run ios
-                ```
-
-            </TabItem>
-            <TabItem value="android" label="android">
-
-                ```bash
-                npm run android
-                ```
-
-            </TabItem>
-        </Tabs>
-
-    </TabItem>
-    <TabItem value="Yarn" label="Yarn">
-
-        <Tabs>
-            <TabItem value="ios" label="ios">
-
-                ```bash
-                yarn ios
-                ```
-
-            </TabItem>
-            <TabItem value="android" label="android">
-
-                ```bash
-                yarn android
-                ```
-
-            </TabItem>
-        </Tabs>
-
-    </TabItem>
-</Tabs>
+<ImageWrapper url={"/react_native/track_joining_from_dashboard.gif"} height={720}/>
 
 ## Summary
 
