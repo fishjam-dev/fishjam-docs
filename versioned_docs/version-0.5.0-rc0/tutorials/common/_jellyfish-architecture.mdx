@@ -1,0 +1,62 @@
+:::info
+
+You can learn more about Jellyfish architecture in [Jellyfish
+docs](/). This section provides a
+brief description aimed at front-end developers
+
+:::
+
+Let's introduce some concepts first:
+
+- **Peer** - A peer is a client-side entity that connects to the server to
+  publish, subscribe or publish and subscribe to tracks published by components
+  or other peers. You can think of it as a participant in a room. At the moment,
+  there is only one type of peer - WebRTC.
+- **Track** - An object that represents an audio or video stream. A track can be
+  associated with a local media source, such as a camera or microphone, or a
+  remote media source received from another user. Tracks are used to capture,
+  transmit, and receive audio and video data in WebRTC applications.
+- **Room** - In Jellyfish, a room serves as a holder for peers and components,
+  its function varying based on application. From a front-end perspective, this will
+  be probably one meeting or a broadcast.
+
+For a better understanding of these concepts here is an example of a room that
+holds a standard WebRTC conference from a perspective of the User:
+
+![Room example](/img/tutorials/room_example.png)
+
+In this example, peers stream multiple video and audio tracks. Peer #1 streams
+even two video tracks (camera and screencast track). You can differentiate
+between them by using track metadata. The user gets info about peers and their
+tracks from the server using Jellyfish Client. The user is also informed in real
+time about peers joining/leaving and tracks being added/removed.
+
+To keep this tutorial short we'll simplify things a little. Every peer will stream just one
+video track.
+
+### Connecting and joining the room
+
+The general flow of connecting to the server and joining the room in a standard
+WebRTC conference setup looks like this:
+
+![Connecting and joing the room](/img/tutorials/connection.png)
+
+The parts that you need to implement are marked in blue and things handled by
+Jellyfish are marked in red.
+
+Firstly, the user logs in. Then your backend authenticates the user and obtains
+a peer token. It allows the user to authenticate and join the room in Jellyfish
+Server. The backend passes the token to your front-end, and your front-end passes
+it to Jellyfish Client. The client establishes the connection with Jellyfish
+Server. Then Jellyfish Client sets up tracks (camera, microphone) to stream and
+joins the room on Jellyfish Server. Finally, your front-end can display the room
+for the user.
+
+For this tutorial we simplified this process a bit - you don't have to implement
+a backend or authentication. Jellyfish Dashboard will do this for you. It's also
+a nice tool to test and play around with Jellyfish. The flow with Jellyfish Dashboard looks like this:
+
+![Connecting and joing the room with dashboard](/img/tutorials/dashboard_connection.png)
+
+You can see that the only things you need to implement are interactions with the
+user and Jellyfish Client. This tutorial will show you how to do it.

@@ -7,10 +7,10 @@
 * Added Recording Component for creating meeting recordings
 * Added ResourceManager that will remove raw recordings after timeout
 * Bumped `membrane_core` to 1.1.0-rc0
-* Added `Room.State` module and peer disconnected timeout, which removes peers after a predefined inactivity period
+* Added `Room.State` module and peer disconnected timeout, which removes peers after predefined inactivity period
 * Added peer websocket url to PeerDetailsResponse
 * Added `PeerAdded` and `PeerDeleted` notifications
-* Restricted user-assigned room's id to alphanumeric
+* Restricted user assigned room's id to alphanumeric
 * Added `JF_S3_PATH_PREFIX` to config and require s3_config to be provided
 
 ### Bugfixes
