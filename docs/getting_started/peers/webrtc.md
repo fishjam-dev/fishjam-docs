@@ -24,6 +24,7 @@ Read more about WebRTC [here](https://webrtc.org/).
 * `JF_WEBRTC_TURN_LISTEN_IP` - the IP address on which TURN servers will listen. 
 By default set to `127.0.0.1`.
 When running Jellyfish via Docker, this MUST be set to `0.0.0.0`, even for local tests.
+You may also set this env variable to a hostname which will get resolved at JF startup.
 
 * `JF_WEBRTC_TURN_IP` - the IP address, under which TURN will present itself to the clients. By default set to `127.0.0.1`.
 When running Jellyfish via Docker, this MUST be set to real (non-loopback) address, even for local tests.
