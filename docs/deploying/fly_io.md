@@ -31,6 +31,7 @@ You can start from our `fly.toml` sample file:
     JF_WEBRTC_TURN_IP = "<ip obtained with fly ips allocate-v4>"
     JF_WEBRTC_TURN_PORT_RANGE = "50000-59999"
     JF_WEBRTC_TURN_LISTEN_IP = "fly-global-services"
+    JF_WEBRTC_TURN_TCP_PORT = "50000"
 
   [experimental]
     auto_rollback = true
