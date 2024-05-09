@@ -15,7 +15,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Jellyfish" href="/jellyfish-docs/opensearch.xml"><link rel="stylesheet" href="/jellyfish-docs/assets/css/styles.5c31fc27.css">
-<script src="/jellyfish-docs/assets/js/runtime~main.bd55456a.js" defer="defer"></script>
+<script src="/jellyfish-docs/assets/js/runtime~main.5047fe10.js" defer="defer"></script>
 <script src="/jellyfish-docs/assets/js/main.6f93e2e4.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -42,7 +42,8 @@
 <li>
 <p><code>JF_WEBRTC_TURN_LISTEN_IP</code> - the IP address on which TURN servers will listen.
 By default set to <code>127.0.0.1</code>.
-When running Jellyfish via Docker, this MUST be set to <code>0.0.0.0</code>, even for local tests.</p>
+When running Jellyfish via Docker, this MUST be set to <code>0.0.0.0</code>, even for local tests.
+You may also set this env variable to a hostname which will get resolved at JF startup.</p>
 </li>
 <li>
 <p><code>JF_WEBRTC_TURN_IP</code> - the IP address, under which TURN will present itself to the clients. By default set to <code>127.0.0.1</code>.
