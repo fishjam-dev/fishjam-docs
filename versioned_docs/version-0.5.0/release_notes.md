@@ -1,22 +1,22 @@
 # Release Notes
 
-## 0.5.0-rc0 - 23.04.2024
+## 0.5.0 - 15.05.2024
 
 ### Features
 * Added Jellyfish version and commit to healthcheck endpoint
 * Added Recording Component for creating meeting recordings
 * Added ResourceManager that will remove raw recordings after timeout
-* Bumped `membrane_core` to 1.1.0-rc0
-* Added `Room.State` module and peer disconnected timeout, which removes peers after predefined inactivity period
-* Added peer websocket url to PeerDetailsResponse
-* Added `PeerAdded` and `PeerDeleted` notifications
-* Restricted user assigned room's id to alphanumeric
-* Added `JF_S3_PATH_PREFIX` to config and require s3_config to be provided
+* Added `Room.State` module and peer disconnected timeout, which removes peers after a predefined inactivity period
+* Added peer websocket url to PeerDetailsResponse, simplifying connecting a peer to Jellyfish
+* Added `PeerAdded` and `PeerDeleted` notifications, useful e.g. when a peer is removed due to a timeout
+* Restricted user-assigned room's id to alphanumeric **[BREAKING]**
+* Allow for passing hostname to `JF_WEBRTC_TURN_LISTEN_IP` - useful for deployment on fly.io
 
 ### Bugfixes
 * Fixed ex-aws requests
-* Extended timeout for s3 requests
-
+* Extended timeout for AWS S3 requests
+* Don't normalize AWS S3 paths
+* Ensure that EPMD starts when starting the Jellyfish
 
 ## 0.4.2 - 08.03.2024
 
