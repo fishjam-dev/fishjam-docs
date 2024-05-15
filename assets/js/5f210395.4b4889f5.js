@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjellyfish_docs=self.webpackChunkjellyfish_docs||[]).push([[6336],{71529:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-redoc","id":"jellyfish-rest-apix-0_5_0"}')}}]);
