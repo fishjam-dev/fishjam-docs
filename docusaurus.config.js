@@ -80,9 +80,9 @@ const config = {
             route: '/examples/using-single-yaml-0_4_2/',
           },
           {
-            id: 'jellyfish-rest-apix-0_5_0-rc0',
-            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/v0.5.0-rc0/openapi.yaml',
-            route: '/examples/using-single-yaml-0_5_0-rc0/',
+            id: 'jellyfish-rest-apix-0_5_0',
+            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/v0.5.0/openapi.yaml',
+            route: '/examples/using-single-yaml-0_5_0/',
           }
         ],
         // Theme Options for modifying how redoc renders them
