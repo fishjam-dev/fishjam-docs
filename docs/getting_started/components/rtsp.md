@@ -42,7 +42,9 @@ Read more about RTSP [here](https://www.rfc-editor.org/rfc/rfc2326.html).
 
 ## Env variables
 
-Currently, there are no environment variables related to this component.
+* `FJ_COMPONENTS_USED` - has to contain `rtsp` if RTSP components will be used.<br/>
+By default set to an empty string (RTSP components are disabled).<br/>
+Refer [here](../installation.md#environment-variables) for more info.
 
 ## Example Docker commands
 

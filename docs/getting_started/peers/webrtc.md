@@ -19,7 +19,8 @@ Read more about WebRTC [here](https://webrtc.org/).
 
 ## Env variables
 
-* `FJ_WEBRTC_USED` - has to be `true` if WebRTC peers will be used
+* `FJ_WEBRTC_USED` - has to be `true` if WebRTC peers will be used.
+By default set to `true`.
 
 * `FJ_WEBRTC_TURN_LISTEN_IP` - the IP address on which TURN servers will listen. 
 By default set to `127.0.0.1`.

@@ -29,5 +29,8 @@ SIP Endpoint will be published.
 
 ## Env variables
 
-* `FJ_SIP_USED` - has to be `true` if SIP component will be used
+* `FJ_COMPONENTS_USED` - has to contain `sip` if SIP components will be used.<br/>
+By default set to an empty string (SIP components are disabled).<br/>
+Refer [here](../installation.md#environment-variables) for more info.
+
 * `FJ_SIP_IP` - the IP address on which SIP server will listen. It must be a public IP and reachable from the outside network. 

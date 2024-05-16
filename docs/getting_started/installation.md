@@ -130,6 +130,11 @@ For running Docker locally, it can simply be `localhost:8080`.
 
 #### Optional:
 
+* `FJ_COMPONENTS_USED` - defines which components can be added to rooms on this Fishjam.<br/>
+Defaults to an empty string, i.e. all components are disabled globally.<br/>
+The format is a space-separated list of allowed component types written in lowercase.<br/>
+Example: `FJ_COMPONENTS_USED="hls rtsp sip"`.
+
 * `FJ_IP` - an ip address to run the HTTP server on.<br/>
 Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0.0.0` for Docker.
 
