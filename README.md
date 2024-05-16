@@ -1,8 +1,8 @@
-# FishJam docs
+# Fishjam docs
 
 [![pages-build-deployment](https://github.com/fishjam-dev/fishjam-docs/actions/workflows/build_pages.yml/badge.svg)](https://github.com/fishjam-dev/fishjam-docs/actions/workflows/pages/pages-build-deployment)
 
-The docs for the [FishJam](https://github.com/fishjam-dev/fishjam).
+The docs for the [Fishjam](https://github.com/fishjam-dev/fishjam).
 You can read the docs here: https://fishjam-dev.github.io/fishjam-docs/
 
 ## Installation

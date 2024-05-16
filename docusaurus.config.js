@@ -103,9 +103,9 @@ const config = {
       // Replace with your project's social card
       image: 'img/membrane-signet-light.svg',
       navbar: {
-        title: 'FishJam Docs',
+        title: 'Fishjam Docs',
         logo: {
-          alt: 'FishJam Logo',
+          alt: 'Fishjam Logo',
           src: 'img/membrane-signet-light.svg',
         },
         items: [
@@ -121,12 +121,12 @@ const config = {
           },
           {
             href: 'https://fishjam-dev.github.io/fishjam-dashboard/',
-            label: 'FishJam Dashboard',
+            label: 'Fishjam Dashboard',
             position: 'left',
           },
           {
             href: 'https://jellyroom.membrane.stream/',
-            label: 'FishJam Room',
+            label: 'Fishjam Room',
             position: 'left',
           }
         ],
