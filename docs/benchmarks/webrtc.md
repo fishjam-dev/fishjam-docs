@@ -1,6 +1,6 @@
 # WebRTC
 
-The WebRTC tests conducted for the Jellyfish media server aimed to assess its performance and reliability in handling real-time communication scenarios, replicating real-life online meetings. 
+The WebRTC tests conducted for the Fishjam media server aimed to assess its performance and reliability in handling real-time communication scenarios, replicating real-life online meetings. 
 
 ## Setup
 

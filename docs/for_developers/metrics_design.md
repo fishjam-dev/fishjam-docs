@@ -1,6 +1,6 @@
 # Metrics Design
 
-Currently, jellyfish exposed a few metrics, which included a label room_id.
+Currently, fishjam exposed a few metrics, which included a label room_id.
 Some could be worried about the cardinality of this type of metric.
 To answer these worries, we have to deepen our knowledge about Prometheus metrics.
 Each unique labelset creates a separate time series.
@@ -11,11 +11,11 @@ But the question is, how quickly will this add up?
 At the moment (16.11.2023), Prometheus can handle around ten million time series.
 Prometheus maintainers suggest that when analyzing the capacity of Prometheus, we should think about a cluster where one Prometheus instance monitors around 1000 servers.
 Default retention in Prometheus is 15 days, meaning time series older than 15 days are removed.
-Based on this assumption, we can approximate how many rooms per hour on each of 1000 jellyfish for 15 days straight must be created to reach Prometheus limits.
+Based on this assumption, we can approximate how many rooms per hour on each of 1000 fishjam for 15 days straight must be created to reach Prometheus limits.
 
 ```
-room_per_hour_on_jellyfish =
-= total_time_series_limit / number_of_jellyfishes / prometheus_retention_in_days / hours_in_day = 
+room_per_hour_on_fishjam =
+= total_time_series_limit / number_of_fishjams / prometheus_retention_in_days / hours_in_day = 
 = 10_000_000 / 1_000 / 15 / 24 = 27
 ``` 
 

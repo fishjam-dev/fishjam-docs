@@ -27,15 +27,15 @@ Supports H264 for video and OPUS for audio files.
 * The audio must be monophonic, encoded in OPUS and encapsulated in Ogg container.
   You can convert the audio using the following ffmpeg command:
   `ffmpeg -i input_audio -ac 1 -acodec libopus output.ogg`
-* The input files must be located inside `$JF_RESOURCES_BASE_PATH/file_component_sources` path.
-  Take a look at `JF_RESOURCES_BASE_PATH` environment variable in the
+* The input files must be located inside `$FJ_RESOURCES_BASE_PATH/file_component_sources` path.
+  Take a look at `FJ_RESOURCES_BASE_PATH` environment variable in the
   [installation guide](../installation.md#environment-variables) for more info
 
 ## Configuration options
 
 **Required**
 
-* `filePath` (string) - path for media file, relative to the `$JF_RESOURCES_BASE_PATH/file_component_sources` directory, with either `.ogg` or `.h264` extension
+* `filePath` (string) - path for media file, relative to the `$FJ_RESOURCES_BASE_PATH/file_component_sources` directory, with either `.ogg` or `.h264` extension
 
 **Optional**
 

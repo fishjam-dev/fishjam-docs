@@ -1,6 +1,6 @@
 # Benchmarks
 
-Performance tests for our Jellyfish media server were carried out with particular emphasis
+Performance tests for our Fishjam media server were carried out with particular emphasis
 on quantifying its real-world capabilities, even under intense workloads.
 
 Visit the reports corresponding to the specific type of load:

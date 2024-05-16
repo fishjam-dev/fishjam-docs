@@ -29,5 +29,5 @@ SIP Endpoint will be published.
 
 ## Env variables
 
-* `JF_SIP_USED` - has to be `true` if SIP component will be used
-* `JF_SIP_IP` - the IP address on which SIP server will listen. It must be a public IP and reachable from the outside network. 
+* `FJ_SIP_USED` - has to be `true` if SIP component will be used
+* `FJ_SIP_IP` - the IP address on which SIP server will listen. It must be a public IP and reachable from the outside network. 

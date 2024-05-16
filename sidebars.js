@@ -19,7 +19,7 @@ const sidebars = {
       label: "Introduction",
       collapsed: false,
       items: [
-        "introduction/what_is_jellyfish",
+        "introduction/what_is_fishjam",
         "introduction/basic_concepts",
         "introduction/example_scenarios",
       ],

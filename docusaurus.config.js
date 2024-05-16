@@ -6,19 +6,19 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Jellyfish',
-  tagline: 'Jellyfish are cool',
+  title: 'Fishjam',
+  tagline: 'FishJosh is cool',
   favicon: 'img/membrane-signet-light.svg',
 
   // Set the production url of your site here
-  url: 'https://jellyfish-dev.github.io/',
+  url: 'https://fishjam-dev.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/jellyfish-docs/',
+  baseUrl: '/fishjam-docs/',
 
   // GitHub pages deployment config.
-  organizationName: 'jellyfish-dev',
-  projectName: 'jellyfish-docs',
+  organizationName: 'fishjam-dev',
+  projectName: 'fishjam-docs',
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
@@ -41,7 +41,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/jellyfish-dev/jellyfish-docs',
+            'https://github.com/fishjam-dev/fishjam-docs',
           routeBasePath: '/',
         },
         blog: false,
@@ -60,28 +60,28 @@ const config = {
         // Plugin Options for loading OpenAPI files
         specs: [
           {
-            id: 'jellyfish-rest-api',
-            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/main/openapi.yaml',
+            id: 'fishjam-rest-api',
+            spec: 'https://raw.githubusercontent.com/fishjam-dev/fishjam/main/openapi.yaml',
             route: '/examples/using-single-yaml/',
           },
           {
-            id: 'jellyfish-rest-apix-0_2_1',
-            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/v0.2.1/openapi.yaml',
+            id: 'fishjam-rest-apix-0_2_1',
+            spec: 'https://raw.githubusercontent.com/fishjam-dev/fishjam/v0.2.1/openapi.yaml',
             route: '/examples/using-single-yaml-0_2_1/',
           },
           {
-            id: 'jellyfish-rest-apix-0_3_0',
-            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/v0.3.0/openapi.yaml',
+            id: 'fishjam-rest-apix-0_3_0',
+            spec: 'https://raw.githubusercontent.com/fishjam-dev/fishjam/v0.3.0/openapi.yaml',
             route: '/examples/using-single-yaml-0_3_0/',
           },
           {
-            id: 'jellyfish-rest-apix-0_4_2',
-            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/v0.4.2/openapi.yaml',
+            id: 'fishjam-rest-apix-0_4_2',
+            spec: 'https://raw.githubusercontent.com/fishjam-dev/fishjam/v0.4.2/openapi.yaml',
             route: '/examples/using-single-yaml-0_4_2/',
           },
           {
-            id: 'jellyfish-rest-apix-0_5_0',
-            spec: 'https://raw.githubusercontent.com/jellyfish-dev/jellyfish/v0.5.0/openapi.yaml',
+            id: 'fishjam-rest-apix-0_5_0',
+            spec: 'https://raw.githubusercontent.com/fishjam-dev/fishjam/v0.5.0/openapi.yaml',
             route: '/examples/using-single-yaml-0_5_0/',
           }
         ],
@@ -103,9 +103,9 @@ const config = {
       // Replace with your project's social card
       image: 'img/membrane-signet-light.svg',
       navbar: {
-        title: 'Jellydocs',
+        title: 'Fishjam Docs',
         logo: {
-          alt: 'Jellyfish Logo',
+          alt: 'Fishjam Logo',
           src: 'img/membrane-signet-light.svg',
         },
         items: [
@@ -115,18 +115,18 @@ const config = {
             dropdownActiveClassDisabled: true,
           },
           {
-            href: 'https://github.com/jellyfish-dev/jellyfish',
+            href: 'https://github.com/fishjam-dev/fishjam',
             label: 'GitHub',
             position: 'right',
           },
           {
-            href: 'https://jellyfish-dev.github.io/jellyfish-dashboard/',
-            label: 'Jellydashboard',
+            href: 'https://fishjam-dev.github.io/fishjam-dashboard/',
+            label: 'Fishjam Dashboard',
             position: 'left',
           },
           {
             href: 'https://jellyroom.membrane.stream/',
-            label: 'Jellyroom',
+            label: 'Fishjam Room',
             position: 'left',
           }
         ],
@@ -169,7 +169,7 @@ const config = {
               // },
               {
                 label: 'GitHub',
-                href: 'https://github.com/jellyfish-dev/jellyfish',
+                href: 'https://github.com/fishjam-dev/fishjam',
               },
             ],
           },
@@ -188,7 +188,7 @@ const config = {
         // Public API key: it is safe to commit it
         apiKey: '4b226ecf0912d4f136ebb9ac4f01b4d5',
 
-        indexName: 'jellyfish',
+        indexName: 'fishjam',
 
         // Optional: see doc section below
         contextualSearch: true,

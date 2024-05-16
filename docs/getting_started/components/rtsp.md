@@ -53,10 +53,10 @@ since Docker can change the source port of UDP packets for routing reasons,
 which breaks the `pierceNat` functionality.
 
 This means that users on macOS will most likely be unable to access any
-RTSP stream source outside of their network when running Jellyfish using Docker.
+RTSP stream source outside of their network when running Fishjam using Docker.
 
 If you're on macOS and want to receive RTSP streams from behind NAT,
-right now the only way is to [build Jellyfish natively from source](../installation.md#building-from-source).
+right now the only way is to [build Fishjam natively from source](../installation.md#building-from-source).
 
 :::
 
@@ -65,9 +65,9 @@ Explicit port exposure (macOS compatible)
 ```bash
 docker run -p 20000:20000/udp \
            -p 8080:8080/tcp \
-           -e JF_SERVER_API_TOKEN=token \
-           -e JF_HOST=localhost:8080 \
-           ghcr.io/jellyfish-dev/jellyfish:0.5.0
+           -e FJ_SERVER_API_TOKEN=token \
+           -e FJ_HOST=localhost:8080 \
+           ghcr.io/fishjam-dev/fishjam:0.5.0
 ```
 
 :::caution
@@ -83,7 +83,7 @@ Using host network (Linux only)
 
 ```bash
 docker run --network=host \
-           -e JF_SERVER_API_TOKEN=token \
-           -e JF_HOST=localhost:8080 \
-           ghcr.io/jellyfish-dev/jellyfish:0.5.0
+           -e FJ_SERVER_API_TOKEN=token \
+           -e FJ_HOST=localhost:8080 \
+           ghcr.io/fishjam-dev/fishjam:0.5.0
 ```

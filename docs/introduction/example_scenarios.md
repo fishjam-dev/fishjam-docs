@@ -3,8 +3,8 @@ import ThemedImage from '@theme/ThemedImage';
 
 # Example Scenarios
 
-Below, we present example scenarios that can be achieved with Jellyfish.
-Each scenario consists of a short description and illustrative Jellyfish 
+Below, we present example scenarios that can be achieved with Fishjam.
+Each scenario consists of a short description and illustrative Fishjam 
 internal architecture so that you can catch the difference between peers
 and components even better!
 
@@ -38,7 +38,7 @@ then uploaded to CDN and broadcasted to the broader audience.
 
 As you can see, the whole system will automatically
 adapt to the number of participants talking in real-time.
-In particular, Jellyfish will handle a scenario with only one streamer out of the box.
+In particular, Fishjam will handle a scenario with only one streamer out of the box.
 
 <ThemedImage
   alt="Broadcasting system architecture"

@@ -49,15 +49,15 @@ the [Subscription API](../../for_developers/api_reference/rest_api#tag/room/oper
 server_address = "localhost:5002"
 server_api_token = "development"
 
-client = Jellyfish.Client.new(server_address: server_address, server_api_token: server_api_token)
+client = Fishjam.Client.new(server_address: server_address, server_api_token: server_api_token)
 
-{:ok, room, _jellyfish_address} = Jellyfish.Room.create(client, video_codec: :h264)
-{:ok, %{peer: peer}} = Jellyfish.Room.add_peer(client, room.id, Jellyfish.Peer.WebRTC)
+{:ok, room, _fishjam_address} = Fishjam.Room.create(client, video_codec: :h264)
+{:ok, %{peer: peer}} = Fishjam.Room.add_peer(client, room.id, Fishjam.Peer.WebRTC)
 
-hls_options = %Jellyfish.Component.HLS{subscribe_mode: :manual}
-{:ok, _component} = Jellyfish.Room.add_component(client, room.id, hls_options)
+hls_options = %Fishjam.Component.HLS{subscribe_mode: :manual}
+{:ok, _component} = Fishjam.Room.add_component(client, room.id, hls_options)
 
-:ok = Jellyfish.Room.hls_subscribe(client, room.id, [peer.id])
+:ok = Fishjam.Room.hls_subscribe(client, room.id, [peer.id])
 ```
 
   </TabItem>
@@ -65,14 +65,14 @@ hls_options = %Jellyfish.Component.HLS{subscribe_mode: :manual}
   <TabItem value="python" label="Python">
 
 ```python
-from jellyfish import RoomApi, ComponentOptionsHLS, PeerOptionsWebRTC
+from fishjam import RoomApi, ComponentOptionsHLS, PeerOptionsWebRTC
 
 server_address = "localhost:5002"
 server_api_token = "development"
 
 room_api = RoomApi(server_address='localhost:5002', server_api_token='development')
 
-jellyfish_address, room = room_api.create_room(video_codec='h264')
+fishjam_address, room = room_api.create_room(video_codec='h264')
 result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 
 hls_options = ComponentOptionsHLS(subscribe_mode="manual")
@@ -91,20 +91,20 @@ Currently, there are no environment variables related to this component.
 ## Output
 
 After adding a WebRTC peer (and at least one track) or an RTSP component, the HLS stream will be available
-under `http://<jellyfish-address>/hls/<room_id>/index.m3u8` (or `https://`, if using TLS).
+under `http://<fishjam-address>/hls/<room_id>/index.m3u8` (or `https://`, if using TLS).
 
 ## Example Docker commands
 
 The HLS playlist will be created inside the Docker container. To access it from the host,
-you need to create a volume, e.g. by adding the option `-v $(pwd)/jellyfish_resources:/app/jellyfish_resources`
+you need to create a volume, e.g. by adding the option `-v $(pwd)/fishjam_resources:/app/fishjam_resources`
 to your Docker command.
 
 Other than that, your Docker commands shouldn't be affected by adding this component.
 
 ```bash
 docker run -p 8080:8080/tcp \
-           -e JF_SERVER_API_TOKEN=token \
-           -e JF_HOST=localhost:8080 \
-           -v $(pwd)/jellyfish_resources:/app/jellyfish_resources \
-           ghcr.io/jellyfish-dev/jellyfish:0.3.0
+           -e FJ_SERVER_API_TOKEN=token \
+           -e FJ_HOST=localhost:8080 \
+           -v $(pwd)/fishjam_resources:/app/fishjam_resources \
+           ghcr.io/fishjam-dev/fishjam:0.3.0
 ```

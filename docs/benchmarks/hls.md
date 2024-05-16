@@ -10,7 +10,7 @@ scenario, where any client can request any segment at any given time.
 
 ## Setup
 
-- Machine `A`, running Jellyfish with one room
+- Machine `A`, running Fishjam with one room
   - One WebRTC peer in the room (WebRTC video stream with **constant bitrate of 1.8 Mbps**)
   - One HLS component in the room (segment length: 6 s, partial segment length: 1 s)
 
@@ -18,7 +18,7 @@ scenario, where any client can request any segment at any given time.
   - The utility steadily increases the number of simulated clients over the course of the test, up to a given amount
   - Clients simulate an HLS player continuously requesting the most recent segments/partials
   (as if watching a livestream)
-  - Each client opens a separate connection to Jellyfish on machine `A` (no connection pooling)
+  - Each client opens a separate connection to Fishjam on machine `A` (no connection pooling)
 
 ### Machine specs
 
