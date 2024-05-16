@@ -82,13 +82,13 @@ To form a cluster using `NODES_LIST` strategy:
 Run the first Fishjam:
 
 ```sh
-FJ_DIST_ENABLED=true FJ_DIST_NODE_NAME=j1@localhost mix phx.server
+FJ_DIST_ENABLED=true FJ_DIST_NODE_NAME=f1@localhost mix phx.server
 ```
 
 Run the second Fishjam
 
 ```sh
-FJ_DIST_ENABLED=true FJ_DIST_NODE_NAME=j2@localhost FJ_DIST_NODES="j1@localhost" FJ_PORT=4002 FJ_METRICS_PORT=9468 mix phx.server
+FJ_DIST_ENABLED=true FJ_DIST_NODE_NAME=f2@localhost FJ_DIST_NODES="f1@localhost" FJ_PORT=4002 FJ_METRICS_PORT=9468 mix phx.server
 ```
 
 :::info
@@ -110,7 +110,7 @@ x-fishjam-template: &fishjam-template
   environment: &fishjam-environment
     FJ_SERVER_API_TOKEN: "development"
     FJ_DIST_ENABLED: "true"
-    FJ_DIST_NODES: "j1@fishjam1 j2@fishjam2"
+    FJ_DIST_NODES: "f1@fishjam1 f2@fishjam2"
   restart: on-failure
 
 services:
@@ -121,7 +121,7 @@ services:
       FJ_HOST: "localhost:5001"
       FJ_PORT: 5001
       FJ_METRICS_PORT: 6001
-      FJ_DIST_NODE_NAME: j1@fishjam1
+      FJ_DIST_NODE_NAME: f1@fishjam1
     ports:
       - 5001:5001
       - 6001:6001
@@ -133,7 +133,7 @@ services:
       FJ_HOST: "localhost:5002"
       FJ_PORT: 5002
       FJ_METRICS_PORT: 6002
-      FJ_DIST_NODE_NAME: j2@fishjam2
+      FJ_DIST_NODE_NAME: f2@fishjam2
     ports:
       - 5002:5002
       - 6002:6002
@@ -228,7 +228,7 @@ and is routable from other nodes in the docker network.
 When a cluster is created correctly you will see a log indicating that one of your Fishjams connected to the other one, e.g.:
 
 ```
-[info] [libcluster:epmd_cluster] connected to :"j1@127.0.0.1"
+[info] [libcluster:epmd_cluster] connected to :"f1@127.0.0.1"
 ```
 
 To see clustering in action, create two rooms using the same Fishjam address and observe how they are load balanced:
