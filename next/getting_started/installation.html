@@ -15,7 +15,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Fishjam" href="/fishjam-docs/opensearch.xml"><link rel="stylesheet" href="/fishjam-docs/assets/css/styles.5c31fc27.css">
-<script src="/fishjam-docs/assets/js/runtime~main.ff5cddcb.js" defer="defer"></script>
+<script src="/fishjam-docs/assets/js/runtime~main.f595a286.js" defer="defer"></script>
 <script src="/fishjam-docs/assets/js/main.b88fcae3.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -92,6 +92,12 @@ For running Docker locally, it can simply be <code>localhost:8080</code>.</p>
 </ul>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="optional">Optional:<a href="#optional" class="hash-link" aria-label="Direct link to Optional:" title="Direct link to Optional:">​</a></h4>
 <ul>
+<li>
+<p><code>FJ_COMPONENTS_USED</code> - defines which components can be added to rooms on this Fishjam.<br>
+Defaults to an empty string, i.e. all components are disabled globally.<br>
+The format is a space-separated list of allowed component types written in lowercase.<br>
+Example: <code>FJ_COMPONENTS_USED=&quot;hls rtsp sip&quot;</code>.</p>
+</li>
 <li>
 <p><code>FJ_IP</code> - an ip address to run the HTTP server on.<br>
 Defaults to <code>127.0.0.1</code> when running from source or using <code>mix release</code>, or <code>0.0.0.0</code> for Docker.</p>

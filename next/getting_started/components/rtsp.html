@@ -15,7 +15,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Fishjam" href="/fishjam-docs/opensearch.xml"><link rel="stylesheet" href="/fishjam-docs/assets/css/styles.5c31fc27.css">
-<script src="/fishjam-docs/assets/js/runtime~main.ff5cddcb.js" defer="defer"></script>
+<script src="/fishjam-docs/assets/js/runtime~main.f595a286.js" defer="defer"></script>
 <script src="/fishjam-docs/assets/js/main.b88fcae3.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -62,7 +62,11 @@ by sending an empty datagram from client to source, after the completion of RTSP
 </li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="env-variables">Env variables<a href="#env-variables" class="hash-link" aria-label="Direct link to Env variables" title="Direct link to Env variables">​</a></h2>
-<p>Currently, there are no environment variables related to this component.</p>
+<ul>
+<li><code>FJ_COMPONENTS_USED</code> - has to contain <code>rtsp</code> if RTSP components will be used.<br>
+By default set to an empty string (RTSP components are disabled).<br>
+Refer <a href="/fishjam-docs/next/getting_started/installation#environment-variables">here</a> for more info.</li>
+</ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="example-docker-commands">Example Docker commands<a href="#example-docker-commands" class="hash-link" aria-label="Direct link to Example Docker commands" title="Direct link to Example Docker commands">​</a></h2>
 <div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>caution</div><div class="admonitionContent_BuS1"><p>If the client is behind NAT, the option <code>--network=host</code> is necessary
 since Docker can change the source port of UDP packets for routing reasons,
