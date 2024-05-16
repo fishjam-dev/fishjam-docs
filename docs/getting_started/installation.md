@@ -83,7 +83,7 @@ need to set a couple of [environment variables](#environment-variables).
 An example docker command running bare Fishjam HTTP service locally:
 
 ```bash
-docker run -p 8080:8080/tcp -e JF_HOST=localhost:8080 -e JF_SERVER_API_TOKEN=token ghcr.io/fishjam-dev/fishjam:0.5.0
+docker run -p 8080:8080/tcp -e FJ_HOST=localhost:8080 -e FJ_SERVER_API_TOKEN=token ghcr.io/fishjam-dev/fishjam:0.5.0
 ```
 
 Note that in real case scenarios, docker commands depend on peers/components you are going to use.
@@ -114,57 +114,57 @@ set any of them.
 
 #### Required in production:
 
-* `JF_SERVER_API_TOKEN` - token for authorizing HTTP requests.<br/>
+* `FJ_SERVER_API_TOKEN` - token for authorizing HTTP requests.<br/>
 Defaults to `development` for development builds.
 
-* `JF_HOST` - defines how Fishjam should be seen from the outside.<br/>
-Defaults to `JF_IP:JF_PORT`.<br/>
+* `FJ_HOST` - defines how Fishjam should be seen from the outside.<br/>
+Defaults to `FJ_IP:FJ_PORT`.<br/>
 It can be in the form of `ip:port`, `domain:port` or simply `domain`.
 Additionally, you can specify a path (e.g. `ip:port/path`, `domain:port/path`, `domain/path`).
 Useful when hosting Fishjam behind proxy.
 It is returned e.g. when creating a new room.
-When running with Docker, `JF_IP` is set to `0.0.0.0`
-making the default value of `JF_HOST` incorrect.
-Therefore, for Docker, you have to set `JF_HOST` manually.
+When running with Docker, `FJ_IP` is set to `0.0.0.0`
+making the default value of `FJ_HOST` incorrect.
+Therefore, for Docker, you have to set `FJ_HOST` manually.
 For running Docker locally, it can simply be `localhost:8080`.
 
 #### Optional:
 
-* `JF_IP` - an ip address to run the HTTP server on.<br/>
+* `FJ_IP` - an ip address to run the HTTP server on.<br/>
 Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0.0.0` for Docker.
 
-* `JF_PORT` - port to run the HTTP server on.<br/>
+* `FJ_PORT` - port to run the HTTP server on.<br/>
 Defaults to `5002` for development builds and `8080` for production builds (`mix release` or Docker).
 
-* `JF_SSL_KEY_PATH` - an absolute path to the SSL key.
-When both `JF_SSL_KEY_PATH` and `JF_SSL_CERT_PATH` are set, Fishjam will
+* `FJ_SSL_KEY_PATH` - an absolute path to the SSL key.
+When both `FJ_SSL_KEY_PATH` and `FJ_SSL_CERT_PATH` are set, Fishjam will
 run HTTPS server instead of HTTP one.
-An address where this server listens to is still configured via `JF_IP` and `JF_PORT`.
+An address where this server listens to is still configured via `FJ_IP` and `FJ_PORT`.
 
-* `JF_SSL_CERT_PATH` - an absolute path the the SSL certificate.
-When both `JF_SSL_KEY_PATH` and `JF_SSL_CERT_PATH` are set, Fishjam will
+* `FJ_SSL_CERT_PATH` - an absolute path the the SSL certificate.
+When both `FJ_SSL_KEY_PATH` and `FJ_SSL_CERT_PATH` are set, Fishjam will
 run HTTPS server instead of HTTP one.
-An address where this server listens to is still configured via `JF_IP` and `JF_PORT`.
+An address where this server listens to is still configured via `FJ_IP` and `FJ_PORT`.
 
-* `JF_SECRET_KEY_BASE` - used to sign/encrypt tokens generated for Peers.
+* `FJ_SECRET_KEY_BASE` - used to sign/encrypt tokens generated for Peers.
 Generated if not provided.
 
-* `JF_CHECK_ORIGIN` - defines if Fishjam will check the origin of incoming requests and socket connection. <br/>
+* `FJ_CHECK_ORIGIN` - defines if Fishjam will check the origin of incoming requests and socket connection. <br/>
 Defaults to `true`.<br/>
 Possible values are `true`, `false` or a space-separated list of allowed origins (wildcards are allowed). <br/>
-Example: `JF_CHECK_ORIGIN="https://example.com //another.com:888 //*.other.com"`
+Example: `FJ_CHECK_ORIGIN="https://example.com //another.com:888 //*.other.com"`
 
-* `JF_RESOURCES_BASE_PATH` - a base path where Fishjam multimedia files are stored<br/>
+* `FJ_RESOURCES_BASE_PATH` - a base path where Fishjam multimedia files are stored<br/>
 Defaults to `./fishjam_resources/`.<br/>
 When running via docker, the directory can be mounted as `-v $(pwd)/host_directory:/app/fishjam_resources`.
 
-* `JF_METRICS_IP` - an IP address to run metrics endpoint on.<br/>
+* `FJ_METRICS_IP` - an IP address to run metrics endpoint on.<br/>
 Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0.0.0` for Docker.
 
-* `JF_METRICS_PORT` - a port to run metrics endpoint on.<br/>
+* `FJ_METRICS_PORT` - a port to run metrics endpoint on.<br/>
 Defaults to `9568`.
 
-* `JF_STRUCTURED_LOGGING` - whether to enable JSON-structured logging to stdout.<br/>
+* `FJ_STRUCTURED_LOGGING` - whether to enable JSON-structured logging to stdout.<br/>
 Defaults to `false`.<br/>
 Possible values of the `severity` field (ordered by importance) are:
   * `error`
@@ -202,55 +202,55 @@ Possible values are:
 
 #### Distribution:
 
-* `JF_DIST_ENABLED` - whether to run Fishjam in a cluster.<br/>
+* `FJ_DIST_ENABLED` - whether to run Fishjam in a cluster.<br/>
 Defaults to `false`.
 
-* `JF_DIST_STRATEGY_NAME` - specify which clustering strategy to use.<br/>
+* `FJ_DIST_STRATEGY_NAME` - specify which clustering strategy to use.<br/>
 Possible values are `DNS` or `NODES_LIST`. 
 Defaults to `NODES_LIST`.
 
-* `JF_DIST_NODE_NAME` - Node name used in a cluster.
+* `FJ_DIST_NODE_NAME` - Node name used in a cluster.
 Defaults to `fishjam@(hostname)`. <br/>
 It consists of two parts - nodename@hostname.
 The first part identifies a node on a single machine and can
 be any string.
 The second part identifies the host machine fishjam runs on and has to be resolvable.
-Its format depends on `JF_DIST_MODE`.
-If `JF_DIST_MODE` is set to `name`, the `hostname` has to be an IP address or FQDN.
-If `JF_DIST_MODE` is set to `sname`, the `hostname` can be any string.
+Its format depends on `FJ_DIST_MODE`.
+If `FJ_DIST_MODE` is set to `name`, the `hostname` has to be an IP address or FQDN.
+If `FJ_DIST_MODE` is set to `sname`, the `hostname` can be any string.
 If you run a cluster using `DNS` strategy, every Fishjam instance must have `nodename` set to the same value.
 If `hostname` is not an IP address, it will be automatically resolved as DNS strategy requires
 node names to use IP addresses.
-This also means that `DNS` strategy has to be run with `JF_DIST_MODE` set to `name`.
+This also means that `DNS` strategy has to be run with `FJ_DIST_MODE` set to `name`.
 See our [docker-compose-epmd.yaml](https://github.com/fishjam-dev/fishjam/blob/main/docker-compose-epmd.yaml) or [docker-compose-dns.yaml](https://github.com/fishjam-dev/fishjam/blob/main/docker-compose-dns.yaml), which we use in our integration tests or refer to [Cluster](../cluster.md) section for examples.
 
-* `JF_DIST_MODE` - distribution mode - can be `name` or `sname`.<br/>
+* `FJ_DIST_MODE` - distribution mode - can be `name` or `sname`.<br/>
 Defaults to `sname`.<br/>
 When using `name`, your hostname has to be an IP address or FQDN of a machine Fishjam runs on.
 When using `sname`, your hostname can be any string.
-See `JF_DIST_NODE_NAME` for more information.
+See `FJ_DIST_NODE_NAME` for more information.
 
-* `JF_DIST_COOKIE` - used to group Fishjams in a cluster.<br/>
+* `FJ_DIST_COOKIE` - used to group Fishjams in a cluster.<br/>
 Defaults to `fishjam_cookie`.<br/>
 Use different cookies to create multiple clusters on the same machine.<br/>
 **Important**: cookie does not provide any cryptographic security.
 Its only purpose is to prevent a node from connecting to a cluster with which 
 it is not intended to communicate.
 
-* `JF_DIST_MIN_PORT`- minimal port used by Fishjam when forming a cluster
+* `FJ_DIST_MIN_PORT`- minimal port used by Fishjam when forming a cluster
 (connecting to other Fishjams).<br/>
 Defaults to `9000` when running with Docker.<br/>
 Only available when running with Docker or `mix release`.
 
-* `JF_DIST_MAX_PORT`- maximal port used by Fishjam when forming a cluster
+* `FJ_DIST_MAX_PORT`- maximal port used by Fishjam when forming a cluster
 (connecting to other Fishjams).<br/>
 Defaults to `9000` when running with Docker.<br/>
 Only available when running with Docker or `mix release`.
 
 ###### Distribution NODES_LIST specific:
-* `JF_DIST_NODES` - space-separated list of other Fishjams to connect to.<br/>
+* `FJ_DIST_NODES` - space-separated list of other Fishjams to connect to.<br/>
 Defaults to `""`.<br/>
-Example: `JF_DIST_NODES="fishjam1@127.0.0.1 fishjam2@127.0.0.1"`.<br/>
+Example: `FJ_DIST_NODES="fishjam1@127.0.0.1 fishjam2@127.0.0.1"`.<br/>
 This list can also include ourselves so that you can pass the same value
 to every Fishjam.
 Note: Fishjam connection to other Fishjam is transitive meaning that
@@ -258,10 +258,10 @@ when you connect to one Fishjam you also connect to all other Fishjams
 this one was connected to.
 
 ###### Distribution DNS specific:
-* `JF_DIST_QUERY` - query sent to DNS to discover other Fishjams. <br/>
+* `FJ_DIST_QUERY` - query sent to DNS to discover other Fishjams. <br/>
 Returned list of IPs from DNS is used for creating distribution node name in the format `<nodename>@<IP_ADDRESS>`.  
 
-* `JF_DIST_POLLING_INTERVAL` - DNS polling interval in ms. <br/> 
+* `FJ_DIST_POLLING_INTERVAL` - DNS polling interval in ms. <br/> 
 Default value is 5000.
 
 :::tip
@@ -273,7 +273,7 @@ more than two Fishjams.
 
 :::caution
 
-Besides ports specified using `JF_DIST_MIN_PORT` and `JF_DIST_MAX_PORT`, Fishjam
+Besides ports specified using `FJ_DIST_MIN_PORT` and `FJ_DIST_MAX_PORT`, Fishjam
 also uses one more service called EPMD that runs on port 4369.
 This port has to be explicitly exported when running with Docker.
 Read more in the [Cluster](../cluster.md) section.

@@ -152,14 +152,14 @@ We prepared a template *cloud-config* that will configure your server and start 
     - service nginx start
     - |
       cat << EOF > /opt/fishjam/env-file
-      JF_HOST=$FISHJAM_DOMAIN
-      JF_PORT=5002
-      JF_SERVER_API_TOKEN=$SERVER_API_TOKEN
-      JF_CHECK_ORIGIN=false
-      JF_WEBRTC_TURN_IP=$(ip route get 1.0.0.0 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')
-      JF_WEBRTC_TURN_TCP_PORT=49999
-      JF_WEBRTC_TURN_PORT_RANGE=50000-50100
-      JF_WEBRTC_TURN_LISTEN_IP=0.0.0.0
+      FJ_HOST=$FISHJAM_DOMAIN
+      FJ_PORT=5002
+      FJ_SERVER_API_TOKEN=$SERVER_API_TOKEN
+      FJ_CHECK_ORIGIN=false
+      FJ_WEBRTC_TURN_IP=$(ip route get 1.0.0.0 | sed -n 's/^.*src \([0-9.]*\) .*$/\1/p')
+      FJ_WEBRTC_TURN_TCP_PORT=49999
+      FJ_WEBRTC_TURN_PORT_RANGE=50000-50100
+      FJ_WEBRTC_TURN_LISTEN_IP=0.0.0.0
       EOF
     - [
         su,

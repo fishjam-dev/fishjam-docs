@@ -39,9 +39,9 @@ the [Subscription API](../../for_developers/api_reference/rest_api#tag/room/oper
 If you prefer not to pass these parameters through the REST API, you should declare the following environment variables for the S3 bucket:
 
 Credentials:
-* `JF_S3_BUCKET` - The name of the S3 bucket where the RTP streams will be stored.
-* `JF_S3_REGION` - The AWS region where your S3 bucket is located.
-* `JF_S3_ACCESS_KEY_ID` - Your AWS access key ID.
-* `JF_S3_SECRET_ACCESS_KEY` - Your secret access key for AWS. 
+* `FJ_S3_BUCKET` - The name of the S3 bucket where the RTP streams will be stored.
+* `FJ_S3_REGION` - The AWS region where your S3 bucket is located.
+* `FJ_S3_ACCESS_KEY_ID` - Your AWS access key ID.
+* `FJ_S3_SECRET_ACCESS_KEY` - Your secret access key for AWS. 
 Path prefix:
-* `JF_S3_PATH_PREFIX` - path prefix under which all streams will be stored.
+* `FJ_S3_PATH_PREFIX` - path prefix under which all streams will be stored.

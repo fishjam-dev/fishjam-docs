@@ -3,18 +3,18 @@ For testing, we'll run the Fishjam Media Server locally using Docker image:
 ```bash
 docker run -p 50000-50050:50000-50050/udp \
            -p 5002:5002/tcp \
-           -e JF_CHECK_ORIGIN=false \
-           -e JF_HOST=<your ip address>:5002 \
-           -e JF_PORT="5002" \
-           -e JF_WEBRTC_USED=true \
-           -e JF_WEBRTC_TURN_PORT_RANGE=50000-50050 \
-           -e JF_WEBRTC_TURN_IP=<your ip address> \
-           -e JF_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
-           -e JF_SERVER_API_TOKEN=development \
+           -e FJ_CHECK_ORIGIN=false \
+           -e FJ_HOST=<your ip address>:5002 \
+           -e FJ_PORT="5002" \
+           -e FJ_WEBRTC_USED=true \
+           -e FJ_WEBRTC_TURN_PORT_RANGE=50000-50050 \
+           -e FJ_WEBRTC_TURN_IP=<your ip address> \
+           -e FJ_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
+           -e FJ_SERVER_API_TOKEN=development \
            ghcr.io/fishjam-dev/fishjam:0.5.0
 ```
 
-Make sure to set `JF_WEBRTC_TURN_IP` and `JF_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the Fishjam.
+Make sure to set `FJ_WEBRTC_TURN_IP` and `FJ_HOST` to your local IP address. Without it, the mobile device won't be able to connect to the Fishjam.
 
 :::tip
 

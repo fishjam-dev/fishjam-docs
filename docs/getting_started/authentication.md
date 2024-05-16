@@ -18,13 +18,13 @@ Token encodes peer id and room id.
 1. Run Fishjam
 
 ```bash
-JF_SERVER_API_TOKEN=JF_SERVER_API_TOKEN mix phx.server
+FJ_SERVER_API_TOKEN=FJ_SERVER_API_TOKEN mix phx.server
 ```
 
 2. Create a room and add one peer
 
 ```elixir title="Business Logic"
-client = Fishjam.Client.new("http://address-of-your-server.com", "JF_SERVER_API_TOKEN")
+client = Fishjam.Client.new("http://address-of-your-server.com", "FJ_SERVER_API_TOKEN")
 {:ok, room, _fishjam_address} = Fishjam.Room.create(client, max_peers: 10)
 {:ok, %{peer: peer, token: peer_token, websocket_url: websocket_url}} = Fishjam.Room.add_peer(client, room.id, "BobId")
 ```

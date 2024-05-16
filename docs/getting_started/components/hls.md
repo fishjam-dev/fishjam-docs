@@ -103,8 +103,8 @@ Other than that, your Docker commands shouldn't be affected by adding this compo
 
 ```bash
 docker run -p 8080:8080/tcp \
-           -e JF_SERVER_API_TOKEN=token \
-           -e JF_HOST=localhost:8080 \
+           -e FJ_SERVER_API_TOKEN=token \
+           -e FJ_HOST=localhost:8080 \
            -v $(pwd)/fishjam_resources:/app/fishjam_resources \
            ghcr.io/fishjam-dev/fishjam:0.3.0
 ```

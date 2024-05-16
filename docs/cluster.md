@@ -4,7 +4,7 @@ Fishjam comes with a built-in clustering mechanism.
 By a cluster, we mean a set of connected Fishjam instances.
 Whenever a new request for creating a room is sent to one of Fishjams in a cluster, this Fishjam
 communicates with all other nodes and creates a room on the node with the lowest load.
-In response, a Fishjam address (specified with `JF_HOST` environment variable) where the room was created is returned.
+In response, a Fishjam address (specified with `FJ_HOST` environment variable) where the room was created is returned.
 
 :::info
 
@@ -45,8 +45,8 @@ any extra steps to make it work.
 
 * Fishjam uses a random port for connecting to other Fishjams.
 If you run Fishjam using Docker, this port defaults to `9000` (TCP) but you can configure
-the range it is selected from with `JF_DIST_MIN_PORT` and `JF_DIST_MAX_PORT`.
-Note that `JF_DIST_MIN_PORT` and `JF_DIST_MAX_PORT` are not available when running from source 
+the range it is selected from with `FJ_DIST_MIN_PORT` and `FJ_DIST_MAX_PORT`.
+Note that `FJ_DIST_MIN_PORT` and `FJ_DIST_MAX_PORT` are not available when running from source 
 (using `mix phx.server`) as in development you don't have to worry about the port used for
 forming a cluster.
 As in the case of EPMD, in production deployment, you have to modify your firewall rules appropriately.
@@ -72,9 +72,9 @@ When node A connects to node B, it also connects to all other nodes that node B 
 
 To form a cluster using `NODES_LIST` strategy:
 
-1. Enable distribution mode with `JF_DIST_ENABLED=true`
-1. Give your node a name with `JF_DIST_NODE_NAME`
-1. Specify a list of nodes to connect to with `JF_DIST_NODES`
+1. Enable distribution mode with `FJ_DIST_ENABLED=true`
+1. Give your node a name with `FJ_DIST_NODE_NAME`
+1. Specify a list of nodes to connect to with `FJ_DIST_NODES`
 
 
 ### Running from source
@@ -82,13 +82,13 @@ To form a cluster using `NODES_LIST` strategy:
 Run the first Fishjam:
 
 ```sh
-JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j1@localhost mix phx.server
+FJ_DIST_ENABLED=true FJ_DIST_NODE_NAME=j1@localhost mix phx.server
 ```
 
 Run the second Fishjam
 
 ```sh
-JF_DIST_ENABLED=true JF_DIST_NODE_NAME=j2@localhost JF_DIST_NODES="j1@localhost" JF_PORT=4002 JF_METRICS_PORT=9468 mix phx.server
+FJ_DIST_ENABLED=true FJ_DIST_NODE_NAME=j2@localhost FJ_DIST_NODES="j1@localhost" FJ_PORT=4002 FJ_METRICS_PORT=9468 mix phx.server
 ```
 
 :::info
@@ -108,9 +108,9 @@ version: "3"
 x-fishjam-template: &fishjam-template
   build: .
   environment: &fishjam-environment
-    JF_SERVER_API_TOKEN: "development"
-    JF_DIST_ENABLED: "true"
-    JF_DIST_NODES: "j1@fishjam1 j2@fishjam2"
+    FJ_SERVER_API_TOKEN: "development"
+    FJ_DIST_ENABLED: "true"
+    FJ_DIST_NODES: "j1@fishjam1 j2@fishjam2"
   restart: on-failure
 
 services:
@@ -118,10 +118,10 @@ services:
     <<: *fishjam-template
     environment:
       <<: *fishjam-environment
-      JF_HOST: "localhost:5001"
-      JF_PORT: 5001
-      JF_METRICS_PORT: 6001
-      JF_DIST_NODE_NAME: j1@fishjam1
+      FJ_HOST: "localhost:5001"
+      FJ_PORT: 5001
+      FJ_METRICS_PORT: 6001
+      FJ_DIST_NODE_NAME: j1@fishjam1
     ports:
       - 5001:5001
       - 6001:6001
@@ -130,17 +130,17 @@ services:
     <<: *fishjam-template
     environment:
       <<: *fishjam-environment
-      JF_HOST: "localhost:5002"
-      JF_PORT: 5002
-      JF_METRICS_PORT: 6002
-      JF_DIST_NODE_NAME: j2@fishjam2
+      FJ_HOST: "localhost:5002"
+      FJ_PORT: 5002
+      FJ_METRICS_PORT: 6002
+      FJ_DIST_NODE_NAME: j2@fishjam2
     ports:
       - 5002:5002
       - 6002:6002
 ```
 
 Because we run Fishjams in the same Docker network:
-* we can use `JF_DIST_NODE: "sname"`, which allows
+* we can use `FJ_DIST_NODE: "sname"`, which allows
 us to reference Fishjams using their service names so
 `fishjam1` and `fishjam2`
 * we don't need to export EPMD (`4369`) or distribution (`9000`)
@@ -151,8 +151,8 @@ ports
 
 When forming a cluster across multiple machines:
 * you have to take care of [Extra Network Configuration](#extra-network-configuration)
-* you also can't use `JF_DIST_MODE="sname"` as you have to name Fishjam nodes using their publicly available IP address
-or domain names (see `JF_DIST_NODE_NAME` and `JF_DIST_MODE`)
+* you also can't use `FJ_DIST_MODE="sname"` as you have to name Fishjam nodes using their publicly available IP address
+or domain names (see `FJ_DIST_NODE_NAME` and `FJ_DIST_MODE`)
 * you can't simulate this setup locally as you won't be able to expose two EMPD ports on the same machine.
 See [Deeper dive into Erlang Distribution](#deeper-dive-into-erlang-distribution) for more information.
 
@@ -163,15 +163,15 @@ See our [Fishjam Videoroom deployment configuration](https://github.com/fishjam-
 
 To form a cluster using `DNS` strategy:
 
-1. Enable distribution mode with `JF_DIST_ENABLED=true`
-1. Chose `DNS` strategy with `JF_DIST_STRATEGY_NAME`.
-1. Set `JF_DIST_MODE` to `name`.
-1. Give your node a name with `JF_DIST_NODE_NAME`.<br /> 
+1. Enable distribution mode with `FJ_DIST_ENABLED=true`
+1. Chose `DNS` strategy with `FJ_DIST_STRATEGY_NAME`.
+1. Set `FJ_DIST_MODE` to `name`.
+1. Give your node a name with `FJ_DIST_NODE_NAME`.<br /> 
 **Important** It has to be in the form of `<nodename>@<hostname>`
 where all Fishjams MUST have the same `<nodename>`.
-1. Specify a query under which Fishjams are register in DNS with `JF_DIST_QUERY`. <br />
+1. Specify a query under which Fishjams are register in DNS with `FJ_DIST_QUERY`. <br />
 **Important** Fishjam does not register itself in DNS.
-It is user responsibility to enusre that your Fishjam is registered in DNS under `JF_DIST_QUERY`.
+It is user responsibility to enusre that your Fishjam is registered in DNS under `FJ_DIST_QUERY`.
 
 ### Running with Docker
 
@@ -182,19 +182,19 @@ version: "3"
 x-fishjam-template: &fishjam-template
   build: .
   environment: &fishjam-environment
-    JF_SERVER_API_TOKEN: "development"
-    JF_DIST_ENABLED: "true"
-    JF_DIST_STRATEGY_NAME: "DNS"
-    JF_DIST_MODE: "name"
+    FJ_SERVER_API_TOKEN: "development"
+    FJ_DIST_ENABLED: "true"
+    FJ_DIST_STRATEGY_NAME: "DNS"
+    FJ_DIST_MODE: "name"
   restart: on-failure
 services:
   app1:
     <<: *fishjam-template
     environment:
       <<: *fishjam-environment
-      JF_HOST: "localhost:4001"
-      JF_PORT: 4001
-      JF_DIST_QUERY: app.dns-network
+      FJ_HOST: "localhost:4001"
+      FJ_PORT: 4001
+      FJ_DIST_QUERY: app.dns-network
     ports:
       - 4001:4001
     networks:
@@ -206,9 +206,9 @@ services:
     <<: *fishjam-template
     environment:
       <<: *fishjam-environment
-      JF_HOST: "localhost:4002"
-      JF_PORT: 4002
-      JF_DIST_QUERY: app.dns-network
+      FJ_HOST: "localhost:4002"
+      FJ_PORT: 4002
+      FJ_DIST_QUERY: app.dns-network
     ports:
       - 4002:4002
     networks:
@@ -219,7 +219,7 @@ services:
 
 Because we run Fishjams in the same Docker network we don't need to export EPMD (`4369`) or distribution (`9000`)
 ports.
-We also didn't have to explicitly set `JF_DIST_NODE_NAME`.
+We also didn't have to explicitly set `FJ_DIST_NODE_NAME`.
 The default value (`fishjam@(hostname)`) is automatically resolved to `fishjam@<ip_address>`
 and is routable from other nodes in the docker network.
 

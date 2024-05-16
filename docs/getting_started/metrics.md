@@ -2,7 +2,7 @@
 
 Fishjam exports several metrics in the Prometheus format.
 By default, they are available on port `9568` at `/metrics`.
-See `JF_METRICS_IP` and `JF_METRICS_PORT` for configuration options.
+See `FJ_METRICS_IP` and `FJ_METRICS_PORT` for configuration options.
 
 | Name                                           | Labels    | Description                                                                   |
 | ---------------------------------------------- | --------- | ----------------------------------------------------------------------------- |
