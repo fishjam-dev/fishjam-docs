@@ -36,6 +36,12 @@ the [Subscription API](../../for_developers/api_reference/rest_api#tag/room/oper
 
 ## Environment variables
 
+* `FJ_COMPONENTS_USED` - has to contain `recording` if Recording components will be used.<br/>
+By default set to an empty string (Recording components are disabled).<br/>
+Refer [here](../installation.md#environment-variables) for more info.
+
+### S3-related
+
 If you prefer not to pass these parameters through the REST API, you should declare the following environment variables for the S3 bucket:
 
 Credentials:

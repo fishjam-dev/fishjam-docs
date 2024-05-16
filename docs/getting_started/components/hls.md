@@ -86,7 +86,9 @@ room_api.hls_subscribe(room.id, [result.peer.id])
 
 ## Env variables
 
-Currently, there are no environment variables related to this component.
+* `FJ_COMPONENTS_USED` - has to contain `hls` if HLS components will be used.<br/>
+By default set to an empty string (HLS components are disabled).<br/>
+Refer [here](../installation.md#environment-variables) for more info.
 
 ## Output
 

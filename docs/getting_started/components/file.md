@@ -45,4 +45,6 @@ For video files `null` means 30 FPS.
 
 ## Env variables
 
-Currently, there are no environment variables related to this component.
+* `FJ_COMPONENTS_USED` - has to contain `file` if File components will be used.<br/>
+By default set to an empty string (File components are disabled).<br/>
+Refer [here](../installation.md#environment-variables) for more info.
