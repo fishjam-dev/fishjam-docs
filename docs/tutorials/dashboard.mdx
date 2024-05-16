@@ -1,49 +1,49 @@
 ---
-title: Jellyfish Dashboard
+title: Fishjam Dashboard
 ---
 
 import { ImageWrapper } from "./ImageWrapper";
-import StartingJellyfishMediaServer from "./common/_starting-jellyfish-media-server.mdx";
-import StartingJellyfishDashboard from "./common/_starting-dashboard.mdx";
+import StartingFishjamMediaServer from "./common/_starting-fishjam-media-server.mdx";
+import StartingFishjamDashboard from "./common/_starting-dashboard.mdx";
 
-# The Whats and Hows of Jellyfish Dashboard
+# The Whats and Hows of Fishjam Dashboard
 
-## What is Jellyfish Dashboard?
+## What is Fishjam Dashboard?
 
-Jellyfish Dashboard is a web application that allows you to manage your Jellyfish Media Server instance.
-It is a React application that uses the [Jellyfish React Client API](https://github.com/jellyfish-dev/react-client-sdk)
-for adding and receiving tracks and [Jellyfish Server API](https://github.com/jellyfish-dev/jellyfish/blob/main/openapi.yaml)
+Fishjam Dashboard is a web application that allows you to manage your Fishjam Media Server instance.
+It is a React application that uses the [Fishjam React Client API](https://github.com/fishjam-dev/react-client-sdk)
+for adding and receiving tracks and [Fishjam Server API](https://github.com/fishjam-dev/fishjam/blob/main/openapi.yaml)
 for adding peers, creating rooms etc.
 
-It was created to help Jellyfish developers in testing but was later extended and adapted as a tool for tutorials and demos.
+It was created to help Fishjam developers in testing but was later extended and adapted as a tool for tutorials and demos.
 Here, we present a short introduction to the dashboard and its features.
 
-## How to start Jellyfish Dashboard?
+## How to start Fishjam Dashboard?
 
-<StartingJellyfishDashboard />
+<StartingFishjamDashboard />
 
-## How to start Jellyfish Media Server?
+## How to start Fishjam Media Server?
 
-<StartingJellyfishMediaServer />
+<StartingFishjamMediaServer />
 
-## How to use Jellyfish Dashboard?
+## How to use Fishjam Dashboard?
 
-Since we have Dashboard and Jellyfish Media Server up and running, we can dive into
+Since we have Dashboard and Fishjam Media Server up and running, we can dive into
 the features.
 
 ### Connecting to the server
 
-We started the dashboard and the Jellyfish Media Server separately, so we need to connect them.
+We started the dashboard and the Fishjam Media Server separately, so we need to connect them.
 
 1. Open the dashboard in your browser. Open the side menu and fill in the parameters:
 
 ![Dashboard server connection](/img/tutorials/dashboard/dashboard_server.png)
 
-- **Server token** - a token necessary to authenticate the dashboard with the Jellyfish. For now, it's simply `development`,
-  but it is meant to authenticate the dashboard to the Jellyfish, so the good practice is to use a token that is hard to guess.
-- **WS/WSS** - whether to use a secure or insecure connection. , it's `ws`, but if the Jellyfish uses secure WebSocket, use `wss`.
-- **HTTP/HTTPS** - whether to use a secure or insecure connection. By default, it's `http`, but if the Jellyfish uses secure HTTP, use `https`.
-- **Server URL** - URL of the Jellyfish server. Here, `localhost:5002` would be a local build, but it can be any URL that points to the Jellyfish.
+- **Server token** - a token necessary to authenticate the dashboard with the Fishjam. For now, it's simply `development`,
+  but it is meant to authenticate the dashboard to the Fishjam, so the good practice is to use a token that is hard to guess.
+- **WS/WSS** - whether to use a secure or insecure connection. , it's `ws`, but if the Fishjam uses secure WebSocket, use `wss`.
+- **HTTP/HTTPS** - whether to use a secure or insecure connection. By default, it's `http`, but if the Fishjam uses secure HTTP, use `https`.
+- **Server URL** - URL of the Fishjam server. Here, `localhost:5002` would be a local build, but it can be any URL that points to the Fishjam.
 - **Socket Path** - path to the WebSocket endpoint. The default value is `/socket/peer/websocket`.
 
 2. Click **Connect to server**. If everything is correct, a server will appear in the list of connected servers:
@@ -70,10 +70,10 @@ Using the **Create peer** button, you can create a peer that will be ready to co
 ![Peer created](/img/tutorials/dashboard/dashboard_peer_created.png)
 
 The peer has its `ID` and `Token`.
-The `ID` is used to identify the peer in the Jellyfish Server, and the `Token` is used to authenticate the peer with the Jellyfish Server.
+The `ID` is used to identify the peer in the Fishjam Server, and the `Token` is used to authenticate the peer with the Fishjam Server.
 
 Dashboard has an option to copy both of those values to the clipboard.
-You can also create a QR code with the peer's `Token` to make connecting to Jellyfish with a mobile device easier.
+You can also create a QR code with the peer's `Token` to make connecting to Fishjam with a mobile device easier.
 
 ![Peer copied](/img/tutorials/dashboard/dashboard_peer_copied.png)
 
@@ -110,9 +110,9 @@ When the peer connects to the room, it will automatically receive tracks from ot
 ### Server logs in console
 
 On the side menu, you can set up the dashboard to display React Client logs in the console.
-Logs are great for debugging purposes and provide insight into the various communications that occur between the dashboard and the Jellyfish Server.
-You can also register your event handlers in your Jellyfish-based projects, both in the
-[React Client SDK](https://github.com/jellyfish-dev/react-client-sdk) and the[TS Client SDK](https://github.com/jellyfish-dev/ts-client-sdk).
+Logs are great for debugging purposes and provide insight into the various communications that occur between the dashboard and the Fishjam Server.
+You can also register your event handlers in your Fishjam-based projects, both in the
+[React Client SDK](https://github.com/fishjam-dev/react-client-sdk) and the[TS Client SDK](https://github.com/fishjam-dev/ts-client-sdk).
 These logs can show you when particular events occur and provide data that you can use in your own handlers
 
 <ImageWrapper
@@ -144,23 +144,23 @@ You can set up the streams and see them in the room. It will look like this:
 
 ## Loadbalancing in Dashboard
 
-Jellyfish Server supports load balancing.
+Fishjam Server supports load balancing.
 This means you can run multiple instances of the server and use them simultaneously to distribute the load evenly among them.
 The dashboard reflects this feature.
-If you run multiple Jellyfish instances (which [Docker Compose](https://github.com/jellyfish-dev/jellyfish/blob/main/docker-compose.yaml) does by default),
+If you run multiple Fishjam instances (which [Docker Compose](https://github.com/fishjam-dev/fishjam/blob/main/docker-compose.yaml) does by default),
 connect one server to the dashboard.
 When a server opens a room on a different instance, the Dashboard will automatically connect to it and display the room.
-When Jellyfish runs in a cluster, and the Dashboard requests a new room, it's created on the Jellyfish instance with the lowest load.
-Information about the specific Jellyfish instance that hosts the newly created room is returned in the HTTP response body.
+When Fishjam runs in a cluster, and the Dashboard requests a new room, it's created on the Fishjam instance with the lowest load.
+Information about the specific Fishjam instance that hosts the newly created room is returned in the HTTP response body.
 
-## Data collected by Jellyfish
+## Data collected by Fishjam
 
-For each server, Jellyfish collects WebRTC statistics about the rooms, clients and streamed tracks. You can see them in the dashboard using the **Internals** button.
+For each server, Fishjam collects WebRTC statistics about the rooms, clients and streamed tracks. You can see them in the dashboard using the **Internals** button.
 
 ![Internals button](/img/tutorials/dashboard/dashboard_internals_button.png)
 
-The button opens a new tab with the panel to connect to the WebSocket of the Jellyfish of choice.
-You can observe the data with the dynamically generated charts showing what flows through the Jellyfish.
+The button opens a new tab with the panel to connect to the WebSocket of the Fishjam of choice.
+You can observe the data with the dynamically generated charts showing what flows through the Fishjam.
 
 ![Internals](/img/tutorials/dashboard/dashboard_internals.png)
 
@@ -169,11 +169,11 @@ You can observe the data with the dynamically generated charts showing what flow
 Congrats on finishing the tutorial! You should now be able to use the dashboard to its full potential.
 
 But this was just the beginning.
-Jellyfish Client API is a powerful tool that allows you to create your own web or mobile multimedia application.
-Check out the other tutorials to learn more about the Jellyfish Client API and how to use it in your projects.
+Fishjam Client API is a powerful tool that allows you to create your own web or mobile multimedia application.
+Check out the other tutorials to learn more about the Fishjam Client API and how to use it in your projects.
 
-You can also take a look at our fully featured [Videoroom Demo example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
+You can also take a look at our fully featured [Videoroom Demo example](https://github.com/fishjam-dev/react-native-membrane-webrtc/tree/master/example):
 
 <ImageWrapper url={"/img/tutorials/videoroom.gif"} alt="Videoroom Demo" />
 
-It's written in React Native, but it uses the same Jellyfish Client API as the dashboard, so you can learn a lot from it.
+It's written in React Native, but it uses the same Fishjam Client API as the dashboard, so you can learn a lot from it.

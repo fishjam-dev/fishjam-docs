@@ -1,7 +1,7 @@
 # Cloud VPS with cloud-init
 
 We're encouraging you to use VPS as the most customizable option.
-In this example, we will show you how to set up a Jellyfish media server on [Hetzner Cloud](https://www.hetzner.com/cloud), but you can use these instructions to run Jellyfish on VPS from any provider that supports [cloud-init](https://cloud-init.io/) setup.
+In this example, we will show you how to set up a Fishjam media server on [Hetzner Cloud](https://www.hetzner.com/cloud), but you can use these instructions to run Fishjam on VPS from any provider that supports [cloud-init](https://cloud-init.io/) setup.
 
 We're presenting a configuration which uses SSL protocol, as we are aware of the consequences of using unencrypted connections.
 That means you're going to need a registered domain but getting one is not a big deal nowadays.
@@ -26,9 +26,9 @@ After registering your domain go to the DNS Records Table of your provider and c
 ## 3. Choosing the right VPS
 
 Now let's go back to the Hetzner project site.
-It's time to choose and configure a server for Jellyfish.
+It's time to choose and configure a server for Fishjam.
 
-Although Jellyfish doesn't have minimum requirements to work, we encourage you to choose a middle-sized VPS (at least 8 cores) as media processing is consuming quite a lot of CPU.
+Although Fishjam doesn't have minimum requirements to work, we encourage you to choose a middle-sized VPS (at least 8 cores) as media processing is consuming quite a lot of CPU.
 Remember to choose a server located in the data center where you've created an IP address in the first step.
 
 For this tutorial, we decided on CPX21 from Hetzner Cloud running Ubuntu 22:
@@ -43,7 +43,7 @@ Select it.
 
 ## 5. Adding a *cloud-init* configuration
 
-To configure a server and install Jellyfish on it we're going to use *cloud-init*.
+To configure a server and install Fishjam on it we're going to use *cloud-init*.
 It's a preinstalled tool that lets you set up a newly created server with a YAML config file.
 In the configuration you can create a user, choose packages to be installed, configure them, write or modify files and in our case finally run a docker container.
 
@@ -52,7 +52,7 @@ Full documentation about keys you can use in a _cloud-config_ file can be found 
 
 ### A ___cloud-config___ template
 
-We prepared a template *cloud-config* that will configure your server and start a chosen version of Jellyfish:
+We prepared a template *cloud-config* that will configure your server and start a chosen version of Fishjam:
 
 <details>
   <summary>cloud-config.yaml</summary>
@@ -60,7 +60,7 @@ We prepared a template *cloud-config* that will configure your server and start 
   ```
   #cloud-config
   users:
-    - name: jellyfish
+    - name: fishjam
       groups: docker
       sudo: null
       shell: /bin/false
@@ -82,13 +82,13 @@ We prepared a template *cloud-config* that will configure your server and start 
     - nginx
     - certbot
   write_files:
-    - path: /opt/jellyfish/env-file
+    - path: /opt/fishjam/env-file
       defer: true
-      owner: jellyfish:jellyfish
+      owner: fishjam:fishjam
 
   runcmd:
-    - export JELLYFISH_VERSION=0.3.0
-    - export JELLYFISH_DOMAIN=mydomain.example.com
+    - export FISHJAM_VERSION=0.5.0
+    - export FISHJAM_DOMAIN=mydomain.example.com
     - export LETSENCRYPT_EMAIL=my@email.com
     - export SERVER_API_TOKEN=test_token
     - systemctl enable fail2ban
@@ -107,16 +107,16 @@ We prepared a template *cloud-config* that will configure your server and start 
     - ufw allow out 49999 proto tcp to any
     - ufw enable
     - service nginx stop
-    - "[ ! -f /etc/letsencrypt/live/$JELLYFISH_DOMAIN/cert.pem ] && certbot certonly --standalone --noninteractive --agree-tos --email $LETSENCRYPT_EMAIL -d $JELLYFISH_DOMAIN"
+    - "[ ! -f /etc/letsencrypt/live/$FISHJAM_DOMAIN/cert.pem ] && certbot certonly --standalone --noninteractive --agree-tos --email $LETSENCRYPT_EMAIL -d $FISHJAM_DOMAIN"
     - |
       cat << EOF > /etc/cron.d/cert_renew
-      0 4 * * * [jellyfish] certbot certonly --webroot -w /usr/share/nginx/html -d $JELLYFISH_DOMAIN --keep-until-expiring --quiet
-      5 4 * * * [jellyfish] service nginx reload
+      0 4 * * * [fishjam] certbot certonly --webroot -w /usr/share/nginx/html -d $FISHJAM_DOMAIN --keep-until-expiring --quiet
+      5 4 * * * [fishjam] service nginx reload
       EOF
     - |
-      cat << EOF > /etc/nginx/sites-available/$JELLYFISH_DOMAIN
+      cat << EOF > /etc/nginx/sites-available/$FISHJAM_DOMAIN
         server {
-          server_name $JELLYFISH_DOMAIN;
+          server_name $FISHJAM_DOMAIN;
           location / {
             proxy_pass http://localhost:5002;
             proxy_http_version 1.1;
@@ -127,14 +127,14 @@ We prepared a template *cloud-config* that will configure your server and start 
 
           listen [::]:443 ssl http2; # managed by Certbot
           listen 443 ssl http2; # managed by Certbot
-          ssl_certificate /etc/letsencrypt/live/$JELLYFISH_DOMAIN/fullchain.pem; # managed by Certbot
-          ssl_certificate_key /etc/letsencrypt/live/$JELLYFISH_DOMAIN/privkey.pem; # managed by Certbot
+          ssl_certificate /etc/letsencrypt/live/$FISHJAM_DOMAIN/fullchain.pem; # managed by Certbot
+          ssl_certificate_key /etc/letsencrypt/live/$FISHJAM_DOMAIN/privkey.pem; # managed by Certbot
         }
 
         server {
             listen 80;
             listen [::]:80;
-            server_name $JELLYFISH_DOMAIN;
+            server_name $FISHJAM_DOMAIN;
             # Do not HTTPS redirect Let'sEncrypt ACME challenge
             location /.well-known/acme-challenge/ {
                     auth_basic off;
@@ -148,11 +148,11 @@ We prepared a template *cloud-config* that will configure your server and start 
             }
         }
       EOF
-    - ln -sf /etc/nginx/sites-available/$JELLYFISH_DOMAIN /etc/nginx/sites-enabled/$JELLYFISH_DOMAIN
+    - ln -sf /etc/nginx/sites-available/$FISHJAM_DOMAIN /etc/nginx/sites-enabled/$FISHJAM_DOMAIN
     - service nginx start
     - |
-      cat << EOF > /opt/jellyfish/env-file
-      JF_HOST=$JELLYFISH_DOMAIN
+      cat << EOF > /opt/fishjam/env-file
+      JF_HOST=$FISHJAM_DOMAIN
       JF_PORT=5002
       JF_SERVER_API_TOKEN=$SERVER_API_TOKEN
       JF_CHECK_ORIGIN=false
@@ -163,7 +163,7 @@ We prepared a template *cloud-config* that will configure your server and start 
       EOF
     - [
         su,
-        jellyfish,
+        fishjam,
         -s,
         /bin/bash,
         -c,
@@ -171,23 +171,23 @@ We prepared a template *cloud-config* that will configure your server and start 
         --restart unless-stopped \
         -p 50000-50100:50000-50100/udp \
         -p 5002:5002 \
-        --env-file /opt/jellyfish/env-file \
-        -v /opt/jellyfish/jellyfish_resources:/app/jellyfish_resources \
-        ghcr.io/jellyfish-dev/jellyfish:$JELLYFISH_VERSION",
+        --env-file /opt/fishjam/env-file \
+        -v /opt/fishjam/fishjam_resources:/app/fishjam_resources \
+        ghcr.io/fishjam-dev/fishjam:$FISHJAM_VERSION",
       ]
   ```
 </details>
 You'll need to manually take care of four lines in that template:
 
-- `- export JELLYFISH_VERSION=0.1.0-ed317b`
-  Change the value if you want to deploy a different version of Jellyfish.
-  You can find the list of available versions in [our package repository](https://github.com/jellyfish-dev/jellyfish/pkgs/container/jellyfish)
-- `- export JELLYFISH_DOMAIN=mydomain.example.com`
+- `- export FISHJAM_VERSION=0.1.0-ed317b`
+  Change the value if you want to deploy a different version of Fishjam.
+  You can find the list of available versions in [our package repository](https://github.com/fishjam-dev/fishjam/pkgs/container/fishjam)
+- `- export FISHJAM_DOMAIN=mydomain.example.com`
   Enter here a domain you've configured with **A** record in step 2.
 - `- export LETSENCRYPT_EMAIL=my@email.com`
   Enter your email address to be notified when the SSL certificate will be about to expire.
 - `export SERVER_API_TOKEN=test_token`
-  Server API token is a token you'll need to connect to Jellyfish via API or SDK.
+  Server API token is a token you'll need to connect to Fishjam via API or SDK.
   Write here a chosen secret value you're going to remember later.
 
 Copy the file and change up those two variables.
@@ -249,7 +249,7 @@ Possible responses are `running`, `error` and `done`.
 The first one informs you that _cloud-init_ is still configuring your server.
 The second one means that something went wrong.
 You can find logs from the _cloud-init_ run in `/var/log/cloud-init-output.log` file.
-`done` means that your jellyfish server is ready to be used.
+`done` means that your fishjam server is ready to be used.
 
 If you'd like to keep an eye on the _cloud-init_ process you can use:
 
@@ -258,11 +258,11 @@ cloud-init status --wait
 ```
 To see the output when the process is finished (successfully or not).
 
-## Testing your instance with the Jellyfish dashboard
+## Testing your instance with the Fishjam dashboard
 
-To see how (or if) your Jellyfish server is working you can test it by connecting our [Jellyfish Dashboard](https://jellyfish-dev.github.io/jellyfish-dashboard/) with your server.
-Detailed instructions on how to use Jellyfish Dashboard can be found [here](../tutorials/dashboard.mdx).
+To see how (or if) your Fishjam server is working you can test it by connecting our [Fishjam Dashboard](https://fishjam-dev.github.io/fishjam-dashboard/) with your server.
+Detailed instructions on how to use Fishjam Dashboard can be found [here](../tutorials/dashboard.mdx).
 
 :::tip
-You can use the `/health` endpoint of Jellyfish to see the status of its services. Read more [here](../for_developers/api_reference/rest_api.md)
+You can use the `/health` endpoint of Fishjam to see the status of its services. Read more [here](../for_developers/api_reference/rest_api.md)
 :::

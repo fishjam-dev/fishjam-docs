@@ -1,17 +1,17 @@
 import { ImageWrapper } from "./ImageWrapper";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import JellyfishArchitecture from "./common/_jellyfish-architecture.mdx";
-import StartingJellyfishBackend from "./common/_starting-jellyfish-media-server.mdx";
-import StartingJellyfishDashboard from "./common/_starting-dashboard.mdx";
+import FishjamArchitecture from "./common/_fishjam-architecture.mdx";
+import StartingFishjamBackend from "./common/_starting-fishjam-media-server.mdx";
+import StartingFishjamDashboard from "./common/_starting-dashboard.mdx";
 
 # Simple React App
 
 ## What you'll learn
 
-This tutorial will guide you through creating your first React project that uses the Jellyfish Client.
+This tutorial will guide you through creating your first React project that uses the Fishjam Client.
 By the end of the tutorial, you'll have a working web application that connects to
-[Jellyfish Media Server](https://github.com/jellyfish-dev/jellyfish) using WebRTC technology.
+[Fishjam Media Server](https://github.com/fishjam-dev/fishjam) using WebRTC technology.
 
 <ImageWrapper
   url={"/img/tutorials/react-finished.gif"}
@@ -19,7 +19,7 @@ By the end of the tutorial, you'll have a working web application that connects 
   alt="Finished app"
 />
 
-You can check out the finished project [here](https://github.com/jellyfish-dev/jellyfish-clients-tutorials/tree/main/JellyfishDashboardReact/JellyfishDashboard)
+You can check out the finished project [here](https://github.com/fishjam-dev/fishjam-clients-tutorials/tree/main/FishjamDashboardReact/FishjamDashboard)
 
 ## What do you need
 
@@ -27,9 +27,9 @@ You can check out the finished project [here](https://github.com/jellyfish-dev/j
 - IDE of your choice (for example [Visual Studio Code](https://code.visualstudio.com/))
 - [Node.js](https://nodejs.org/en/) installed on your machine
 
-## Jellyfish architecture
+## Fishjam architecture
 
-<JellyfishArchitecture />
+<FishjamArchitecture />
 
 ## Setup
 
@@ -53,26 +53,26 @@ npm create vite@latest my-react-app -- --template react-ts
 
   <TabItem value="react" label="React">
     For this module to work you'll need to add our `react-client-sdk` package. This
-    is necessary to create and connect Jellyfish Client.
+    is necessary to create and connect Fishjam Client.
 
 ```bash npm2yarn
-npm install https://github.com/jellyfish-dev/react-client-sdk#0.1.2
+npm install https://github.com/fishjam-dev/react-client-sdk#0.1.2
 ```
 
   </TabItem>
 </Tabs>
 
-### Start the Jellyfish backend
+### Start the Fishjam backend
 
-<StartingJellyfishBackend />
+<StartingFishjamBackend />
 
 ### Start the dashboard web front-end
 
-<StartingJellyfishDashboard />
+<StartingFishjamDashboard />
 
 ## (Optional) Add a bit of CSS styling
 
-For this project, we prepared simple [CSS classes](https://github.com/Crackhoff/jellyfish-clients-tutorials/blob/main/JellyfishDashboardReact/JellyfishDashboard/src/styles.css),
+For this project, we prepared simple [CSS classes](https://github.com/Crackhoff/fishjam-clients-tutorials/blob/main/FishjamDashboardReact/FishjamDashboard/src/styles.css),
 You are free to use it or create your own.
 
 ## General project structure
@@ -85,9 +85,9 @@ Our app will consist of two parts:
 
 ## First step - prepare all the hooks and the context
 
-To connect to the Jellyfish backend, we need to create a Membrane Client
+To connect to the Fishjam backend, we need to create a Membrane Client
 instance. We can do it by using the `create` function from the
-`@jellyfish-dev/react-client-sdk` package. It needs two generic parameters:
+`@fishjam-dev/react-client-sdk` package. It needs two generic parameters:
 
 - `PeerMetadata` - the type of metadata that will be sent to the server when
   connecting to the room (for example, user name) it has to be serializable
@@ -97,7 +97,7 @@ instance. We can do it by using the `create` function from the
 
 ```tsx title="App.tsx"
 import React from "react";
-import { create } from "@jellyfish-dev/react-client-sdk";
+import { create } from "@fishjam-dev/react-client-sdk";
 
 // Example metadata types for peer and track
 // You can define your metadata types just make sure they are serializable
@@ -109,10 +109,10 @@ type TrackMetadata = {
   type: "camera" | "screen";
 };
 
-// Create a Jellyfish client instance
+// Create a Fishjam client instance
 // Since we will use this context outside of the component we need to export it
 export const {
-  JellyfishContextProvider, // Context provider
+  FishjamContextProvider, // Context provider
 } = create<PeerMetadata, TrackMetadata>();
 
 export const App = () => {};
@@ -120,19 +120,19 @@ export const App = () => {};
 
 ### Now we need to wrap our app with the context provider
 
-That's all we will need to do in this file. Simply import the `JellyfishContextProvider` along with the `App`
-component and wrap the `App` component with the `JellyfishContextProvider`:
+That's all we will need to do in this file. Simply import the `FishjamContextProvider` along with the `App`
+component and wrap the `App` component with the `FishjamContextProvider`:
 
 ```tsx title="main.tsx"
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App, JellyfishContextProvider } from "./components/App";
+import { App, FishjamContextProvider } from "./components/App";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <JellyfishContextProvider>
+    <FishjamContextProvider>
       <App />
-    </JellyfishContextProvider>
+    </FishjamContextProvider>
   </React.StrictMode>
 );
 ```
@@ -176,7 +176,7 @@ export const App = () => {
 ### Once the UI is ready, we need to implement the logic
 
 ```tsx title="App.tsx"
-import { SignalingUrl } from "@jellyfish-dev/react-client-sdk/.";
+import { SignalingUrl } from "@fishjam-dev/react-client-sdk/.";
 //...
 export const {
   // highlight-start
@@ -184,7 +184,7 @@ export const {
   useConnect, // Hook to connect to the server
   useDisconnect, // Hook to disconnect from the server
   // highlight-end
-  JellyfishContextProvider, // Context provider
+  FishjamContextProvider, // Context provider
 };
 export const App = () => {
   // Create a state to store the peer token
@@ -243,8 +243,8 @@ This hook uses [Navigator.mediaDevices](https://developer.mozilla.org/en-US/docs
 
 ```tsx title="App.tsx"
 import React, { useEffect, useState } from "react";
-import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@jellyfish-dev/react-client-sdk";
-import { SignalingUrl, Peer } from "@jellyfish-dev/react-client-sdk/.";
+import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@fishjam-dev/react-client-sdk";
+import { SignalingUrl, Peer } from "@fishjam-dev/react-client-sdk/.";
 //...
 export const {
   useStatus, // Hook to check the status of the connection
@@ -252,7 +252,7 @@ export const {
   useApi, // Hook to get the webrtcApi reference
   useConnect, // Hook to connect to the server
   useDisconnect, // Hook to disconnect from the server
-  JellyfishContextProvider, // Context provider
+  FishjamContextProvider, // Context provider
 } = create<PeerMetadata, TrackMetadata>();
 
 export const App = () => {
@@ -341,8 +341,8 @@ export default VideoPlayer;
 
 ```tsx title="App.tsx"
 import React, { useEffect, useState } from "react";
-import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@jellyfish-dev/react-client-sdk";
-import { SignalingUrl, Peer } from "@jellyfish-dev/react-client-sdk/.";
+import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@fishjam-dev/react-client-sdk";
+import { SignalingUrl, Peer } from "@fishjam-dev/react-client-sdk/.";
 import VideoPlayer from "./VideoPlayer";
 //...
 
@@ -353,7 +353,7 @@ export const {
   useApi, // Hook to get the webrtcApi reference
   useConnect, // Hook to connect to the server
   useDisconnect, // Hook to disconnect from the server
-  JellyfishContextProvider, // Context provider
+  FishjamContextProvider, // Context provider
 } = create<PeerMetadata, TrackMetadata>();
 export const App = () => {
   const tracks = useTracks();
@@ -378,11 +378,11 @@ You should see all the tracks sent from the dashboard directly on your page, to 
 
 ## Summary
 
-Congrats on finishing your first Jellyfish web application! In this tutorial,
-You've learned how to make a basic Jellyfish client application that streams your screen and
+Congrats on finishing your first Fishjam web application! In this tutorial,
+You've learned how to make a basic Fishjam client application that streams your screen and
 receives video tracks with WebRTC technology.
 
-But this was just the beginning. Jellyfish Client supports much more than just
+But this was just the beginning. Fishjam Client supports much more than just
 streaming camera: It can also stream audio or your device's camera,
 configure your camera and audio devices, detect voice activity, control
 simulcast, bandwidth and encoding settings, show camera preview, display WebRTC
@@ -390,6 +390,6 @@ stats and more to come. Check out our other tutorials to learn about those
 features.
 
 You can also take a look at our fully featured [Videoroom Demo
-example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
+example](https://github.com/fishjam-dev/react-native-membrane-webrtc/tree/master/example):
 
 <ImageWrapper url={"/img/tutorials/videoroom.gif"} alt="Videoroom Demo" />

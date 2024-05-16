@@ -1,9 +1,9 @@
-# Releasing Jellyfish
+# Releasing Fishjam
 
-To release Jellyfish Media Server perform the following steps:
-1. Bump Jellyfish Version
-1. Prepare release candidate and deploy Jellyroom using the newest Jellyfish version.
-1. Ensure that Jellydashboard works with the newest Jellyfish.
+To release Fishjam Media Server perform the following steps:
+1. Bump Fishjam Version
+1. Prepare release candidate and deploy Jellyroom using the newest Fishjam version.
+1. Ensure that Jellydashboard works with the newest Fishjam.
 1. Prepare release notes. Split features from bugfixes and mark breaking changes accordingly.
 1. Create and push a new tag on GitHub.
 1. Create a new release on GitHub with previously prepared release notes. Don't use auto-generated release notes.

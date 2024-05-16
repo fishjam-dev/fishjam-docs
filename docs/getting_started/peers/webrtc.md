@@ -1,6 +1,6 @@
 # WebRTC
 
-WebRTC peer allows you to connect to Jellyfish via WebRTC standard.
+WebRTC peer allows you to connect to Fishjam via WebRTC standard.
 
 Read more about WebRTC [here](https://webrtc.org/).
 
@@ -23,11 +23,11 @@ Read more about WebRTC [here](https://webrtc.org/).
 
 * `JF_WEBRTC_TURN_LISTEN_IP` - the IP address on which TURN servers will listen. 
 By default set to `127.0.0.1`.
-When running Jellyfish via Docker, this MUST be set to `0.0.0.0`, even for local tests.
+When running Fishjam via Docker, this MUST be set to `0.0.0.0`, even for local tests.
 You may also set this env variable to a hostname which will get resolved at JF startup.
 
 * `JF_WEBRTC_TURN_IP` - the IP address, under which TURN will present itself to the clients. By default set to `127.0.0.1`.
-When running Jellyfish via Docker, this MUST be set to real (non-loopback) address, even for local tests.
+When running Fishjam via Docker, this MUST be set to real (non-loopback) address, even for local tests.
 
 * `JF_WEBRTC_TURN_PORT_RANGE` - port range, where UDP TURN will try to open ports. By default set to `50000-59999`.
 The bigger the range is, the more users server will be able to handle. 
@@ -49,7 +49,7 @@ docker run -p 50000-50050:50000-50050/udp \
            -e JF_WEBRTC_TURN_PORT_RANGE=50000-50050 \
            -e JF_WEBRTC_TURN_IP=192.168.0.1 \
            -e JF_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
-           ghcr.io/jellyfish-dev/jellyfish:0.5.0
+           ghcr.io/fishjam-dev/fishjam:0.5.0
 ```
 
 :::caution
@@ -68,5 +68,5 @@ docker run --network=host \
            -e JF_WEBRTC_USED=true \
            -e JF_WEBRTC_TURN_IP=192.168.0.1 \
            -e JF_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
-           ghcr.io/jellyfish-dev/jellyfish:0.5.0
+           ghcr.io/fishjam-dev/fishjam:0.5.0
 ```

@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 # Notifications
 
-Jellyfish sends server side notifications whenever some important event occurs, e.g.:
+Fishjam sends server side notifications whenever some important event occurs, e.g.:
 * a room has been created
 * some peer has connected
 * component has crashed
@@ -23,7 +23,7 @@ In other words, you don't have to do anything on your own.
   <TabItem value="python" label="Python">
 
 ```python
-from jellyfish import Notifier
+from fishjam import Notifier
 
 server_address = "localhost:5002"
 server_api_token = "development"
@@ -54,13 +54,13 @@ server_address = "localhost:5002"
 server_api_token = "development"
 
 {:ok, notifier} =
-  Jellyfish.WSNotifier.start(server_address: server_address, server_api_token: server_api_token)
+  Fishjam.WSNotifier.start(server_address: server_address, server_api_token: server_api_token)
 
-:ok = Jellyfish.WSNotifier.subscribe_server_notifications(notifier)
-:ok = Jellyfish.WSNotifier.subscribe_metrics(notifier)
+:ok = Fishjam.WSNotifier.subscribe_server_notifications(notifier)
+:ok = Fishjam.WSNotifier.subscribe_metrics(notifier)
 
 receive do
-  {:jellyfish, %Jellyfish.Notification.PeerConnected{} = notification} ->
+  {:fishjam, %Fishjam.Notification.PeerConnected{} = notification} ->
     IO.inspect(notification)
   # other notificaitons ...
 end
@@ -90,8 +90,8 @@ To receive server notifications through webhooks you have to pass `webhook_url` 
   <TabItem value="python" label="Python">
 
 ```python
-from jellyfish import Notifier, RoomApi
-from jellyfish import recevie_binary
+from fishjam import Notifier, RoomApi
+from fishjam import recevie_binary
 
 server_address = "localhost:5002"
 server_api_token = "development"
@@ -118,8 +118,8 @@ server_address = "localhost:5002"
 server_api_token = "development"
 webhook_url = "http://localhost:5003/webhook"
 
-client = Jellyfish.Client.new(server_address: server_address, server_api_token: server_api_token)
-{:ok, %Jellyfish.Room{id: room_id}, jellyfish_address} = Jellyfish.Room.create(client, max_peers: 10, webhook_url: webhook_url)
+client = Fishjam.Client.new(server_address: server_address, server_api_token: server_api_token)
+{:ok, %Fishjam.Room{id: room_id}, fishjam_address} = Fishjam.Room.create(client, max_peers: 10, webhook_url: webhook_url)
 
 # assuming you are using Phoenix
 # router.ex
@@ -132,7 +132,7 @@ def receive_webhook_notification(conn, _params) do
   {:ok, body, conn} = Plug.Conn.read_body(conn, [])
   json_body = Jason.decode!(body)
 
-  notification = Jellyfish.WebhookNotifier.receive(json_body)
+  notification = Fishjam.WebhookNotifier.receive(json_body)
 
   conn
   |> put_resp_content_type("text/plain")

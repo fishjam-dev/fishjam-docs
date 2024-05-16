@@ -9,7 +9,7 @@ You can learn more about the problems we came across [in the deploying section](
 :::
 
 [Fly.io](https://fly.io) is the go-to platform for deploying Phoenix apps.
-This guide will help you deploy Jellyfish server on Fly.io.
+This guide will help you deploy Fishjam server on Fly.io.
 
 First, we recommend you read the [Fly.io speedrun](https://fly.io/docs/speedrun/) for deploying an app.
 
@@ -107,20 +107,20 @@ You don't need to run migrations, since you don't have a database.
   release_command = "/app/bin/migrate"
 ```
 
-Jellyfish uses `JF_HOST` variable instead of the default `PHX_HOST`.
+Fishjam uses `JF_HOST` variable instead of the default `PHX_HOST`.
 ```
 JF_HOST = "<YOUR APP HOSTNAME>"
 ```  
 
 Also, make sure you have set the correct port.
 The environment variable `JF_PORT` has to match the TCP `internal_port` defined under `services` section.
-The default for Jellyfish is 5002 in development and 8080 in production (when using Docker or `mix release`).
+The default for Fishjam is 5002 in development and 8080 in production (when using Docker or `mix release`).
 
 
-To be able to receive and send UDP traffic, Jellyfish has to open its UDP ports on a special `fly-global-services` address, not `0.0.0.0`.
+To be able to receive and send UDP traffic, Fishjam has to open its UDP ports on a special `fly-global-services` address, not `0.0.0.0`.
 
 This must be set using the `JF_WEBRTC_TURN_LISTEN_IP` enviroment variable.
-You also need to specify the Jellyfish IP address for UDP, it is the IP address which you generated in the previous step.
+You also need to specify the Fishjam IP address for UDP, it is the IP address which you generated in the previous step.
 ```
 JF_WEBRTC_TURN_LISTEN_IP = "fly-global-services"
 JF_WEBRTC_TURN_IP="<YOUR APP IP ADDRESS>"
@@ -134,7 +134,7 @@ You can also read [tutorial for running Fly.io apps which use UDP](https://fly.i
 There are environment variables, which you may not want to keep in the `fly.toml` config.
 Fly.io provides a way to store such values securely.
 
-For Jellyfish you need to configure just one secret - `JF_SERVER_API_TOKEN`.
+For Fishjam you need to configure just one secret - `JF_SERVER_API_TOKEN`.
 ```
 flyctl secrets set JF_SERVER_API_TOKEN=development
 ```

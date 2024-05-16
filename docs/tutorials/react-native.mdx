@@ -5,9 +5,9 @@ title: React Native
 import { ImageWrapper } from "./ImageWrapper";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import JellyfishArchitecture from "./common/_jellyfish-architecture.mdx";
-import StartingJellyfishBackend from "./common/_starting-jellyfish-media-server.mdx";
-import StartingJellyfishDashboard from "./common/_starting-dashboard.mdx";
+import FishjamArchitecture from "./common/_fishjam-architecture.mdx";
+import StartingFishjamBackend from "./common/_starting-fishjam-media-server.mdx";
+import StartingFishjamDashboard from "./common/_starting-dashboard.mdx";
 
 # React Native Minimal Working Example
 
@@ -22,8 +22,8 @@ This tutorial is compatible with react-native-client-sdk version 0.1.6
 ## What you'll learn
 
 This tutorial will guide you through creating your first React Native / Expo
-project which uses Jellyfish client. By the end of the tutorial, you'll have a
-working application that connects to an instance of [Jellyfish Server](https://github.com/jellyfish-dev/jellyfish) using WebRTC,
+project which uses Fishjam client. By the end of the tutorial, you'll have a
+working application that connects to an instance of [Fishjam Server](https://github.com/fishjam-dev/fishjam) using WebRTC,
 streaming and receiving multimedia.
 
 <ImageWrapper url={"/img/tutorials/rn_full_app.gif"} />
@@ -35,27 +35,27 @@ refer to the [React Native
 Guide](https://reactnative.dev/docs/getting-started) or [Expo
 Guide](https://docs.expo.dev/) to learn more
 
-## Jellyfish architecture
+## Fishjam architecture
 
-<JellyfishArchitecture />
+<FishjamArchitecture />
 
 ## Setup
 
-### Start the Jellyfish Dashboard
+### Start the Fishjam Dashboard
 
-<StartingJellyfishBackend />
+<StartingFishjamBackend />
 
 ### Start the dashboard web front-end
 
-<StartingJellyfishDashboard />
+<StartingFishjamDashboard />
 
 ### Create React Native / Expo project
 
 :::info
 
-If you want to skip creating and setuping app clone this [repo](https://github.com/karkakol/react-native-jellyfish-example-begin-0.1.6). Then continue from this [step](#screens).
+If you want to skip creating and setuping app clone this [repo](https://github.com/karkakol/react-native-fishjam-example-begin-0.1.6). Then continue from this [step](#screens).
 
-If you want ready to use app just clone and run this [repo](https://github.com/karkakol/react-native-jellyfish-example-end-0.1.6). Remember to change your [server url](https://github.com/karkakol/react-native-jellyfish-example-end-0.1.6/blob/5ef7d7ac6146d3d631598c2f6168d5dc591a1377/screens/Connect.tsx#L22).
+If you want ready to use app just clone and run this [repo](https://github.com/karkakol/react-native-fishjam-example-end-0.1.6). Remember to change your [server url](https://github.com/karkakol/react-native-fishjam-example-end-0.1.6/blob/5ef7d7ac6146d3d631598c2f6168d5dc591a1377/screens/Connect.tsx#L22).
 :::
 
 Firstly create a brand new project and change directory.
@@ -64,14 +64,14 @@ Firstly create a brand new project and change directory.
     <TabItem value="react-native" label="React Native">
 
         ```bash
-        npx react-native@latest init ReactNativeJellyfishExample && cd ReactNativeJellyfishExample
+        npx react-native@latest init ReactNativeFishjamExample && cd ReactNativeFishjamExample
         ```
 
     </TabItem>
     <TabItem value="expo-bare" label="Expo Bare workflow">
 
         ```bash
-        npx react-native init ReactNativeJellyfishExample --template react-native-template-typescript && cd ReactNativeJellyfishExample
+        npx react-native init ReactNativeFishjamExample --template react-native-template-typescript && cd ReactNativeFishjamExample
         ```
 
     </TabItem>
@@ -98,7 +98,7 @@ Just add it to `app.json`:
   "expo": {
     "name": "example",
     //...
-    "plugins": ["@jellyfish-dev/react-native-membrane-webrtc"]
+    "plugins": ["@fishjam-dev/react-native-membrane-webrtc"]
   }
 }
 ```
@@ -106,19 +106,19 @@ Just add it to `app.json`:
 <Tabs>
     <TabItem value="react-native" label="React Native">
         In order for this module to work, you'll need to also add `expo` package. The
-        package introduces a small footprint, but is necessary as the Jellyfish client
+        package introduces a small footprint, but is necessary as the Fishjam client
         package is built as Expo module.
         <Tabs>
             <TabItem value="npm" label="npm">
                 ```bash npm2yarn
                 npx install-expo-modules@latest
-                npm install @jellyfish-dev/react-native-client-sdk
+                npm install @fishjam-dev/react-native-client-sdk
                 ```
             </TabItem>
             <TabItem value="Yarn" label="Yarn">
                 ```bash npm2yarn
                 npx install-expo-modules@latest
-                yarn add @jellyfish-dev/react-native-client-sdk
+                yarn add @fishjam-dev/react-native-client-sdk
                 ```
             </TabItem>
         </Tabs>
@@ -128,7 +128,7 @@ Just add it to `app.json`:
 
         ```bash
         npx install-expo-modules@latest
-        npx expo install @jellyfish-dev/react-native-client-sdk
+        npx expo install @fishjam-dev/react-native-client-sdk
         ```
 
     </TabItem>
@@ -160,14 +160,14 @@ For audio you'll need the `RECORD_AUDIO` permission:
 On iOS you must set `NSCameraUsageDescription` in `Info.plist` file. This value is a description that is shown when iOS asks user
 for camera permission.
 
-```xml title=ios/jellyfish-dashboard/Info.plist
+```xml title=ios/fishjam-dashboard/Info.plist
 <key>NSCameraUsageDescription</key>
 <string> 🙏 🎥 </string>
 ```
 
 Similarly, for audio there is `NSMicrophoneUsageDescription`.
 
-```xml title=ios/jellyfish-dashboard/Info.plist
+```xml title=ios/fishjam-dashboard/Info.plist
 <key>NSMicrophoneUsageDescription</key>
 <string> 🙏 🎤 </string>
 ```
@@ -175,14 +175,14 @@ Similarly, for audio there is `NSMicrophoneUsageDescription`.
 We also suggest setting background mode to `audio` so that the app doesn't
 disconnect when it's in the background:
 
-```xml title=ios/jellyfish-dashboard/Info.plist
+```xml title=ios/fishjam-dashboard/Info.plist
 <key>UIBackgroundModes</key>
 <array>
   <string>audio</string>
 </array>
 ```
 
-Screencast requires additional configuration, you can find the details [here](https://github.com/jellyfish-dev/react-native-client-sdk#ios). To keep this tutorial simple, we will skip this step.
+Screencast requires additional configuration, you can find the details [here](https://github.com/fishjam-dev/react-native-client-sdk#ios). To keep this tutorial simple, we will skip this step.
 
 
 ### Add source components
@@ -303,7 +303,7 @@ Firstly wrap your app with `JelyfishContextProvider`:
 ```tsx title="/App.tsx"
 import React from "react";
 // highlight-next-line
-import { JellyfishContextProvider } from "@jellyfish-dev/react-native-client-sdk";
+import { FishjamContextProvider } from "@fishjam-dev/react-native-client-sdk";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ConnectScreen from "./screens/Connect";
@@ -314,7 +314,7 @@ const Stack = createNativeStackNavigator();
 function App(): React.JSX.Element {
   return (
     // highlight-next-line
-    <JellyfishContextProvider>
+    <FishjamContextProvider>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Connect" component={ConnectScreen} />
@@ -322,44 +322,44 @@ function App(): React.JSX.Element {
         </Stack.Navigator>
       </NavigationContainer>
       // highlight-next-line
-    </JellyfishContextProvider>
+    </FishjamContextProvider>
   );
 }
 
 export default App;
 ```
 
-Then in the `ConnectScreen` use the `useJellyfishClient` hook to connect to the
-server. Simply call the `connect` method with your Jellyfish server URL and the
-peer token. The `connect` function establishes a connection with the Jellyfish server
+Then in the `ConnectScreen` use the `useFishjamClient` hook to connect to the
+server. Simply call the `connect` method with your Fishjam server URL and the
+peer token. The `connect` function establishes a connection with the Fishjam server
 via web socket and authenticates the peer.
 
 ```tsx title="/screens/Connect.tsx"
 // highlight-next-line
-import { useJellyfishClient } from "@jellyfish-dev/react-native-client-sdk";
+import { useFishjamClient } from "@fishjam-dev/react-native-client-sdk";
 import { NavigationProp } from "@react-navigation/native";
 
 interface ConnectScreenProps {
   navigation: NavigationProp<any>;
 }
 
-// This is the address of the Jellyfish backend. Change the local IP to yours. We
+// This is the address of the Fishjam backend. Change the local IP to yours. We
 // strongly recommend setting this as an environment variable, we hardcoded it here
 // for simplicity.
-// If you use secure connection with your Jellyfish Media Server change ws to wss in this variable.
+// If you use secure connection with your Fishjam Media Server change ws to wss in this variable.
 // highlight-next-line
-const JELLYFISH_URL = "ws://X.X.X.X:5002/socket/peer/websocket";
+const FISHJAM_URL = "ws://X.X.X.X:5002/socket/peer/websocket";
 
 function ConnectScreen({ navigation }: ConnectScreenProps): React.JSX.Element {
   const [peerToken, setPeerToken] = useState<string>("");
 
   // highlight-next-line
-  const { connect } = useJellyfishClient();
+  const { connect } = useFishjamClient();
 
   // highlight-start
   const connectToRoom = async () => {
     try {
-      await connect(JELLYFISH_URL, peerToken.trim());
+      await connect(FISHJAM_URL, peerToken.trim());
     } catch (e) {
       console.log("Error while connecting", e);
     }
@@ -422,7 +422,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): React.JSX.Element {
 
   const connectToRoom = async () => {
     try {
-      await connect(JELLYFISH_URL, peerToken.trim());
+      await connect(FISHJAM_URL, peerToken.trim());
 
       // highlight-start
       if (!(await grantedCameraPermissions())) {
@@ -442,7 +442,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): React.JSX.Element {
 
 ### Starting the camera
 
-Jellyfish Client provides a handy hook for managing the camera: `useCamera`.
+Fishjam Client provides a handy hook for managing the camera: `useCamera`.
 Not only it can start a camera but also toggle it, manage its state, simulcast and bandwidth settings, and switch between multiple sources.
 Also when starting the camera you can provide multiple different settings such as
 resolution, quality, and metadata.
@@ -451,10 +451,10 @@ on to stream the camera to the dashboard with default settings
 
 ```tsx title="/screens/Connect.tsx"
 import {
-  useJellyfishClient,
+  useFishjamClient,
   // highlight-next-line
   useCamera,
-} from "@jellyfish-dev/react-native-client-sdk";
+} from "@fishjam-dev/react-native-client-sdk";
 
 // ...
 
@@ -466,7 +466,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): React.JSX.Element {
 
   const connectToRoom = async () => {
     try {
-      await connect(JELLYFISH_URL, peerToken.trim());
+      await connect(FISHJAM_URL, peerToken.trim());
 
       if (!(await grantedCameraPermissions())) {
         return;
@@ -490,7 +490,7 @@ function ConnectScreen({ navigation }: ConnectScreenProps): React.JSX.Element {
 The last step of connecting to the room would be actually joining it so
 that your camera track is visible to the other users.
 To do this simply use the `join` function
-from the `useJellyfishClient` hook.
+from the `useFishjamClient` hook.
 
 You can also provide some user metadata when joining.
 Metadata can be anything and is forwarded to the other participants as is.
@@ -503,11 +503,11 @@ After joining the room we navigate to the next screen: Room screen.
 
 function ConnectScreen({ navigation }: ConnectScreenProps): React.JSX.Element {
   // highlight-next-line
-  const { connect, join } = useJellyfishClient();
+  const { connect, join } = useFishjamClient();
 
   const connectToRoom = async () => {
     try {
-      await connect(JELLYFISH_URL, peerToken.trim());
+      await connect(FISHJAM_URL, peerToken.trim());
 
       if (!(await grantedCameraPermissions())) {
         return;
@@ -543,12 +543,12 @@ Note that it's taken directly from your camera i.e. we don't send it to the JF a
 - it allows you to leave a meeting
 
 To get information about all participants (also the local one) in the room use
-`usePeers()` hook from Jellyfish Client. The hook returns all the participants
+`usePeers()` hook from Fishjam Client. The hook returns all the participants
 with their ids, tracks and metadata. When a new participant joins or any
 participant leaves or anything else changes, the hook updates with the new
 information.
 
-To display video tracks Jellyfish Client comes with a dedicated component for
+To display video tracks Fishjam Client comes with a dedicated component for
 displaying a video track: `<VideoRenderer>`. It takes a track id as a prop (it
 may be a local or remote track) and, as any other `<View>` in react, a style.
 style property gives a [lot of possibilities](https://reactnative.dev/docs/stylesheet). You can even animate your track!
@@ -563,7 +563,7 @@ import { NavigationProp } from "@react-navigation/native";
 import {
   usePeers,
   VideoRendererView,
-} from "@jellyfish-dev/react-native-client-sdk";
+} from "@fishjam-dev/react-native-client-sdk";
 // highlight-end
 
 interface RoomScreenProps {
@@ -616,7 +616,7 @@ export default RoomScreen;
 
 Now the app is ready for the first test.
 
-This video shows how to connect to Jellyfish dashboard, create room and peers.
+This video shows how to connect to Fishjam dashboard, create room and peers.
 
 <ImageWrapper url={"/react_native/dashboard_connect_to_media_server.gif"} />
 
@@ -722,7 +722,7 @@ displaying the streams from other participants.
 
 This gif shows how to add a fake peer that shares a video track in the dashboard (remember to check the `Attach metadata` checkbox):
 
-<ImageWrapper url={"/react_native/add_track_in_jellyfish.gif"} />
+<ImageWrapper url={"/react_native/add_track_in_fishjam.gif"} />
 
 It should show up in the Room screen automatically:
 
@@ -767,7 +767,7 @@ To leave a room we'll add a button for the user. When the user clicks it, we
 gracefully leave the room, close the server connection and go back to the
 `Connectscreen`.
 
-For leaving the room and closing the server connection you can use the `cleanUp` method from the `useJellyfishClient()` hook.
+For leaving the room and closing the server connection you can use the `cleanUp` method from the `useFishjamClient()` hook.
 
 ```tsx title="/screens/Room.tsx"
 // ...
@@ -776,8 +776,8 @@ import {
   usePeers,
   VideoRendererView,
   // highlight-next-line
-  useJellyfishClient,
-} from "@jellyfish-dev/react-native-client-sdk";
+  useFishjamClient,
+} from "@fishjam-dev/react-native-client-sdk";
 // highlight-next-line
 import InCallButton from '../components/InCallButton.tsx';
 
@@ -786,7 +786,7 @@ import InCallButton from '../components/InCallButton.tsx';
 function RoomScreen({ navigation }: RoomScreenProps): React.JSX.Element {
   const peers = usePeers();
   // highlight-start
-  const { cleanUp } = useJellyfishClient();
+  const { cleanUp } = useFishjamClient();
 
   const onDisconnectPress = () => {
     cleanUp();
@@ -819,11 +819,11 @@ Now your app should look like this:
 
 ## Summary
 
-Congrats on finishing your first Jellyfish mobile application! In this tutorial,
-you've learned how to make a basic Jellyfish client application that streams and
+Congrats on finishing your first Fishjam mobile application! In this tutorial,
+you've learned how to make a basic Fishjam client application that streams and
 receives video tracks with WebRTC technology.
 
-But this was just the beginning. Jellyfish Client supports much more than just
+But this was just the beginning. Fishjam Client supports much more than just
 streaming camera: it can also stream audio, screencast your device's screen,
 configure your camera and audio devices, detect voice activity, control
 simulcast, bandwidth and encoding settings, show camera preview, display WebRTC
@@ -831,6 +831,6 @@ stats and more to come. Check out our other tutorials to learn about those
 features.
 
 You can also take a look at our fully featured [Videoroom Demo
-example](https://github.com/jellyfish-dev/react-native-membrane-webrtc/tree/master/example):
+example](https://github.com/fishjam-dev/react-native-membrane-webrtc/tree/master/example):
 
 ![Videoroom Demo](/img/tutorials/videoroom.gif)

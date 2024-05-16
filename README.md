@@ -1,9 +1,9 @@
-# Jellyfish docs
+# FishJam docs
 
-[![pages-build-deployment](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/build_pages.yml/badge.svg)](https://github.com/jellyfish-dev/jellyfish-docs/actions/workflows/pages/pages-build-deployment)
+[![pages-build-deployment](https://github.com/fishjam-dev/fishjam-docs/actions/workflows/build_pages.yml/badge.svg)](https://github.com/fishjam-dev/fishjam-docs/actions/workflows/pages/pages-build-deployment)
 
-The docs for the [Jellyfish](https://github.com/jellyfish-dev/jellyfish).
-You can read the docs here: https://jellyfish-dev.github.io/jellyfish-docs/
+The docs for the [FishJam](https://github.com/fishjam-dev/fishjam).
+You can read the docs here: https://fishjam-dev.github.io/fishjam-docs/
 
 ## Installation
 
@@ -37,8 +37,8 @@ To create a new docs version:
 
 ## Copyright and License
 
-Copyright 2023, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=jellyfish)
+Copyright 2023, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=fishjam)
 
-[![Software Mansion](https://logo.swmansion.com/logo?color=white&variant=desktop&width=200&tag=membrane-github)](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=jellyfish)
+[![Software Mansion](https://logo.swmansion.com/logo?color=white&variant=desktop&width=200&tag=membrane-github)](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=fishjam)
 
 Licensed under the [Apache License, Version 2.0](LICENSE)

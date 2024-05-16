@@ -5,7 +5,7 @@ To utilize the output of the Recording Component:
 * The streams are serialized using the  [Membrane Stream Plugin](https://github.com/membraneframework/membrane_stream_plugin). Use the deserializer from this plugin to obtain the plain RTP.
 * In order to depayload RTP packets to the codecs, use the RTP depayloader bin from the Membrane RTP Plugin.
 
-For an example pipeline, please refer to the [Recording Converter](https://github.com/jellyfish-dev/recording-converter).
+For an example pipeline, please refer to the [Recording Converter](https://github.com/fishjam-dev/recording-converter).
 
 ## Compatibility
 

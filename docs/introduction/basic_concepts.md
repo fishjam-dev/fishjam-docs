@@ -1,15 +1,15 @@
 # Basic Concepts
 
-This section outlines Jellyfish building blocks. We suggest reading this before
+This section outlines Fishjam building blocks. We suggest reading this before
 you proceed, as these terms will be recurrent in the following chapters. Enjoy
 your exploration!
 
 ## Room
 
-In Jellyfish, a room serves as a holder for peers and components, its function
+In Fishjam, a room serves as a holder for peers and components, its function
 varying based on application.
 
-For instance, within a video conferencing system, a Jellyfish room represents a
+For instance, within a video conferencing system, a Fishjam room represents a
 single online meeting or a channel accommodating multiple users for
 conversation.
 
