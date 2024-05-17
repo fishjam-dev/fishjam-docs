@@ -169,6 +169,10 @@ Defaults to `127.0.0.1` when running from source or using `mix release`, or `0.0
 * `FJ_METRICS_PORT` - a port to run metrics endpoint on.<br/>
 Defaults to `9568`.
 
+* `FJ_LOG_LEVEL` - level of logs below which all logs will not be displayed. <br/>
+Defaults to `info`.<br/>
+All possible values are: `error`, `warning`, `info`, `debug`.
+
 * `FJ_STRUCTURED_LOGGING` - whether to enable JSON-structured logging to stdout.<br/>
 Defaults to `false`.<br/>
 Possible values of the `severity` field (ordered by importance) are:
