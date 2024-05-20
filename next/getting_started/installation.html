@@ -15,7 +15,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Fishjam" href="/fishjam-docs/opensearch.xml"><link rel="stylesheet" href="/fishjam-docs/assets/css/styles.b46010d3.css">
-<script src="/fishjam-docs/assets/js/runtime~main.89f5548e.js" defer="defer"></script>
+<script src="/fishjam-docs/assets/js/runtime~main.d67f7095.js" defer="defer"></script>
 <script src="/fishjam-docs/assets/js/main.292683d2.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -140,6 +140,11 @@ Defaults to <code>127.0.0.1</code> when running from source or using <code>mix r
 <li>
 <p><code>FJ_METRICS_PORT</code> - a port to run metrics endpoint on.<br>
 Defaults to <code>9568</code>.</p>
+</li>
+<li>
+<p><code>FJ_LOG_LEVEL</code> - level of logs below which all logs will not be displayed. <br>
+Defaults to <code>info</code>.<br>
+All possible values are: <code>error</code>, <code>warning</code>, <code>info</code>, <code>debug</code>.</p>
 </li>
 <li>
 <p><code>FJ_STRUCTURED_LOGGING</code> - whether to enable JSON-structured logging to stdout.<br>
