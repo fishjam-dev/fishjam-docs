@@ -101,12 +101,12 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/membrane-signet-light.svg',
+      image: 'img/logo-black.svg',
       navbar: {
         title: 'Fishjam Docs',
         logo: {
           alt: 'Fishjam Logo',
-          src: 'img/membrane-signet-light.svg',
+          src: 'img/logo-black.svg',
         },
         items: [
           {
