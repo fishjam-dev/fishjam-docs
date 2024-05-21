@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Fishjam',
   tagline: 'FishJosh is cool',
-  favicon: 'img/membrane-signet-light.svg',
+  favicon: 'img/sygnet-black.svg',
 
   // Set the production url of your site here
   url: 'https://fishjam-dev.github.io/',
