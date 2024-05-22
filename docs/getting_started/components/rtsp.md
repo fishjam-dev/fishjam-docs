@@ -69,7 +69,7 @@ docker run -p 20000:20000/udp \
            -p 8080:8080/tcp \
            -e FJ_SERVER_API_TOKEN=token \
            -e FJ_HOST=localhost:8080 \
-           ghcr.io/fishjam-dev/fishjam:0.5.0
+           ghcr.io/fishjam-dev/fishjam:0.6.2
 ```
 
 :::caution
@@ -87,5 +87,5 @@ Using host network (Linux only)
 docker run --network=host \
            -e FJ_SERVER_API_TOKEN=token \
            -e FJ_HOST=localhost:8080 \
-           ghcr.io/fishjam-dev/fishjam:0.5.0
+           ghcr.io/fishjam-dev/fishjam:0.6.2
 ```
