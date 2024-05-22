@@ -50,7 +50,7 @@ docker run -p 50000-50050:50000-50050/udp \
            -e FJ_WEBRTC_TURN_PORT_RANGE=50000-50050 \
            -e FJ_WEBRTC_TURN_IP=192.168.0.1 \
            -e FJ_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
-           ghcr.io/fishjam-dev/fishjam:0.5.0
+           ghcr.io/fishjam-dev/fishjam:0.6.2
 ```
 
 :::caution
@@ -69,5 +69,5 @@ docker run --network=host \
            -e FJ_WEBRTC_USED=true \
            -e FJ_WEBRTC_TURN_IP=192.168.0.1 \
            -e FJ_WEBRTC_TURN_LISTEN_IP=0.0.0.0 \
-           ghcr.io/fishjam-dev/fishjam:0.5.0
+           ghcr.io/fishjam-dev/fishjam:0.6.2
 ```
