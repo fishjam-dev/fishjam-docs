@@ -230,16 +230,12 @@ add some logic to send our tracks to the server and receive tracks from others.
 This hook uses [Navigator.mediaDevices](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaDevices) take a look how it works
 
 ```tsx title="App.tsx"
-import { useState } from "react";
 import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@fishjam-dev/react-client-sdk";
 //…
 export const {
-  useStatus, // Hook to check the status of the connection
   // highlight-next-line
   useClient, // Hook to get the client reference
-  useConnect, // Hook to connect to the server
-  useDisconnect, // Hook to disconnect from the server
-  FishjamContextProvider, // Context provider
+  //…
 } = create<PeerMetadata, TrackMetadata>();
 
 export const App = () => {
