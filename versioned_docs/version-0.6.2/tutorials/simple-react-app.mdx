@@ -19,7 +19,7 @@ By the end of the tutorial, you'll have a working web application that connects 
   alt="Finished app"
 />
 
-You can check out the finished project [here](https://github.com/fishjam-dev/fishjam-clients-tutorials/tree/main/FishjamDashboardReact/FishjamDashboard)
+You can check out the finished project [here](https://github.com/fishjam-dev/fishjam-clients-tutorials/blob/main/fishjam-react)
 
 ## What do you need
 
@@ -164,8 +164,6 @@ export const App = () => {
 ### Once the UI is ready, we need to implement the logic
 
 ```tsx title="App.tsx"
-//…
-import "./styles.css";
 //…
 export const {
   // highlight-start
@@ -317,7 +315,6 @@ export default VideoPlayer;
 import { useEffect, useState } from "react";
 import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@fishjam-dev/react-client-sdk";
 import VideoPlayer from "./VideoPlayer";
-import "./styles.css";
 //…
 
 export const {
