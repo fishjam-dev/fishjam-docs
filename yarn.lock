@@ -1236,7 +1236,7 @@
     "@docsearch/css" "3.6.0"
     algoliasearch "^4.19.1"
 
-"@docusaurus/core@3.2.1", "@docusaurus/core@latest":
+"@docusaurus/core@^3.2.1", "@docusaurus/core@3.2.1":
   version "3.2.1"
   resolved "https://registry.npmjs.org/@docusaurus/core/-/core-3.2.1.tgz"
   integrity sha512-ZeMAqNvy0eBv2dThEeMuNzzuu+4thqMQakhxsgT5s02A8LqRcdkg+rbcnuNqUIpekQ4GRx3+M5nj0ODJhBXo9w==
@@ -1360,7 +1360,7 @@
     vfile "^6.0.1"
     webpack "^5.88.1"
 
-"@docusaurus/module-type-aliases@3.2.1", "@docusaurus/module-type-aliases@latest":
+"@docusaurus/module-type-aliases@^3.2.1", "@docusaurus/module-type-aliases@3.2.1":
   version "3.2.1"
   resolved "https://registry.npmjs.org/@docusaurus/module-type-aliases/-/module-type-aliases-3.2.1.tgz"
   integrity sha512-FyViV5TqhL1vsM7eh29nJ5NtbRE6Ra6LP1PDcPvhwPSlA7eiWGRKAn3jWwMUcmjkos5SYY+sr0/feCdbM3eQHQ==
@@ -1455,7 +1455,7 @@
     "@docusaurus/utils-validation" "3.2.1"
     tslib "^2.6.0"
 
-"@docusaurus/plugin-google-gtag@3.2.1", "@docusaurus/plugin-google-gtag@latest":
+"@docusaurus/plugin-google-gtag@^3.2.1", "@docusaurus/plugin-google-gtag@3.2.1":
   version "3.2.1"
   resolved "https://registry.npmjs.org/@docusaurus/plugin-google-gtag/-/plugin-google-gtag-3.2.1.tgz"
   integrity sha512-XtuJnlMvYfppeVdUyKiDIJAa/gTJKCQU92z8CLZZ9ibJdgVjFOLS10s0hIC0eL5z0U2u2loJz2rZ63HOkNHbBA==
@@ -1491,7 +1491,7 @@
     sitemap "^7.1.1"
     tslib "^2.6.0"
 
-"@docusaurus/preset-classic@latest":
+"@docusaurus/preset-classic@^3.2.1":
   version "3.2.1"
   resolved "https://registry.npmjs.org/@docusaurus/preset-classic/-/preset-classic-3.2.1.tgz"
   integrity sha512-E3OHSmttpEBcSMhfPBq3EJMBxZBM01W1rnaCUTXy9EHvkmB5AwgTfW1PwGAybPAX579ntE03R+2zmXdizWfKnQ==
