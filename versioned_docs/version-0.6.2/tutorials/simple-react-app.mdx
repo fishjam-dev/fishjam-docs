@@ -262,7 +262,6 @@ export const App = () => {
   >
     Start screen share
   </button>
-  <span className="span-status">Status: {status}</span>
   //…
   )
 };
@@ -284,22 +283,22 @@ Create in your directory file `VideoPlayer.tsx`
 import { RefObject, useEffect, useRef } from "react";
 import "./styles.css";
 type Props = {
-    stream: MediaStream | null | undefined;
+  stream: MediaStream | null | undefined;
 };
 
 const VideoPlayer = ({ stream }: Props) => {
-    const videoRef: RefObject<HTMLVideoElement> = useRef<HTMLVideoElement>(null);
+  const videoRef: RefObject<HTMLVideoElement> = useRef<HTMLVideoElement>(null);
 
-    useEffect(() => {
-        if (!videoRef.current) return;
-        videoRef.current.srcObject = stream || null;
-    }, [stream]);
+  useEffect(() => {
+    if (!videoRef.current) return;
+    videoRef.current.srcObject = stream || null;
+  }, [stream]);
 
-    return (
-        <div className="video-container">
-            <video autoPlay playsInline muted ref={videoRef} />
-        </div>
-    );
+  return (
+    <div className="video-container">
+      <video autoPlay playsInline muted ref={videoRef} />
+    </div>
+  );
 };
 
 export default VideoPlayer;
@@ -308,7 +307,6 @@ export default VideoPlayer;
 ### Now we can use it in our main component
 
 ```tsx title="App.tsx"
-import { useEffect, useState } from "react";
 import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@fishjam-dev/react-client-sdk";
 import VideoPlayer from "./VideoPlayer";
 //…
