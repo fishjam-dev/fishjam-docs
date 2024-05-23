@@ -8,7 +8,7 @@ The holder for peers and components.
 
 * `roomId` (string, default: null) - Custom ID used for identifying the room within Fishjam.
   Must be unique across all rooms. If not provided, a random UUID will be generated. 
-  It may contain only alphanumeric characters and hyphens.
+  It may contain only alphanumeric characters, hyphens and underscores.
 
 * `maxPeers` (integer 1.., default: null) - Maximum number of peers allowed in the room.
   If set to null (default), the number of peers is unlimited.

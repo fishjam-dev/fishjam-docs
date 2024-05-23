@@ -87,7 +87,7 @@ We prepared a template *cloud-config* that will configure your server and start 
       owner: fishjam:fishjam
 
   runcmd:
-    - export FISHJAM_VERSION=0.5.0
+    - export FISHJAM_VERSION=0.6.2
     - export FISHJAM_DOMAIN=mydomain.example.com
     - export LETSENCRYPT_EMAIL=my@email.com
     - export SERVER_API_TOKEN=test_token

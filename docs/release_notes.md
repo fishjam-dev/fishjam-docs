@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.6.2 - 22.05.2024
+
+### Features
+* Log level may now be configured using the `FJ_LOG_LEVEL` env variable
+* Room IDs may now contain underscores as well as alphanumeric characters and hyphens
+
 ## 0.6.1 - 17.05.2024
 
 ### Bugfixes
@@ -7,7 +13,7 @@
 
 ## 0.6.0 - 16.05.2024
 
-### Features:
+### Features
 * Rebranding: Jellyfish -> Fishjam. All env vars have been renamed from `JF_*` to `FJ_*`.
 When a new env var is not set, an old one is tried.
 This behaviour will be removed in version 0.8.0. **[BREAKING]**

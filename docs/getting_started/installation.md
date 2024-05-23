@@ -83,7 +83,7 @@ need to set a couple of [environment variables](#environment-variables).
 An example docker command running bare Fishjam HTTP service locally:
 
 ```bash
-docker run -p 8080:8080/tcp -e FJ_HOST=localhost:8080 -e FJ_SERVER_API_TOKEN=token ghcr.io/fishjam-dev/fishjam:0.5.0
+docker run -p 8080:8080/tcp -e FJ_HOST=localhost:8080 -e FJ_SERVER_API_TOKEN=token ghcr.io/fishjam-dev/fishjam:0.6.2
 ```
 
 Note that in real case scenarios, docker commands depend on peers/components you are going to use.
