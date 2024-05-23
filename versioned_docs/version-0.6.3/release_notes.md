@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.6.3 - 23.05.2024
+
+### Bugfixes
+* Fallback to `JF_DIST_*` env vars when `FJ_DIST_*` ones are missing.
+We missed a couple of env vars related to distribution when fixing
+backward compatibility in `0.6.1`.  
+
 ## 0.6.2 - 22.05.2024
 
 ### Features
@@ -20,6 +27,7 @@ This behaviour will be removed in version 0.8.0. **[BREAKING]**
 * Make allowed components configurable - from now, all components are by default
 disabled and have to be enabled with `FJ_COMPONENTS_USED`.
 For example, `FJ_COMPONENTS_USED=hls recording sip`. **[BREAKING]**
+* Metrics changed their prefix from `jellyfish` to `fishjam` e.g. `jellyfish_traffic_ingress_webrtc_total_bytes` -> `fishjam_traffic_ingress_webrtc_total_bytes` **[BREAKING]**
 
 ## 0.5.0 - 15.05.2024
 
