@@ -4,7 +4,7 @@
   <ShortName>Fishjam</ShortName>
   <Description>Search Fishjam</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://fishjam-dev.github.io/fishjam-docs/img/sygnet-black.svg</Image>
+  <Image width="16" height="16" type="image/x-icon">https://fishjam-dev.github.io/fishjam-docs/img/logo/favicon.svg</Image>
   <Url type="text/html" method="get" template="https://fishjam-dev.github.io/fishjam-docs/search?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://fishjam-dev.github.io/fishjam-docs/opensearch.xml" />
   <moz:SearchForm>https://fishjam-dev.github.io/fishjam-docs/</moz:SearchForm>
