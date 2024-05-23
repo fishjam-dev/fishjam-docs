@@ -41,7 +41,7 @@ Firstly create a brand new project.
   <TabItem value="vite" label="Vite">
 
 ```bash
-npm create vite@latest my-react-app -- --template react-ts
+npm create vite@latest fishjam-react -- --template react-ts
 ```
 
   </TabItem>
@@ -56,7 +56,7 @@ npm create vite@latest my-react-app -- --template react-ts
     is necessary to create and connect Fishjam Client.
 
 ```bash npm2yarn
-npm install https://github.com/fishjam-dev/react-client-sdk#0.1.2
+npm install @jellyfish-dev/react-client-sdk#0.3.1
 ```
 
   </TabItem>
@@ -72,7 +72,7 @@ npm install https://github.com/fishjam-dev/react-client-sdk#0.1.2
 
 ## (Optional) Add a bit of CSS styling
 
-For this project, we prepared simple [CSS classes](https://github.com/Crackhoff/fishjam-clients-tutorials/blob/main/FishjamDashboardReact/FishjamDashboard/src/styles.css),
+For this project, we prepared simple [CSS classes](https://github.com/fishjam-dev/fishjam-clients-tutorials/blob/main/fishjam-react/src/styles.css),
 You are free to use it or create your own.
 
 ## General project structure
@@ -96,7 +96,6 @@ instance. We can do it by using the `create` function from the
   sending a track (for example, track name) it has to be serializable as well
 
 ```tsx title="App.tsx"
-import React from "react";
 import { create } from "@fishjam-dev/react-client-sdk";
 
 // Example metadata types for peer and track
@@ -126,15 +125,15 @@ component and wrap the `App` component with the `FishjamContextProvider`:
 ```tsx title="main.tsx"
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App, FishjamContextProvider } from "./components/App";
+import { App, FishjamContextProvider, } from "./App";
 import "./styles.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <React.StrictMode>
-        <FishjamContextProvider>
-            <App />
-        </FishjamContextProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <FishjamContextProvider>
+      <App/>
+    </FishjamContextProvider>
+  </React.StrictMode>
 );
 ```
 
@@ -145,20 +144,20 @@ that will allow us to enter the peer token and a button that
 will connect to the server and join the room. We can also display the status of the connection.
 
 ```tsx title="App.tsx"
-import React, { useState } from "react";
+import { useState } from "react";
 //…
 export const App = () => {
-    const [token, setToken] = useState("");
-    return (
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <input value={token} onChange={(e) => setToken(() => e?.target?.value)} placeholder="token" />
-            <div style={{ display: "flex", flexDirection: "row", gap: "8px" }}>
-                <button onClick={() => {}}> Connect </button>
-                <button onClick={() => {}}> Disconnect </button>
-                <span>Status: {}</span>
-            </div>
-    	</div>
-    );
+  const [token, setToken] = useState("");
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <input value={token} onChange={(e) => setToken(() => e?.target?.value)} placeholder="token"/>
+      <div style={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+        <button onClick={() => {}}>Connect</button>
+        <button onClick={() => {}}> Disconnect</button>
+        <span>Status: {}</span>
+      </div>
+    </div>
+  );
 };
 ```
 
@@ -233,30 +232,30 @@ add some logic to send our tracks to the server and receive tracks from others.
 This hook uses [Navigator.mediaDevices](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaDevices) take a look how it works
 
 ```tsx title="App.tsx"
-import React, { useState } from "react";
+import { useState } from "react";
 import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@jellyfish-dev/react-client-sdk";
 //…
 export const {
   useStatus, // Hook to check the status of the connection
   // highlight-next-line
-  useApi, // Hook to get the webrtcApi reference
+  useClient, // Hook to get the client reference
   useConnect, // Hook to connect to the server
   useDisconnect, // Hook to disconnect from the server
   FishjamContextProvider, // Context provider
 } = create<PeerMetadata, TrackMetadata>();
 
 export const App = () => {
-  //...
+  //…
   // Get the webrtcApi reference
-  const webrtcApi = useApi();
+  const client = useClient();
 
   function startScreenSharing() {
     // Get screen sharing MediaStream
     navigator.mediaDevices.getDisplayMedia(SCREEN_SHARING_MEDIA_CONSTRAINTS).then((screenStream) => {
-        // Add local MediaStream to webrtc
-        screenStream.getTracks().forEach((track) => webrtcApi.addTrack(track, screenStream, { type: "screen" }));
+      // Add local MediaStream to webrtc
+      screenStream.getTracks().forEach((track) => client.addTrack(track, screenStream, { type: "screen" }));
     });
-   }
+  }
 
    return (
   //…
@@ -269,7 +268,7 @@ export const App = () => {
   >
     Start screen share
   </button>
-  <span>Status: {status}</span>
+  <span className="span-status">Status: {status}</span>
   //…
   )
 };
@@ -312,51 +311,23 @@ const VideoPlayer = ({ stream }: Props) => {
 export default VideoPlayer;
 ```
 
-### Now the logic for the component
-
-```tsx title="VideoPlayer.tsx"
-type Props = {
-  stream: MediaStream | null | undefined;
-};
-
-const VideoPlayer = ({ stream }: Props) => {
-  const videoRef: RefObject<HTMLVideoElement> = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (!videoRef.current) return;
-    videoRef.current.srcObject = stream || null;
-  }, [stream]);
-
-  return (
-    <div>
-      <video autoPlay playsInline muted ref={videoRef} />
-    </div>
-  );
-};
-
-export default VideoPlayer;
-```
-
 ### Now we can use it in our main component
 
 ```tsx title="App.tsx"
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { create, SCREEN_SHARING_MEDIA_CONSTRAINTS } from "@fishjam-dev/react-client-sdk";
 import VideoPlayer from "./VideoPlayer";
 import "./styles.css"
-//...
+//…
 
 export const {
- useStatus, // Hook to check the status of the connection
+  //…
+  // highlight-next-line
   useTracks, // Hook to get the tracks from the server
-  useApi, // Hook to get the webrtcApi reference
-  useConnect, // Hook to connect to the server
-  useDisconnect, // Hook to disconnect from the server
-  JellyfishContextProvider, // Context provider
+  //…
 } = create<PeerMetadata, TrackMetadata>();
 export const App = () => {
   //…
-  const webrtcApi = useApi();
   const tracks = useTracks();
   //…
   <div style={{
@@ -370,7 +341,7 @@ export const App = () => {
         <VideoPlayer key={trackId} stream={stream} /> // pass the stream to the component
       ))}
   </div>
-  //...
+  //…
   )
 ```
 
