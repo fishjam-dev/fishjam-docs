@@ -187,14 +187,14 @@ Example log with and without this option:
   <TabItem value="json-log-on" label="true" default>
 
   ```json
-  {"time":"2024-02-20T17:32:32.448Z","severity":"info","message":"Initialize room","metadata":{"room_id":"40"}}
+  {"time":"2024-02-20T17:32:32.448Z","severity":"info","message":"Initialize room","metadata":{"room_id":"da2e-4a75-95ff-776bad2caf04-666973686a616d4031302e302e302e31"}}
   ```
 
   </TabItem>
   <TabItem value="json-log-off" label="false" default>
 
   ```
-  17:32:32.448 room_id=40 [info] Initialize room
+  17:32:32.448 room_id=da2e-4a75-95ff-776bad2caf04-666973686a616d4031302e302e302e31 [info] Initialize room
   ```
 
   </TabItem>
