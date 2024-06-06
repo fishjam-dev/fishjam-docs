@@ -51,3 +51,12 @@ Credentials:
 * `FJ_S3_SECRET_ACCESS_KEY` - Your secret access key for AWS. 
 Path prefix:
 * `FJ_S3_PATH_PREFIX` - path prefix under which all streams will be stored.
+
+## Client SDK
+
+The recording component allows for customization of each track. Currently, there are two fields that can be set based on client and track properties:
+
+* `displayName` - The name of the track that will be displayed on the recording.
+* `type` - The type of the track. At present, only screensharing is supported; all other types will be ignored.
+  
+These fields should be provided by the client for each track, utilizing track metadata. For additional information, please refer to the [ts-client-sdk](https://fishjam-dev.github.io/ts-client-sdk/classes/FishjamClient.html#addTrack).
