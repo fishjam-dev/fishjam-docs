@@ -289,4 +289,17 @@ Read more in the [Cluster](../cluster.md) section.
 
 :::
 
+#### Feature flags:
 
+:::caution
+
+The features hidden behind these flags are experimental and may change at any moment.
+
+:::
+
+* `FJ_FEATURE_FLAG_REQUEST_ROUTING_ENABLED` - when toggled, every Fishjam in the cluster
+will be able to handle requests pertaining to every room in the cluster,
+even if that room is on another Fishjam instance. <br/>
+Defaults to `false`. <br/>
+Caution: With this feature enabled, setting custom room names is no longer allowed -
+they will instead be generated based on the node name of the Fishjam that holds the room.
