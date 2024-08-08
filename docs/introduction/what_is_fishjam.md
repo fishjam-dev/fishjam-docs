@@ -1,8 +1,3 @@
----
-id: what_is_fishjam
-slug: /
----
-
 # What is Fishjam?
 
 Fishjam is an open-source, general-purpose media server that ships with support for multiple media protocols.

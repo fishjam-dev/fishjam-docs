@@ -129,6 +129,11 @@ const config = {
             href: 'https://jellyroom.membrane.stream/',
             label: 'Fishjam Room',
             position: 'left',
+          },
+          {
+            href: 'https://cloud.fishjam.stream/',
+            label: 'Fishjam Cloud',
+            position: 'left',
           }
         ],
       },

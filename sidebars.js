@@ -14,10 +14,11 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   mainSidebar: [
+    "fishjam_cloud",
     {
       type: "category",
       label: "Introduction",
-      collapsed: false,
+      collapsed: true,
       items: [
         "introduction/what_is_fishjam",
         "introduction/basic_concepts",
