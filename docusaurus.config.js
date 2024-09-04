@@ -131,7 +131,7 @@ const config = {
             position: 'left',
           },
           {
-            href: 'https://cloud.fishjam.stream/',
+            href: 'https://fishjam.io/',
             label: 'Fishjam Cloud',
             position: 'left',
           }
