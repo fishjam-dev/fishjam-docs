@@ -124,21 +124,6 @@ const config = {
             dropdownActiveClassDisabled: true,
           },
           {
-            href: 'https://github.com/fishjam-dev/fishjam',
-            label: 'GitHub',
-            position: 'right',
-          },
-          {
-            href: 'https://fishjam-dev.github.io/fishjam-dashboard/',
-            label: 'Fishjam Dashboard',
-            position: 'left',
-          },
-          {
-            href: 'https://room.fishjam.stream/',
-            label: 'Fishjam Room',
-            position: 'left',
-          },
-          {
             href: 'https://fishjam.io/',
             label: 'Fishjam Cloud',
             position: 'left',
