@@ -1,5 +1,7 @@
 > [!IMPORTANT]  
-> Checkout our [new documentation](https://github.com/fishjam-cloud/documentation) for [Fishjam Cloud](https://fishjam.io/).
+> This repository is archived.
+>
+> Check out our [new documentation](https://github.com/fishjam-cloud/documentation) for [Fishjam Cloud](https://fishjam.io/).
 
 # Fishjam docs
 
