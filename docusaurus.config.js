@@ -40,8 +40,7 @@ const config = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/fishjam-dev/fishjam-docs',
+          editUrl: 'https://github.com/fishjam-dev/fishjam-docs',
           routeBasePath: '/',
         },
         blog: false,
@@ -83,7 +82,7 @@ const config = {
             id: 'fishjam-rest-apix-0_5_0',
             spec: 'https://raw.githubusercontent.com/fishjam-dev/fishjam/v0.5.0/openapi.yaml',
             route: '/examples/using-single-yaml-0_5_0/',
-          }
+          },
         ],
         // Theme Options for modifying how redoc renders them
         theme: {
@@ -94,9 +93,7 @@ const config = {
     ],
   ],
 
-  themes: [
-    'docusaurus-theme-github-codeblock'
-  ],
+  themes: ['docusaurus-theme-github-codeblock'],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
@@ -127,7 +124,7 @@ const config = {
             href: 'https://fishjam.io/',
             label: 'Fishjam Cloud',
             position: 'left',
-          }
+          },
         ],
       },
       footer: {
@@ -173,12 +170,12 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Software Mansion S.A.`,
+        copyright: `Copyright © 2024 Software Mansion S.A.`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['elixir']
+        additionalLanguages: ['elixir'],
       },
       algolia: {
         // The application ID provided by Algolia
@@ -202,9 +199,9 @@ const config = {
       codeblock: {
         showGithubLink: true,
         githubLinkLabel: 'View on GitHub',
-        showRunmeLink: false
-      }
-    }),
+        showRunmeLink: false,
+      },
+    },
 };
 
 module.exports = config;
