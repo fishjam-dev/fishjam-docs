@@ -40,8 +40,7 @@ const config = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/fishjam-dev/fishjam-docs',
+          editUrl: 'https://github.com/fishjam-dev/fishjam-docs',
           routeBasePath: '/',
         },
         blog: false,
@@ -83,7 +82,7 @@ const config = {
             id: 'fishjam-rest-apix-0_5_0',
             spec: 'https://raw.githubusercontent.com/fishjam-dev/fishjam/v0.5.0/openapi.yaml',
             route: '/examples/using-single-yaml-0_5_0/',
-          }
+          },
         ],
         // Theme Options for modifying how redoc renders them
         theme: {
@@ -94,12 +93,18 @@ const config = {
     ],
   ],
 
-  themes: [
-    'docusaurus-theme-github-codeblock'
-  ],
+  themes: ['docusaurus-theme-github-codeblock'],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
+      announcementBar: {
+        id: 'use_fishjam_cloud',
+        content:
+          '<h4>Fishjam goes to the Cloud!</h4>After 1.5 years of work we decided to do a pivot and continue the project as <a href="https://fishjam.io/"><strong>Fishjam Cloud</strong></a> making it also closed source.<br />This documentation is no longer maintained.',
+        backgroundColor: '#ED716D',
+        textColor: '#091E42',
+        isCloseable: false,
+      },
       // Replace with your project's social card
       image: 'img/logo/favicon.svg',
       navbar: {
@@ -116,25 +121,10 @@ const config = {
             dropdownActiveClassDisabled: true,
           },
           {
-            href: 'https://github.com/fishjam-dev/fishjam',
-            label: 'GitHub',
-            position: 'right',
-          },
-          {
-            href: 'https://fishjam-dev.github.io/fishjam-dashboard/',
-            label: 'Fishjam Dashboard',
-            position: 'left',
-          },
-          {
-            href: 'https://room.fishjam.stream/',
-            label: 'Fishjam Room',
-            position: 'left',
-          },
-          {
             href: 'https://fishjam.io/',
             label: 'Fishjam Cloud',
             position: 'left',
-          }
+          },
         ],
       },
       footer: {
@@ -180,12 +170,12 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Software Mansion S.A.`,
+        copyright: `Copyright © 2024 Software Mansion S.A.`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['elixir']
+        additionalLanguages: ['elixir'],
       },
       algolia: {
         // The application ID provided by Algolia
@@ -209,9 +199,9 @@ const config = {
       codeblock: {
         showGithubLink: true,
         githubLinkLabel: 'View on GitHub',
-        showRunmeLink: false
-      }
-    }),
+        showRunmeLink: false,
+      },
+    },
 };
 
 module.exports = config;
