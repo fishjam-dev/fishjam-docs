@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> Checkout our [new documentation](https://github.com/fishjam-cloud/documentation) for [Fishjam Cloud](https://fishjam.io/).
+
 # Fishjam docs
 
 [![pages-build-deployment](https://github.com/fishjam-dev/fishjam-docs/actions/workflows/build_pages.yml/badge.svg)](https://github.com/fishjam-dev/fishjam-docs/actions/workflows/pages/pages-build-deployment)
@@ -32,8 +35,9 @@ This command generates static content into the `build` directory and can be serv
 We follow [the versioning system provided by docusaurus](https://docusaurus.io/docs/versioning)
 
 To create a new docs version:
-* make sure that `sidebars.js` and files inside `docs/` directory are up-to-date and ready to be frozen
-* run `npm run docusaurus docs:version 1.0.0`
+
+- make sure that `sidebars.js` and files inside `docs/` directory are up-to-date and ready to be frozen
+- run `npm run docusaurus docs:version 1.0.0`
 
 ## Copyright and License
 
