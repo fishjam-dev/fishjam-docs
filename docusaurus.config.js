@@ -100,7 +100,7 @@ const config = {
       announcementBar: {
         id: 'use_fishjam_cloud',
         content:
-          'Fishjam goes to the Cloud!<br />After 1.5 years of work we decided to do a pivot and continue the project as <a href="https://fishjam.io/">Fishjam Cloud</a> making it also closed source.<br />This documentation is no longer maintained.',
+          '<h4>Fishjam goes to the Cloud!</h4>After 1.5 years of work we decided to do a pivot and continue the project as <a href="https://fishjam.io/"><strong>Fishjam Cloud</strong></a> making it also closed source.<br />This documentation is no longer maintained.',
         backgroundColor: '#ED716D',
         textColor: '#091E42',
         isCloseable: false,
